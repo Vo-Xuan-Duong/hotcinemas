@@ -1,0 +1,41 @@
+.container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  padding: 2rem;
+  margin: 2rem auto;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+  table {
+    font-size: 0.95rem;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  padding: 0.7rem 0.5rem;
+  text-align: left;
+}
+
+th {
+  background: #f8f9fa;
+  color: #667eea;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background: #fafbfc;
+}
+
+tr:hover {
+  background: #f0f4ff;
+} 

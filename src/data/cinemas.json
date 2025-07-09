@@ -1,0 +1,7 @@
+[
+  {"id":1,"name":"HotCinemas Vincom","address":"Vincom Center, Q.1, TP.HCM","rooms":[{"id":"P1","name":"Phòng chiếu 1","type":"2D"},{"id":"P2","name":"Phòng chiếu 2","type":"IMAX"}]},
+  {"id":2,"name":"HotCinemas Landmark","address":"Landmark 81, Bình Thạnh, TP.HCM","rooms":[{"id":"P3","name":"Phòng chiếu 3","type":"2D"},{"id":"P4","name":"Phòng chiếu 4","type":"2D"}]},
+  {"id":3,"name":"HotCinemas Crescent Mall","address":"Crescent Mall, Q.7, TP.HCM","rooms":[{"id":"P5","name":"Phòng chiếu 5","type":"2D"}]},
+  {"id":4,"name":"HotCinemas GigaMall","address":"GigaMall, Thủ Đức, TP.HCM","rooms":[{"id":"P6","name":"Phòng chiếu 6","type":"2D"},{"id":"P7","name":"Phòng chiếu 7","type":"IMAX"}]},
+  {"id":5,"name":"HotCinemas Aeon Mall","address":"Aeon Mall, Bình Tân, TP.HCM","rooms":[{"id":"P8","name":"Phòng chiếu 8","type":"2D"},{"id":"P9","name":"Phòng chiếu 9","type":"2D"}]}
+] 

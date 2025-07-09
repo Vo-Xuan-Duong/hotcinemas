@@ -1,0 +1,380 @@
+[
+  {
+    "id": 1,
+    "title": "Avengers: Endgame",
+    "genre": "Hành động, Phiêu lưu, Khoa học viễn tưởng, Hành động, Gián điệp, Phiêu lưu",
+    "releaseDate": "26.04.2019",
+    "poster": "https://image-worker.momocdn.net/img/80099757410724750-doemon.png?size=M&referer=cinema.momocdn.net",
+    "backgroundImage": "https://static.nutscdn.com/vimg/0-0/26d12c770dad5cb72cc14d5fbaeaec13.jpg",
+    "description": "Sau sự kiện tàn khốc của Avengers: Infinity War, một nửa vũ trụ đã bị xóa sổ bởi Thanos. Những siêu anh hùng còn sống sót, với sự giúp đỡ của các đồng minh mới, phải tập hợp lại để đảo ngược hành động của Mad Titan và khôi phục lại trật tự cho vũ trụ, dù phải trả giá bằng bất cứ giá nào. Đây là đỉnh cao của 22 bộ phim trong Vũ trụ Điện ảnh Marvel.",
+    "duration": 181,
+    "rating": 9.2,
+    "ageLabel": "18+",
+    "format": "2D",
+    "trailer": "https://www.youtube.com/watch?v=nDR_9NCMIYk",
+    "director": "Anthony Russo, Joe Russo",
+    "cast": [
+      { "name": "Robert Downey Jr.", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Chris Evans", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Mark Ruffalo", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Chris Hemsworth", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Scarlett Johansson", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Jeremy Renner", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" }
+    ],
+    "productionStudio": "Marvel Studios",
+    "audioOptions": [
+      { "language": "Tiếng Anh", "type": "Thuyết minh" }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Ma Không Đầu",
+    "genre": "Kinh Dị, Hài, Giật gân, Hành động, Gián điệp, Phiêu lưu",
+    "releaseDate": "17.10.2025",
+    "poster": "https://image-worker.momocdn.net/img/80099757410724750-doemon.png?size=M&referer=cinema.momocdn.net",
+    "backgroundImage": "https://static.nutscdn.com/vimg/0-0/26d12c770dad5cb72cc14d5fbaeaec13.jpg",
+    "description": "Một câu chuyện rùng rợn về một hồn ma không đầu ám ảnh một ngôi làng cổ kính, gây ra những tình huống dở khóc dở cười cho những người dân cố gắng tìm cách xua đuổi nó. Phim pha trộn yếu tố kinh dị truyền thống với những tình tiết hài hước bất ngờ, mang đến trải nghiệm vừa sợ hãi vừa giải trí.",
+    "duration": 148,
+    "rating": 8.4,
+    "ageLabel": "18+",
+    "format": "2D",
+    "trailer": "https://www.youtube.com/watch?v=nDR_9NCMIYk",
+    "director": "Đạo diễn ẩn danh (Ví dụ)",
+    "cast": [
+      { "name": "Diễn viên A", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Diễn viên B", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Diễn viên C", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" }
+    ],
+    "productionStudio": "Nhà sản xuất độc lập (Ví dụ)",
+    "audioOptions": [
+      { "language": "Tiếng Việt", "type": "Phụ đề" }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Bí Kíp Luyện Rồng",
+    "genre": "Phiêu Lưu, Hoạt hình, Giả tưởng, Hành động, Gián điệp, Phiêu lưu",
+    "releaseDate": "23.05.2025",
+    "poster": "https://image-worker.momocdn.net/img/80099757410724750-doemon.png?size=M&referer=cinema.momocdn.net",
+    "backgroundImage": "https://static.nutscdn.com/vimg/0-0/26d12c770dad5cb72cc14d5fbaeaec13.jpg",
+    "description": "Trong một thế giới nơi loài rồng và con người xung đột, một chàng trai Viking trẻ tuổi tên Hiccup, người không phù hợp với hình ảnh chiến binh mạnh mẽ của bộ tộc mình, đã kết bạn với một con rồng bị thương. Tình bạn bất ngờ này đã thay đổi hoàn toàn cách nhìn của cả hai thế giới về nhau, dẫn đến một cuộc phiêu lưu đầy kịch tính và cảm động.",
+    "duration": 176,
+    "rating": 9.6,
+    "ageLabel": "K",
+    "format": "2D",
+    "trailer": "https://www.youtube.com/watch?v=nDR_9NCMIYk",
+    "director": "Dean DeBlois, Chris Sanders",
+    "cast": [
+      { "name": "Jay Baruchel", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Gerard Butler", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "America Ferrera", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Jonah Hill", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" }
+    ],
+    "productionStudio": "DreamWorks Animation",
+    "audioOptions": [
+      { "language": "Tiếng Việt", "type": "Phụ đề" }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "DAN DA DAN: Tà Nhân",
+    "genre": "Hoạt Hình, Phiêu Lưu, Hài, Siêu nhiên, Hành động, Gián điệp, Phiêu lưu",
+    "releaseDate": "05.09.2025",
+    "poster": "https://image-worker.momocdn.net/img/80099757410724750-doemon.png?size=M&referer=cinema.momocdn.net",
+    "backgroundImage": "https://static.nutscdn.com/vimg/0-0/26d12c770dad5cb72cc14d5fbaeaec13.jpg",
+    "description": "Một bộ phim hoạt hình đầy màu sắc và hài hước, kể về cuộc phiêu lưu của một nhóm bạn trẻ khám phá những bí ẩn siêu nhiên và đối đầu với các thế lực tà ác. Với đồ họa ấn tượng và cốt truyện độc đáo, phim hứa hẹn mang đến những tràng cười sảng khoái và những pha hành động mãn nhãn.",
+    "duration": 161,
+    "rating": 9.1,
+    "ageLabel": "16+",
+    "format": "2D",
+    "trailer": "https://www.youtube.com/watch?v=nDR_9NCMIYk",
+    "director": "Đạo diễn X (Ví dụ)",
+    "cast": [
+      { "name": "Diễn viên D", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Diễn viên E", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Diễn viên F", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" }
+    ],
+    "productionStudio": "TOHO Animation (Ví dụ)",
+    "audioOptions": [
+      { "language": "Tiếng Nhật", "type": "Thuyết minh" }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Ultraman Arc: Ánh Sáng Và ...",
+    "genre": "Khoa Học Viễn Tưởng, Chính Kịch, Hành động, Gián điệp, Phiêu lưu",
+    "releaseDate": "21.02.2025",
+    "poster": "https://image-worker.momocdn.net/img/80099757410724750-doemon.png?size=M&referer=cinema.momocdn.net",
+    "backgroundImage": "https://static.nutscdn.com/vimg/0-0/26d12c770dad5cb72cc14d5fbaeaec13.jpg",
+    "description": "Trong một tương lai không xa, khi Trái Đất bị đe dọa bởi những quái vật khổng lồ, một thế hệ Ultraman mới đã trỗi dậy. Ultraman Arc, mang trong mình ánh sáng hy vọng, phải đối mặt với những thử thách cam go nhất, không chỉ để bảo vệ nhân loại mà còn để tìm hiểu ý nghĩa thực sự của sức mạnh và trách nhiệm.",
+    "duration": 120,
+    "rating": 9.2,
+    "ageLabel": "13+",
+    "format": "2D",
+    "trailer": "https://www.youtube.com/watch?v=nDR_9NCMIYk",
+    "director": "Đạo diễn G (Ví dụ)",
+    "cast": [
+      { "name": "Diễn viên G", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Diễn viên H", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Diễn viên I", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" }
+    ],
+    "productionStudio": "Tsuburaya Productions (Ví dụ)",
+    "audioOptions": [
+      { "language": "Tiếng Nhật", "type": "Thuyết minh" }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Spider-Man: No Way Home",
+    "genre": "Siêu anh hùng, Hành động, Khoa học viễn tưởng, Gián điệp, Phiêu lưu",
+    "releaseDate": "17.12.2021",
+    "poster": "https://image-worker.momocdn.net/img/80099757410724750-doemon.png?size=M&referer=cinema.momocdn.net",
+    "backgroundImage": "https://static.nutscdn.com/vimg/0-0/26d12c770dad5cb72cc14d5fbaeaec13.jpg",
+    "description": "Sau khi danh tính Spider-Man bị Mysterio tiết lộ, cuộc sống của Peter Parker và những người thân yêu của cậu bị đảo lộn hoàn toàn. Tuyệt vọng, Peter tìm đến Doctor Strange để nhờ giúp đỡ, nhưng một phép thuật sai lầm đã mở ra đa vũ trụ, đưa những kẻ thù cũ từ các vũ trụ khác đến thế giới của cậu, buộc cậu phải đối mặt với số phận của mình.",
+    "duration": 148,
+    "rating": 8.9,
+    "ageLabel": "13+",
+    "format": "2D",
+    "trailer": "https://www.youtube.com/watch?v=nDR_9NCMIYk",
+    "director": "Jon Watts",
+    "cast": [
+      { "name": "Tom Holland", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Zendaya", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Benedict Cumberbatch", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Jacob Batalon", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" }
+    ],
+    "productionStudio": "Columbia Pictures, Marvel Studios",
+    "audioOptions": [
+      { "language": "Tiếng Anh", "type": "Thuyết minh" }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "The Batman",
+    "genre": "Hành động, Tội phạm, Bí ẩn, Gián điệp, Phiêu lưu",
+    "releaseDate": "04.03.2022",
+    "poster": "https://image-worker.momocdn.net/img/80099757410724750-doemon.png?size=M&referer=cinema.momocdn.net",
+    "backgroundImage": "https://static.nutscdn.com/vimg/0-0/26d12c770dad5cb72cc14d5fbaeaec13.jpg",
+    "description": "Trong năm thứ hai chiến đấu với tội phạm, Batman khám phá sự tham nhũng ở Gotham City khi truy đuổi Riddler, một kẻ giết người hàng loạt bí ẩn. Anh phải đối mặt với những sự thật đen tối về gia đình mình và tầm ảnh hưởng của chúng đối với thành phố, đồng thời tìm cách trở thành biểu tượng của hy vọng mà Gotham cần.",
+    "duration": 155,
+    "rating": 8.7,
+    "ageLabel": "16+",
+    "format": "2D",
+    "trailer": "https://www.youtube.com/watch?v=nDR_9NCMIYk",
+    "director": "Matt Reeves",
+    "cast": [
+      { "name": "Robert Pattinson", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Zoë Kravitz", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Paul Dano", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Jeffrey Wright", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" }
+    ],
+    "productionStudio": "Warner Bros. Pictures, DC Films",
+    "audioOptions": [
+      { "language": "Tiếng Anh", "type": "Thuyết minh" }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Black Panther: Wakanda Forever",
+    "genre": "Siêu anh hùng, Hành động, Chính kịch, Gián điệp, Phiêu lưu",
+    "releaseDate": "11.11.2022",
+    "poster": "https://image-worker.momocdn.net/img/80099757410724750-doemon.png?size=M&referer=cinema.momocdn.net",
+    "backgroundImage": "https://static.nutscdn.com/vimg/0-0/26d12c770dad5cb72cc14d5fbaeaec13.jpg",
+    "description": "Sau cái chết của Vua T'Challa, Nữ hoàng Ramonda, Shuri, M'Baku, Okoye và Dora Milaje phải chiến đấu để bảo vệ quốc gia của họ khỏi các thế lực thế giới can thiệp sau khi Vua Báo Đen qua đời. Khi một mối đe dọa mới từ vương quốc dưới nước Talokan xuất hiện, các anh hùng Wakanda phải hợp tác với nhau để định hình con đường mới cho Wakanda.",
+    "duration": 161,
+    "rating": 8.5,
+    "ageLabel": "13+",
+    "format": "2D",
+    "trailer": "https://www.youtube.com/watch?v=nDR_9NCMIYk",
+    "director": "Ryan Coogler",
+    "cast": [
+      { "name": "Letitia Wright", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Lupita Nyong'o", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Danai Gurira", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Winston Duke", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" }
+    ],
+    "productionStudio": "Marvel Studios",
+    "audioOptions": [
+      { "language": "Tiếng Anh", "type": "Thuyết minh" }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Doctor Strange: Multiverse of Madness",
+    "genre": "Khoa học viễn tưởng, Hành động, Kinh dị, Gián điệp, Phiêu lưu",
+    "releaseDate": "06.05.2022",
+    "poster": "https://image-worker.momocdn.net/img/80099757410724750-doemon.png?size=M&referer=cinema.momocdn.net",
+    "backgroundImage": "https://static.nutscdn.com/vimg/0-0/26d12c770dad5cb72cc14d5fbaeaec13.jpg",
+    "description": "Doctor Strange, cùng với các đồng minh cũ và mới, du hành vào đa vũ trụ để đối mặt với một kẻ thù bí ẩn mới. Khi thực tại bị đe dọa bởi những mối nguy hiểm không lường trước, Strange phải sử dụng tất cả sức mạnh phép thuật của mình để bảo vệ thế giới và khám phá những bí ẩn của đa vũ trụ.",
+    "duration": 126,
+    "rating": 8.3,
+    "ageLabel": "16+",
+    "format": "2D",
+    "trailer": "https://www.youtube.com/watch?v=nDR_9NCMIYk",
+    "director": "Sam Raimi",
+    "cast": [
+      { "name": "Benedict Cumberbatch", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Elizabeth Olsen", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Chiwetel Ejiofor", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Benedict Wong", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" }
+    ],
+    "productionStudio": "Marvel Studios",
+    "audioOptions": [
+      { "language": "Tiếng Anh", "type": "Thuyết minh" }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Thor: Love and Thunder",
+    "genre": "Hành động, Hài, Giả tưởng, Gián điệp, Phiêu lưu",
+    "releaseDate": "08.07.2022",
+    "poster": "https://image-worker.momocdn.net/img/80099757410724750-doemon.png?size=M&referer=cinema.momocdn.net",
+    "backgroundImage": "https://static.nutscdn.com/vimg/0-0/26d12c770dad5cb72cc14d5fbaeaec13.jpg",
+    "description": "Thor tìm kiếm sự bình yên nội tâm nhưng bị gián đoạn bởi sự xuất hiện của Gorr the God Butcher, một kẻ giết thần đang tìm cách hủy diệt tất cả các vị thần. Để chống lại mối đe dọa này, Thor phải nhờ đến sự giúp đỡ của Vua Valkyrie, Korg và bạn gái cũ Jane Foster, người giờ đây đã trở thành Mighty Thor.",
+    "duration": 119,
+    "rating": 8.0,
+    "ageLabel": "13+",
+    "format": "2D",
+    "trailer": "https://www.youtube.com/watch?v=nDR_9NCMIYk",
+    "director": "Taika Waititi",
+    "cast": [
+      { "name": "Chris Hemsworth", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Natalie Portman", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Christian Bale", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Tessa Thompson", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" }
+    ],
+    "productionStudio": "Marvel Studios",
+    "audioOptions": [
+      { "language": "Tiếng Anh", "type": "Thuyết minh" }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Minions: The Rise of Gru",
+    "genre": "Hoạt hình, Hài, Phiêu lưu, Gián điệp, Phiêu lưu",
+    "releaseDate": "01.07.2022",
+    "poster": "https://image-worker.momocdn.net/img/80099757410724750-doemon.png?size=M&referer=cinema.momocdn.net",
+    "backgroundImage": "https://static.nutscdn.com/vimg/0-0/26d12c770dad5cb72cc14d5fbaeaec13.jpg",
+    "description": "Khám phá câu chuyện nguồn gốc chưa kể về ước mơ trở thành siêu phản diện vĩ đại nhất thế giới của Gru. Khi còn là một cậu bé 12 tuổi sống ở vùng ngoại ô vào những năm 1970, Gru đã ấp ủ kế hoạch thống trị thế giới với sự giúp đỡ của đội quân Minions trung thành của mình, đối đầu với một nhóm siêu phản diện khét tiếng.",
+    "duration": 87,
+    "rating": 7.8,
+    "ageLabel": "K",
+    "format": "2D",
+    "trailer": "https://www.youtube.com/watch?v=nDR_9NCMIYk",
+    "director": "Kyle Balda, Brad Ableson",
+    "cast": [
+      { "name": "Steve Carell", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Pierre Coffin", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Taraji P. Henson", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Michelle Yeoh", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" }
+    ],
+    "productionStudio": "Illumination, Universal Pictures",
+    "audioOptions": [
+      { "language": "Tiếng Anh", "type": "Thuyết minh" }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Lightyear",
+    "genre": "Hoạt hình, Phiêu lưu, Khoa học viễn tưởng, Gián điệp, Phiêu lưu",
+    "releaseDate": "17.06.2022",
+    "poster": "https://image-worker.momocdn.net/img/80099757410724750-doemon.png?size=M&referer=cinema.momocdn.net",
+    "backgroundImage": "https://static.nutscdn.com/vimg/0-0/26d12c770dad5cb72cc14d5fbaeaec13.jpg",
+    "description": "Câu chuyện nguồn gốc của Buzz Lightyear, người hùng đã truyền cảm hứng cho món đồ chơi. Phim kể về hành trình khám phá vũ trụ của Buzz, bị mắc kẹt trên một hành tinh xa lạ cách Trái Đất hàng triệu năm ánh sáng, cùng với đội trưởng và phi hành đoàn của mình. Anh phải tìm cách trở về nhà trong khi đối mặt với mối đe dọa từ Zurg và đội quân robot của hắn.",
+    "duration": 105,
+    "rating": 7.9,
+    "ageLabel": "K",
+    "format": "2D",
+    "trailer": "https://www.youtube.com/watch?v=nDR_9NCMIYk",
+    "director": "Angus MacLane",
+    "cast": [
+      { "name": "Chris Evans", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Keke Palmer", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Peter Sohn", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Taika Waititi", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" }
+    ],
+    "productionStudio": "Pixar Animation Studios, Walt Disney Pictures",
+    "audioOptions": [
+      { "language": "Tiếng Anh", "type": "Thuyết minh" }
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Top Gun: Maverick",
+    "genre": "Hành động, Chính kịch, Phiêu lưu, Gián điệp, Phiêu lưu",
+    "releaseDate": "27.05.2022",
+    "poster": "https://image-worker.momocdn.net/img/80099757410724750-doemon.png?size=M&referer=cinema.momocdn.net",
+    "backgroundImage": "https://static.nutscdn.com/vimg/0-0/26d12c770dad5cb72cc14d5fbaeaec13.jpg",
+    "description": "Sau hơn ba mươi năm phục vụ với tư cách là một trong những phi công hàng đầu của Hải quân, Pete 'Maverick' Mitchell đang ở nơi anh thuộc về, vượt qua giới hạn với tư cách là một phi công thử nghiệm dũng cảm và né tránh việc thăng cấp, điều sẽ khiến anh phải ngừng bay. Khi anh được giao nhiệm vụ huấn luyện một đội đặc nhiệm tốt nghiệp Top Gun cho một nhiệm vụ chuyên biệt chưa từng có, Maverick phải đối mặt với những bóng ma trong quá khứ và đối đầu với nỗi sợ hãi sâu sắc nhất của mình.",
+    "duration": 131,
+    "rating": 8.6,
+    "ageLabel": "16+",
+    "format": "2D",
+    "trailer": "https://www.youtube.com/watch?v=nDR_9NCMIYk",
+    "director": "Joseph Kosinski",
+    "cast": [
+      { "name": "Tom Cruise", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Miles Teller", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Jennifer Connelly", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Jon Hamm", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" }
+    ],
+    "productionStudio": "Paramount Pictures, Skydance Media",
+    "audioOptions": [
+      { "language": "Tiếng Anh", "type": "Thuyết minh" }
+    ]
+  },
+  {
+    "id": 14,
+    "title": "No Time to Die",
+    "genre": "Hành động, Gián điệp, Phiêu lưu ",
+    "releaseDate": "08.10.2021",
+    "poster": "https://image-worker.momocdn.net/img/80099757410724750-doemon.png?size=M&referer=cinema.momocdn.net",
+    "backgroundImage": "https://static.nutscdn.com/vimg/0-0/26d12c770dad5cb72cc14d5fbaeaec13.jpg",
+    "description": "James Bond đã rời khỏi nhiệm vụ tích cực và tận hưởng cuộc sống yên bình ở Jamaica. Nhưng sự bình yên của anh chỉ tồn tại trong thời gian ngắn khi người bạn cũ Felix Leiter từ CIA xuất hiện để nhờ giúp đỡ. Nhiệm vụ giải cứu một nhà khoa học bị bắt cóc hóa ra nguy hiểm hơn nhiều so với dự kiến, đưa Bond vào con đường của một kẻ phản diện bí ẩn được trang bị công nghệ mới nguy hiểm.",
+    "duration": 163,
+    "rating": 8.2,
+    "ageLabel": "16+",
+    "format": "2D",
+    "trailer": "https://www.youtube.com/watch?v=nDR_9NCMIYk",
+    "director": "Cary Joji Fukunaga",
+    "cast": [
+      { "name": "Daniel Craig", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Rami Malek", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Léa Seydoux", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Lashana Lynch", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" }
+    ],
+    "productionStudio": "Eon Productions, Metro-Goldwyn-Mayer (MGM)",
+    "audioOptions": [
+      { "language": "Tiếng Anh", "type": "Thuyết minh" }
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Encanto",
+    "genre": "Hoạt hình, Gia đình, Ca nhạc, Giả tưởng, Gián điệp, Phiêu lưu",
+    "releaseDate": "24.11.2021",
+    "poster": "https://image-worker.momocdn.net/img/80099757410724750-doemon.png?size=M&referer=cinema.momocdn.net",
+    "backgroundImage": "https://static.nutscdn.com/vimg/0-0/26d12c770dad5cb72cc14d5fbaeaec13.jpg",
+    "description": "Encanto của Walt Disney Animation Studios kể về câu chuyện của gia đình Madrigal, một gia đình phi thường sống ẩn mình trong một ngôi nhà kỳ diệu ở vùng núi Colombia, tại một nơi tuyệt vời và quyến rũ gọi là Encanto. Phép thuật của Encanto đã ban phước cho mọi đứa trẻ trong gia đình một món quà độc đáo, từ siêu sức mạnh đến khả năng chữa lành, ngoại trừ Mirabel. Nhưng khi cô phát hiện ra rằng phép thuật bao quanh Encanto đang gặp nguy hiểm, Mirabel quyết định rằng cô, thành viên duy nhất không có phép thuật của gia đình mình, có thể là hy vọng cuối cùng của họ.",
+    "duration": 102,
+    "rating": 8.1,
+    "ageLabel": "K",
+    "format": "2D",
+    "trailer": "https://www.youtube.com/watch?v=nDR_9NCMIYk",
+    "director": "Jared Bush, Byron Howard",
+    "cast": [
+      { "name": "Stephanie Beatriz", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "María Cecilia Botero", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "John Leguizamo", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Jessica Darrow", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Stephanie Beatriz", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "María Cecilia Botero", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "John Leguizamo", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" },
+      { "name": "Jessica Darrow", "avatar": "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg" }
+    ],
+    "productionStudio": "Walt Disney Animation Studios, Walt Disney Pictures",
+    "audioOptions": [
+      { "language": "Tiếng Việt", "type": "Thuyết minh" }
+    ]
+  }
+]

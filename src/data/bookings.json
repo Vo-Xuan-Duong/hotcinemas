@@ -1,0 +1,12 @@
+[
+  {"id":1,"userId":1,"showtimeId":"ST1","seats":["A1","A2"],"total":140000,"status":"confirmed"},
+  {"id":2,"userId":2,"showtimeId":"ST2","seats":["B3","B4"],"total":180000,"status":"pending"},
+  {"id":3,"userId":3,"showtimeId":"ST3","seats":["C5"],"total":90000,"status":"confirmed"},
+  {"id":4,"userId":4,"showtimeId":"ST4","seats":["D6","D7"],"total":180000,"status":"cancelled"},
+  {"id":5,"userId":5,"showtimeId":"ST5","seats":["E8"],"total":70000,"status":"confirmed"},
+  {"id":6,"userId":6,"showtimeId":"ST6","seats":["F9","F10"],"total":140000,"status":"pending"},
+  {"id":7,"userId":7,"showtimeId":"ST7","seats":["G11"],"total":70000,"status":"confirmed"},
+  {"id":8,"userId":8,"showtimeId":"ST8","seats":["H12"],"total":70000,"status":"confirmed"},
+  {"id":9,"userId":9,"showtimeId":"ST9","seats":["I1","I2"],"total":140000,"status":"pending"},
+  {"id":10,"userId":10,"showtimeId":"ST10","seats":["J1"],"total":150000,"status":"confirmed"}
+] 

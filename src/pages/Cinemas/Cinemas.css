@@ -1,0 +1,97 @@
+.cinemas-page {
+  padding: 2rem 0;
+}
+
+.cinemas-title {
+  color: #764ba2;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.cinemas-filter {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.cinemas-filter input,
+.cinemas-filter select {
+  padding: 0.7rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  min-width: 180px;
+}
+
+.cinemas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.cinema-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cinema-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 8px 32px rgba(52, 73, 94, 0.13);
+}
+
+.cinema-card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.cinema-card-body {
+  padding: 1.2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.cinema-card-meta {
+  color: #888;
+  font-size: 0.98rem;
+  margin-bottom: 0.5rem;
+}
+
+.cinema-card-link {
+  margin-top: auto;
+  color: #667eea;
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.cinema-card-link:hover {
+  color: #ff6b6b;
+}
+
+@media (max-width: 600px) {
+  .cinemas-title {
+    font-size: 1.3rem;
+  }
+  .cinemas-filter input,
+  .cinemas-filter select {
+    min-width: 120px;
+    font-size: 0.95rem;
+  }
+  .cinemas-grid {
+    gap: 1rem;
+  }
+  .cinema-card-img {
+    height: 120px;
+  }
+} 

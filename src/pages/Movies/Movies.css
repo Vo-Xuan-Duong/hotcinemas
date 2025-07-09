@@ -1,0 +1,47 @@
+.movies-page {
+  padding: 2rem 0;
+}
+
+.movies-title {
+  color: #667eea;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.movies-filter {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.movies-filter input,
+.movies-filter select {
+  padding: 0.7rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  min-width: 180px;
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 600px) {
+  .movies-title {
+    font-size: 1.3rem;
+  }
+  .movies-filter input,
+  .movies-filter select {
+    min-width: 120px;
+    font-size: 0.95rem;
+  }
+  .movies-grid {
+    gap: 1rem;
+  }
+} 
