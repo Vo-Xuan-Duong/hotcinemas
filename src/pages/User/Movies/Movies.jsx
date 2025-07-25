@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import MovieCard from '../../components/MovieCard/MovieCard';
-import { MOVIE_GENRES } from '../../utils/constants';
-import movies from '../../data/movies.json';
+import MovieCard from '../../../components/MovieCard/MovieCard';
+import { MOVIE_GENRES } from '../../../utils/constants';
+import movies from '../../../data/movies.json';
 import './Movies.css';
 
 const Movies = () => {

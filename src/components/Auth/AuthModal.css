@@ -1,0 +1,228 @@
+.auth-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+    backdrop-filter: blur(4px);
+}
+
+.auth-modal-content {
+    background: #ffffff !important;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 450px;
+    max-height: 85vh;
+    overflow: hidden;
+    position: relative;
+    animation: modalSlideIn 0.3s ease-out;
+    color: #333333 !important;
+    border: 1.5px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.auth-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #f5f5f5;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #666666;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.auth-modal-close:hover {
+    background: #e53e3e;
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+.auth-modal-tabs {
+    display: flex;
+    border-bottom: 1.5px solid #e2e8f0;
+    margin: 0 1.5rem;
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #718096;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.auth-tab:hover {
+    color: #667eea;
+    background: #f7fafc;
+}
+
+.auth-tab.active {
+    color: #667eea;
+}
+
+.auth-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #667eea;
+    border-radius: 1px;
+}
+
+.auth-modal-body {
+    padding: 0;
+    background: #ffffff !important;
+    overflow: hidden;
+    max-height: calc(85vh - 60px);
+    /* Trừ đi chiều cao tabs */
+    transition: opacity 0.3s ease-in-out;
+}
+
+.auth-modal-body .login-form-container,
+.auth-modal-body .register-form-container {
+    background: #ffffff !important;
+    min-height: auto;
+    padding: 0;
+}
+
+.auth-modal-body .login-form,
+.auth-modal-body .register-form {
+    box-shadow: none;
+    border-radius: 0 0 16px 16px;
+    margin: 0;
+    padding: 1.25rem;
+    background: #ffffff !important;
+    color: #333333 !important;
+}
+
+.auth-modal-body .login-form::before,
+.auth-modal-body .register-form::before {
+    display: none;
+}
+
+/* Đảm bảo tất cả text trong modal có màu đúng */
+.auth-modal-content * {
+    color: inherit !important;
+}
+
+.auth-modal-content h2 {
+    color: #333333 !important;
+}
+
+.auth-modal-content p {
+    color: #666666 !important;
+}
+
+.auth-modal-content label {
+    color: #333333 !important;
+}
+
+/* Compact form styling cho modal */
+.auth-modal-body .form-header {
+    margin-bottom: 0.5rem;
+}
+
+.auth-modal-body .form-header h2 {
+    font-size: 1.4rem !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.auth-modal-body .form-header p {
+    font-size: 0.85rem !important;
+    margin-bottom: 0 !important;
+}
+
+.auth-modal-body .form-group {
+    margin-bottom: 0.75rem !important;
+}
+
+.auth-modal-body .form-options {
+    margin: 0.5rem 0 !important;
+}
+
+.auth-modal-body .submit-button {
+    margin: 0.5rem 0 !important;
+    padding: 0.7rem !important;
+    font-size: 0.95rem !important;
+}
+
+.auth-modal-body .form-footer {
+    margin: 0.5rem 0 !important;
+}
+
+.auth-modal-body .divider {
+    margin: 0.5rem 0 !important;
+}
+
+.auth-modal-body .social-login {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.auth-modal-body .social-button {
+    padding: 0.55rem 0.8rem !important;
+    font-size: 0.85rem !important;
+    margin-bottom: 0.25rem !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .auth-modal-overlay {
+        padding: 0.5rem;
+    }
+
+    .auth-modal-content {
+        max-width: 100%;
+        max-height: 90vh;
+        border-radius: 16px;
+    }
+
+    .auth-modal-tabs {
+        margin: 0 1rem;
+    }
+
+    .auth-tab {
+        padding: 0.75rem 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .auth-modal-body .login-form,
+    .auth-modal-body .register-form {
+        padding: 1rem;
+    }
+}

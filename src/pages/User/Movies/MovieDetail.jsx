@@ -1,11 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import './MovieDetail.css';
-import MovieInfo from '../../components/Info/MovieInfo';
-import ShowtimesSection from '../../components/Showtimes/ShowtimesSection';
-import CommentsSection from '../../components/Comments/CommentsSection';
-import NowShowingSidebar from '../../components/Showtimes/NowShowingSidebar';
-import movies from '../../data/movies.json';
+import MovieInfo from '../../../components/Info/MovieInfo';
+import ShowtimesSection from '../../../components/Showtimes/ShowtimesSection';
+import CommentsSection from '../../../components/Comments/CommentsSection';
+import NowShowingSidebar from '../../../components/Showtimes/NowShowingSidebar';
+import movies from '../../../data/movies.json';
 
 const showtimes = [
   {

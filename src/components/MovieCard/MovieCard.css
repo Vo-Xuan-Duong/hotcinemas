@@ -6,7 +6,7 @@
 }
 
 .movie-card-link:hover {
-  /* transform: translateY(-4px); */
+  transform: none;
 }
 
 .movie-card {
@@ -16,14 +16,29 @@
   box-shadow: none;
   position: relative;
   transition: transform 0.3s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+  /* Đảm bảo chiều cao tối thiểu */
+  max-width: 100%;
+  /* Ngăn card vượt quá container */
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .movie-poster {
   position: relative;
   overflow: hidden;
-  height: 340px;
+  height: 320px;
   border-radius: 18px;
-  box-shadow: 0 8px 32px #0008;
+  /* box-shadow: 0 8px 32px #0008; */
+  flex-shrink: 0;
+  /* Không cho phép poster co lại */
+  width: 100%;
+  /* Đảm bảo poster chiếm toàn bộ chiều rộng */
+  box-sizing: border-box;
 }
 
 .movie-poster img {
@@ -32,7 +47,7 @@
   object-fit: cover;
   border-radius: 18px;
   display: block;
-  transition: transform 0.32s cubic-bezier(.4,1.6,.4,1);
+  transition: transform 0.32s cubic-bezier(.4, 1.6, .4, 1);
 }
 
 .movie-card:hover .movie-poster img {
@@ -42,7 +57,7 @@
 .movie-poster-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg,rgba(0,0,0,0.45) 60%,rgba(0,0,0,0.85) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 60%, rgba(0, 0, 0, 0.85) 100%);
   border-radius: 18px;
   z-index: 1;
   pointer-events: none;
@@ -77,8 +92,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  background: rgba(255,255,255,0.18);
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.18);
   border: 2px solid #fff;
   border-radius: 50%;
   width: 54px;
@@ -130,34 +145,455 @@
   margin-top: 12px;
   text-align: left;
   padding: 0 2px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  /* Đảm bảo chiếm toàn bộ chiều rộng */
+  box-sizing: border-box;
+  overflow: hidden;
+  /* Ngăn nội dung tràn ra ngoài */
 }
 
 .movie-title {
-  margin: 0 0 2px 0;
+  margin: 0 0 8px 0;
   font-size: 1.1rem;
   font-weight: 700;
-  color: #fff;
-  text-shadow: 0 2px 8px #000a;
+  color: #5e5e5e;
+  /* text-shadow: 0 2px 8px #000a; */
   line-height: 1.3;
+  min-height: 2.6rem;
+  /* Ensure consistent title height */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-wrap: break-word;
+  /* Tự động xuống dòng */
+  hyphens: auto;
+  /* Tự động ngắt từ */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .movie-meta {
   font-size: 0.95rem;
-  color: #ffeb3b;
+  color: #535353;
   font-weight: 500;
-  text-shadow: 0 1px 4px #000a;
+  /* text-shadow: 0 1px 4px #000a; */
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .movie-genre {
   margin-right: 8px;
+  display: inline-block;
+  max-width: calc(100% - 16px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
+/* Mobile First Responsive - Tablets and small desktops */
 @media (max-width: 768px) {
+  .movie-card {
+    min-height: 380px;
+    border-radius: 16px;
+  }
+
+  .movie-poster {
+    height: 260px;
+    border-radius: 16px;
+  }
+
+  .movie-poster img {
+    border-radius: 16px;
+  }
+
+  .movie-poster-overlay {
+    border-radius: 16px;
+  }
+
+  .movie-info {
+    padding: 0 4px;
+    margin-top: 10px;
+  }
+
+  .movie-title {
+    font-size: 1rem;
+    min-height: 2.4rem;
+    line-height: 1.2;
+  }
+
+  .movie-meta {
+    font-size: 0.9rem;
+    margin-top: 6px;
+  }
+
+  .movie-genre {
+    font-size: 0.9rem;
+  }
+
+  .movie-age-label {
+    padding: 3px 8px;
+    font-size: 0.75rem;
+    top: 8px;
+    left: 8px;
+  }
+
+  .movie-release-date {
+    padding: 3px 8px;
+    font-size: 0.75rem;
+    bottom: 12px;
+    left: 12px;
+  }
+
+  .movie-play-btn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .movie-play-icon {
+    font-size: 16px;
+  }
+
+  .movie-rating {
+    top: 8px;
+    right: 8px;
+    padding: 3px 8px;
+    font-size: 0.9rem;
+  }
+
+  .rating-star {
+    font-size: 0.8rem;
+  }
+
+  .rating-text {
+    font-size: 0.8rem;
+  }
+}
+
+/* Mobile phones - Large */
+@media (max-width: 600px) {
+  .movie-card {
+    min-height: 350px;
+    border-radius: 14px;
+  }
+
+  .movie-poster {
+    height: 240px;
+    border-radius: 14px;
+  }
+
+  .movie-poster img {
+    border-radius: 14px;
+  }
+
+  .movie-poster-overlay {
+    border-radius: 14px;
+  }
+
+  .movie-title {
+    font-size: 0.95rem;
+    min-height: 2rem;
+    line-height: 1.2;
+  }
+
+  .movie-info {
+    margin-top: 8px;
+    padding: 0 2px;
+  }
+
+  .movie-meta {
+    margin-top: 4px;
+    font-size: 0.85rem;
+  }
+
+  .movie-genre {
+    font-size: 0.85rem;
+  }
+
+  .movie-age-label {
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    top: 6px;
+    left: 6px;
+  }
+
+  .movie-release-date {
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    bottom: 10px;
+    left: 10px;
+  }
+
+  .movie-play-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .movie-play-icon {
+    font-size: 14px;
+  }
+
+  .movie-rating {
+    top: 6px;
+    right: 6px;
+    padding: 2px 6px;
+    font-size: 0.85rem;
+  }
+
+  .rating-star {
+    font-size: 0.75rem;
+  }
+
+  .rating-text {
+    font-size: 0.75rem;
+  }
+}
+
+/* Mobile phones - Medium */
+@media (max-width: 480px) {
+  .movie-card {
+    min-height: 320px;
+    border-radius: 12px;
+  }
+
   .movie-poster {
     height: 220px;
+    border-radius: 12px;
   }
-  
+
+  .movie-poster img {
+    border-radius: 12px;
+  }
+
+  .movie-poster-overlay {
+    border-radius: 12px;
+  }
+
+  .movie-title {
+    font-size: 0.9rem;
+    min-height: 1.8rem;
+    line-height: 1.2;
+  }
+
   .movie-info {
+    margin-top: 6px;
     padding: 0 1px;
   }
-} 
+
+  .movie-meta {
+    margin-top: 3px;
+    font-size: 0.8rem;
+  }
+
+  .movie-genre {
+    font-size: 0.8rem;
+  }
+
+  .movie-age-label {
+    padding: 2px 5px;
+    font-size: 0.65rem;
+    top: 5px;
+    left: 5px;
+  }
+
+  .movie-release-date {
+    padding: 2px 5px;
+    font-size: 0.65rem;
+    bottom: 8px;
+    left: 8px;
+  }
+
+  .movie-play-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .movie-play-icon {
+    font-size: 12px;
+  }
+
+  .movie-rating {
+    top: 5px;
+    right: 5px;
+    padding: 2px 5px;
+    font-size: 0.8rem;
+  }
+
+  .rating-star {
+    font-size: 0.7rem;
+  }
+
+  .rating-text {
+    font-size: 0.7rem;
+  }
+}
+
+/* Mobile phones - Small (iPhone SE) */
+@media (max-width: 375px) {
+  .movie-card {
+    min-height: 300px;
+    border-radius: 10px;
+  }
+
+  .movie-poster {
+    height: 200px;
+    border-radius: 10px;
+  }
+
+  .movie-poster img {
+    border-radius: 10px;
+  }
+
+  .movie-poster-overlay {
+    border-radius: 10px;
+  }
+
+  .movie-title {
+    font-size: 0.85rem;
+    min-height: 1.6rem;
+    line-height: 1.1;
+    font-weight: 600;
+  }
+
+  .movie-info {
+    padding: 0;
+    margin-top: 5px;
+  }
+
+  .movie-meta {
+    margin-top: 2px;
+    font-size: 0.75rem;
+  }
+
+  .movie-genre {
+    font-size: 0.75rem;
+    line-height: 1.1;
+  }
+
+  .movie-age-label {
+    padding: 1px 4px;
+    font-size: 0.6rem;
+    top: 4px;
+    left: 4px;
+  }
+
+  .movie-release-date {
+    padding: 1px 4px;
+    font-size: 0.6rem;
+    bottom: 6px;
+    left: 6px;
+  }
+
+  .movie-play-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .movie-play-icon {
+    font-size: 10px;
+  }
+
+  .movie-rating {
+    top: 4px;
+    right: 4px;
+    padding: 1px 4px;
+    font-size: 0.75rem;
+  }
+
+  .rating-star {
+    font-size: 0.65rem;
+  }
+
+  .rating-text {
+    font-size: 0.65rem;
+  }
+}
+
+/* Mobile phones - Extra small */
+@media (max-width: 320px) {
+  .movie-card {
+    min-height: 280px;
+    border-radius: 8px;
+  }
+
+  .movie-poster {
+    height: 180px;
+    border-radius: 8px;
+  }
+
+  .movie-poster img {
+    border-radius: 8px;
+  }
+
+  .movie-poster-overlay {
+    border-radius: 8px;
+  }
+
+  .movie-title {
+    font-size: 0.8rem;
+    min-height: 1.4rem;
+    line-height: 1.05;
+    font-weight: 600;
+  }
+
+  .movie-info {
+    margin-top: 4px;
+    padding: 0;
+  }
+
+  .movie-meta {
+    margin-top: 1px;
+    font-size: 0.7rem;
+  }
+
+  .movie-genre {
+    font-size: 0.7rem;
+    line-height: 1.05;
+  }
+
+  .movie-age-label {
+    padding: 1px 3px;
+    font-size: 0.55rem;
+    top: 3px;
+    left: 3px;
+  }
+
+  .movie-release-date {
+    padding: 1px 3px;
+    font-size: 0.55rem;
+    bottom: 4px;
+    left: 4px;
+  }
+
+  .movie-play-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .movie-play-icon {
+    font-size: 8px;
+  }
+
+  .movie-rating {
+    top: 3px;
+    right: 3px;
+    padding: 1px 3px;
+    font-size: 0.7rem;
+  }
+
+  .rating-star {
+    font-size: 0.6rem;
+  }
+
+  .rating-text {
+    font-size: 0.6rem;
+  }
+}

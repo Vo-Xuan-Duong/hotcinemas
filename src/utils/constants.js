@@ -1,6 +1,6 @@
 // API Endpoints
 export const API_BASE_URL = 'https://api.hotcinemas.vn';
-export const API_ENDPOINTS = {
+export const ENDPOINTS = {
   MOVIES: '/movies',
   CINEMAS: '/cinemas',
   SCHEDULES: '/schedules',
@@ -8,6 +8,8 @@ export const API_ENDPOINTS = {
   USERS: '/users',
   AUTH: '/auth'
 };
+
+export const API_ENDPOINTS = ENDPOINTS; // Backward compatibility
 
 // Movie Categories
 export const MOVIE_CATEGORIES = {
@@ -83,7 +85,8 @@ export const STORAGE_KEYS = {
   USER_INFO: 'user_info',
   CART_ITEMS: 'cart_items',
   THEME: 'theme',
-  LANGUAGE: 'language'
+  LANGUAGE: 'language',
+  REMEMBER_EMAIL: 'remembered_email'
 };
 
 // Theme Colors

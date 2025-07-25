@@ -16,6 +16,7 @@ const Movies = React.lazy(() => import('./pages/User/Movies'));
 const MovieDetail = React.lazy(() => import('./pages/User/Movies/MovieDetail'));
 const Cinemas = React.lazy(() => import('./pages/User/Cinemas'));
 const CinemaDetail = React.lazy(() => import('./pages/User/Cinemas/CinemaDetail'));
+const Schedule = React.lazy(() => import('./pages/User/Schedule'));
 const Booking = React.lazy(() => import('./pages/User/Booking'));
 const BookingConfirm = React.lazy(() => import('./pages/User/Booking/BookingConfirm'));
 
@@ -26,6 +27,10 @@ const AdminCinemas = React.lazy(() => import('./pages/Admin/Cinemas'));
 const AdminSchedules = React.lazy(() => import('./pages/Admin/Schedules'));
 const AdminUsers = React.lazy(() => import('./pages/Admin/Users'));
 const AdminBookings = React.lazy(() => import('./pages/Admin/Bookings'));
+
+// Demo pages
+const SwiperDemo = React.lazy(() => import('./pages/SwiperDemo'));
+const AuthTest = React.lazy(() => import('./components/AuthTest'));
 
 const router = createBrowserRouter([
   {
@@ -41,8 +46,11 @@ const router = createBrowserRouter([
       { path: 'movies/:id', element: <React.Suspense fallback={<div>Loading...</div>}><MovieDetail /></React.Suspense> },
       { path: 'cinemas', element: <React.Suspense fallback={<div>Loading...</div>}><Cinemas /></React.Suspense> },
       { path: 'cinemas/:id', element: <React.Suspense fallback={<div>Loading...</div>}><CinemaDetail /></React.Suspense> },
+      { path: 'schedule', element: <React.Suspense fallback={<div>Loading...</div>}><Schedule /></React.Suspense> },
       { path: 'booking', element: <React.Suspense fallback={<div>Loading...</div>}><Booking /></React.Suspense> },
       { path: 'booking/confirm', element: <React.Suspense fallback={<div>Loading...</div>}><BookingConfirm /></React.Suspense> },
+      { path: 'swiper-demo', element: <React.Suspense fallback={<div>Loading...</div>}><SwiperDemo /></React.Suspense> },
+      { path: 'auth-test', element: <React.Suspense fallback={<div>Loading...</div>}><AuthTest /></React.Suspense> },
     ],
     errorElement: <NotFound />,
   },

@@ -1,7 +1,7 @@
 import React from 'react';
 import MovieCard from '../../../components/MovieCard/MovieCard';
 import HeroSlider from '../../../components/HeroSlider/HeroSlider';
-import MovieSlider from '../../../components/MovieSlider/MovieSlider';
+import MovieSliderTest from '../../../components/MovieSlider/MovieSliderTest';
 import FeaturedComments from '../../../components/FeaturedComments/FeaturedComments';
 import FeaturesSection from '../../../components/FeaturesSection/FeaturesSection';
 import './Home.css';
@@ -23,10 +23,10 @@ const Home = () => {
       <HeroSlider movies={heroMovies} />
 
       {/* Movies Section */}
-      <MovieSlider movies={movies} title="Phim đang chiếu" showMoreButton={true} onShowMore={() => alert('Xem thêm phim đang chiếu')} />
+      <MovieSliderTest movies={movies} title="Phim đang chiếu" showMoreButton={true} onShowMore={() => alert('Xem thêm phim đang chiếu')} />
 
       {/* Movies Section */}
-      <MovieSlider movies={movies} title="Phim sắp chiếu" showMoreButton={true} onShowMore={() => alert('Xem thêm phim sắp chiếu')} />
+      <MovieSliderTest movies={movies} title="Phim sắp chiếu" showMoreButton={true} onShowMore={() => alert('Xem thêm phim sắp chiếu')} />
 
       {/* Featured Comments Section */}
       <FeaturedComments />
