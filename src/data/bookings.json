@@ -1,12 +1,280 @@
 [
-  {"id":1,"userId":1,"showtimeId":"ST1","seats":["A1","A2"],"total":140000,"status":"confirmed"},
-  {"id":2,"userId":2,"showtimeId":"ST2","seats":["B3","B4"],"total":180000,"status":"pending"},
-  {"id":3,"userId":3,"showtimeId":"ST3","seats":["C5"],"total":90000,"status":"confirmed"},
-  {"id":4,"userId":4,"showtimeId":"ST4","seats":["D6","D7"],"total":180000,"status":"cancelled"},
-  {"id":5,"userId":5,"showtimeId":"ST5","seats":["E8"],"total":70000,"status":"confirmed"},
-  {"id":6,"userId":6,"showtimeId":"ST6","seats":["F9","F10"],"total":140000,"status":"pending"},
-  {"id":7,"userId":7,"showtimeId":"ST7","seats":["G11"],"total":70000,"status":"confirmed"},
-  {"id":8,"userId":8,"showtimeId":"ST8","seats":["H12"],"total":70000,"status":"confirmed"},
-  {"id":9,"userId":9,"showtimeId":"ST9","seats":["I1","I2"],"total":140000,"status":"pending"},
-  {"id":10,"userId":10,"showtimeId":"ST10","seats":["J1"],"total":150000,"status":"confirmed"}
-] 
+  {
+    "id": 1,
+    "userId": 1,
+    "userName": "Nguyễn Văn A",
+    "movieTitle": "Avengers: Endgame",
+    "cinemaName": "CGV Vincom",
+    "showtimeId": "ST1",
+    "showtime": {
+      "date": "2025-07-01",
+      "time": "20:00"
+    },
+    "seats": [
+      "A1",
+      "A2"
+    ],
+    "totalAmount": 140000,
+    "status": "confirmed",
+    "createdAt": "2025-07-01T18:30:00Z"
+  },
+  {
+    "id": 2,
+    "userId": 2,
+    "userName": "Trần Thị B",
+    "movieTitle": "Spider-Man: No Way Home",
+    "cinemaName": "Lotte Cinema",
+    "showtimeId": "ST2",
+    "showtime": {
+      "date": "2025-07-02",
+      "time": "15:30"
+    },
+    "seats": [
+      "B3",
+      "B4"
+    ],
+    "totalAmount": 180000,
+    "status": "pending",
+    "createdAt": "2025-07-02T13:15:00Z"
+  },
+  {
+    "id": 3,
+    "userId": 3,
+    "userName": "Lê Văn C",
+    "movieTitle": "Top Gun: Maverick",
+    "cinemaName": "Galaxy Cinema",
+    "showtimeId": "ST3",
+    "showtime": {
+      "date": "2025-06-28",
+      "time": "19:45"
+    },
+    "seats": [
+      "C5"
+    ],
+    "totalAmount": 90000,
+    "status": "confirmed",
+    "createdAt": "2025-06-28T17:20:00Z"
+  },
+  {
+    "id": 4,
+    "userId": 4,
+    "userName": "Phạm Thị D",
+    "movieTitle": "Doctor Strange",
+    "cinemaName": "CGV Vincom",
+    "showtimeId": "ST4",
+    "showtime": {
+      "date": "2025-06-25",
+      "time": "21:15"
+    },
+    "seats": [
+      "D6",
+      "D7"
+    ],
+    "totalAmount": 180000,
+    "status": "cancelled",
+    "createdAt": "2025-06-25T19:00:00Z"
+  },
+  {
+    "id": 5,
+    "userId": 5,
+    "userName": "Hoàng Văn E",
+    "movieTitle": "Black Panther",
+    "cinemaName": "Lotte Cinema",
+    "showtimeId": "ST5",
+    "showtime": {
+      "date": "2025-06-20",
+      "time": "16:30"
+    },
+    "seats": [
+      "E8"
+    ],
+    "totalAmount": 70000,
+    "status": "confirmed",
+    "createdAt": "2025-06-20T14:45:00Z"
+  },
+  {
+    "id": 6,
+    "userId": 6,
+    "userName": "Vũ Thị F",
+    "movieTitle": "Thor: Love and Thunder",
+    "cinemaName": "Galaxy Cinema",
+    "showtimeId": "ST6",
+    "showtime": {
+      "date": "2025-06-15",
+      "time": "18:00"
+    },
+    "seats": [
+      "F9",
+      "F10"
+    ],
+    "totalAmount": 140000,
+    "status": "pending",
+    "createdAt": "2025-06-15T16:30:00Z"
+  },
+  {
+    "id": 7,
+    "userId": 7,
+    "userName": "Đỗ Văn G",
+    "movieTitle": "Captain Marvel",
+    "cinemaName": "CGV Vincom",
+    "showtimeId": "ST7",
+    "showtime": {
+      "date": "2025-05-30",
+      "time": "14:45"
+    },
+    "seats": [
+      "G11"
+    ],
+    "totalAmount": 70000,
+    "status": "confirmed",
+    "createdAt": "2025-05-30T12:15:00Z"
+  },
+  {
+    "id": 8,
+    "userId": 8,
+    "userName": "Bùi Thị H",
+    "movieTitle": "Iron Man 3",
+    "cinemaName": "Lotte Cinema",
+    "showtimeId": "ST8",
+    "showtime": {
+      "date": "2025-05-25",
+      "time": "20:30"
+    },
+    "seats": [
+      "H12"
+    ],
+    "totalAmount": 70000,
+    "status": "confirmed",
+    "createdAt": "2025-05-25T18:45:00Z"
+  },
+  {
+    "id": 9,
+    "userId": 9,
+    "userName": "Ngô Văn I",
+    "movieTitle": "Guardians of the Galaxy",
+    "cinemaName": "Galaxy Cinema",
+    "showtimeId": "ST9",
+    "showtime": {
+      "date": "2025-05-15",
+      "time": "17:15"
+    },
+    "seats": [
+      "I1",
+      "I2"
+    ],
+    "totalAmount": 140000,
+    "status": "pending",
+    "createdAt": "2025-05-15T15:00:00Z"
+  },
+  {
+    "id": 10,
+    "userId": 10,
+    "userName": "Tạ Thị J",
+    "movieTitle": "Ant-Man",
+    "cinemaName": "CGV Vincom",
+    "showtimeId": "ST10",
+    "showtime": {
+      "date": "2025-04-20",
+      "time": "19:00"
+    },
+    "seats": [
+      "J1"
+    ],
+    "totalAmount": 150000,
+    "status": "confirmed",
+    "createdAt": "2025-04-20T17:30:00Z"
+  },
+  {
+    "id": 11,
+    "userId": 11,
+    "userName": "Lý Văn K",
+    "movieTitle": "The Batman",
+    "cinemaName": "Lotte Cinema",
+    "showtimeId": "ST11",
+    "showtime": {
+      "date": "2025-04-10",
+      "time": "21:00"
+    },
+    "seats": [
+      "K1",
+      "K2"
+    ],
+    "totalAmount": 160000,
+    "status": "confirmed",
+    "createdAt": "2025-04-10T19:15:00Z"
+  },
+  {
+    "id": 12,
+    "userId": 12,
+    "userName": "Trịnh Thị L",
+    "movieTitle": "Wonder Woman",
+    "cinemaName": "Galaxy Cinema",
+    "showtimeId": "ST12",
+    "showtime": {
+      "date": "2025-03-25",
+      "time": "16:45"
+    },
+    "seats": [
+      "L3"
+    ],
+    "totalAmount": 85000,
+    "status": "confirmed",
+    "createdAt": "2025-03-25T14:30:00Z"
+  },
+  {
+    "id": 13,
+    "userId": 13,
+    "userName": "Võ Văn M",
+    "movieTitle": "Aquaman",
+    "cinemaName": "CGV Vincom",
+    "showtimeId": "ST13",
+    "showtime": {
+      "date": "2025-03-15",
+      "time": "18:30"
+    },
+    "seats": [
+      "M4",
+      "M5"
+    ],
+    "totalAmount": 170000,
+    "status": "confirmed",
+    "createdAt": "2025-03-15T16:45:00Z"
+  },
+  {
+    "id": 14,
+    "userId": 14,
+    "userName": "Đinh Thị N",
+    "movieTitle": "Shazam!",
+    "cinemaName": "Lotte Cinema",
+    "showtimeId": "ST14",
+    "showtime": {
+      "date": "2025-02-28",
+      "time": "20:15"
+    },
+    "seats": [
+      "N6"
+    ],
+    "totalAmount": 75000,
+    "status": "confirmed",
+    "createdAt": "2025-02-28T18:00:00Z"
+  },
+  {
+    "id": 15,
+    "userId": 15,
+    "userName": "Hồ Văn O",
+    "movieTitle": "Justice League",
+    "cinemaName": "Galaxy Cinema",
+    "showtimeId": "ST15",
+    "showtime": {
+      "date": "2025-02-14",
+      "time": "15:00"
+    },
+    "seats": [
+      "O7",
+      "O8"
+    ],
+    "totalAmount": 150000,
+    "status": "confirmed",
+    "createdAt": "2025-02-14T13:30:00Z"
+  }
+]

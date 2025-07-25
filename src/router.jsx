@@ -2,22 +2,25 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import UserLayout from './layouts/UserLayout';
 import AdminLayout from './layouts/AdminLayout';
-import Home from './pages/Home/Home';
-import NotFound from './pages/ErrorPages/NotFound';
+import Home from './pages/User/Home';
+import NotFound from './pages/Common/ErrorPages/NotFound';
 
-// Các trang sẽ tạo sau
+// Auth pages
 const Login = React.lazy(() => import('./pages/Auth/Login'));
 const Register = React.lazy(() => import('./pages/Auth/Register'));
+
+// User pages
 const Profile = React.lazy(() => import('./pages/User/Profile'));
 const BookingHistory = React.lazy(() => import('./pages/User/BookingHistory'));
-const Movies = React.lazy(() => import('./pages/Movies/Movies'));
-const MovieDetail = React.lazy(() => import('./pages/Movies/MovieDetail'));
-const Cinemas = React.lazy(() => import('./pages/Cinemas/Cinemas'));
-const CinemaDetail = React.lazy(() => import('./pages/Cinemas/CinemaDetail'));
-const Booking = React.lazy(() => import('./pages/Booking/Booking'));
-const BookingConfirm = React.lazy(() => import('./pages/Booking/BookingConfirm'));
+const Movies = React.lazy(() => import('./pages/User/Movies'));
+const MovieDetail = React.lazy(() => import('./pages/User/Movies/MovieDetail'));
+const Cinemas = React.lazy(() => import('./pages/User/Cinemas'));
+const CinemaDetail = React.lazy(() => import('./pages/User/Cinemas/CinemaDetail'));
+const Booking = React.lazy(() => import('./pages/User/Booking'));
+const BookingConfirm = React.lazy(() => import('./pages/User/Booking/BookingConfirm'));
 
 // Admin pages
+const AdminDashboard = React.lazy(() => import('./pages/Admin/Dashboard'));
 const AdminMovies = React.lazy(() => import('./pages/Admin/Movies'));
 const AdminCinemas = React.lazy(() => import('./pages/Admin/Cinemas'));
 const AdminSchedules = React.lazy(() => import('./pages/Admin/Schedules'));
@@ -47,7 +50,8 @@ const router = createBrowserRouter([
     path: '/admin',
     element: <AdminLayout />,
     children: [
-      { index: true, element: <React.Suspense fallback={<div>Loading...</div>}><AdminMovies /></React.Suspense> },
+      { index: true, element: <React.Suspense fallback={<div>Loading...</div>}><AdminDashboard /></React.Suspense> },
+      { path: 'dashboard', element: <React.Suspense fallback={<div>Loading...</div>}><AdminDashboard /></React.Suspense> },
       { path: 'movies', element: <React.Suspense fallback={<div>Loading...</div>}><AdminMovies /></React.Suspense> },
       { path: 'cinemas', element: <React.Suspense fallback={<div>Loading...</div>}><AdminCinemas /></React.Suspense> },
       { path: 'schedules', element: <React.Suspense fallback={<div>Loading...</div>}><AdminSchedules /></React.Suspense> },
