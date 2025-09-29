@@ -1,280 +1,782 @@
 [
   {
     "id": 1,
-    "userId": 1,
-    "userName": "Nguyễn Văn A",
+    "userId": 2,
+    "userName": "Nguyễn Văn An",
+    "movieId": 1,
     "movieTitle": "Avengers: Endgame",
+    "cinemaId": 1,
     "cinemaName": "CGV Vincom",
-    "showtimeId": "ST1",
-    "showtime": {
-      "date": "2025-07-01",
-      "time": "20:00"
-    },
-    "seats": [
-      "A1",
-      "A2"
-    ],
-    "totalAmount": 140000,
+    "showtime": "2024-01-28T19:30:00Z",
+    "seats": ["A1", "A2"],
+    "totalPrice": 200000,
     "status": "confirmed",
-    "createdAt": "2025-07-01T18:30:00Z"
+    "paymentMethod": "credit_card",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-01-25T10:30:00Z",
+    "customerInfo": {
+      "name": "Nguyễn Văn An",
+      "email": "nguyenvanan@gmail.com",
+      "phone": "0912345678"
+    },
+    "screening": {
+      "room": "Phòng 1",
+      "format": "2D",
+      "language": "Việt Sub"
+    }
   },
   {
     "id": 2,
-    "userId": 2,
-    "userName": "Trần Thị B",
+    "userId": 3,
+    "userName": "Trần Thị Bình",
+    "movieId": 2,
     "movieTitle": "Spider-Man: No Way Home",
+    "cinemaId": 2,
     "cinemaName": "Lotte Cinema",
-    "showtimeId": "ST2",
-    "showtime": {
-      "date": "2025-07-02",
-      "time": "15:30"
+    "showtime": "2024-01-28T21:00:00Z",
+    "seats": ["B5", "B6", "B7"],
+    "totalPrice": 315000,
+    "status": "confirmed",
+    "paymentMethod": "bank_transfer",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-01-26T14:15:00Z",
+    "customerInfo": {
+      "name": "Trần Thị Bình",
+      "email": "tranbinh@yahoo.com",
+      "phone": "0923456789"
     },
-    "seats": [
-      "B3",
-      "B4"
-    ],
-    "totalAmount": 180000,
-    "status": "pending",
-    "createdAt": "2025-07-02T13:15:00Z"
+    "screening": {
+      "room": "Phòng 2",
+      "format": "3D",
+      "language": "Việt Sub"
+    }
   },
   {
     "id": 3,
-    "userId": 3,
-    "userName": "Lê Văn C",
+    "userId": 5,
+    "userName": "Phạm Thị Lan",
+    "movieId": 3,
     "movieTitle": "Top Gun: Maverick",
-    "cinemaName": "Galaxy Cinema",
-    "showtimeId": "ST3",
-    "showtime": {
-      "date": "2025-06-28",
-      "time": "19:45"
-    },
-    "seats": [
-      "C5"
-    ],
-    "totalAmount": 90000,
+    "cinemaId": 1,
+    "cinemaName": "CGV Vincom",
+    "showtime": "2024-01-29T16:45:00Z",
+    "seats": ["C10", "C11"],
+    "totalPrice": 280000,
     "status": "confirmed",
-    "createdAt": "2025-06-28T17:20:00Z"
+    "paymentMethod": "e_wallet",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-01-27T09:20:00Z",
+    "customerInfo": {
+      "name": "Phạm Thị Lan",
+      "email": "phamlan@gmail.com",
+      "phone": "0945678901"
+    },
+    "screening": {
+      "room": "Phòng VIP",
+      "format": "IMAX",
+      "language": "Lồng tiếng"
+    }
   },
   {
     "id": 4,
-    "userId": 4,
-    "userName": "Phạm Thị D",
-    "movieTitle": "Doctor Strange",
-    "cinemaName": "CGV Vincom",
-    "showtimeId": "ST4",
-    "showtime": {
-      "date": "2025-06-25",
-      "time": "21:15"
+    "userId": 6,
+    "userName": "Hoàng Văn Tùng",
+    "movieId": 4,
+    "movieTitle": "Doctor Strange 2",
+    "cinemaId": 3,
+    "cinemaName": "Galaxy Cinema",
+    "showtime": "2024-01-29T20:15:00Z",
+    "seats": ["D3", "D4", "D5", "D6"],
+    "totalPrice": 420000,
+    "status": "confirmed",
+    "paymentMethod": "cash",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-01-27T16:45:00Z",
+    "customerInfo": {
+      "name": "Hoàng Văn Tùng",
+      "email": "hoangtung@hotmail.com",
+      "phone": "0956789012"
     },
-    "seats": [
-      "D6",
-      "D7"
-    ],
-    "totalAmount": 180000,
-    "status": "cancelled",
-    "createdAt": "2025-06-25T19:00:00Z"
+    "screening": {
+      "room": "Phòng 3",
+      "format": "2D",
+      "language": "Việt Sub"
+    }
   },
   {
     "id": 5,
-    "userId": 5,
-    "userName": "Hoàng Văn E",
-    "movieTitle": "Black Panther",
+    "userId": 4,
+    "userName": "Lê Minh Đức",
+    "movieId": 1,
+    "movieTitle": "Avengers: Endgame",
+    "cinemaId": 2,
     "cinemaName": "Lotte Cinema",
-    "showtimeId": "ST5",
-    "showtime": {
-      "date": "2025-06-20",
-      "time": "16:30"
+    "showtime": "2024-01-30T18:00:00Z",
+    "seats": ["E8"],
+    "totalPrice": 105000,
+    "status": "cancelled",
+    "paymentMethod": "credit_card",
+    "paymentStatus": "refunded",
+    "bookingDate": "2024-01-25T12:30:00Z",
+    "customerInfo": {
+      "name": "Lê Minh Đức",
+      "email": "leminhduc@outlook.com",
+      "phone": "0934567890"
     },
-    "seats": [
-      "E8"
-    ],
-    "totalAmount": 70000,
-    "status": "confirmed",
-    "createdAt": "2025-06-20T14:45:00Z"
+    "screening": {
+      "room": "Phòng 1",
+      "format": "2D",
+      "language": "Việt Sub"
+    }
   },
   {
     "id": 6,
-    "userId": 6,
-    "userName": "Vũ Thị F",
-    "movieTitle": "Thor: Love and Thunder",
-    "cinemaName": "Galaxy Cinema",
-    "showtimeId": "ST6",
-    "showtime": {
-      "date": "2025-06-15",
-      "time": "18:00"
+    "userId": 9,
+    "userName": "Bùi Thị Hương",
+    "movieId": 5,
+    "movieTitle": "Black Panther",
+    "cinemaId": 1,
+    "cinemaName": "CGV Vincom",
+    "showtime": "2024-01-30T22:30:00Z",
+    "seats": ["F1", "F2"],
+    "totalPrice": 240000,
+    "status": "confirmed",
+    "paymentMethod": "e_wallet",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-01-28T08:15:00Z",
+    "customerInfo": {
+      "name": "Bùi Thị Hương",
+      "email": "buihuong@yahoo.com",
+      "phone": "0989012345"
     },
-    "seats": [
-      "F9",
-      "F10"
-    ],
-    "totalAmount": 140000,
-    "status": "pending",
-    "createdAt": "2025-06-15T16:30:00Z"
+    "screening": {
+      "room": "Phòng 2",
+      "format": "2D",
+      "language": "Lồng tiếng"
+    }
   },
   {
     "id": 7,
-    "userId": 7,
-    "userName": "Đỗ Văn G",
-    "movieTitle": "Captain Marvel",
-    "cinemaName": "CGV Vincom",
-    "showtimeId": "ST7",
-    "showtime": {
-      "date": "2025-05-30",
-      "time": "14:45"
-    },
-    "seats": [
-      "G11"
-    ],
-    "totalAmount": 70000,
+    "userId": 10,
+    "userName": "Đặng Văn Nam",
+    "movieId": 2,
+    "movieTitle": "Spider-Man: No Way Home",
+    "cinemaId": 3,
+    "cinemaName": "Galaxy Cinema",
+    "showtime": "2024-01-31T15:30:00Z",
+    "seats": ["G5", "G6", "G7", "G8"],
+    "totalPrice": 460000,
     "status": "confirmed",
-    "createdAt": "2025-05-30T12:15:00Z"
+    "paymentMethod": "bank_transfer",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-01-28T11:00:00Z",
+    "customerInfo": {
+      "name": "Đặng Văn Nam",
+      "email": "dangnam@gmail.com",
+      "phone": "0990123456"
+    },
+    "screening": {
+      "room": "Phòng VIP",
+      "format": "3D",
+      "language": "Việt Sub"
+    }
   },
   {
     "id": 8,
-    "userId": 8,
-    "userName": "Bùi Thị H",
-    "movieTitle": "Iron Man 3",
+    "userId": 7,
+    "userName": "Vũ Thị Mai",
+    "movieId": 3,
+    "movieTitle": "Top Gun: Maverick",
+    "cinemaId": 2,
     "cinemaName": "Lotte Cinema",
-    "showtimeId": "ST8",
-    "showtime": {
-      "date": "2025-05-25",
-      "time": "20:30"
+    "showtime": "2024-02-01T17:45:00Z",
+    "seats": ["H12"],
+    "totalPrice": 120000,
+    "status": "expired",
+    "paymentMethod": "credit_card",
+    "paymentStatus": "failed",
+    "bookingDate": "2024-01-20T14:20:00Z",
+    "customerInfo": {
+      "name": "Vũ Thị Mai",
+      "email": "vumai@gmail.com",
+      "phone": "0967890123"
     },
-    "seats": [
-      "H12"
-    ],
-    "totalAmount": 70000,
-    "status": "confirmed",
-    "createdAt": "2025-05-25T18:45:00Z"
+    "screening": {
+      "room": "Phòng 1",
+      "format": "2D",
+      "language": "Việt Sub"
+    }
   },
   {
     "id": 9,
-    "userId": 9,
-    "userName": "Ngô Văn I",
-    "movieTitle": "Guardians of the Galaxy",
-    "cinemaName": "Galaxy Cinema",
-    "showtimeId": "ST9",
-    "showtime": {
-      "date": "2025-05-15",
-      "time": "17:15"
+    "userId": 8,
+    "userName": "Đỗ Minh Quân",
+    "movieId": 4,
+    "movieTitle": "Doctor Strange 2",
+    "cinemaId": 1,
+    "cinemaName": "CGV Vincom",
+    "showtime": "2024-02-01T13:15:00Z",
+    "seats": ["I7", "I8"],
+    "totalPrice": 220000,
+    "status": "confirmed",
+    "paymentMethod": "e_wallet",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-01-28T19:30:00Z",
+    "customerInfo": {
+      "name": "Đỗ Minh Quân",
+      "email": "dominquan@outlook.com",
+      "phone": "0978901234"
     },
-    "seats": [
-      "I1",
-      "I2"
-    ],
-    "totalAmount": 140000,
-    "status": "pending",
-    "createdAt": "2025-05-15T15:00:00Z"
+    "screening": {
+      "room": "Phòng 2",
+      "format": "2D",
+      "language": "Lồng tiếng"
+    }
   },
   {
     "id": 10,
-    "userId": 10,
-    "userName": "Tạ Thị J",
-    "movieTitle": "Ant-Man",
-    "cinemaName": "CGV Vincom",
-    "showtimeId": "ST10",
-    "showtime": {
-      "date": "2025-04-20",
-      "time": "19:00"
+    "userId": 2,
+    "userName": "Nguyễn Văn An",
+    "movieId": 5,
+    "movieTitle": "Black Panther",
+    "cinemaId": 3,
+    "cinemaName": "Galaxy Cinema",
+    "showtime": "2024-02-02T20:00:00Z",
+    "seats": ["J3", "J4", "J5"],
+    "totalPrice": 345000,
+    "status": "pending",
+    "paymentMethod": "bank_transfer",
+    "paymentStatus": "pending",
+    "bookingDate": "2024-01-28T15:45:00Z",
+    "customerInfo": {
+      "name": "Nguyễn Văn An",
+      "email": "nguyenvanan@gmail.com",
+      "phone": "0912345678"
     },
-    "seats": [
-      "J1"
-    ],
-    "totalAmount": 150000,
-    "status": "confirmed",
-    "createdAt": "2025-04-20T17:30:00Z"
+    "screening": {
+      "room": "Phòng VIP",
+      "format": "IMAX",
+      "language": "Việt Sub"
+    }
   },
   {
     "id": 11,
     "userId": 11,
-    "userName": "Lý Văn K",
-    "movieTitle": "The Batman",
-    "cinemaName": "Lotte Cinema",
-    "showtimeId": "ST11",
-    "showtime": {
-      "date": "2025-04-10",
-      "time": "21:00"
-    },
-    "seats": [
-      "K1",
-      "K2"
-    ],
-    "totalAmount": 160000,
+    "userName": "Nguyễn Thị Hoa",
+    "movieId": 1,
+    "movieTitle": "Avengers: Endgame",
+    "cinemaId": 1,
+    "cinemaName": "CGV Vincom",
+    "showtime": "2024-02-05T19:00:00Z",
+    "seats": ["K1", "K2", "K3"],
+    "totalPrice": 300000,
     "status": "confirmed",
-    "createdAt": "2025-04-10T19:15:00Z"
+    "paymentMethod": "credit_card",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-01T10:15:00Z",
+    "customerInfo": {
+      "name": "Nguyễn Thị Hoa",
+      "email": "nguyenhoa@gmail.com",
+      "phone": "0901234567"
+    },
+    "screening": {
+      "room": "Phòng 1",
+      "format": "3D",
+      "language": "Việt Sub"
+    }
   },
   {
     "id": 12,
     "userId": 12,
-    "userName": "Trịnh Thị L",
-    "movieTitle": "Wonder Woman",
-    "cinemaName": "Galaxy Cinema",
-    "showtimeId": "ST12",
-    "showtime": {
-      "date": "2025-03-25",
-      "time": "16:45"
-    },
-    "seats": [
-      "L3"
-    ],
-    "totalAmount": 85000,
+    "userName": "Trần Văn Cường",
+    "movieId": 2,
+    "movieTitle": "Spider-Man: No Way Home",
+    "cinemaId": 2,
+    "cinemaName": "Lotte Cinema",
+    "showtime": "2024-02-06T20:30:00Z",
+    "seats": ["L4", "L5"],
+    "totalPrice": 210000,
     "status": "confirmed",
-    "createdAt": "2025-03-25T14:30:00Z"
+    "paymentMethod": "e_wallet",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-02T14:30:00Z",
+    "customerInfo": {
+      "name": "Trần Văn Cường",
+      "email": "trancuong@yahoo.com",
+      "phone": "0912345679"
+    },
+    "screening": {
+      "room": "Phòng 2",
+      "format": "2D",
+      "language": "Lồng tiếng"
+    }
   },
   {
     "id": 13,
     "userId": 13,
-    "userName": "Võ Văn M",
-    "movieTitle": "Aquaman",
-    "cinemaName": "CGV Vincom",
-    "showtimeId": "ST13",
-    "showtime": {
-      "date": "2025-03-15",
-      "time": "18:30"
-    },
-    "seats": [
-      "M4",
-      "M5"
-    ],
-    "totalAmount": 170000,
+    "userName": "Lê Thị Dung",
+    "movieId": 3,
+    "movieTitle": "Top Gun: Maverick",
+    "cinemaId": 3,
+    "cinemaName": "Galaxy Cinema",
+    "showtime": "2024-02-07T18:15:00Z",
+    "seats": ["M7", "M8", "M9"],
+    "totalPrice": 315000,
     "status": "confirmed",
-    "createdAt": "2025-03-15T16:45:00Z"
+    "paymentMethod": "bank_transfer",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-03T09:45:00Z",
+    "customerInfo": {
+      "name": "Lê Thị Dung",
+      "email": "ledung@gmail.com",
+      "phone": "0923456780"
+    },
+    "screening": {
+      "room": "Phòng VIP",
+      "format": "IMAX",
+      "language": "Việt Sub"
+    }
   },
   {
     "id": 14,
     "userId": 14,
-    "userName": "Đinh Thị N",
-    "movieTitle": "Shazam!",
-    "cinemaName": "Lotte Cinema",
-    "showtimeId": "ST14",
-    "showtime": {
-      "date": "2025-02-28",
-      "time": "20:15"
+    "userName": "Phạm Văn Đức",
+    "movieId": 4,
+    "movieTitle": "Doctor Strange 2",
+    "cinemaId": 1,
+    "cinemaName": "CGV Vincom",
+    "showtime": "2024-02-08T21:00:00Z",
+    "seats": ["N1"],
+    "totalPrice": 105000,
+    "status": "pending",
+    "paymentMethod": "credit_card",
+    "paymentStatus": "pending",
+    "bookingDate": "2024-02-04T16:20:00Z",
+    "customerInfo": {
+      "name": "Phạm Văn Đức",
+      "email": "phamduc@hotmail.com",
+      "phone": "0934567891"
     },
-    "seats": [
-      "N6"
-    ],
-    "totalAmount": 75000,
-    "status": "confirmed",
-    "createdAt": "2025-02-28T18:00:00Z"
+    "screening": {
+      "room": "Phòng 3",
+      "format": "2D",
+      "language": "Việt Sub"
+    }
   },
   {
     "id": 15,
     "userId": 15,
-    "userName": "Hồ Văn O",
-    "movieTitle": "Justice League",
-    "cinemaName": "Galaxy Cinema",
-    "showtimeId": "ST15",
-    "showtime": {
-      "date": "2025-02-14",
-      "time": "15:00"
-    },
-    "seats": [
-      "O7",
-      "O8"
-    ],
-    "totalAmount": 150000,
+    "userName": "Hoàng Thị Lan",
+    "movieId": 5,
+    "movieTitle": "Black Panther",
+    "cinemaId": 2,
+    "cinemaName": "Lotte Cinema",
+    "showtime": "2024-02-09T19:45:00Z",
+    "seats": ["O3", "O4", "O5", "O6"],
+    "totalPrice": 420000,
     "status": "confirmed",
-    "createdAt": "2025-02-14T13:30:00Z"
+    "paymentMethod": "cash",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-05T11:30:00Z",
+    "customerInfo": {
+      "name": "Hoàng Thị Lan",
+      "email": "hoanglan@outlook.com",
+      "phone": "0945678902"
+    },
+    "screening": {
+      "room": "Phòng 1",
+      "format": "3D",
+      "language": "Lồng tiếng"
+    }
+  },
+  {
+    "id": 16,
+    "userId": 16,
+    "userName": "Vũ Văn Minh",
+    "movieId": 1,
+    "movieTitle": "Avengers: Endgame",
+    "cinemaId": 3,
+    "cinemaName": "Galaxy Cinema",
+    "showtime": "2024-02-10T17:30:00Z",
+    "seats": ["P8", "P9"],
+    "totalPrice": 210000,
+    "status": "confirmed",
+    "paymentMethod": "e_wallet",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-06T13:15:00Z",
+    "customerInfo": {
+      "name": "Vũ Văn Minh",
+      "email": "vuminh@gmail.com",
+      "phone": "0956789013"
+    },
+    "screening": {
+      "room": "Phòng 2",
+      "format": "2D",
+      "language": "Việt Sub"
+    }
+  },
+  {
+    "id": 17,
+    "userId": 17,
+    "userName": "Đặng Thị Nga",
+    "movieId": 2,
+    "movieTitle": "Spider-Man: No Way Home",
+    "cinemaId": 1,
+    "cinemaName": "CGV Vincom",
+    "showtime": "2024-02-11T20:15:00Z",
+    "seats": ["Q1", "Q2", "Q3", "Q4"],
+    "totalPrice": 420000,
+    "status": "confirmed",
+    "paymentMethod": "bank_transfer",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-07T08:45:00Z",
+    "customerInfo": {
+      "name": "Đặng Thị Nga",
+      "email": "dangnga@yahoo.com",
+      "phone": "0967890124"
+    },
+    "screening": {
+      "room": "Phòng VIP",
+      "format": "IMAX",
+      "language": "Việt Sub"
+    }
+  },
+  {
+    "id": 18,
+    "userId": 18,
+    "userName": "Bùi Văn Sơn",
+    "movieId": 3,
+    "movieTitle": "Top Gun: Maverick",
+    "cinemaId": 2,
+    "cinemaName": "Lotte Cinema",
+    "showtime": "2024-02-12T18:00:00Z",
+    "seats": ["R5", "R6"],
+    "totalPrice": 210000,
+    "status": "cancelled",
+    "paymentMethod": "credit_card",
+    "paymentStatus": "refunded",
+    "bookingDate": "2024-02-08T15:30:00Z",
+    "customerInfo": {
+      "name": "Bùi Văn Sơn",
+      "email": "buison@gmail.com",
+      "phone": "0978901235"
+    },
+    "screening": {
+      "room": "Phòng 1",
+      "format": "2D",
+      "language": "Lồng tiếng"
+    }
+  },
+  {
+    "id": 19,
+    "userId": 19,
+    "userName": "Lê Văn Thành",
+    "movieId": 4,
+    "movieTitle": "Doctor Strange 2",
+    "cinemaId": 3,
+    "cinemaName": "Galaxy Cinema",
+    "showtime": "2024-02-13T21:30:00Z",
+    "seats": ["S7", "S8", "S9"],
+    "totalPrice": 315000,
+    "status": "confirmed",
+    "paymentMethod": "e_wallet",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-09T12:00:00Z",
+    "customerInfo": {
+      "name": "Lê Văn Thành",
+      "email": "lethanh@hotmail.com",
+      "phone": "0989012346"
+    },
+    "screening": {
+      "room": "Phòng 3",
+      "format": "3D",
+      "language": "Việt Sub"
+    }
+  },
+  {
+    "id": 20,
+    "userId": 20,
+    "userName": "Nguyễn Thị Vân",
+    "movieId": 5,
+    "movieTitle": "Black Panther",
+    "cinemaId": 1,
+    "cinemaName": "CGV Vincom",
+    "showtime": "2024-02-14T19:15:00Z",
+    "seats": ["T1", "T2"],
+    "totalPrice": 210000,
+    "status": "confirmed",
+    "paymentMethod": "cash",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-10T10:20:00Z",
+    "customerInfo": {
+      "name": "Nguyễn Thị Vân",
+      "email": "nguyenvan@outlook.com",
+      "phone": "0990123457"
+    },
+    "screening": {
+      "room": "Phòng 2",
+      "format": "2D",
+      "language": "Lồng tiếng"
+    }
+  },
+  {
+    "id": 21,
+    "userId": 21,
+    "userName": "Trần Văn Hùng",
+    "movieId": 1,
+    "movieTitle": "Avengers: Endgame",
+    "cinemaId": 2,
+    "cinemaName": "Lotte Cinema",
+    "showtime": "2024-02-15T20:45:00Z",
+    "seats": ["U3", "U4", "U5"],
+    "totalPrice": 315000,
+    "status": "confirmed",
+    "paymentMethod": "bank_transfer",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-11T14:10:00Z",
+    "customerInfo": {
+      "name": "Trần Văn Hùng",
+      "email": "tranhung@gmail.com",
+      "phone": "0901234568"
+    },
+    "screening": {
+      "room": "Phòng VIP",
+      "format": "IMAX",
+      "language": "Việt Sub"
+    }
+  },
+  {
+    "id": 22,
+    "userId": 22,
+    "userName": "Phạm Thị Mai",
+    "movieId": 2,
+    "movieTitle": "Spider-Man: No Way Home",
+    "cinemaId": 3,
+    "cinemaName": "Galaxy Cinema",
+    "showtime": "2024-02-16T17:00:00Z",
+    "seats": ["V6", "V7"],
+    "totalPrice": 210000,
+    "status": "confirmed",
+    "paymentMethod": "credit_card",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-12T09:35:00Z",
+    "customerInfo": {
+      "name": "Phạm Thị Mai",
+      "email": "phammai@yahoo.com",
+      "phone": "0912345680"
+    },
+    "screening": {
+      "room": "Phòng 1",
+      "format": "2D",
+      "language": "Lồng tiếng"
+    }
+  },
+  {
+    "id": 23,
+    "userId": 23,
+    "userName": "Hoàng Văn Tuấn",
+    "movieId": 3,
+    "movieTitle": "Top Gun: Maverick",
+    "cinemaId": 1,
+    "cinemaName": "CGV Vincom",
+    "showtime": "2024-02-17T18:30:00Z",
+    "seats": ["W8", "W9", "W10"],
+    "totalPrice": 315000,
+    "status": "confirmed",
+    "paymentMethod": "e_wallet",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-13T11:50:00Z",
+    "customerInfo": {
+      "name": "Hoàng Văn Tuấn",
+      "email": "hoangtuan@gmail.com",
+      "phone": "0923456781"
+    },
+    "screening": {
+      "room": "Phòng 3",
+      "format": "3D",
+      "language": "Việt Sub"
+    }
+  },
+  {
+    "id": 24,
+    "userId": 24,
+    "userName": "Vũ Thị Hương",
+    "movieId": 4,
+    "movieTitle": "Doctor Strange 2",
+    "cinemaId": 2,
+    "cinemaName": "Lotte Cinema",
+    "showtime": "2024-02-18T21:15:00Z",
+    "seats": ["X1", "X2", "X3", "X4"],
+    "totalPrice": 420000,
+    "status": "confirmed",
+    "paymentMethod": "cash",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-14T16:25:00Z",
+    "customerInfo": {
+      "name": "Vũ Thị Hương",
+      "email": "vuhuong@hotmail.com",
+      "phone": "0934567892"
+    },
+    "screening": {
+      "room": "Phòng 2",
+      "format": "2D",
+      "language": "Lồng tiếng"
+    }
+  },
+  {
+    "id": 25,
+    "userId": 25,
+    "userName": "Đặng Văn Nam",
+    "movieId": 5,
+    "movieTitle": "Black Panther",
+    "cinemaId": 3,
+    "cinemaName": "Galaxy Cinema",
+    "showtime": "2024-02-19T19:45:00Z",
+    "seats": ["Y5", "Y6"],
+    "totalPrice": 210000,
+    "status": "confirmed",
+    "paymentMethod": "bank_transfer",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-15T13:40:00Z",
+    "customerInfo": {
+      "name": "Đặng Văn Nam",
+      "email": "dangnam@outlook.com",
+      "phone": "0945678903"
+    },
+    "screening": {
+      "room": "Phòng VIP",
+      "format": "IMAX",
+      "language": "Việt Sub"
+    }
+  },
+  {
+    "id": 26,
+    "userId": 26,
+    "userName": "Lê Thị Dung",
+    "movieId": 1,
+    "movieTitle": "Avengers: Endgame",
+    "cinemaId": 1,
+    "cinemaName": "CGV Vincom",
+    "showtime": "2024-02-20T20:00:00Z",
+    "seats": ["Z7", "Z8", "Z9"],
+    "totalPrice": 315000,
+    "status": "confirmed",
+    "paymentMethod": "credit_card",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-16T10:15:00Z",
+    "customerInfo": {
+      "name": "Lê Thị Dung",
+      "email": "ledung@gmail.com",
+      "phone": "0956789014"
+    },
+    "screening": {
+      "room": "Phòng 1",
+      "format": "3D",
+      "language": "Việt Sub"
+    }
+  },
+  {
+    "id": 27,
+    "userId": 27,
+    "userName": "Bùi Văn Sơn",
+    "movieId": 2,
+    "movieTitle": "Spider-Man: No Way Home",
+    "cinemaId": 2,
+    "cinemaName": "Lotte Cinema",
+    "showtime": "2024-02-21T18:15:00Z",
+    "seats": ["AA1", "AA2"],
+    "totalPrice": 210000,
+    "status": "confirmed",
+    "paymentMethod": "e_wallet",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-17T14:30:00Z",
+    "customerInfo": {
+      "name": "Bùi Văn Sơn",
+      "email": "buison@yahoo.com",
+      "phone": "0967890125"
+    },
+    "screening": {
+      "room": "Phòng 2",
+      "format": "2D",
+      "language": "Lồng tiếng"
+    }
+  },
+  {
+    "id": 28,
+    "userId": 28,
+    "userName": "Nguyễn Văn An",
+    "movieId": 3,
+    "movieTitle": "Top Gun: Maverick",
+    "cinemaId": 3,
+    "cinemaName": "Galaxy Cinema",
+    "showtime": "2024-02-22T21:30:00Z",
+    "seats": ["BB3", "BB4", "BB5", "BB6"],
+    "totalPrice": 420000,
+    "status": "confirmed",
+    "paymentMethod": "cash",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-18T11:45:00Z",
+    "customerInfo": {
+      "name": "Nguyễn Văn An",
+      "email": "nguyenvanan@gmail.com",
+      "phone": "0912345678"
+    },
+    "screening": {
+      "room": "Phòng 3",
+      "format": "3D",
+      "language": "Việt Sub"
+    }
+  },
+  {
+    "id": 29,
+    "userId": 29,
+    "userName": "Trần Thị Bình",
+    "movieId": 4,
+    "movieTitle": "Doctor Strange 2",
+    "cinemaId": 1,
+    "cinemaName": "CGV Vincom",
+    "showtime": "2024-02-23T19:00:00Z",
+    "seats": ["CC7", "CC8"],
+    "totalPrice": 210000,
+    "status": "confirmed",
+    "paymentMethod": "bank_transfer",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-19T16:20:00Z",
+    "customerInfo": {
+      "name": "Trần Thị Bình",
+      "email": "tranbinh@hotmail.com",
+      "phone": "0923456789"
+    },
+    "screening": {
+      "room": "Phòng VIP",
+      "format": "IMAX",
+      "language": "Lồng tiếng"
+    }
+  },
+  {
+    "id": 30,
+    "userId": 30,
+    "userName": "Phạm Thị Lan",
+    "movieId": 5,
+    "movieTitle": "Black Panther",
+    "cinemaId": 2,
+    "cinemaName": "Lotte Cinema",
+    "showtime": "2024-02-24T20:45:00Z",
+    "seats": ["DD1", "DD2", "DD3"],
+    "totalPrice": 315000,
+    "status": "confirmed",
+    "paymentMethod": "credit_card",
+    "paymentStatus": "paid",
+    "bookingDate": "2024-02-20T13:10:00Z",
+    "customerInfo": {
+      "name": "Phạm Thị Lan",
+      "email": "phamlan@outlook.com",
+      "phone": "0945678901"
+    },
+    "screening": {
+      "room": "Phòng 1",
+      "format": "2D",
+      "language": "Việt Sub"
+    }
   }
 ]

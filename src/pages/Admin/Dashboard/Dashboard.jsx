@@ -1,343 +1,368 @@
 import React, { useState, useEffect } from 'react';
+import {
+  Card,
+  Row,
+  Col,
+  Statistic,
+  Table,
+  Button,
+  Select,
+  Typography,
+  Tag,
+  Avatar,
+  Space,
+  Progress,
+  Divider,
+  Skeleton
+} from 'antd';
+import {
+  DollarOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+  ShopOutlined,
+  CalendarOutlined,
+  TrophyOutlined,
+  RiseOutlined,
+  FallOutlined
+} from '@ant-design/icons';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
-import './Dashboard.css';
+import './DashboardAntd.css';
+import bookingsData from '../../../data/bookings.json';
+import moviesData from '../../../data/movies.json';
+import cinemasData from '../../../data/cinemas.json';
+import usersData from '../../../data/users.json';
+
+const { Title, Text } = Typography;
+const { Option } = Select;
 
 const Dashboard = () => {
-  const [stats, setStats] = useState({
-    totalMovies: 0,
-    totalCinemas: 0,
-    totalUsers: 0,
-    totalBookings: 0,
-    totalRevenue: 0,
-    pendingBookings: 0
-  });
-  const [recentBookings, setRecentBookings] = useState([]);
-  const [revenueData, setRevenueData] = useState([]);
-  const [bookingData, setBookingData] = useState([]);
-  const [chartPeriod, setChartPeriod] = useState('month'); // 'month' or 'week'
-  const [loading, setLoading] = useState(true);
+  const [chartPeriod, setChartPeriod] = useState('month');
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    loadDashboardData();
-  }, [chartPeriod]);
-
-  const processChartData = (bookings, period) => {
-    const now = new Date();
-    const data = {};
-
-    if (period === 'month') {
-      // Dữ liệu 12 tháng gần nhất
-      for (let i = 11; i >= 0; i--) {
-        const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
-        const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-        const monthName = date.toLocaleDateString('vi-VN', { month: 'short', year: 'numeric' });
-        data[key] = { period: monthName, revenue: 0, bookings: 0 };
-      }
-    } else {
-      // Dữ liệu 8 tuần gần nhất
-      for (let i = 7; i >= 0; i--) {
-        const date = new Date(now.getTime() - i * 7 * 24 * 60 * 60 * 1000);
-        const weekStart = new Date(date.getTime() - date.getDay() * 24 * 60 * 60 * 1000);
-        const key = `${weekStart.getFullYear()}-W${Math.ceil((weekStart.getTime() - new Date(weekStart.getFullYear(), 0, 1).getTime()) / (7 * 24 * 60 * 60 * 1000))}`;
-        const weekName = `Tuần ${Math.ceil((weekStart.getTime() - new Date(weekStart.getFullYear(), 0, 1).getTime()) / (7 * 24 * 60 * 60 * 1000))}`;
-        data[key] = { period: weekName, revenue: 0, bookings: 0 };
-      }
-    }
-
-    // Xử lý dữ liệu bookings
-    bookings.forEach(booking => {
-      const bookingDate = new Date(booking.createdAt);
-      let key;
-
-      if (period === 'month') {
-        key = `${bookingDate.getFullYear()}-${String(bookingDate.getMonth() + 1).padStart(2, '0')}`;
-      } else {
-        const weekStart = new Date(bookingDate.getTime() - bookingDate.getDay() * 24 * 60 * 60 * 1000);
-        key = `${weekStart.getFullYear()}-W${Math.ceil((weekStart.getTime() - new Date(weekStart.getFullYear(), 0, 1).getTime()) / (7 * 24 * 60 * 60 * 1000))}`;
-      }
-
-      if (data[key]) {
-        data[key].revenue += booking.totalAmount || 0;
-        data[key].bookings += 1;
-      }
-    });
-
-    return Object.values(data);
+  // Thống kê tổng quan từ dữ liệu JSON
+  const stats = {
+    totalMovies: moviesData.length,
+    totalCinemas: cinemasData.length,
+    totalUsers: usersData.length,
+    totalBookings: bookingsData.length,
+    confirmedBookings: bookingsData.filter(b => b.status === 'confirmed').length,
+    pendingBookings: bookingsData.filter(b => b.status === 'pending').length,
+    totalRevenue: bookingsData
+      .filter(b => b.status === 'confirmed')
+      .reduce((sum, b) => sum + b.totalPrice, 0),
+    totalSeats: bookingsData
+      .filter(b => b.status === 'confirmed')
+      .reduce((sum, b) => sum + b.seats.length, 0)
   };
 
-  const loadDashboardData = async () => {
-    try {
-      const [moviesRes, cinemasRes, usersRes, bookingsRes] = await Promise.all([
-        fetch('/src/data/movies.json'),
-        fetch('/src/data/cinemas.json'),
-        fetch('/src/data/users.json'),
-        fetch('/src/data/bookings.json')
-      ]);
+  // Booking gần đây
+  const recentBookings = bookingsData
+    .sort((a, b) => new Date(b.bookingDate) - new Date(a.bookingDate))
+    .slice(0, 5);
 
-      const [movies, cinemas, users, bookings] = await Promise.all([
-        moviesRes.json(),
-        cinemasRes.json(),
-        usersRes.json(),
-        bookingsRes.json()
-      ]);
+  // Dữ liệu biểu đồ doanh thu theo tháng
+  const revenueData = [
+    { month: 'T1', revenue: 45000000, bookings: 150 },
+    { month: 'T2', revenue: 52000000, bookings: 180 },
+    { month: 'T3', revenue: 48000000, bookings: 165 },
+    { month: 'T4', revenue: 61000000, bookings: 210 },
+    { month: 'T5', revenue: 58000000, bookings: 195 },
+    { month: 'T6', revenue: 67000000, bookings: 230 },
+    { month: 'T7', revenue: 75000000, bookings: 260 },
+    { month: 'T8', revenue: 69000000, bookings: 240 },
+    { month: 'T9', revenue: 64000000, bookings: 220 },
+    { month: 'T10', revenue: 71000000, bookings: 245 },
+    { month: 'T11', revenue: 68000000, bookings: 235 },
+    { month: 'T12', revenue: 78000000, bookings: 275 }
+  ];
 
-      const totalRevenue = bookings.reduce((sum, booking) => sum + booking.totalAmount, 0);
-      const pendingBookings = bookings.filter(booking => booking.status === 'pending').length;
+  // Top phim có doanh thu cao nhất
+  const topMovies = moviesData
+    .map(movie => {
+      const movieBookings = bookingsData.filter(b => b.movieId === movie.id && b.status === 'confirmed');
+      return {
+        ...movie,
+        totalRevenue: movieBookings.reduce((sum, b) => sum + b.totalPrice, 0),
+        totalBookings: movieBookings.length
+      };
+    })
+    .sort((a, b) => b.totalRevenue - a.totalRevenue)
+    .slice(0, 5);
 
-      setStats({
-        totalMovies: movies.length,
-        totalCinemas: cinemas.length,
-        totalUsers: users.length,
-        totalBookings: bookings.length,
-        totalRevenue,
-        pendingBookings
-      });
+  // Top rạp có doanh thu cao nhất
+  const topCinemas = cinemasData
+    .map(cinema => {
+      const cinemaBookings = bookingsData.filter(b => b.cinemaId === cinema.id && b.status === 'confirmed');
+      return {
+        ...cinema,
+        totalRevenue: cinemaBookings.reduce((sum, b) => sum + b.totalPrice, 0),
+        totalBookings: cinemaBookings.length
+      };
+    })
+  // Render trạng thái booking
+  const renderBookingStatus = (status) => {
+    const statusConfig = {
+      confirmed: { color: 'success', text: 'Đã xác nhận' },
+      pending: { color: 'warning', text: 'Chờ xử lý' },
+      cancelled: { color: 'error', text: 'Đã hủy' },
+      expired: { color: 'default', text: 'Hết hạn' }
+    };
 
-      // Lấy 5 đặt vé gần nhất
-      const sortedBookings = bookings
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        .slice(0, 5);
-      setRecentBookings(sortedBookings);
-
-      // Xử lý dữ liệu biểu đồ
-      const chartData = processChartData(bookings, chartPeriod);
-      setRevenueData(chartData);
-      setBookingData(chartData);
-    } catch (error) {
-      console.error('Error loading dashboard data:', error);
-    } finally {
-      setLoading(false);
-    }
+    const config = statusConfig[status] || statusConfig.pending;
+    return <Tag color={config.color}>{config.text}</Tag>;
   };
 
-  const handlePeriodChange = (period) => {
-    setChartPeriod(period);
-  };
-
-  if (loading) {
-    return <div className="admin-loading">Đang tải...</div>;
-  }
+  // Cột cho bảng booking gần đây
+  const bookingColumns = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id',
+      width: 60,
+    },
+    {
+      title: 'Khách hàng',
+      dataIndex: 'userName',
+      key: 'userName',
+      render: (text, record) => (
+        <Space>
+          <Avatar icon={<UserOutlined />} />
+          <div>
+            <div style={{ fontWeight: 500 }}>{text}</div>
+            <Text type="secondary" style={{ fontSize: '12px' }}>
+              {record.customerInfo?.email}
+            </Text>
+          </div>
+        </Space>
+      ),
+    },
+    {
+      title: 'Phim',
+      dataIndex: 'movieTitle',
+      key: 'movieTitle',
+      ellipsis: true,
+    },
+    {
+      title: 'Rạp',
+      dataIndex: 'cinemaName',
+      key: 'cinemaName',
+      ellipsis: true,
+    },
+    {
+      title: 'Tổng tiền',
+      dataIndex: 'totalPrice',
+      key: 'totalPrice',
+      render: (amount) => `${amount?.toLocaleString('vi-VN')} ₫`,
+    },
+    {
+      title: 'Trạng thái',
+      dataIndex: 'status',
+      key: 'status',
+      render: renderBookingStatus,
+    },
+  ];
 
   return (
     <div className="dashboard-container">
+      {/* Header */}
       <div className="dashboard-header">
-        <h1>Dashboard</h1>
-        <p>Chào mừng đến với trang quản trị Hot Cinemas</p>
+        <Title level={2} className="dashboard-title">
+          Dashboard Quản Trị
+        </Title>
+        <Text className="dashboard-subtitle">
+          Tổng quan hệ thống HotCinemas
+        </Text>
       </div>
 
-      <div className="dashboard-content">
-        {/* Stats Cards */}
-        <div className="stats-grid">
-          <div className="stat-card stat-movies">
-            <div className="stat-icon">🎬</div>
-            <div className="stat-info">
-              <div className="stat-number">{stats.totalMovies}</div>
-              <div className="stat-label">Tổng số phim</div>
-            </div>
-          </div>
+      {/* Statistics Cards */}
+      <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
+        <Col xs={24} sm={12} md={8} lg={6}>
+          <Card className="stats-card">
+            <Statistic
+              title="Tổng số phim"
+              value={stats.totalMovies}
+              prefix={<VideoCameraOutlined className="stats-icon" style={{ color: '#1890ff' }} />}
+              valueStyle={{ color: '#1890ff' }}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={8} lg={6}>
+          <Card className="stats-card">
+            <Statistic
+              title="Tổng số rạp"
+              value={stats.totalCinemas}
+              prefix={<ShopOutlined className="stats-icon" style={{ color: '#52c41a' }} />}
+              valueStyle={{ color: '#52c41a' }}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={8} lg={6}>
+          <Card className="stats-card">
+            <Statistic
+              title="Tổng người dùng"
+              value={stats.totalUsers}
+              prefix={<UserOutlined className="stats-icon" style={{ color: '#faad14' }} />}
+              valueStyle={{ color: '#faad14' }}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={8} lg={6}>
+          <Card className="stats-card">
+            <Statistic
+              title="Tổng đặt vé"
+              value={stats.totalBookings}
+              prefix={<CalendarOutlined className="stats-icon" style={{ color: '#722ed1' }} />}
+              valueStyle={{ color: '#722ed1' }}
+            />
+          </Card>
+        </Col>
+      </Row>
 
-          <div className="stat-card stat-cinemas">
-            <div className="stat-icon">🏢</div>
-            <div className="stat-info">
-              <div className="stat-number">{stats.totalCinemas}</div>
-              <div className="stat-label">Tổng số rạp</div>
-            </div>
-          </div>
+      {/* Revenue and Performance */}
+      <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
+        <Col xs={24} sm={12} md={8}>
+          <Card className="stats-card performance-card">
+            <Statistic
+              title="Tổng doanh thu"
+              value={stats.totalRevenue}
+              prefix={<DollarOutlined />}
+              suffix="₫"
+              formatter={(value) => value?.toLocaleString('vi-VN')}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={8}>
+          <Card className="stats-card">
+            <Statistic
+              title="Vé đã xác nhận"
+              value={stats.confirmedBookings}
+              prefix={<TrophyOutlined style={{ color: '#52c41a' }} />}
+              valueStyle={{ color: '#52c41a' }}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={8}>
+          <Card className="stats-card">
+            <Statistic
+              title="Chờ xử lý"
+              value={stats.pendingBookings}
+              prefix={<RiseOutlined style={{ color: '#faad14' }} />}
+              valueStyle={{ color: '#faad14' }}
+            />
+          </Card>
+        </Col>
+      </Row>
 
-          <div className="stat-card stat-users">
-            <div className="stat-icon">👥</div>
-            <div className="stat-info">
-              <div className="stat-number">{stats.totalUsers}</div>
-              <div className="stat-label">Tổng số người dùng</div>
-            </div>
-          </div>
+      {/* Charts Row */}
+      <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
+        <Col xs={24} lg={12}>
+          <Card className="chart-card" title="Doanh thu theo tháng">
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={revenueData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="month" />
+                <YAxis tickFormatter={(value) => `${(value / 1000000).toFixed(0)}M`} />
+                <Tooltip
+                  formatter={(value) => [`${value.toLocaleString('vi-VN')} ₫`, 'Doanh thu']}
+                />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="revenue"
+                  stroke="#1890ff"
+                  strokeWidth={3}
+                  dot={{ fill: '#1890ff', strokeWidth: 2, r: 4 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </Card>
+        </Col>
+        <Col xs={24} lg={12}>
+          <Card className="chart-card" title="Số lượng đặt vé theo tháng">
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={revenueData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="month" />
+                <YAxis />
+                <Tooltip formatter={(value) => [value, 'Số đặt vé']} />
+                <Legend />
+                <Bar dataKey="bookings" fill="#52c41a" />
+              </BarChart>
+            </ResponsiveContainer>
+          </Card>
+        </Col>
+      </Row>
 
-          <div className="stat-card stat-bookings">
-            <div className="stat-icon">🎫</div>
-            <div className="stat-info">
-              <div className="stat-number">{stats.totalBookings}</div>
-              <div className="stat-label">Tổng số đặt vé</div>
-            </div>
-          </div>
-
-          <div className="stat-card stat-revenue">
-            <div className="stat-icon">💰</div>
-            <div className="stat-info">
-              <div className="stat-number">{stats.totalRevenue.toLocaleString('vi-VN')}</div>
-              <div className="stat-label">Tổng doanh thu (VNĐ)</div>
-            </div>
-          </div>
-
-          <div className="stat-card stat-pending">
-            <div className="stat-icon">⏳</div>
-            <div className="stat-info">
-              <div className="stat-number">{stats.pendingBookings}</div>
-              <div className="stat-label">Đặt vé chờ xác nhận</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Charts Section */}
-        <div className="charts-section">
-          <div className="charts-header">
-            <h2>Biểu Đồ Thống Kê</h2>
-            <div className="period-selector">
-              <button
-                className={`period-btn ${chartPeriod === 'month' ? 'active' : ''}`}
-                onClick={() => handlePeriodChange('month')}
-              >
-                Theo Tháng
-              </button>
-              <button
-                className={`period-btn ${chartPeriod === 'week' ? 'active' : ''}`}
-                onClick={() => handlePeriodChange('week')}
-              >
-                Theo Tuần
-              </button>
-            </div>
-          </div>
-
-          <div className="charts-grid">
-            {/* Revenue Chart */}
-            <div className="chart-container">
-              <h3>Doanh Thu</h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={revenueData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="period" />
-                  <YAxis tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`} />
-                  <Tooltip
-                    formatter={(value) => [`${value.toLocaleString('vi-VN')} VNĐ`, 'Doanh Thu']}
-                  />
-                  <Legend />
-                  <Line
-                    type="monotone"
-                    dataKey="revenue"
-                    stroke="#8884d8"
-                    strokeWidth={2}
-                    dot={{ fill: '#8884d8' }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-
-            {/* Bookings Chart */}
-            <div className="chart-container">
-              <h3>Số Lượng Đặt Vé</h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={bookingData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="period" />
-                  <YAxis />
-                  <Tooltip
-                    formatter={(value) => [value, 'Số Đặt Vé']}
-                  />
-                  <Legend />
-                  <Bar
-                    dataKey="bookings"
-                    fill="#82ca9d"
-                    name="Số Đặt Vé"
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-        </div>
-
-        {/* Recent Bookings */}
-        <div className="recent-bookings">
-          <h2>Đặt Vé Gần Đây</h2>
-          <div className="bookings-table">
-            <table>
-              <thead>
-                <tr>
-                  <th>Mã Đặt Vé</th>
-                  <th>Người Dùng</th>
-                  <th>Phim</th>
-                  <th>Rạp</th>
-                  <th>Suất Chiếu</th>
-                  <th>Tổng Tiền</th>
-                  <th>Trạng Thái</th>
-                  <th>Ngày Đặt</th>
-                </tr>
-              </thead>
-              <tbody>
-                {recentBookings.map((booking) => (
-                  <tr key={booking.id}>
-                    <td><span className="booking-id">#{booking.id}</span></td>
-                    <td>{booking.userName || 'Không tìm thấy'}</td>
-                    <td>{booking.movieTitle || 'Không tìm thấy'}</td>
-                    <td>{booking.cinemaName || 'Không tìm thấy'}</td>
-                    <td>
-                      <div className="showtime-info">
-                        <div>{booking.showtime?.date}</div>
-                        <div className="showtime-time">{booking.showtime?.time}</div>
-                      </div>
-                    </td>
-                    <td className="amount">{booking?.totalAmount?.toLocaleString('vi-VN')} VNĐ</td>
-                    <td>
-                      <span className={`status-badge status-${booking.status}`}>
-                        {booking.status === 'pending' && 'Chờ xác nhận'}
-                        {booking.status === 'confirmed' && 'Đã xác nhận'}
-                        {booking.status === 'completed' && 'Hoàn thành'}
-                        {booking.status === 'cancelled' && 'Đã hủy'}
-                        {booking.status === 'expired' && 'Hết hạn'}
-                      </span>
-                    </td>
-                    <td>{new Date(booking.createdAt).toLocaleDateString('vi-VN')}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* Quick Actions */}
-        <div className="quick-actions">
-          <h2>Thao Tác Nhanh</h2>
-          <div className="actions-grid">
-            <div className="action-card" onClick={() => window.location.href = '/admin/movies'}>
-              <div className="action-icon">🎬</div>
-              <div className="action-info">
-                <div className="action-title">Quản lý Phim</div>
-                <div className="action-desc">Thêm, sửa, xóa phim</div>
+      {/* Recent Bookings and Top Lists */}
+      <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
+        <Col xs={24} lg={14}>
+          <Card className="recent-table" title="Đặt vé gần đây">
+            <Table
+              columns={bookingColumns}
+              dataSource={recentBookings}
+              rowKey="id"
+              pagination={false}
+              size="small"
+            />
+          </Card>
+        </Col>
+        <Col xs={24} lg={10}>
+          <Card title="Top phim doanh thu cao">
+            {topMovies.map((movie, index) => (
+              <div key={movie.id} className="top-item">
+                <div className="top-item-rank">#{index + 1}</div>
+                <Avatar
+                  src={movie.poster}
+                  size={40}
+                  style={{ marginRight: 12 }}
+                  icon={<VideoCameraOutlined />}
+                />
+                <div className="top-item-info">
+                  <div className="top-item-title">{movie.title}</div>
+                  <div className="top-item-meta">
+                    {movie.totalBookings || 0} vé | {(movie.totalRevenue || 0).toLocaleString('vi-VN')} ₫
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
+          </Card>
+        </Col>
+      </Row>
 
-            <div className="action-card" onClick={() => window.location.href = '/admin/cinemas'}>
-              <div className="action-icon">🏢</div>
-              <div className="action-info">
-                <div className="action-title">Quản lý Rạp</div>
-                <div className="action-desc">Quản lý thông tin rạp</div>
-              </div>
-            </div>
-
-            <div className="action-card" onClick={() => window.location.href = '/admin/schedules'}>
-              <div className="action-icon">📅</div>
-              <div className="action-info">
-                <div className="action-title">Lịch Chiếu</div>
-                <div className="action-desc">Quản lý suất chiếu</div>
-              </div>
-            </div>
-
-            <div className="action-card" onClick={() => window.location.href = '/admin/bookings'}>
-              <div className="action-icon">🎫</div>
-              <div className="action-info">
-                <div className="action-title">Đặt Vé</div>
-                <div className="action-desc">Xem và quản lý đặt vé</div>
-              </div>
-            </div>
-
-            <div className="action-card" onClick={() => window.location.href = '/admin/users'}>
-              <div className="action-icon">👥</div>
-              <div className="action-info">
-                <div className="action-title">Người Dùng</div>
-                <div className="action-desc">Quản lý tài khoản</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Quick Actions */}
+      <Row gutter={[16, 16]} className="quick-actions">
+        <Col span={24}>
+          <Title level={4}>Thao tác nhanh</Title>
+        </Col>
+        <Col xs={24} sm={12} md={8} lg={6}>
+          <Card className="quick-action-card" onClick={() => window.location.href = '/admin/movies'}>
+            <VideoCameraOutlined className="quick-action-icon" />
+            <div className="quick-action-title">Quản lý Phim</div>
+            <div className="quick-action-desc">Thêm, sửa, xóa phim</div>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={8} lg={6}>
+          <Card className="quick-action-card" onClick={() => window.location.href = '/admin/cinemas'}>
+            <ShopOutlined className="quick-action-icon" />
+            <div className="quick-action-title">Quản lý Rạp</div>
+            <div className="quick-action-desc">Quản lý thông tin rạp</div>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={8} lg={6}>
+          <Card className="quick-action-card" onClick={() => window.location.href = '/admin/schedules'}>
+            <CalendarOutlined className="quick-action-icon" />
+            <div className="quick-action-title">Lịch Chiếu</div>
+            <div className="quick-action-desc">Quản lý suất chiếu</div>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={8} lg={6}>
+          <Card className="quick-action-card" onClick={() => window.location.href = '/admin/bookings'}>
+            <CalendarOutlined className="quick-action-icon" />
+            <div className="quick-action-title">Đặt Vé</div>
+            <div className="quick-action-desc">Xem và quản lý đặt vé</div>
+          </Card>
+        </Col>
+      </Row>
     </div>
   );
 };

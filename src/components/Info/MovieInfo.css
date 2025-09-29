@@ -188,7 +188,7 @@
 }
 
 /* Meta Information */
-.movie-meta {
+.movie-meta-block .movie-meta {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1.2rem;
@@ -217,33 +217,33 @@
   font-size: 1.05rem;
   border-radius: 6px;
   padding: 0.1rem 0.6rem;
-  background: rgba(255,255,255,0.10);
+  background: rgba(255, 255, 255, 0.10);
   margin-left: 0.1rem;
 }
 
 .genre-value {
   color: #a259ff;
-  background: rgba(162,89,255,0.13);
+  background: rgba(162, 89, 255, 0.13);
 }
 
 .duration-value {
   color: #00b894;
-  background: rgba(0,184,148,0.13);
+  background: rgba(0, 184, 148, 0.13);
 }
 
 .format-value {
   color: #ff9800;
-  background: rgba(255,152,0,0.13);
+  background: rgba(255, 152, 0, 0.13);
 }
 
 .date-value {
   color: #2196f3;
-  background: rgba(33,150,243,0.13);
+  background: rgba(33, 150, 243, 0.13);
 }
 
 .subtitle-value {
   color: #6c63ff;
-  background: rgba(108,99,255,0.13);
+  background: rgba(108, 99, 255, 0.13);
 }
 
 /* Age Info */
@@ -351,9 +351,11 @@
   /* margin-bottom: 0rem; */
 }
 
-.movie-meta-block, .movie-cast-block {
+.movie-meta-block,
+.movie-cast-block {
   /* margin-bottom: 2.2rem; */
 }
+
 .movie-meta-block .section-title,
 .movie-cast-block .section-title {
   font-size: 1.18rem;
@@ -362,30 +364,36 @@
   margin-bottom: 1.1rem;
   letter-spacing: 1px;
 }
+
 .movie-cast-block {
   margin-top: 1.5rem;
 }
+
 .cast-grid {
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
 }
+
 .cast-item {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
   padding: 0.7rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
+
 .cast-item:last-child {
   border-bottom: none;
 }
+
 .cast-label {
   min-width: 120px;
   font-weight: 700;
   color: #ffd700;
   font-size: 1.05rem;
 }
+
 .cast-name {
   font-size: 1.05rem;
   color: #fff;
@@ -450,25 +458,31 @@
     gap: 1.5rem;
     padding: 1.2rem;
   }
+
   .movie-poster-section {
     flex: 0 0 420px;
     max-width: 420px;
     margin: 0 auto;
   }
+
   .movie-details-section {
     padding-top: 0.5rem;
   }
+
   .trailer-btn {
     padding: 0.5rem 1.2rem;
     font-size: 1rem;
   }
+
   .btn-icon {
     font-size: 1.1rem;
   }
+
   .actor-avatar {
     width: 48px;
     height: 48px;
   }
+
   .movie-cast-block {
     display: none;
   }
@@ -478,30 +492,30 @@
   .movie-info-container {
     margin-top: 1rem;
   }
-  
+
   .movie-info-main {
     padding: 1.5rem;
     gap: 1.5rem;
   }
-  
+
   .movie-details-section .movie-title {
     font-size: 2.2rem;
   }
-  
-  .movie-meta {
+
+  .movie-meta-block .movie-meta {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
     padding: 1rem;
   }
-  
+
   .cast-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .movie-actions {
     flex-direction: column;
   }
-  
+
   .trailer-btn {
     justify-content: center;
   }
@@ -511,27 +525,27 @@
   .movie-info-main {
     padding: 1rem;
   }
-  
+
   .movie-details-section .movie-title {
     font-size: 2rem;
   }
-  
-  .movie-meta {
+
+  .movie-meta-block .movie-meta {
     grid-template-columns: 1fr;
   }
-  
+
   .movie-rating {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
   }
-  
+
   .movie-tags {
     flex-direction: row;
     top: 8px;
     left: 8px;
   }
-  
+
   .movie-tag {
     font-size: 0.7rem;
     padding: 0.3rem 0.6rem;
@@ -542,33 +556,41 @@
   .movie-info-container {
     padding: 0.5rem 0 0.5rem 0;
   }
+
   .movie-info-main {
     flex-direction: column;
     gap: 0.7rem;
     padding: 0.7rem;
   }
+
   .movie-poster-section {
     flex: 0 0 300px;
     max-width: 300px;
     margin: 0 auto;
   }
+
   .movie-details-section {
     padding-top: 0.3rem;
   }
+
   .movie-title {
     font-size: 1.3rem;
   }
+
   .movie-meta-block .section-title,
   .movie-cast-block .section-title {
     font-size: 1rem;
   }
+
   .trailer-btn {
     padding: 0.35rem 0.7rem;
     font-size: 0.95rem;
   }
+
   .btn-icon {
     font-size: 0.95rem;
   }
+
   .actor-avatar {
     width: 60px;
     height: 60px;
@@ -586,7 +608,7 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  background: rgba(255,255,255,0.07);
+  background: rgba(255, 255, 255, 0.07);
   border-radius: 20px;
   padding: 0.2rem 0.7rem 0.2rem 0.2rem;
 }
@@ -609,6 +631,7 @@
 .actors-list.no-avatar {
   display: inline;
 }
+
 .actor-name {
   font-size: 1.05rem;
   color: #fff;
@@ -618,9 +641,13 @@
 
 .movie-info-bg-overlay {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(20, 20, 30, 0.75);
   backdrop-filter: blur(8px);
   z-index: 1;
-} 
+}

@@ -1,0 +1,1394 @@
+/* Simple and Clean Header Design */
+.header-antd {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    width: 100vw;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Dark theme header */
+[data-theme="dark"] .header-antd {
+    background: rgba(20, 20, 20, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Clean Header Layout */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 56px;
+    padding: 0 12px;
+}
+
+/* Simple Logo Section */
+.logo-section {
+    flex: 0 0 auto;
+}
+
+/* Clean Logo Design */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 18px;
+    color: #e50914;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+[data-theme="dark"] .logo {
+    color: #ff6b35;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+    background: rgba(229, 9, 20, 0.05);
+}
+
+[data-theme="dark"] .logo:hover {
+    background: rgba(255, 107, 53, 0.1);
+}
+
+/* Simple Logo Icon */
+.logo-icon {
+    font-size: 20px;
+}
+
+/* Clean Logo Text */
+.logo-text {
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: inherit;
+}
+
+/* Simple Menu Section - Flexible */
+.menu-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    overflow: visible;
+}
+
+/* Desktop Menu - Full width */
+.desktop-menu {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+}
+
+/* Simple Actions Section */
+.actions-section {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 8px;
+}
+
+/* Search container enhancement */
+.actions-section .ant-space-item:first-child {
+    margin-right: 6px;
+}
+
+/* User section spacing */
+.actions-section .ant-space-item:last-child .ant-space {
+    gap: 8px !important;
+}
+
+/* Better button spacing */
+.actions-section .ant-space-horizontal {
+    gap: 8px !important;
+}
+
+.actions-section .ant-space-horizontal .ant-space-item {
+    display: flex;
+    align-items: center;
+}
+
+/* Simple Mobile Menu Button */
+.mobile-menu-button {
+    display: none;
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: #333333 !important;
+    font-size: 16px !important;
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+}
+
+[data-theme="dark"] .mobile-menu-button {
+    background: rgba(30, 30, 30, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+}
+
+.mobile-menu-button:hover {
+    background: #e50914 !important;
+    border-color: #e50914 !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .mobile-menu-button:hover {
+    background: #ff6b35 !important;
+    border-color: #ff6b35 !important;
+    color: #ffffff !important;
+}
+
+/* Mobile button icon */
+.mobile-menu-button .ant-btn-icon,
+.mobile-menu-button .ant-btn-icon *,
+.mobile-menu-button .anticon,
+.mobile-menu-button .anticon * {
+    color: inherit !important;
+}
+
+.mobile-menu-button .anticon * {
+    color: inherit !important;
+}
+
+/* Main menu background */
+.main-menu {
+    background: transparent !important;
+    border-bottom: none !important;
+    min-width: 200px;
+    max-width: none !important;
+    width: auto !important;
+    flex: 1;
+    overflow: visible !important;
+}
+
+/* Disable menu overflow */
+.main-menu .ant-menu-overflow {
+    overflow: visible !important;
+    flex-wrap: nowrap !important;
+    width: 100% !important;
+}
+
+.main-menu .ant-menu-overflow-item {
+    overflow: visible !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+
+/* Hide overflow indicator completely */
+.main-menu .ant-menu-overflow-item-rest {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+/* Ensure all menu items are visible */
+.main-menu .ant-menu-item {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+}
+
+/* Ant Design Override - Force text colors */
+.header-antd * {
+    color: inherit !important;
+}
+
+.header-antd .ant-menu-item,
+.header-antd .ant-menu-item span,
+.header-antd .ant-menu-title-content,
+.header-antd .ant-menu-item-icon {
+    color: inherit !important;
+}
+
+.header-antd .ant-btn,
+.header-antd .ant-btn span {
+    color: inherit !important;
+}
+
+.header-antd .ant-input {
+    color: inherit !important;
+}
+
+/* Override Ant Design default colors that may conflict */
+.header-antd .ant-menu-horizontal>.ant-menu-item,
+.header-antd .ant-menu-horizontal>.ant-menu-submenu {
+    color: inherit !important;
+}
+
+.header-antd .ant-menu-horizontal>.ant-menu-item:hover,
+.header-antd .ant-menu-horizontal>.ant-menu-submenu:hover {
+    color: inherit !important;
+}
+
+.header-antd .ant-menu-horizontal>.ant-menu-item-selected {
+    color: inherit !important;
+}
+
+/* Simple Menu Styling */
+.main-menu {
+    background: transparent !important;
+    border-bottom: none !important;
+}
+
+.main-menu .ant-menu-item {
+    color: #333333 !important;
+    border-bottom: none !important;
+    transition: all 0.3s ease;
+    margin: 0 1px;
+    border-radius: 3px;
+    font-weight: 500 !important;
+    font-size: 12px;
+    padding: 4px 6px;
+    min-width: auto;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+}
+
+[data-theme="dark"] .main-menu .ant-menu-item {
+    color: #ffffff !important;
+}
+
+.main-menu .ant-menu-item:hover {
+    color: #e50914 !important;
+    background: rgba(229, 9, 20, 0.08) !important;
+}
+
+[data-theme="dark"] .main-menu .ant-menu-item:hover {
+    color: #ff6b35 !important;
+    background: rgba(255, 107, 53, 0.1) !important;
+}
+
+.main-menu .ant-menu-item-selected {
+    color: #e50914 !important;
+    background: rgba(229, 9, 20, 0.1) !important;
+    font-weight: 600 !important;
+}
+
+[data-theme="dark"] .main-menu .ant-menu-item-selected {
+    color: #ff6b35 !important;
+    background: rgba(255, 107, 53, 0.15) !important;
+}
+
+/* Menu icon colors */
+.main-menu .ant-menu-item-icon {
+    color: inherit !important;
+}
+
+.main-menu .ant-menu-title-content {
+    color: inherit !important;
+}
+
+.main-menu .ant-menu-item-icon {
+    font-size: 12px;
+    margin-right: 4px;
+}
+
+/* Menu overflow styling - Hide completely */
+.main-menu .ant-menu-overflow-item-rest {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+.main-menu .ant-menu-submenu-title {
+    display: none !important;
+}
+
+/* Force all menu items to show */
+.main-menu .ant-menu-overflow-item {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.main-menu .ant-menu-item {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.main-menu .ant-menu-item {
+    color: #fff !important;
+    border-bottom: none !important;
+    transition: all 0.3s ease;
+}
+
+.main-menu .ant-menu-item:hover {
+    color: #e50914 !important;
+}
+
+.main-menu .ant-menu-item-selected {
+    color: #e50914 !important;
+    background: transparent !important;
+}
+
+/* Actions Section - Enhanced visibility */
+.actions-section {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 12px;
+}
+
+/* Header Icon Buttons - Fixed text colors */
+.header-icon-btn {
+    color: #1a1a1a !important;
+    font-size: 18px !important;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .header-icon-btn {
+    color: #ffffff !important;
+    background: rgba(30, 30, 30, 0.9) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.header-icon-btn:hover {
+    background: #e50914 !important;
+    color: #ffffff !important;
+    transform: scale(1.1);
+    border-color: #e50914 !important;
+    box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+}
+
+[data-theme="dark"] .header-icon-btn:hover {
+    background: #ff6b35 !important;
+    color: #ffffff !important;
+    border-color: #ff6b35 !important;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+}
+
+/* Badge styling - Enhanced visibility */
+.actions-section .ant-badge {
+    display: flex;
+    align-items: center;
+}
+
+.actions-section .ant-badge-count {
+    background: #e50914 !important;
+    border: 2px solid rgba(255, 255, 255, 0.9) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    min-width: 18px !important;
+    height: 18px !important;
+    border-radius: 9px !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(229, 9, 20, 0.4) !important;
+    text-shadow: none !important;
+}
+
+[data-theme="dark"] .actions-section .ant-badge-count {
+    border: 2px solid rgba(20, 20, 20, 0.9) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6) !important;
+}
+
+.actions-section .ant-space {
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+}
+
+.actions-section .ant-space-item {
+    display: flex;
+    align-items: center;
+}
+
+/* User name styling - Fixed contrast */
+.user-name {
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    text-shadow: none !important;
+}
+
+[data-theme="dark"] .user-name {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Global Header Text Color Override with modern animations */
+.header-antd,
+.header-antd * {
+    -webkit-text-fill-color: unset !important;
+}
+
+/* Specific overrides for all possible text elements */
+.header-antd .ant-menu-item *,
+.header-antd .ant-btn *,
+.header-antd .ant-input,
+.header-antd .ant-space *,
+.header-antd .anticon,
+.header-antd .logo-text {
+    color: inherit !important;
+    -webkit-text-fill-color: unset !important;
+}
+
+/* Simple focus states for accessibility */
+.header-antd .ant-menu-item:focus,
+.header-antd .ant-btn:focus {
+    outline: 2px solid #e50914;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+[data-theme="dark"] .header-antd .ant-menu-item:focus,
+[data-theme="dark"] .header-antd .ant-btn:focus {
+    outline-color: #ff6b35;
+}
+
+/* Smooth color transitions for theme switching */
+.header-antd * {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* User avatar styling - Enhanced */
+.actions-section .ant-avatar {
+    background: linear-gradient(135deg, #e50914, #ff4757) !important;
+    border: 2px solid rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 2px 12px rgba(229, 9, 20, 0.3) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+[data-theme="dark"] .actions-section .ant-avatar {
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Search box styling - Enhanced contrast and visibility */
+.actions-section .ant-input-search {
+    border-radius: 25px;
+    overflow: hidden;
+    width: 280px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.actions-section .ant-input-search .ant-input-group-wrapper {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 25px !important;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+[data-theme="dark"] .actions-section .ant-input-search .ant-input-group-wrapper {
+    background: rgba(20, 20, 20, 0.9) !important;
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.actions-section .ant-input-search .ant-input-wrapper {
+    background: transparent !important;
+    border: none !important;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.actions-section .ant-input-search .ant-input-affix-wrapper {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 25px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.actions-section .ant-input-search .ant-input {
+    background: transparent !important;
+    border: none !important;
+    color: #1a1a1a !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    padding: 0;
+    z-index: 1;
+    position: relative;
+    text-shadow: none !important;
+}
+
+[data-theme="dark"] .actions-section .ant-input-search .ant-input {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+.actions-section .ant-input-search .ant-input::placeholder {
+    color: #666666 !important;
+    font-weight: 500 !important;
+    font-style: italic;
+}
+
+[data-theme="dark"] .actions-section .ant-input-search .ant-input::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.actions-section .ant-input-search .ant-input-group-wrapper:hover {
+    border-color: #e50914 !important;
+    background: rgba(255, 255, 255, 1) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(229, 9, 20, 0.2);
+}
+
+[data-theme="dark"] .actions-section .ant-input-search .ant-input-group-wrapper:hover {
+    border-color: #ff6b35 !important;
+    background: rgba(20, 20, 20, 1) !important;
+    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.3);
+}
+
+.actions-section .ant-input-search .ant-input:focus::placeholder {
+    color: rgba(102, 102, 102, 0.5) !important;
+    transform: translateX(3px);
+}
+
+[data-theme="dark"] .actions-section .ant-input-search .ant-input:focus::placeholder {
+    color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.actions-section .ant-input-search .ant-input-group-wrapper:focus-within {
+    border-color: #e50914 !important;
+    background: rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.2), 0 12px 40px rgba(229, 9, 20, 0.25);
+    transform: scale(1.02);
+}
+
+[data-theme="dark"] .actions-section .ant-input-search .ant-input-group-wrapper:focus-within {
+    border-color: #ff6b35 !important;
+    background: rgba(20, 20, 20, 1) !important;
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2), 0 12px 40px rgba(255, 107, 53, 0.25);
+}
+
+.actions-section .ant-input-search .ant-input:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Search button styling */
+.actions-section .ant-input-search .ant-input-group-addon {
+    background: transparent !important;
+    border: none !important;
+    padding: 2px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100% !important;
+    width: auto !important;
+    min-width: 40px !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+/* Override Ant Design default styles that might hide the button */
+.actions-section .ant-input-search .ant-input-group-addon:last-child {
+    inset-inline-start: 0 !important;
+    border: none !important;
+    padding: 2px !important;
+}
+
+.actions-section .ant-input-search .ant-input-search-button {
+    background: linear-gradient(135deg, #e50914, #ff6b35) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow:
+        0 3px 12px rgba(229, 9, 20, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 10 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.actions-section .ant-input-search .ant-input-search-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.actions-section .ant-input-search .ant-input-search-button:hover {
+    transform: scale(1.15) rotate(15deg) !important;
+    box-shadow:
+        0 6px 20px rgba(229, 9, 20, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+    background: linear-gradient(135deg, #ff6b35, #ff4757) !important;
+}
+
+.actions-section .ant-input-search .ant-input-search-button:hover::before {
+    opacity: 1;
+}
+
+.actions-section .ant-input-search .ant-input-search-button:active {
+    transform: scale(1.08) rotate(8deg) !important;
+    transition: all 0.15s ease !important;
+}
+
+.actions-section .ant-input-search .ant-input-search-button .anticon {
+    color: #fff !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    z-index: 100 !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+}
+
+.actions-section .ant-input-search .ant-input-search-button .ant-btn-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.actions-section .ant-input-search .ant-input-search-button:hover .anticon {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    transform: translate(-50%, -50%) scale(1.1) !important;
+}
+
+/* Force search button to be visible - Critical overrides */
+.actions-section .ant-input-search .ant-input-search-button,
+.actions-section .ant-input-search .ant-btn.ant-input-search-button,
+.actions-section .ant-input-search .ant-btn-default.ant-input-search-button {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    color: #fff !important;
+    background: linear-gradient(135deg, #e50914, #ff6b35) !important;
+    border: none !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    border-radius: 50% !important;
+    position: relative !important;
+    z-index: 1000 !important;
+}
+
+/* Force icon to be visible */
+.actions-section .ant-input-search .ant-input-search-button svg,
+.actions-section .ant-input-search .ant-input-search-button .anticon,
+.actions-section .ant-input-search .ant-input-search-button .ant-btn-icon {
+    color: #fff !important;
+    fill: #fff !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Perfect icon centering */
+.actions-section .ant-input-search .ant-input-search-button svg {
+    width: 16px !important;
+    height: 16px !important;
+    position: relative !important;
+    z-index: 101 !important;
+}
+
+.actions-section .ant-input-search .ant-input-search-button .anticon svg {
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+/* Clear button styling */
+.actions-section .ant-input-search .ant-input-clear-icon {
+    color: rgba(255, 255, 255, 0.6) !important;
+    transition: all 0.3s ease !important;
+    border-radius: 50%;
+    padding: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+}
+
+.actions-section .ant-input-search .ant-input-clear-icon:hover {
+    color: #e50914 !important;
+    background: rgba(229, 9, 20, 0.1) !important;
+    transform: scale(1.2) rotate(90deg) !important;
+    box-shadow: 0 2px 8px rgba(229, 9, 20, 0.3);
+}
+
+.actions-section .ant-input-search .ant-input-clear-icon:active {
+    transform: scale(1.1) rotate(45deg) !important;
+}
+
+/* Button styling */
+.actions-section .ant-btn {
+    border-radius: 20px;
+    font-weight: 500;
+    height: 36px;
+    padding: 0 20px;
+}
+
+.actions-section .ant-btn-default {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+}
+
+.actions-section .ant-btn-default:hover {
+    border-color: #e50914;
+    color: #e50914;
+    background: rgba(229, 9, 20, 0.1);
+}
+
+.actions-section .ant-btn-primary {
+    background: linear-gradient(45deg, #e50914, #ff4757);
+    border: none;
+    box-shadow: 0 2px 8px rgba(229, 9, 20, 0.3);
+}
+
+.actions-section .ant-btn-primary:hover {
+    background: linear-gradient(45deg, #ff4757, #e50914);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
+}
+
+/* Avatar dropdown */
+.ant-dropdown {
+    background: #1f1f1f;
+    border: 1px solid #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.ant-dropdown .ant-dropdown-menu {
+    background: #1f1f1f;
+    border: none;
+}
+
+.ant-dropdown .ant-dropdown-menu-item {
+    color: #fff;
+    padding: 8px 16px;
+}
+
+.ant-dropdown .ant-dropdown-menu-item:hover {
+    background: rgba(229, 9, 20, 0.1);
+    color: #e50914;
+}
+
+/* Simple Responsive Design for Mobile */
+@media (max-width: 768px) {
+    .header-antd {
+        padding: 0 16px;
+    }
+
+    .header-content {
+        padding: 0;
+        gap: 8px;
+    }
+
+    .logo {
+        font-size: 20px;
+        gap: 8px;
+        padding: 6px 10px;
+    }
+
+    .logo-icon {
+        font-size: 24px;
+    }
+
+    .menu-section {
+        display: none;
+    }
+
+    .mobile-menu-button {
+        display: flex !important;
+    }
+
+    .actions-section {
+        gap: 8px;
+    }
+
+    .actions-section .ant-input-search {
+        width: 180px !important;
+    }
+
+    .header-icon-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+
+    .user-name {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .actions-section .ant-input-search {
+        width: 180px !important;
+    }
+
+    .actions-section .ant-input-search .ant-input-affix-wrapper {
+        padding: 5px 10px;
+    }
+
+    .actions-section .ant-input-search .ant-input::placeholder {
+        font-size: 12px;
+    }
+
+    .actions-section .ant-input-search .ant-input-search-button {
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+    .actions-section .ant-input-search .ant-input-search-button .anticon {
+        font-size: 12px !important;
+    }
+
+    .actions-section .ant-btn {
+        padding: 0 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .actions-section .ant-space {
+        gap: 8px !important;
+    }
+
+    .actions-section .ant-input-search {
+        width: 120px !important;
+    }
+
+    .actions-section .ant-input-search .ant-input-group-wrapper {
+        height: 32px;
+    }
+
+    .actions-section .ant-input-search .ant-input-affix-wrapper {
+        padding: 4px 8px;
+    }
+
+    .actions-section .ant-input-search .ant-input {
+        font-size: 12px;
+    }
+
+    .actions-section .ant-input-search .ant-input-search-button {
+        width: 24px;
+        height: 24px;
+        margin: 2px;
+    }
+
+    .actions-section .ant-input-search .ant-input-search-button .anticon {
+        font-size: 10px;
+    }
+}
+
+/* Responsive menu styles */
+@media (max-width: 1200px) {
+    .menu-section {
+        min-width: 0;
+        flex: 0 1 auto;
+    }
+
+    .main-menu {
+        min-width: 250px;
+        max-width: 350px;
+    }
+
+    .main-menu .ant-menu-item {
+        padding: 0 8px !important;
+        font-size: 14px;
+    }
+
+    .actions-section .ant-input-search {
+        width: 240px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .menu-section {
+        flex: 0 1 200px;
+    }
+
+    .main-menu {
+        min-width: 180px;
+        max-width: 250px;
+    }
+
+    .main-menu .ant-menu-item {
+        padding: 0 6px !important;
+        font-size: 13px;
+    }
+
+    .actions-section .ant-input-search {
+        width: 200px !important;
+    }
+
+    .actions-section .ant-input-search .ant-input-affix-wrapper {
+        padding: 6px 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-antd {
+        padding: 0 16px;
+    }
+
+    .header-content {
+        height: 56px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .logo-icon {
+        font-size: 24px;
+    }
+
+    .menu-section {
+        display: none;
+        /* Hide on mobile, should use mobile menu */
+    }
+
+    .actions-section {
+        gap: 8px;
+    }
+
+    .actions-section .ant-input-search {
+        width: 160px !important;
+    }
+
+    .actions-section .ant-input-search .ant-input-affix-wrapper {
+        padding: 4px 12px;
+    }
+
+    .user-menu .ant-dropdown-trigger {
+        padding: 4px 8px;
+    }
+
+    .auth-buttons .ant-btn {
+        padding: 4px 12px;
+        font-size: 13px;
+        height: 32px;
+    }
+}
+
+@media (max-width: 576px) {
+    .header-antd {
+        padding: 0 12px;
+    }
+
+    .header-content {
+        height: 52px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .logo-icon {
+        font-size: 20px;
+    }
+
+    .actions-section {
+        gap: 6px;
+    }
+
+    .actions-section .ant-input-search {
+        width: 120px !important;
+    }
+
+    .auth-buttons .ant-btn {
+        padding: 4px 8px;
+        font-size: 12px;
+        height: 28px;
+    }
+
+    .auth-buttons .ant-btn span {
+        display: none;
+    }
+
+    .auth-buttons .ant-btn .anticon {
+        margin: 0;
+    }
+}
+
+/* Enhanced overflow menu dropdown */
+.main-menu .ant-menu-submenu-popup {
+    background: rgba(0, 0, 0, 0.95) !important;
+    backdrop-filter: blur(20px);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.main-menu .ant-menu-submenu-popup .ant-menu-item {
+    color: #fff !important;
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.main-menu .ant-menu-submenu-popup .ant-menu-item:hover {
+    background: rgba(229, 9, 20, 0.1) !important;
+    color: #e50914 !important;
+    border-bottom-color: rgba(229, 9, 20, 0.3);
+}
+
+.main-menu .ant-menu-submenu-popup .ant-menu-item:last-child {
+    border-bottom: none;
+}
+
+/* Enhanced Mobile Menu Styles */
+.mobile-menu-drawer .ant-drawer-header {
+    background: linear-gradient(135deg, rgba(229, 9, 20, 0.95) 0%, rgba(255, 75, 87, 0.95) 100%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .mobile-menu-drawer .ant-drawer-header {
+    background: linear-gradient(135deg, #141414 0%, #1f1f1f 100%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.mobile-drawer-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .mobile-drawer-title {
+    color: #ff6b35 !important;
+}
+
+.mobile-drawer-title .logo-icon {
+    font-size: 24px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.mobile-drawer-title .logo-text {
+    background: linear-gradient(45deg, #ffffff, #f0f0f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+}
+
+[data-theme="dark"] .mobile-drawer-title .logo-text {
+    background: linear-gradient(45deg, #ff6b35, #ff8c00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.mobile-menu-drawer .ant-drawer-body {
+    background: rgba(255, 255, 255, 0.98) !important;
+    padding: 0;
+}
+
+[data-theme="dark"] .mobile-menu-drawer .ant-drawer-body {
+    background: #1a1a1a !important;
+}
+
+.mobile-menu-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.mobile-menu {
+    background: transparent;
+    border: none;
+    flex: 1;
+}
+
+.mobile-menu .ant-menu-item {
+    color: #333333 !important;
+    margin: 0;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    height: auto;
+    line-height: 1.4;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .mobile-menu .ant-menu-item {
+    color: #ffffff !important;
+    border-bottom: 1px solid #333;
+}
+
+.mobile-menu .ant-menu-item:hover {
+    background: rgba(229, 9, 20, 0.1);
+    color: #e50914 !important;
+    transform: translateX(8px);
+}
+
+[data-theme="dark"] .mobile-menu .ant-menu-item:hover {
+    background: rgba(255, 107, 53, 0.1);
+    color: #ff6b35 !important;
+}
+
+.mobile-menu .ant-menu-item-selected {
+    background: rgba(229, 9, 20, 0.15);
+    color: #e50914 !important;
+    font-weight: 700;
+}
+
+[data-theme="dark"] .mobile-menu .ant-menu-item-selected {
+    background: rgba(255, 107, 53, 0.2);
+    color: #ff6b35 !important;
+}
+
+.mobile-menu .ant-menu-item::after {
+    border-right: 3px solid #e50914;
+}
+
+[data-theme="dark"] .mobile-menu .ant-menu-item::after {
+    border-right: 3px solid #ff6b35;
+}
+
+/* Enhanced Mobile Search and Auth Section */
+.mobile-search {
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .mobile-search {
+    border-bottom: 1px solid #333;
+}
+
+.mobile-search .ant-input-search {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(229, 9, 20, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .mobile-search .ant-input-search {
+    background: #333;
+    border: 2px solid rgba(255, 107, 53, 0.3);
+}
+
+.mobile-search .ant-input {
+    background: transparent;
+    border: none;
+    color: #333333;
+    font-weight: 500;
+}
+
+[data-theme="dark"] .mobile-search .ant-input {
+    color: #fff;
+}
+
+.mobile-search .ant-input::placeholder {
+    color: #666666;
+    font-style: italic;
+}
+
+[data-theme="dark"] .mobile-search .ant-input::placeholder {
+    color: #999;
+}
+
+.mobile-search .ant-btn {
+    background: linear-gradient(135deg, #e50914, #ff4757);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(229, 9, 20, 0.3);
+}
+
+[data-theme="dark"] .mobile-search .ant-btn {
+    background: linear-gradient(135deg, #ff6b35, #ff8c00);
+}
+
+.mobile-auth-section {
+    padding: 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: auto;
+    background: rgba(248, 250, 252, 0.8);
+}
+
+[data-theme="dark"] .mobile-auth-section {
+    border-top: 1px solid #333;
+    background: rgba(20, 20, 20, 0.8);
+}
+
+.mobile-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.user-avatar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(229, 9, 20, 0.2);
+    border-radius: 12px;
+    color: #333333;
+    font-weight: 600;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .user-avatar {
+    background: #333;
+    border: 2px solid rgba(255, 107, 53, 0.3);
+    color: #fff;
+}
+
+.mobile-auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mobile-auth-buttons .ant-btn {
+    height: 44px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.mobile-auth-buttons .ant-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-user-info .ant-btn {
+    height: 44px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 2px solid rgba(229, 9, 20, 0.2);
+    background: rgba(255, 255, 255, 0.9);
+    color: #333333;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .mobile-user-info .ant-btn {
+    border: 2px solid rgba(255, 107, 53, 0.3);
+    background: rgba(50, 50, 50, 0.9);
+    color: #fff;
+}
+
+.mobile-user-info .ant-btn:hover {
+    border-color: #e50914;
+    background: #e50914;
+    color: #ffffff;
+    transform: translateX(4px);
+}
+
+[data-theme="dark"] .mobile-user-info .ant-btn:hover {
+    border-color: #ff6b35;
+    background: #ff6b35;
+    color: #ffffff;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+    .desktop-menu {
+        display: none !important;
+    }
+
+    .mobile-menu-button {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .search-section {
+        display: none;
+    }
+
+    .header-content {
+        padding: 0 16px;
+    }
+
+    .actions-section .ant-space>.ant-space-item:first-child {
+        display: none;
+    }
+}

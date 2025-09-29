@@ -208,7 +208,7 @@
   max-width: 100%;
 }
 
-.movie-meta {
+.now-showing-sidebar .movie-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -220,7 +220,7 @@
 }
 
 .movie-genre {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   color: #fff;
   border-radius: 6px;
   padding: 0.18rem 0.7rem;
@@ -327,7 +327,7 @@
     height: 500px;
     max-height: 500px;
   }
-  
+
   .sidebar-header,
   .movies-list,
   .sidebar-footer {
@@ -341,47 +341,47 @@
     margin-top: 1rem;
     height: 450px;
   }
-  
+
   .sidebar-title {
     font-size: 1.1rem;
   }
-  
+
   .movies-list {
     gap: 0.75rem;
     padding: 0.75rem 1rem;
   }
-  
+
   .movie-card {
     min-height: 70px;
     padding: 0.4rem;
   }
-  
+
   .movie-poster {
     flex: 0 0 50px;
     height: 70px;
   }
-  
+
   .movie-title {
     font-size: 0.85rem;
   }
-  
-  .movie-meta {
+
+  .now-showing-sidebar .movie-meta {
     font-size: 0.75rem;
   }
-  
+
   .movie-genre {
     font-size: 0.7rem;
     padding: 0.15rem 0.4rem;
   }
-  
+
   .movie-duration {
     font-size: 0.65rem;
   }
-  
+
   .star {
     font-size: 0.6rem;
   }
-  
+
   .rating-score {
     font-size: 0.7rem;
   }
@@ -393,52 +393,52 @@
     height: 400px;
     max-height: 400px;
   }
-  
+
   .sidebar-header,
   .movies-list,
   .sidebar-footer {
     padding: 0.75rem;
   }
-  
+
   .sidebar-title {
     font-size: 1rem;
   }
-  
+
   .sidebar-subtitle {
     font-size: 0.8rem;
   }
-  
 
-  
+
+
   .movie-card {
     min-height: 60px;
     padding: 0.3rem;
   }
-  
+
   .movie-poster {
     flex: 0 0 45px;
     height: 60px;
   }
-  
+
   .movie-title {
     font-size: 0.75rem;
   }
-  
-  .movie-meta {
+
+  .now-showing-sidebar .movie-meta {
     font-size: 0.7rem;
   }
-  
+
   .movie-genre {
     font-size: 0.65rem;
     padding: 0.1rem 0.3rem;
   }
-  
+
   .movie-duration {
     font-size: 0.6rem;
   }
-  
+
   .view-all-btn {
     padding: 0.6rem 0.75rem;
     font-size: 0.8rem;
   }
-} 
+}

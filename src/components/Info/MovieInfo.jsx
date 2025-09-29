@@ -53,10 +53,10 @@ const MovieInfo = ({ movie }) => {
         <div className="movie-info-main">
           <div className="movie-poster-section">
             <div className="movie-poster-wrapper">
-              <img 
-                className="movie-info-poster" 
-                src={movie.poster || '/default-poster.png'} 
-                alt={movie.title} 
+              <img
+                className="movie-info-poster"
+                src={movie.poster || '/default-poster.png'}
+                alt={movie.title}
               />
               <div className="movie-tags">
                 <span className="movie-tag format">{movie.format}</span>
@@ -65,16 +65,16 @@ const MovieInfo = ({ movie }) => {
                 </span>
               </div>
             </div>
-            
+
             <div className="movie-actions">
-              <button 
+              <button
                 className="trailer-btn primary"
                 onClick={handleTrailerClick}
               >
                 <span className="btn-icon">▶</span>
                 Xem Trailer
               </button>
-              
+
             </div>
           </div>
 
@@ -84,8 +84,8 @@ const MovieInfo = ({ movie }) => {
               <div className="movie-rating">
                 <div className="rating-stars">
                   {[1, 2, 3, 4, 5].map((star) => (
-                    <span 
-                      key={star} 
+                    <span
+                      key={star}
                       className={`star ${star <= Math.round(rating) ? 'filled' : ''}`}
                     >
                       ★
@@ -135,8 +135,8 @@ const MovieInfo = ({ movie }) => {
               <div className="description-content">
                 {!isDescriptionExpanded && movie.description && movie.description.length > maxChars ? (
                   <>
-                    {movie.description.slice(0, maxChars)}... 
-                    <button 
+                    {movie.description.slice(0, maxChars)}...
+                    <button
                       className="expand-btn inline"
                       onClick={toggleDescription}
                       style={{ display: 'inline', marginLeft: 0 }}
@@ -148,7 +148,7 @@ const MovieInfo = ({ movie }) => {
                   <>
                     {movie.description}
                     {movie.description && movie.description.length > maxChars && (
-                      <button 
+                      <button
                         className="expand-btn inline"
                         onClick={toggleDescription}
                         style={{ marginLeft: 8 }}

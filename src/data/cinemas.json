@@ -1,7 +1,276 @@
 [
-  {"id":1,"name":"HotCinemas Vincom","address":"Vincom Center, Q.1, TP.HCM","rooms":[{"id":"P1","name":"Phòng chiếu 1","type":"2D"},{"id":"P2","name":"Phòng chiếu 2","type":"IMAX"}]},
-  {"id":2,"name":"HotCinemas Landmark","address":"Landmark 81, Bình Thạnh, TP.HCM","rooms":[{"id":"P3","name":"Phòng chiếu 3","type":"2D"},{"id":"P4","name":"Phòng chiếu 4","type":"2D"}]},
-  {"id":3,"name":"HotCinemas Crescent Mall","address":"Crescent Mall, Q.7, TP.HCM","rooms":[{"id":"P5","name":"Phòng chiếu 5","type":"2D"}]},
-  {"id":4,"name":"HotCinemas GigaMall","address":"GigaMall, Thủ Đức, TP.HCM","rooms":[{"id":"P6","name":"Phòng chiếu 6","type":"2D"},{"id":"P7","name":"Phòng chiếu 7","type":"IMAX"}]},
-  {"id":5,"name":"HotCinemas Aeon Mall","address":"Aeon Mall, Bình Tân, TP.HCM","rooms":[{"id":"P8","name":"Phòng chiếu 8","type":"2D"},{"id":"P9","name":"Phòng chiếu 9","type":"2D"}]}
-] 
+  {
+    "id": 1,
+    "name": "HotCinemas Vincom",
+    "address": "Vincom Center, Q.1, TP.HCM",
+    "phone": "028-1234-5678",
+    "email": "vincom@hotcinemas.vn",
+    "image": "https://images.unsplash.com/photo-1489599511320-4c1e7b03c03c?w=500&h=300&fit=crop",
+    "status": "active",
+    "description": "Rạp chiếu phim hiện đại tại trung tâm thành phố",
+    "facilities": [
+      "Parking",
+      "Food Court",
+      "AC",
+      "WiFi",
+      "3D",
+      "IMAX"
+    ],
+    "rooms": [
+      {
+        "id": "P1",
+        "name": "Phòng chiếu 1",
+        "type": "2D",
+        "capacity": 120
+      },
+      {
+        "id": "P2",
+        "name": "Phòng chiếu 2",
+        "type": "IMAX",
+        "capacity": 200
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "HotCinemas Landmark",
+    "address": "Landmark 81, Bình Thạnh, TP.HCM",
+    "phone": "028-2345-6789",
+    "email": "landmark@hotcinemas.vn",
+    "image": "https://images.unsplash.com/photo-1586227740560-8cf2732c1531?w=500&h=300&fit=crop",
+    "status": "active",
+    "description": "Rạp chiếu phim cao cấp tại tòa nhà Landmark 81",
+    "facilities": [
+      "Parking",
+      "Food Court",
+      "AC",
+      "WiFi",
+      "3D"
+    ],
+    "rooms": [
+      {
+        "id": "P3",
+        "name": "Phòng chiếu 3",
+        "type": "2D",
+        "capacity": 100
+      },
+      {
+        "id": "P4",
+        "name": "Phòng chiếu 4",
+        "type": "2D",
+        "capacity": 150
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "HotCinemas Crescent Mall",
+    "address": "Crescent Mall, Q.7, TP.HCM",
+    "phone": "028-3456-7890",
+    "email": "crescent@hotcinemas.vn",
+    "image": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500&h=300&fit=crop",
+    "status": "active",
+    "description": "Rạp chiếu phim gia đình tại Quận 7",
+    "facilities": [
+      "Parking",
+      "Food Court",
+      "AC",
+      "WiFi"
+    ],
+    "rooms": [
+      {
+        "id": "P5",
+        "name": "Phòng chiếu 5",
+        "type": "2D",
+        "capacity": 80
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "HotCinemas GigaMall",
+    "address": "GigaMall, Thủ Đức, TP.HCM",
+    "phone": "028-4567-8901",
+    "email": "gigamall@hotcinemas.vn",
+    "image": "https://images.unsplash.com/photo-1616530940355-351fabd9524b?w=500&h=300&fit=crop",
+    "status": "maintenance",
+    "description": "Rạp chiếu phim tại khu vực Thủ Đức",
+    "facilities": [
+      "Parking",
+      "Food Court",
+      "AC",
+      "WiFi",
+      "3D",
+      "IMAX"
+    ],
+    "rooms": [
+      {
+        "id": "P6",
+        "name": "Phòng chiếu 6",
+        "type": "2D",
+        "capacity": 110
+      },
+      {
+        "id": "P7",
+        "name": "Phòng chiếu 7",
+        "type": "IMAX",
+        "capacity": 250
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "HotCinemas Aeon Mall",
+    "address": "Aeon Mall, Bình Tân, TP.HCM",
+    "phone": "028-5678-9012",
+    "email": "aeon@hotcinemas.vn",
+    "image": "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=500&h=300&fit=crop",
+    "status": "active",
+    "description": "Rạp chiếu phim hiện đại tại Aeon Mall Bình Tân",
+    "facilities": [
+      "Parking",
+      "Food Court",
+      "AC",
+      "WiFi",
+      "3D"
+    ],
+    "rooms": [
+      {
+        "id": "P8",
+        "name": "Phòng chiếu 8",
+        "type": "2D",
+        "capacity": 90
+      },
+      {
+        "id": "P9",
+        "name": "Phòng chiếu 9",
+        "type": "2D",
+        "capacity": 120
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "HotCinemas Mega GS",
+    "address": "Mega GS Cao Thắng, Q.3, TP.HCM",
+    "phone": "028-6789-0123",
+    "email": "megags@hotcinemas.vn",
+    "image": "https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?w=500&h=300&fit=crop",
+    "status": "active",
+    "description": "Rạp trung tâm với nhiều phòng chiếu chuẩn 2D & 3D",
+    "facilities": [
+      "Parking",
+      "AC",
+      "WiFi",
+      "3D"
+    ],
+    "rooms": [
+      {
+        "id": "P10",
+        "name": "Phòng chiếu 10",
+        "type": "2D",
+        "capacity": 100
+      },
+      {
+        "id": "P11",
+        "name": "Phòng chiếu 11",
+        "type": "3D",
+        "capacity": 140
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "HotCinemas SC VivoCity",
+    "address": "SC VivoCity, Q.7, TP.HCM",
+    "phone": "028-7890-1234",
+    "email": "vivocity@hotcinemas.vn",
+    "image": "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=500&h=300&fit=crop",
+    "status": "active",
+    "description": "Không gian giải trí kết hợp mua sắm hiện đại",
+    "facilities": [
+      "Parking",
+      "Food Court",
+      "AC",
+      "WiFi",
+      "3D"
+    ],
+    "rooms": [
+      {
+        "id": "P12",
+        "name": "Phòng chiếu 12",
+        "type": "2D",
+        "capacity": 95
+      },
+      {
+        "id": "P13",
+        "name": "Phòng chiếu 13",
+        "type": "2D",
+        "capacity": 130
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "HotCinemas Vincom Thủ Đức",
+    "address": "Vincom Plaza Thủ Đức, TP.Thủ Đức",
+    "phone": "028-8901-2345",
+    "email": "vincomtd@hotcinemas.vn",
+    "image": "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=500&h=300&fit=crop",
+    "status": "active",
+    "description": "Rạp phục vụ khu vực phía Đông thành phố",
+    "facilities": [
+      "Parking",
+      "AC",
+      "WiFi",
+      "3D",
+      "IMAX"
+    ],
+    "rooms": [
+      {
+        "id": "P14",
+        "name": "Phòng chiếu 14",
+        "type": "2D",
+        "capacity": 105
+      },
+      {
+        "id": "P15",
+        "name": "Phòng chiếu 15",
+        "type": "IMAX",
+        "capacity": 230
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "HotCinemas Đồng Khởi",
+    "address": "Đồng Khởi, Q.1, TP.HCM",
+    "phone": "028-9012-3456",
+    "email": "dongkhoi@hotcinemas.vn",
+    "image": "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500&h=300&fit=crop",
+    "status": "active",
+    "description": "Rạp cao cấp trung tâm Q.1 với phòng IMAX",
+    "facilities": [
+      "Parking",
+      "Food Court",
+      "AC",
+      "WiFi",
+      "3D",
+      "IMAX"
+    ],
+    "rooms": [
+      {
+        "id": "P16",
+        "name": "Phòng chiếu 16",
+        "type": "2D",
+        "capacity": 115
+      },
+      {
+        "id": "P17",
+        "name": "Phòng chiếu 17",
+        "type": "IMAX",
+        "capacity": 260
+      }
+    ]
+  }
+]

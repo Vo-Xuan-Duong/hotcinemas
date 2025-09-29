@@ -70,12 +70,12 @@ const NowShowingSidebar = ({ currentMovieId }) => {
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
-    
+
     return (
       <div className="rating-stars">
         {[1, 2, 3, 4, 5].map((star) => (
-          <span 
-            key={star} 
+          <span
+            key={star}
             className={`star ${star <= fullStars ? 'filled' : star === fullStars + 1 && hasHalfStar ? 'half' : ''}`}
           >
             ★
@@ -127,17 +127,17 @@ const NowShowingSidebar = ({ currentMovieId }) => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="movie-info">
                 <h4 className="movie-title">{movie.title}</h4>
-                
+
                 <div className="movie-meta">
                   <span className="movie-genre">{movie.genre}</span>
                   <span className="movie-duration">
                     {icons.clock} {formatDuration(movie.duration)}
                   </span>
                 </div>
-                
+
                 <div className="movie-rating">
                   {renderStars(movie.rating)}
                   <span className="rating-score">{movie.rating}</span>

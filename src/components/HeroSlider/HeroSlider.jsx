@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './HeroSlider.css';
+import HeroOverlayFeatured from '../HeroOverlayFeatured';
 
 const HeroSlider = ({ movies }) => {
   const [index, setIndex] = useState(0);
@@ -34,15 +35,18 @@ const HeroSlider = ({ movies }) => {
         backgroundImage: `url(${movie.poster})`,
       }}
     >
-      <div className="hero-overlay" />
-      <div className="hero-content">
-        <h1>{movie.title}</h1>
-        <p className="hero-desc">{movie.description}</p>
-        <div className="hero-meta">
-          <span><b>Khởi chiếu:</b> {movie.releaseDate}</span> | <span><b>Thể loại:</b> {movie.genre}</span> | <span><b>Thời lượng:</b> {movie.duration}</span>
+      {index === 0 ? (
+        <HeroOverlayFeatured />
+      ) : (
+        <div className="hero-content">
+          <h1>{movie.title}</h1>
+          <p className="hero-desc">{movie.description}</p>
+          <div className="hero-meta">
+            <span><b>Khởi chiếu:</b> {movie.releaseDate}</span> | <span><b>Thể loại:</b> {movie.genre}</span> | <span><b>Thời lượng:</b> {movie.duration}</span>
+          </div>
+          <button className="cta-button">Đặt vé ngay</button>
         </div>
-        <button className="cta-button">Đặt vé ngay</button>
-      </div>
+      )}
       <div className="hero-indicators">
         {heroMovies.map((_, i) => (
           <button
@@ -57,4 +61,4 @@ const HeroSlider = ({ movies }) => {
   );
 };
 
-export default HeroSlider; 
+export default HeroSlider;

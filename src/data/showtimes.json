@@ -4,8 +4,72 @@
     "movieId": 1,
     "cinemaId": 1,
     "roomId": "P1",
-    "date": "2025-07-24",
-    "time": "14:00"
+    "date": "2025-07-26",
+    "time": "14:00",
+    "availableSeats": 45
+  },
+  {
+    "id": "ST1A",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-07-26",
+    "time": "16:30",
+    "availableSeats": 12
+  },
+  {
+    "id": "ST1B",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-07-26",
+    "time": "19:00",
+    "availableSeats": 8
+  },
+  {
+    "id": "ST1C",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-07-26",
+    "time": "15:00",
+    "availableSeats": 32
+  },
+  {
+    "id": "ST1D",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-07-26",
+    "time": "20:30",
+    "availableSeats": 6
+  },
+  {
+    "id": "ST1E",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-07-26",
+    "time": "18:00",
+    "availableSeats": 25
+  },
+  {
+    "id": "ST1F",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-07-27",
+    "time": "09:00",
+    "availableSeats": 52
+  },
+  {
+    "id": "ST1G",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-07-27",
+    "time": "21:30",
+    "availableSeats": 18
   },
   {
     "id": "ST2",
@@ -238,5 +302,2507 @@
     "roomId": "P5",
     "date": "2025-07-30",
     "time": "21:30"
+  },
+  {
+    "id": "ST31",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-09-29",
+    "time": "10:00",
+    "availableSeats": 40
+  },
+  {
+    "id": "ST32",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-09-29",
+    "time": "13:30",
+    "availableSeats": 22
+  },
+  {
+    "id": "ST33",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-09-29",
+    "time": "19:15",
+    "availableSeats": 11
+  },
+  {
+    "id": "ST34",
+    "movieId": 1,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-09-29",
+    "time": "21:30",
+    "availableSeats": 6
+  },
+  {
+    "id": "ST35",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-09-30",
+    "time": "09:45",
+    "availableSeats": 48
+  },
+  {
+    "id": "ST36",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-09-30",
+    "time": "16:45",
+    "availableSeats": 27
+  },
+  {
+    "id": "ST37",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-09-30",
+    "time": "20:15",
+    "availableSeats": 14
+  },
+  {
+    "id": "ST38",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-01",
+    "time": "11:00",
+    "availableSeats": 38
+  },
+  {
+    "id": "ST39",
+    "movieId": 1,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-01",
+    "time": "18:30",
+    "availableSeats": 19
+  },
+  {
+    "id": "ST40",
+    "movieId": 1,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-01",
+    "time": "21:00",
+    "availableSeats": 9
+  },
+  {
+    "id": "ST41",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-02",
+    "time": "10:15",
+    "availableSeats": 42
+  },
+  {
+    "id": "ST42",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-02",
+    "time": "14:45",
+    "availableSeats": 33
+  },
+  {
+    "id": "ST43",
+    "movieId": 1,
+    "cinemaId": 5,
+    "roomId": "P8",
+    "date": "2025-10-02",
+    "time": "19:00",
+    "availableSeats": 12
+  },
+  {
+    "id": "ST44",
+    "movieId": 1,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-03",
+    "time": "09:30",
+    "availableSeats": 50
+  },
+  {
+    "id": "ST45",
+    "movieId": 1,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-03",
+    "time": "13:00",
+    "availableSeats": 21
+  },
+  {
+    "id": "ST46",
+    "movieId": 1,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-03",
+    "time": "20:45",
+    "availableSeats": 5
+  },
+  {
+    "id": "ST47",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-04",
+    "time": "11:15",
+    "availableSeats": 44
+  },
+  {
+    "id": "ST48",
+    "movieId": 1,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-04",
+    "time": "17:30",
+    "availableSeats": 18
+  },
+  {
+    "id": "ST49",
+    "movieId": 1,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-04",
+    "time": "21:10",
+    "availableSeats": 7
+  },
+  {
+    "id": "ST50",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-05",
+    "time": "10:00",
+    "availableSeats": 46
+  },
+  {
+    "id": "ST51",
+    "movieId": 1,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-05",
+    "time": "15:45",
+    "availableSeats": 23
+  },
+  {
+    "id": "ST52",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-05",
+    "time": "19:20",
+    "availableSeats": 10
+  },
+  {
+    "id": "ST53",
+    "movieId": 2,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-09-29",
+    "time": "15:00",
+    "availableSeats": 30
+  },
+  {
+    "id": "ST54",
+    "movieId": 2,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-09-30",
+    "time": "18:15",
+    "availableSeats": 20
+  },
+  {
+    "id": "ST55",
+    "movieId": 3,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-01",
+    "time": "16:00",
+    "availableSeats": 28
+  },
+  {
+    "id": "ST56",
+    "movieId": 3,
+    "cinemaId": 5,
+    "roomId": "P8",
+    "date": "2025-10-02",
+    "time": "20:30",
+    "availableSeats": 16
+  },
+  {
+    "id": "ST57",
+    "movieId": 4,
+    "cinemaId": 4,
+    "roomId": "P6",
+    "date": "2025-10-03",
+    "time": "14:20",
+    "availableSeats": 34
+  },
+  {
+    "id": "ST58",
+    "movieId": 5,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-04",
+    "time": "09:40",
+    "availableSeats": 41
+  },
+  {
+    "id": "ST59",
+    "movieId": 6,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-05",
+    "time": "18:55",
+    "availableSeats": 13
+  },
+  {
+    "id": "ST60",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-06",
+    "time": "09:00",
+    "availableSeats": 60
+  },
+  {
+    "id": "ST61",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-06",
+    "time": "13:00",
+    "availableSeats": 34
+  },
+  {
+    "id": "ST62",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-06",
+    "time": "16:15",
+    "availableSeats": 22
+  },
+  {
+    "id": "ST63",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-06",
+    "time": "20:00",
+    "availableSeats": 8
+  },
+  {
+    "id": "ST64",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-06",
+    "time": "18:30",
+    "availableSeats": 19
+  },
+  {
+    "id": "ST65",
+    "movieId": 2,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-06",
+    "time": "10:45",
+    "availableSeats": 55
+  },
+  {
+    "id": "ST66",
+    "movieId": 2,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-06",
+    "time": "15:20",
+    "availableSeats": 31
+  },
+  {
+    "id": "ST67",
+    "movieId": 2,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-06",
+    "time": "19:40",
+    "availableSeats": 14
+  },
+  {
+    "id": "ST68",
+    "movieId": 3,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-06",
+    "time": "11:30",
+    "availableSeats": 53
+  },
+  {
+    "id": "ST69",
+    "movieId": 3,
+    "cinemaId": 4,
+    "roomId": "P6",
+    "date": "2025-10-06",
+    "time": "17:10",
+    "availableSeats": 41
+  },
+  {
+    "id": "ST70",
+    "movieId": 4,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-06",
+    "time": "20:45",
+    "availableSeats": 27
+  },
+  {
+    "id": "ST71",
+    "movieId": 5,
+    "cinemaId": 5,
+    "roomId": "P8",
+    "date": "2025-10-06",
+    "time": "09:15",
+    "availableSeats": 63
+  },
+  {
+    "id": "ST72",
+    "movieId": 5,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-06",
+    "time": "14:50",
+    "availableSeats": 38
+  },
+  {
+    "id": "ST73",
+    "movieId": 6,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-06",
+    "time": "19:30",
+    "availableSeats": 21
+  },
+  {
+    "id": "ST74",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-07",
+    "time": "09:10",
+    "availableSeats": 58
+  },
+  {
+    "id": "ST75",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-07",
+    "time": "12:45",
+    "availableSeats": 29
+  },
+  {
+    "id": "ST76",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-07",
+    "time": "16:30",
+    "availableSeats": 24
+  },
+  {
+    "id": "ST77",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-07",
+    "time": "20:10",
+    "availableSeats": 11
+  },
+  {
+    "id": "ST78",
+    "movieId": 2,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-07",
+    "time": "10:30",
+    "availableSeats": 52
+  },
+  {
+    "id": "ST79",
+    "movieId": 2,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-07",
+    "time": "18:50",
+    "availableSeats": 17
+  },
+  {
+    "id": "ST80",
+    "movieId": 3,
+    "cinemaId": 4,
+    "roomId": "P6",
+    "date": "2025-10-07",
+    "time": "14:00",
+    "availableSeats": 46
+  },
+  {
+    "id": "ST81",
+    "movieId": 3,
+    "cinemaId": 4,
+    "roomId": "P6",
+    "date": "2025-10-07",
+    "time": "19:20",
+    "availableSeats": 22
+  },
+  {
+    "id": "ST82",
+    "movieId": 4,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-07",
+    "time": "21:40",
+    "availableSeats": 15
+  },
+  {
+    "id": "ST83",
+    "movieId": 5,
+    "cinemaId": 5,
+    "roomId": "P8",
+    "date": "2025-10-07",
+    "time": "11:00",
+    "availableSeats": 60
+  },
+  {
+    "id": "ST84",
+    "movieId": 5,
+    "cinemaId": 5,
+    "roomId": "P8",
+    "date": "2025-10-07",
+    "time": "15:25",
+    "availableSeats": 33
+  },
+  {
+    "id": "ST85",
+    "movieId": 6,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-07",
+    "time": "20:50",
+    "availableSeats": 19
+  },
+  {
+    "id": "ST86",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-08",
+    "time": "09:20",
+    "availableSeats": 59
+  },
+  {
+    "id": "ST87",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-08",
+    "time": "13:15",
+    "availableSeats": 31
+  },
+  {
+    "id": "ST88",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-08",
+    "time": "17:10",
+    "availableSeats": 18
+  },
+  {
+    "id": "ST89",
+    "movieId": 2,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-08",
+    "time": "11:30",
+    "availableSeats": 48
+  },
+  {
+    "id": "ST90",
+    "movieId": 2,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-08",
+    "time": "19:10",
+    "availableSeats": 20
+  },
+  {
+    "id": "ST91",
+    "movieId": 3,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-08",
+    "time": "10:45",
+    "availableSeats": 55
+  },
+  {
+    "id": "ST92",
+    "movieId": 3,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-08",
+    "time": "18:15",
+    "availableSeats": 23
+  },
+  {
+    "id": "ST93",
+    "movieId": 4,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-08",
+    "time": "16:00",
+    "availableSeats": 40
+  },
+  {
+    "id": "ST94",
+    "movieId": 4,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-08",
+    "time": "21:00",
+    "availableSeats": 13
+  },
+  {
+    "id": "ST95",
+    "movieId": 5,
+    "cinemaId": 5,
+    "roomId": "P8",
+    "date": "2025-10-08",
+    "time": "09:10",
+    "availableSeats": 61
+  },
+  {
+    "id": "ST96",
+    "movieId": 6,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-08",
+    "time": "20:40",
+    "availableSeats": 17
+  },
+  {
+    "id": "ST97",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-09",
+    "time": "09:15",
+    "availableSeats": 62
+  },
+  {
+    "id": "ST98",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-09",
+    "time": "12:50",
+    "availableSeats": 28
+  },
+  {
+    "id": "ST99",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-09",
+    "time": "18:05",
+    "availableSeats": 16
+  },
+  {
+    "id": "ST100",
+    "movieId": 2,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-09",
+    "time": "10:20",
+    "availableSeats": 50
+  },
+  {
+    "id": "ST101",
+    "movieId": 2,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-09",
+    "time": "19:00",
+    "availableSeats": 22
+  },
+  {
+    "id": "ST102",
+    "movieId": 3,
+    "cinemaId": 4,
+    "roomId": "P6",
+    "date": "2025-10-09",
+    "time": "11:40",
+    "availableSeats": 44
+  },
+  {
+    "id": "ST103",
+    "movieId": 3,
+    "cinemaId": 4,
+    "roomId": "P6",
+    "date": "2025-10-09",
+    "time": "17:30",
+    "availableSeats": 25
+  },
+  {
+    "id": "ST104",
+    "movieId": 4,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-09",
+    "time": "21:10",
+    "availableSeats": 12
+  },
+  {
+    "id": "ST105",
+    "movieId": 5,
+    "cinemaId": 5,
+    "roomId": "P8",
+    "date": "2025-10-09",
+    "time": "09:05",
+    "availableSeats": 63
+  },
+  {
+    "id": "ST106",
+    "movieId": 6,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-09",
+    "time": "20:30",
+    "availableSeats": 18
+  },
+  {
+    "id": "ST107",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-10",
+    "time": "09:25",
+    "availableSeats": 57
+  },
+  {
+    "id": "ST108",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-10",
+    "time": "13:05",
+    "availableSeats": 27
+  },
+  {
+    "id": "ST109",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-10",
+    "time": "17:20",
+    "availableSeats": 19
+  },
+  {
+    "id": "ST110",
+    "movieId": 2,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-10",
+    "time": "11:15",
+    "availableSeats": 49
+  },
+  {
+    "id": "ST111",
+    "movieId": 2,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-10",
+    "time": "19:05",
+    "availableSeats": 18
+  },
+  {
+    "id": "ST112",
+    "movieId": 3,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-10",
+    "time": "10:55",
+    "availableSeats": 54
+  },
+  {
+    "id": "ST113",
+    "movieId": 3,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-10",
+    "time": "18:10",
+    "availableSeats": 21
+  },
+  {
+    "id": "ST114",
+    "movieId": 4,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-10",
+    "time": "16:10",
+    "availableSeats": 39
+  },
+  {
+    "id": "ST115",
+    "movieId": 5,
+    "cinemaId": 5,
+    "roomId": "P8",
+    "date": "2025-10-10",
+    "time": "09:20",
+    "availableSeats": 61
+  },
+  {
+    "id": "ST116",
+    "movieId": 6,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-10",
+    "time": "20:35",
+    "availableSeats": 17
+  },
+  {
+    "id": "ST117",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-11",
+    "time": "09:05",
+    "availableSeats": 64
+  },
+  {
+    "id": "ST118",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-11",
+    "time": "12:40",
+    "availableSeats": 30
+  },
+  {
+    "id": "ST119",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-11",
+    "time": "16:25",
+    "availableSeats": 23
+  },
+  {
+    "id": "ST120",
+    "movieId": 2,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-11",
+    "time": "10:10",
+    "availableSeats": 51
+  },
+  {
+    "id": "ST121",
+    "movieId": 2,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-11",
+    "time": "18:35",
+    "availableSeats": 16
+  },
+  {
+    "id": "ST122",
+    "movieId": 3,
+    "cinemaId": 4,
+    "roomId": "P6",
+    "date": "2025-10-11",
+    "time": "11:35",
+    "availableSeats": 47
+  },
+  {
+    "id": "ST123",
+    "movieId": 4,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-11",
+    "time": "21:20",
+    "availableSeats": 14
+  },
+  {
+    "id": "ST124",
+    "movieId": 5,
+    "cinemaId": 5,
+    "roomId": "P8",
+    "date": "2025-10-11",
+    "time": "09:30",
+    "availableSeats": 62
+  },
+  {
+    "id": "ST125",
+    "movieId": 6,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-11",
+    "time": "20:20",
+    "availableSeats": 18
+  },
+  {
+    "id": "ST126",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-12",
+    "time": "09:10",
+    "availableSeats": 63
+  },
+  {
+    "id": "ST127",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-12",
+    "time": "13:10",
+    "availableSeats": 32
+  },
+  {
+    "id": "ST128",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-12",
+    "time": "17:05",
+    "availableSeats": 20
+  },
+  {
+    "id": "ST129",
+    "movieId": 2,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-12",
+    "time": "10:25",
+    "availableSeats": 52
+  },
+  {
+    "id": "ST130",
+    "movieId": 2,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-12",
+    "time": "19:25",
+    "availableSeats": 19
+  },
+  {
+    "id": "ST131",
+    "movieId": 3,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-12",
+    "time": "11:20",
+    "availableSeats": 49
+  },
+  {
+    "id": "ST132",
+    "movieId": 3,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-12",
+    "time": "18:25",
+    "availableSeats": 22
+  },
+  {
+    "id": "ST133",
+    "movieId": 4,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-12",
+    "time": "16:15",
+    "availableSeats": 38
+  },
+  {
+    "id": "ST134",
+    "movieId": 5,
+    "cinemaId": 5,
+    "roomId": "P8",
+    "date": "2025-10-12",
+    "time": "09:40",
+    "availableSeats": 60
+  },
+  {
+    "id": "ST135",
+    "movieId": 6,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-12",
+    "time": "20:10",
+    "availableSeats": 16
+  },
+  {
+    "id": "ST136",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-13",
+    "time": "09:00",
+    "availableSeats": 78
+  },
+  {
+    "id": "ST137",
+    "movieId": 2,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-13",
+    "time": "11:30",
+    "availableSeats": 132
+  },
+  {
+    "id": "ST138",
+    "movieId": 3,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-13",
+    "time": "10:15",
+    "availableSeats": 66
+  },
+  {
+    "id": "ST139",
+    "movieId": 4,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-13",
+    "time": "14:05",
+    "availableSeats": 104
+  },
+  {
+    "id": "ST140",
+    "movieId": 5,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-13",
+    "time": "16:45",
+    "availableSeats": 42
+  },
+  {
+    "id": "ST141",
+    "movieId": 6,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-13",
+    "time": "19:20",
+    "availableSeats": 188
+  },
+  {
+    "id": "ST142",
+    "movieId": 7,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-13",
+    "time": "21:10",
+    "availableSeats": 92
+  },
+  {
+    "id": "ST143",
+    "movieId": 8,
+    "cinemaId": 6,
+    "roomId": "P11",
+    "date": "2025-10-13",
+    "time": "18:10",
+    "availableSeats": 101
+  },
+  {
+    "id": "ST144",
+    "movieId": 1,
+    "cinemaId": 7,
+    "roomId": "P12",
+    "date": "2025-10-13",
+    "time": "13:30",
+    "availableSeats": 64
+  },
+  {
+    "id": "ST145",
+    "movieId": 2,
+    "cinemaId": 8,
+    "roomId": "P14",
+    "date": "2025-10-13",
+    "time": "17:00",
+    "availableSeats": 70
+  },
+  {
+    "id": "ST146",
+    "movieId": 3,
+    "cinemaId": 8,
+    "roomId": "P15",
+    "date": "2025-10-13",
+    "time": "20:30",
+    "availableSeats": 210
+  },
+  {
+    "id": "ST147",
+    "movieId": 4,
+    "cinemaId": 9,
+    "roomId": "P16",
+    "date": "2025-10-13",
+    "time": "09:20",
+    "availableSeats": 88
+  },
+  {
+    "id": "ST148",
+    "movieId": 5,
+    "cinemaId": 9,
+    "roomId": "P17",
+    "date": "2025-10-13",
+    "time": "22:00",
+    "availableSeats": 230
+  },
+  {
+    "id": "ST149",
+    "movieId": 6,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-14",
+    "time": "09:10",
+    "availableSeats": 156
+  },
+  {
+    "id": "ST150",
+    "movieId": 7,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-14",
+    "time": "12:05",
+    "availableSeats": 82
+  },
+  {
+    "id": "ST151",
+    "movieId": 8,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-14",
+    "time": "11:00",
+    "availableSeats": 74
+  },
+  {
+    "id": "ST152",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-14",
+    "time": "15:25",
+    "availableSeats": 118
+  },
+  {
+    "id": "ST153",
+    "movieId": 2,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-14",
+    "time": "16:40",
+    "availableSeats": 39
+  },
+  {
+    "id": "ST154",
+    "movieId": 3,
+    "cinemaId": 4,
+    "roomId": "P6",
+    "date": "2025-10-14",
+    "time": "19:30",
+    "availableSeats": 77
+  },
+  {
+    "id": "ST155",
+    "movieId": 4,
+    "cinemaId": 5,
+    "roomId": "P8",
+    "date": "2025-10-14",
+    "time": "18:25",
+    "availableSeats": 54
+  },
+  {
+    "id": "ST156",
+    "movieId": 5,
+    "cinemaId": 6,
+    "roomId": "P10",
+    "date": "2025-10-14",
+    "time": "21:15",
+    "availableSeats": 63
+  },
+  {
+    "id": "ST157",
+    "movieId": 6,
+    "cinemaId": 7,
+    "roomId": "P13",
+    "date": "2025-10-14",
+    "time": "20:05",
+    "availableSeats": 122
+  },
+  {
+    "id": "ST158",
+    "movieId": 7,
+    "cinemaId": 8,
+    "roomId": "P14",
+    "date": "2025-10-14",
+    "time": "14:15",
+    "availableSeats": 84
+  },
+  {
+    "id": "ST159",
+    "movieId": 8,
+    "cinemaId": 8,
+    "roomId": "P15",
+    "date": "2025-10-14",
+    "time": "22:20",
+    "availableSeats": 188
+  },
+  {
+    "id": "ST160",
+    "movieId": 1,
+    "cinemaId": 9,
+    "roomId": "P16",
+    "date": "2025-10-14",
+    "time": "10:05",
+    "availableSeats": 71
+  },
+  {
+    "id": "ST161",
+    "movieId": 2,
+    "cinemaId": 9,
+    "roomId": "P17",
+    "date": "2025-10-14",
+    "time": "21:40",
+    "availableSeats": 216
+  },
+  {
+    "id": "ST162",
+    "movieId": 3,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-15",
+    "time": "09:25",
+    "availableSeats": 83
+  },
+  {
+    "id": "ST163",
+    "movieId": 4,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-15",
+    "time": "11:40",
+    "availableSeats": 141
+  },
+  {
+    "id": "ST164",
+    "movieId": 5,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-15",
+    "time": "13:15",
+    "availableSeats": 96
+  },
+  {
+    "id": "ST165",
+    "movieId": 6,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-15",
+    "time": "16:05",
+    "availableSeats": 90
+  },
+  {
+    "id": "ST166",
+    "movieId": 7,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-15",
+    "time": "15:45",
+    "availableSeats": 48
+  },
+  {
+    "id": "ST167",
+    "movieId": 8,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-15",
+    "time": "18:40",
+    "availableSeats": 200
+  },
+  {
+    "id": "ST168",
+    "movieId": 1,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-15",
+    "time": "20:25",
+    "availableSeats": 102
+  },
+  {
+    "id": "ST169",
+    "movieId": 2,
+    "cinemaId": 6,
+    "roomId": "P10",
+    "date": "2025-10-15",
+    "time": "21:10",
+    "availableSeats": 81
+  },
+  {
+    "id": "ST170",
+    "movieId": 3,
+    "cinemaId": 7,
+    "roomId": "P12",
+    "date": "2025-10-15",
+    "time": "14:05",
+    "availableSeats": 69
+  },
+  {
+    "id": "ST171",
+    "movieId": 4,
+    "cinemaId": 7,
+    "roomId": "P13",
+    "date": "2025-10-15",
+    "time": "19:50",
+    "availableSeats": 119
+  },
+  {
+    "id": "ST172",
+    "movieId": 5,
+    "cinemaId": 8,
+    "roomId": "P15",
+    "date": "2025-10-15",
+    "time": "12:15",
+    "availableSeats": 205
+  },
+  {
+    "id": "ST173",
+    "movieId": 6,
+    "cinemaId": 8,
+    "roomId": "P14",
+    "date": "2025-10-15",
+    "time": "22:35",
+    "availableSeats": 62
+  },
+  {
+    "id": "ST174",
+    "movieId": 7,
+    "cinemaId": 9,
+    "roomId": "P16",
+    "date": "2025-10-15",
+    "time": "09:45",
+    "availableSeats": 76
+  },
+  {
+    "id": "ST175",
+    "movieId": 8,
+    "cinemaId": 9,
+    "roomId": "P17",
+    "date": "2025-10-15",
+    "time": "21:55",
+    "availableSeats": 230
+  },
+  {
+    "id": "ST176",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-16",
+    "time": "09:00",
+    "availableSeats": 79
+  },
+  {
+    "id": "ST177",
+    "movieId": 2,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-16",
+    "time": "11:15",
+    "availableSeats": 150
+  },
+  {
+    "id": "ST178",
+    "movieId": 3,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-16",
+    "time": "10:45",
+    "availableSeats": 70
+  },
+  {
+    "id": "ST179",
+    "movieId": 4,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-16",
+    "time": "14:25",
+    "availableSeats": 108
+  },
+  {
+    "id": "ST180",
+    "movieId": 5,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-16",
+    "time": "16:55",
+    "availableSeats": 51
+  },
+  {
+    "id": "ST181",
+    "movieId": 6,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-16",
+    "time": "19:30",
+    "availableSeats": 190
+  },
+  {
+    "id": "ST182",
+    "movieId": 7,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-16",
+    "time": "21:15",
+    "availableSeats": 89
+  },
+  {
+    "id": "ST183",
+    "movieId": 8,
+    "cinemaId": 6,
+    "roomId": "P11",
+    "date": "2025-10-16",
+    "time": "18:20",
+    "availableSeats": 111
+  },
+  {
+    "id": "ST184",
+    "movieId": 1,
+    "cinemaId": 7,
+    "roomId": "P12",
+    "date": "2025-10-16",
+    "time": "13:25",
+    "availableSeats": 60
+  },
+  {
+    "id": "ST185",
+    "movieId": 2,
+    "cinemaId": 8,
+    "roomId": "P15",
+    "date": "2025-10-16",
+    "time": "17:10",
+    "availableSeats": 206
+  },
+  {
+    "id": "ST186",
+    "movieId": 3,
+    "cinemaId": 8,
+    "roomId": "P14",
+    "date": "2025-10-16",
+    "time": "20:35",
+    "availableSeats": 74
+  },
+  {
+    "id": "ST187",
+    "movieId": 4,
+    "cinemaId": 9,
+    "roomId": "P16",
+    "date": "2025-10-16",
+    "time": "09:35",
+    "availableSeats": 93
+  },
+  {
+    "id": "ST188",
+    "movieId": 5,
+    "cinemaId": 9,
+    "roomId": "P17",
+    "date": "2025-10-16",
+    "time": "22:05",
+    "availableSeats": 225
+  },
+  {
+    "id": "ST189",
+    "movieId": 6,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-17",
+    "time": "09:05",
+    "availableSeats": 160
+  },
+  {
+    "id": "ST190",
+    "movieId": 7,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-17",
+    "time": "12:15",
+    "availableSeats": 85
+  },
+  {
+    "id": "ST191",
+    "movieId": 8,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-17",
+    "time": "11:10",
+    "availableSeats": 120
+  },
+  {
+    "id": "ST192",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-17",
+    "time": "15:10",
+    "availableSeats": 86
+  },
+  {
+    "id": "ST193",
+    "movieId": 2,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-17",
+    "time": "16:35",
+    "availableSeats": 55
+  },
+  {
+    "id": "ST194",
+    "movieId": 3,
+    "cinemaId": 4,
+    "roomId": "P6",
+    "date": "2025-10-17",
+    "time": "19:40",
+    "availableSeats": 74
+  },
+  {
+    "id": "ST195",
+    "movieId": 4,
+    "cinemaId": 5,
+    "roomId": "P8",
+    "date": "2025-10-17",
+    "time": "18:20",
+    "availableSeats": 61
+  },
+  {
+    "id": "ST196",
+    "movieId": 5,
+    "cinemaId": 6,
+    "roomId": "P10",
+    "date": "2025-10-17",
+    "time": "21:05",
+    "availableSeats": 72
+  },
+  {
+    "id": "ST197",
+    "movieId": 6,
+    "cinemaId": 7,
+    "roomId": "P13",
+    "date": "2025-10-17",
+    "time": "20:00",
+    "availableSeats": 132
+  },
+  {
+    "id": "ST198",
+    "movieId": 7,
+    "cinemaId": 8,
+    "roomId": "P14",
+    "date": "2025-10-17",
+    "time": "14:20",
+    "availableSeats": 90
+  },
+  {
+    "id": "ST199",
+    "movieId": 8,
+    "cinemaId": 8,
+    "roomId": "P15",
+    "date": "2025-10-17",
+    "time": "22:25",
+    "availableSeats": 192
+  },
+  {
+    "id": "ST200",
+    "movieId": 1,
+    "cinemaId": 9,
+    "roomId": "P16",
+    "date": "2025-10-17",
+    "time": "10:00",
+    "availableSeats": 75
+  },
+  {
+    "id": "ST201",
+    "movieId": 2,
+    "cinemaId": 9,
+    "roomId": "P17",
+    "date": "2025-10-17",
+    "time": "21:35",
+    "availableSeats": 220
+  },
+  {
+    "id": "ST202",
+    "movieId": 3,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-18",
+    "time": "09:20",
+    "availableSeats": 88
+  },
+  {
+    "id": "ST203",
+    "movieId": 4,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-18",
+    "time": "11:35",
+    "availableSeats": 145
+  },
+  {
+    "id": "ST204",
+    "movieId": 5,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-18",
+    "time": "13:10",
+    "availableSeats": 101
+  },
+  {
+    "id": "ST205",
+    "movieId": 6,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-18",
+    "time": "16:00",
+    "availableSeats": 95
+  },
+  {
+    "id": "ST206",
+    "movieId": 7,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-18",
+    "time": "15:40",
+    "availableSeats": 53
+  },
+  {
+    "id": "ST207",
+    "movieId": 8,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-18",
+    "time": "18:35",
+    "availableSeats": 210
+  },
+  {
+    "id": "ST208",
+    "movieId": 1,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-18",
+    "time": "20:30",
+    "availableSeats": 108
+  },
+  {
+    "id": "ST209",
+    "movieId": 2,
+    "cinemaId": 6,
+    "roomId": "P11",
+    "date": "2025-10-18",
+    "time": "21:20",
+    "availableSeats": 115
+  },
+  {
+    "id": "ST210",
+    "movieId": 3,
+    "cinemaId": 7,
+    "roomId": "P12",
+    "date": "2025-10-18",
+    "time": "14:00",
+    "availableSeats": 73
+  },
+  {
+    "id": "ST211",
+    "movieId": 4,
+    "cinemaId": 7,
+    "roomId": "P13",
+    "date": "2025-10-18",
+    "time": "19:45",
+    "availableSeats": 124
+  },
+  {
+    "id": "ST212",
+    "movieId": 5,
+    "cinemaId": 8,
+    "roomId": "P15",
+    "date": "2025-10-18",
+    "time": "12:10",
+    "availableSeats": 208
+  },
+  {
+    "id": "ST213",
+    "movieId": 6,
+    "cinemaId": 8,
+    "roomId": "P14",
+    "date": "2025-10-18",
+    "time": "22:30",
+    "availableSeats": 65
+  },
+  {
+    "id": "ST214",
+    "movieId": 7,
+    "cinemaId": 9,
+    "roomId": "P16",
+    "date": "2025-10-18",
+    "time": "09:40",
+    "availableSeats": 79
+  },
+  {
+    "id": "ST215",
+    "movieId": 8,
+    "cinemaId": 9,
+    "roomId": "P17",
+    "date": "2025-10-18",
+    "time": "21:50",
+    "availableSeats": 234
+  },
+  {
+    "id": "ST216",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-19",
+    "time": "09:15",
+    "availableSeats": 82
+  },
+  {
+    "id": "ST217",
+    "movieId": 2,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-19",
+    "time": "11:25",
+    "availableSeats": 148
+  },
+  {
+    "id": "ST218",
+    "movieId": 3,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-19",
+    "time": "10:40",
+    "availableSeats": 72
+  },
+  {
+    "id": "ST219",
+    "movieId": 4,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-19",
+    "time": "14:30",
+    "availableSeats": 110
+  },
+  {
+    "id": "ST220",
+    "movieId": 5,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-19",
+    "time": "16:50",
+    "availableSeats": 49
+  },
+  {
+    "id": "ST221",
+    "movieId": 6,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-19",
+    "time": "19:25",
+    "availableSeats": 192
+  },
+  {
+    "id": "ST222",
+    "movieId": 7,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-19",
+    "time": "21:05",
+    "availableSeats": 94
+  },
+  {
+    "id": "ST223",
+    "movieId": 8,
+    "cinemaId": 6,
+    "roomId": "P11",
+    "date": "2025-10-19",
+    "time": "18:15",
+    "availableSeats": 114
+  },
+  {
+    "id": "ST224",
+    "movieId": 1,
+    "cinemaId": 7,
+    "roomId": "P12",
+    "date": "2025-10-19",
+    "time": "13:20",
+    "availableSeats": 63
+  },
+  {
+    "id": "ST225",
+    "movieId": 2,
+    "cinemaId": 8,
+    "roomId": "P15",
+    "date": "2025-10-19",
+    "time": "17:05",
+    "availableSeats": 211
+  },
+  {
+    "id": "ST226",
+    "movieId": 3,
+    "cinemaId": 8,
+    "roomId": "P14",
+    "date": "2025-10-19",
+    "time": "20:25",
+    "availableSeats": 78
+  },
+  {
+    "id": "ST227",
+    "movieId": 4,
+    "cinemaId": 9,
+    "roomId": "P16",
+    "date": "2025-10-19",
+    "time": "09:30",
+    "availableSeats": 95
+  },
+  {
+    "id": "ST228",
+    "movieId": 5,
+    "cinemaId": 9,
+    "roomId": "P17",
+    "date": "2025-10-19",
+    "time": "22:00",
+    "availableSeats": 228
+  },
+  {
+    "id": "ST229",
+    "movieId": 6,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-20",
+    "time": "09:10",
+    "availableSeats": 158
+  },
+  {
+    "id": "ST230",
+    "movieId": 7,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-20",
+    "time": "12:10",
+    "availableSeats": 87
+  },
+  {
+    "id": "ST231",
+    "movieId": 8,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-20",
+    "time": "11:05",
+    "availableSeats": 76
+  },
+  {
+    "id": "ST232",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-20",
+    "time": "15:20",
+    "availableSeats": 120
+  },
+  {
+    "id": "ST233",
+    "movieId": 2,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-20",
+    "time": "16:45",
+    "availableSeats": 58
+  },
+  {
+    "id": "ST234",
+    "movieId": 3,
+    "cinemaId": 4,
+    "roomId": "P6",
+    "date": "2025-10-20",
+    "time": "19:35",
+    "availableSeats": 80
+  },
+  {
+    "id": "ST235",
+    "movieId": 4,
+    "cinemaId": 5,
+    "roomId": "P8",
+    "date": "2025-10-20",
+    "time": "18:22",
+    "availableSeats": 63
+  },
+  {
+    "id": "ST236",
+    "movieId": 5,
+    "cinemaId": 6,
+    "roomId": "P10",
+    "date": "2025-10-20",
+    "time": "21:10",
+    "availableSeats": 74
+  },
+  {
+    "id": "ST237",
+    "movieId": 6,
+    "cinemaId": 7,
+    "roomId": "P13",
+    "date": "2025-10-20",
+    "time": "20:05",
+    "availableSeats": 134
+  },
+  {
+    "id": "ST238",
+    "movieId": 7,
+    "cinemaId": 8,
+    "roomId": "P14",
+    "date": "2025-10-20",
+    "time": "14:10",
+    "availableSeats": 92
+  },
+  {
+    "id": "ST239",
+    "movieId": 8,
+    "cinemaId": 8,
+    "roomId": "P15",
+    "date": "2025-10-20",
+    "time": "22:28",
+    "availableSeats": 194
+  },
+  {
+    "id": "ST240",
+    "movieId": 1,
+    "cinemaId": 9,
+    "roomId": "P16",
+    "date": "2025-10-20",
+    "time": "10:02",
+    "availableSeats": 78
+  },
+  {
+    "id": "ST241",
+    "movieId": 2,
+    "cinemaId": 9,
+    "roomId": "P17",
+    "date": "2025-10-20",
+    "time": "21:45",
+    "availableSeats": 222
+  },
+  {
+    "id": "ST242",
+    "movieId": 3,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-21",
+    "time": "09:22",
+    "availableSeats": 84
+  },
+  {
+    "id": "ST243",
+    "movieId": 4,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-21",
+    "time": "11:32",
+    "availableSeats": 143
+  },
+  {
+    "id": "ST244",
+    "movieId": 5,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-21",
+    "time": "13:18",
+    "availableSeats": 99
+  },
+  {
+    "id": "ST245",
+    "movieId": 6,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-21",
+    "time": "16:08",
+    "availableSeats": 93
+  },
+  {
+    "id": "ST246",
+    "movieId": 7,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-21",
+    "time": "15:42",
+    "availableSeats": 50
+  },
+  {
+    "id": "ST247",
+    "movieId": 8,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-21",
+    "time": "18:38",
+    "availableSeats": 204
+  },
+  {
+    "id": "ST248",
+    "movieId": 1,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-21",
+    "time": "20:28",
+    "availableSeats": 106
+  },
+  {
+    "id": "ST249",
+    "movieId": 2,
+    "cinemaId": 6,
+    "roomId": "P11",
+    "date": "2025-10-21",
+    "time": "21:18",
+    "availableSeats": 113
+  },
+  {
+    "id": "ST250",
+    "movieId": 3,
+    "cinemaId": 7,
+    "roomId": "P12",
+    "date": "2025-10-21",
+    "time": "14:02",
+    "availableSeats": 71
+  },
+  {
+    "id": "ST251",
+    "movieId": 4,
+    "cinemaId": 7,
+    "roomId": "P13",
+    "date": "2025-10-21",
+    "time": "19:48",
+    "availableSeats": 121
+  },
+  {
+    "id": "ST252",
+    "movieId": 5,
+    "cinemaId": 8,
+    "roomId": "P15",
+    "date": "2025-10-21",
+    "time": "12:12",
+    "availableSeats": 206
+  },
+  {
+    "id": "ST253",
+    "movieId": 6,
+    "cinemaId": 8,
+    "roomId": "P14",
+    "date": "2025-10-21",
+    "time": "22:32",
+    "availableSeats": 64
+  },
+  {
+    "id": "ST254",
+    "movieId": 7,
+    "cinemaId": 9,
+    "roomId": "P16",
+    "date": "2025-10-21",
+    "time": "09:42",
+    "availableSeats": 77
+  },
+  {
+    "id": "ST255",
+    "movieId": 8,
+    "cinemaId": 9,
+    "roomId": "P17",
+    "date": "2025-10-21",
+    "time": "21:52",
+    "availableSeats": 232
+  },
+  {
+    "id": "ST256",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-22",
+    "time": "09:18",
+    "availableSeats": 81
+  },
+  {
+    "id": "ST257",
+    "movieId": 2,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-22",
+    "time": "11:28",
+    "availableSeats": 149
+  },
+  {
+    "id": "ST258",
+    "movieId": 3,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-22",
+    "time": "13:08",
+    "availableSeats": 97
+  },
+  {
+    "id": "ST259",
+    "movieId": 4,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-22",
+    "time": "16:02",
+    "availableSeats": 91
+  },
+  {
+    "id": "ST260",
+    "movieId": 5,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-22",
+    "time": "15:38",
+    "availableSeats": 47
+  },
+  {
+    "id": "ST261",
+    "movieId": 6,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-22",
+    "time": "18:32",
+    "availableSeats": 198
+  },
+  {
+    "id": "ST262",
+    "movieId": 7,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-22",
+    "time": "20:22",
+    "availableSeats": 97
+  },
+  {
+    "id": "ST263",
+    "movieId": 8,
+    "cinemaId": 6,
+    "roomId": "P11",
+    "date": "2025-10-22",
+    "time": "18:12",
+    "availableSeats": 109
+  },
+  {
+    "id": "ST264",
+    "movieId": 1,
+    "cinemaId": 7,
+    "roomId": "P12",
+    "date": "2025-10-22",
+    "time": "13:12",
+    "availableSeats": 59
+  },
+  {
+    "id": "ST265",
+    "movieId": 2,
+    "cinemaId": 8,
+    "roomId": "P15",
+    "date": "2025-10-22",
+    "time": "17:02",
+    "availableSeats": 209
+  },
+  {
+    "id": "ST266",
+    "movieId": 3,
+    "cinemaId": 8,
+    "roomId": "P14",
+    "date": "2025-10-22",
+    "time": "20:18",
+    "availableSeats": 76
+  },
+  {
+    "id": "ST267",
+    "movieId": 4,
+    "cinemaId": 9,
+    "roomId": "P16",
+    "date": "2025-10-22",
+    "time": "09:28",
+    "availableSeats": 91
+  },
+  {
+    "id": "ST268",
+    "movieId": 5,
+    "cinemaId": 9,
+    "roomId": "P17",
+    "date": "2025-10-22",
+    "time": "21:58",
+    "availableSeats": 226
+  },
+  {
+    "id": "ST269",
+    "movieId": 6,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-23",
+    "time": "09:12",
+    "availableSeats": 154
+  },
+  {
+    "id": "ST270",
+    "movieId": 7,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-23",
+    "time": "12:08",
+    "availableSeats": 84
+  },
+  {
+    "id": "ST271",
+    "movieId": 8,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-23",
+    "time": "11:02",
+    "availableSeats": 78
+  },
+  {
+    "id": "ST272",
+    "movieId": 1,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-23",
+    "time": "15:18",
+    "availableSeats": 116
+  },
+  {
+    "id": "ST273",
+    "movieId": 2,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-23",
+    "time": "16:42",
+    "availableSeats": 56
+  },
+  {
+    "id": "ST274",
+    "movieId": 3,
+    "cinemaId": 4,
+    "roomId": "P6",
+    "date": "2025-10-23",
+    "time": "19:38",
+    "availableSeats": 76
+  },
+  {
+    "id": "ST275",
+    "movieId": 4,
+    "cinemaId": 5,
+    "roomId": "P8",
+    "date": "2025-10-23",
+    "time": "18:18",
+    "availableSeats": 59
+  },
+  {
+    "id": "ST276",
+    "movieId": 5,
+    "cinemaId": 6,
+    "roomId": "P10",
+    "date": "2025-10-23",
+    "time": "21:08",
+    "availableSeats": 70
+  },
+  {
+    "id": "ST277",
+    "movieId": 6,
+    "cinemaId": 7,
+    "roomId": "P13",
+    "date": "2025-10-23",
+    "time": "20:02",
+    "availableSeats": 128
+  },
+  {
+    "id": "ST278",
+    "movieId": 7,
+    "cinemaId": 8,
+    "roomId": "P14",
+    "date": "2025-10-23",
+    "time": "14:08",
+    "availableSeats": 88
+  },
+  {
+    "id": "ST279",
+    "movieId": 8,
+    "cinemaId": 8,
+    "roomId": "P15",
+    "date": "2025-10-23",
+    "time": "22:24",
+    "availableSeats": 190
+  },
+  {
+    "id": "ST280",
+    "movieId": 1,
+    "cinemaId": 9,
+    "roomId": "P16",
+    "date": "2025-10-23",
+    "time": "10:04",
+    "availableSeats": 74
+  },
+  {
+    "id": "ST281",
+    "movieId": 2,
+    "cinemaId": 9,
+    "roomId": "P17",
+    "date": "2025-10-23",
+    "time": "21:42",
+    "availableSeats": 218
+  },
+  {
+    "id": "ST282",
+    "movieId": 3,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-24",
+    "time": "09:24",
+    "availableSeats": 86
+  },
+  {
+    "id": "ST283",
+    "movieId": 4,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-24",
+    "time": "11:34",
+    "availableSeats": 147
+  },
+  {
+    "id": "ST284",
+    "movieId": 5,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-24",
+    "time": "13:16",
+    "availableSeats": 103
+  },
+  {
+    "id": "ST285",
+    "movieId": 6,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-24",
+    "time": "16:06",
+    "availableSeats": 97
+  },
+  {
+    "id": "ST286",
+    "movieId": 7,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-24",
+    "time": "15:44",
+    "availableSeats": 52
+  },
+  {
+    "id": "ST287",
+    "movieId": 8,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-24",
+    "time": "18:36",
+    "availableSeats": 202
+  },
+  {
+    "id": "ST288",
+    "movieId": 1,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-24",
+    "time": "20:32",
+    "availableSeats": 104
+  },
+  {
+    "id": "ST289",
+    "movieId": 2,
+    "cinemaId": 6,
+    "roomId": "P11",
+    "date": "2025-10-24",
+    "time": "21:16",
+    "availableSeats": 111
+  },
+  {
+    "id": "ST290",
+    "movieId": 3,
+    "cinemaId": 7,
+    "roomId": "P12",
+    "date": "2025-10-24",
+    "time": "14:04",
+    "availableSeats": 69
+  },
+  {
+    "id": "ST291",
+    "movieId": 4,
+    "cinemaId": 7,
+    "roomId": "P13",
+    "date": "2025-10-24",
+    "time": "19:46",
+    "availableSeats": 123
+  },
+  {
+    "id": "ST292",
+    "movieId": 5,
+    "cinemaId": 8,
+    "roomId": "P15",
+    "date": "2025-10-24",
+    "time": "12:14",
+    "availableSeats": 204
+  },
+  {
+    "id": "ST293",
+    "movieId": 6,
+    "cinemaId": 8,
+    "roomId": "P14",
+    "date": "2025-10-24",
+    "time": "22:26",
+    "availableSeats": 66
+  },
+  {
+    "id": "ST294",
+    "movieId": 7,
+    "cinemaId": 9,
+    "roomId": "P16",
+    "date": "2025-10-24",
+    "time": "09:44",
+    "availableSeats": 81
+  },
+  {
+    "id": "ST295",
+    "movieId": 8,
+    "cinemaId": 9,
+    "roomId": "P17",
+    "date": "2025-10-24",
+    "time": "21:54",
+    "availableSeats": 236
+  },
+  {
+    "id": "ST296",
+    "movieId": 1,
+    "cinemaId": 1,
+    "roomId": "P1",
+    "date": "2025-10-25",
+    "time": "09:14",
+    "availableSeats": 80
+  },
+  {
+    "id": "ST297",
+    "movieId": 2,
+    "cinemaId": 1,
+    "roomId": "P2",
+    "date": "2025-10-25",
+    "time": "11:24",
+    "availableSeats": 152
+  },
+  {
+    "id": "ST298",
+    "movieId": 3,
+    "cinemaId": 2,
+    "roomId": "P3",
+    "date": "2025-10-25",
+    "time": "13:04",
+    "availableSeats": 95
+  },
+  {
+    "id": "ST299",
+    "movieId": 4,
+    "cinemaId": 2,
+    "roomId": "P4",
+    "date": "2025-10-25",
+    "time": "16:00",
+    "availableSeats": 89
+  },
+  {
+    "id": "ST300",
+    "movieId": 5,
+    "cinemaId": 3,
+    "roomId": "P5",
+    "date": "2025-10-25",
+    "time": "15:36",
+    "availableSeats": 45
+  },
+  {
+    "id": "ST301",
+    "movieId": 6,
+    "cinemaId": 4,
+    "roomId": "P7",
+    "date": "2025-10-25",
+    "time": "18:30",
+    "availableSeats": 196
+  },
+  {
+    "id": "ST302",
+    "movieId": 7,
+    "cinemaId": 5,
+    "roomId": "P9",
+    "date": "2025-10-25",
+    "time": "20:20",
+    "availableSeats": 96
+  },
+  {
+    "id": "ST303",
+    "movieId": 8,
+    "cinemaId": 6,
+    "roomId": "P11",
+    "date": "2025-10-25",
+    "time": "18:10",
+    "availableSeats": 107
+  },
+  {
+    "id": "ST304",
+    "movieId": 1,
+    "cinemaId": 7,
+    "roomId": "P12",
+    "date": "2025-10-25",
+    "time": "13:10",
+    "availableSeats": 61
+  },
+  {
+    "id": "ST305",
+    "movieId": 2,
+    "cinemaId": 8,
+    "roomId": "P15",
+    "date": "2025-10-25",
+    "time": "17:00",
+    "availableSeats": 213
+  },
+  {
+    "id": "ST306",
+    "movieId": 3,
+    "cinemaId": 8,
+    "roomId": "P14",
+    "date": "2025-10-25",
+    "time": "20:16",
+    "availableSeats": 72
+  },
+  {
+    "id": "ST307",
+    "movieId": 4,
+    "cinemaId": 9,
+    "roomId": "P16",
+    "date": "2025-10-25",
+    "time": "09:26",
+    "availableSeats": 89
+  },
+  {
+    "id": "ST308",
+    "movieId": 5,
+    "cinemaId": 9,
+    "roomId": "P17",
+    "date": "2025-10-25",
+    "time": "21:56",
+    "availableSeats": 224
   }
 ]

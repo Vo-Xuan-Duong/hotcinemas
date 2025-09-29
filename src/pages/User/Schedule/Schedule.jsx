@@ -206,7 +206,7 @@ const Schedule = () => {
                                     </div>
                                     <div className="movie-details">
                                         <h3>{movie.title}</h3>
-                                        <div className="movie-meta">
+                                        <div className="schedule-page movie-meta">
                                             <span className="duration">⏱️ {movie.duration} phút</span>
                                             <span className="rating">⭐ {movie.rating}</span>
                                             <span className="age-label">{movie.ageLabel}</span>

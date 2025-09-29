@@ -1,0 +1,2554 @@
+/* Movie Detail Modern Styles - Theme Support */
+.movie-detail-modern {
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* Light Theme */
+.movie-detail-modern.light-theme {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 25%, #f1f5f9 50%, #e2e8f0 75%, #cbd5e1 100%);
+    color: #1f2937;
+}
+
+.movie-detail-modern.light-theme::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Dark Theme */
+.movie-detail-modern.dark-theme {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 25%, #2d1b69 50%, #1e3c72 75%, #0f4c75 100%);
+    color: #ffffff;
+}
+
+.movie-detail-modern.dark-theme::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 118, 117, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(56, 178, 172, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Breadcrumb - Theme Support */
+.movie-breadcrumb {
+    padding: 20px 0;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.light-theme .movie-breadcrumb {
+    background: rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .movie-breadcrumb {
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.light-theme .movie-breadcrumb .ant-breadcrumb-link {
+    color: #6b7280;
+}
+
+.dark-theme .movie-breadcrumb .ant-breadcrumb-link {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.movie-breadcrumb .ant-breadcrumb-link:hover {
+    color: #1890ff;
+    transition: color 0.3s ease;
+}
+
+.light-theme .movie-breadcrumb .ant-breadcrumb-separator {
+    color: #9ca3af;
+}
+
+.dark-theme .movie-breadcrumb .ant-breadcrumb-separator {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Enhanced Hero Section */
+.movie-hero-section {
+    padding: 60px 0;
+    transition: all 0.3s ease;
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.light-theme .movie-hero-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.dark-theme .movie-hero-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+/* Enhanced Poster */
+.movie-poster-main {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.light-theme .movie-poster-main {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.dark-theme .movie-poster-main {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.movie-poster-main:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+/* Movie Info Hero Enhanced */
+.movie-info-hero {
+    padding: 20px 0;
+}
+
+.light-theme .movie-info-hero {
+    color: #374151;
+}
+
+.dark-theme .movie-info-hero {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Enhanced Title */
+.movie-title-hero {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    margin-bottom: 16px !important;
+}
+
+.light-theme .movie-title-hero {
+    color: #1f2937 !important;
+    text-shadow: none;
+}
+
+.dark-theme .movie-title-hero {
+    color: white !important;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .movie-poster-main {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.movie-poster-main:hover {
+    transform: translateY(-4px);
+}
+
+/* Movie Info Hero - Theme Support */
+.movie-info-hero {
+    padding-left: 32px;
+}
+
+.light-theme .movie-info-hero {
+    color: #1f2937;
+}
+
+.dark-theme .movie-info-hero {
+    color: #ffffff;
+}
+
+.light-theme .movie-info-hero .ant-typography {
+    color: #374151;
+}
+
+.dark-theme .movie-info-hero .ant-typography {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.light-theme .movie-info-hero .ant-typography-secondary {
+    color: #6b7280;
+}
+
+.dark-theme .movie-info-hero .ant-typography-secondary {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Movie Title - Theme Support */
+.movie-title-hero {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 16px !important;
+    line-height: 1.2 !important;
+    transition: all 0.3s ease;
+}
+
+.light-theme .movie-title-hero {
+    color: #1f2937 !important;
+    background: linear-gradient(135deg, #1f2937 0%, #374151 50%, #4b5563 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+}
+
+.dark-theme .movie-title-hero {
+    color: white !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 50%, #e0e0e0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Meta Info - Theme Support */
+.movie-meta-info {
+    margin: 20px 0;
+}
+
+.light-theme .movie-meta-info .ant-typography {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.dark-theme .movie-meta-info .ant-typography {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+
+.rating-text {
+    color: #faad14 !important;
+}
+
+.light-theme .meta-icon {
+    color: #6b7280;
+}
+
+.dark-theme .meta-icon {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Overview Text - Theme Support */
+.light-theme .movie-overview {
+    color: #4b5563 !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    margin: 24px 0 !important;
+}
+
+.dark-theme .movie-overview {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    margin: 24px 0 !important;
+}
+
+/* Genre Tags - Theme Support */
+.movie-genres {
+    margin: 20px 0;
+}
+
+.genre-tag-hero {
+    border-radius: 16px !important;
+    padding: 4px 12px !important;
+    margin: 4px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+}
+
+.light-theme .genre-tag-hero {
+    background: rgba(59, 130, 246, 0.1) !important;
+    border: 1px solid rgba(59, 130, 246, 0.3) !important;
+    color: #1d4ed8 !important;
+}
+
+.light-theme .genre-tag-hero:hover {
+    background: rgba(59, 130, 246, 0.2) !important;
+    border-color: rgba(59, 130, 246, 0.5) !important;
+    color: #1e40af !important;
+    transform: translateY(-1px);
+}
+
+.dark-theme .genre-tag-hero {
+    background: rgba(24, 144, 255, 0.1) !important;
+    border: 1px solid rgba(24, 144, 255, 0.3) !important;
+    color: #69c0ff !important;
+}
+
+.dark-theme .genre-tag-hero:hover {
+    background: rgba(24, 144, 255, 0.2) !important;
+    border-color: rgba(24, 144, 255, 0.5) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(24, 144, 255, 0.3);
+}
+
+/* Action Buttons - Theme Support */
+.movie-actions-top {
+    margin-bottom: 24px;
+}
+
+.back-btn,
+.favorite-btn,
+.share-btn,
+.theme-toggle-btn {
+    border-radius: 8px;
+    height: 36px;
+    transition: all 0.3s ease;
+}
+
+.light-theme .back-btn,
+.light-theme .favorite-btn,
+.light-theme .share-btn,
+.light-theme .theme-toggle-btn {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #4b5563;
+}
+
+.light-theme .back-btn:hover,
+.light-theme .favorite-btn:hover,
+.light-theme .share-btn:hover,
+.light-theme .theme-toggle-btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.2);
+    color: #1f2937;
+}
+
+.dark-theme .back-btn,
+.dark-theme .favorite-btn,
+.dark-theme .share-btn,
+.dark-theme .theme-toggle-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.dark-theme .back-btn:hover,
+.dark-theme .favorite-btn:hover,
+.dark-theme .share-btn:hover,
+.dark-theme .theme-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.favorite-btn.favorited {
+    background: rgba(255, 77, 79, 0.2);
+    border-color: #ff4d4f;
+    color: #ff4d4f;
+}
+
+.theme-toggle-btn {
+    animation: themeGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes themeGlow {
+    0% {
+        box-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+    }
+
+    100% {
+        box-shadow: 0 0 20px rgba(255, 193, 7, 0.6);
+    }
+}
+
+.trailer-btn-hero {
+    background: linear-gradient(135deg, #1890ff, #722ed1);
+    border: none;
+    border-radius: 8px;
+    height: 40px;
+    font-weight: 600;
+    margin-top: 16px;
+    transition: all 0.3s ease;
+}
+
+.trailer-btn-hero:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(24, 144, 255, 0.4);
+}
+
+.book-ticket-btn-hero {
+    background: linear-gradient(135deg, #52c41a, #73d13d);
+    border: none;
+    border-radius: 8px;
+    height: 44px;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 0 24px;
+    transition: all 0.3s ease;
+}
+
+.book-ticket-btn-hero:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(82, 196, 26, 0.4);
+}
+
+.movie-breadcrumb .ant-breadcrumb-link:hover {
+    color: #40a9ff;
+}
+
+.movie-breadcrumb .ant-breadcrumb-separator {
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 12px;
+}
+
+/* Content Section */
+.movie-content-section {
+    padding: 40px 0;
+}
+
+.movie-tabs {
+    background: transparent;
+}
+
+/* Tabs Navigation - Theme Support */
+.light-theme .movie-tabs .ant-tabs-nav {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 12px;
+    padding: 8px;
+    margin-bottom: 32px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dark-theme .movie-tabs .ant-tabs-nav {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 8px;
+    margin-bottom: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Tabs - Theme Support */
+.light-theme .movie-tabs .ant-tabs-tab {
+    color: #6b7280 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    background: transparent !important;
+    margin: 0 4px !important;
+    padding: 12px 20px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+}
+
+.dark-theme .movie-tabs .ant-tabs-tab {
+    color: rgba(255, 255, 255, 0.7) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    background: transparent !important;
+    margin: 0 4px !important;
+    padding: 12px 20px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+}
+
+.light-theme .movie-tabs .ant-tabs-tab-active {
+    background: linear-gradient(135deg, #1890ff, #722ed1) !important;
+    color: white !important;
+}
+
+.dark-theme .movie-tabs .ant-tabs-tab-active {
+    background: linear-gradient(135deg, #1890ff, #722ed1) !important;
+    color: white !important;
+}
+
+.light-theme .movie-tabs .ant-tabs-tab:hover {
+    background: rgba(0, 0, 0, 0.05) !important;
+    color: #374151 !important;
+}
+
+.dark-theme .movie-tabs .ant-tabs-tab:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+}
+
+.movie-tabs .ant-tabs-ink-bar {
+    display: none;
+}
+
+/* Cards - Theme Support */
+.movie-details-card,
+.movie-cast-card,
+.movie-ratings-card,
+.movie-stats-card,
+.showtimes-card,
+.comments-card {
+    border-radius: 12px !important;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+}
+
+.light-theme .movie-details-card,
+.light-theme .movie-cast-card,
+.light-theme .movie-ratings-card,
+.light-theme .movie-stats-card,
+.light-theme .showtimes-card,
+.light-theme .comments-card {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+.dark-theme .movie-details-card,
+.dark-theme .movie-cast-card,
+.dark-theme .movie-ratings-card,
+.dark-theme .movie-stats-card,
+.dark-theme .showtimes-card,
+.dark-theme .comments-card {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.light-theme .movie-details-card:hover,
+.light-theme .movie-cast-card:hover,
+.light-theme .movie-ratings-card:hover,
+.light-theme .movie-stats-card:hover,
+.light-theme .showtimes-card:hover,
+.light-theme .comments-card:hover {
+    background: rgba(255, 255, 255, 1) !important;
+    border-color: rgba(0, 0, 0, 0.12) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-2px);
+}
+
+.dark-theme .movie-details-card:hover,
+.dark-theme .movie-cast-card:hover,
+.dark-theme .movie-ratings-card:hover,
+.dark-theme .movie-stats-card:hover,
+.dark-theme .showtimes-card:hover,
+.dark-theme .comments-card:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-2px);
+}
+
+.light-theme .movie-details-card .ant-card-head-title,
+.light-theme .movie-cast-card .ant-card-head-title,
+.light-theme .movie-ratings-card .ant-card-head-title,
+.light-theme .movie-stats-card .ant-card-head-title,
+.light-theme .showtimes-card .ant-card-head-title,
+.light-theme .comments-card .ant-card-head-title {
+    color: #1f2937 !important;
+    font-weight: 600 !important;
+    font-size: 18px !important;
+}
+
+.dark-theme .movie-details-card .ant-card-head-title,
+.dark-theme .movie-cast-card .ant-card-head-title,
+.dark-theme .movie-ratings-card .ant-card-head-title,
+.dark-theme .movie-stats-card .ant-card-head-title,
+.dark-theme .showtimes-card .ant-card-head-title,
+.dark-theme .comments-card .ant-card-head-title {
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: 18px !important;
+}
+
+.light-theme .movie-details-card .ant-typography,
+.light-theme .movie-cast-card .ant-typography,
+.light-theme .movie-ratings-card .ant-typography,
+.light-theme .movie-stats-card .ant-typography,
+.light-theme .showtimes-card .ant-typography,
+.light-theme .comments-card .ant-typography {
+    color: #374151;
+}
+
+.dark-theme .movie-details-card .ant-typography,
+.dark-theme .movie-cast-card .ant-typography,
+.dark-theme .movie-ratings-card .ant-typography,
+.dark-theme .movie-stats-card .ant-typography,
+.dark-theme .showtimes-card .ant-typography,
+.dark-theme .comments-card .ant-typography {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.light-theme .movie-details-card .ant-typography-secondary,
+.light-theme .movie-cast-card .ant-typography-secondary,
+.light-theme .movie-ratings-card .ant-typography-secondary,
+.light-theme .movie-stats-card .ant-typography-secondary,
+.light-theme .showtimes-card .ant-typography-secondary,
+.light-theme .comments-card .ant-typography-secondary {
+    color: #6b7280 !important;
+}
+
+.dark-theme .movie-details-card .ant-typography-secondary,
+.dark-theme .movie-cast-card .ant-typography-secondary,
+.dark-theme .movie-ratings-card .ant-typography-secondary,
+.dark-theme .movie-stats-card .ant-typography-secondary,
+.dark-theme .showtimes-card .ant-typography-secondary,
+.dark-theme .comments-card .ant-typography-secondary {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Remove duplicate style - already handled by theme support above */
+
+/* Cast Members - Theme Support */
+.light-theme .cast-member {
+    text-align: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.dark-theme .cast-member {
+    text-align: center;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.cast-member:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px);
+}
+
+.cast-info {
+    margin-top: 12px;
+}
+
+.cast-name {
+    display: block;
+    color: white !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    margin-bottom: 4px !important;
+}
+
+.cast-character {
+    display: block;
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-size: 12px !important;
+}
+
+/* Statistics */
+.stat-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.stat-item .ant-statistic-title {
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-size: 12px !important;
+}
+
+.stat-item .ant-statistic-content {
+    color: white !important;
+    font-weight: 700 !important;
+}
+
+/* Date Selector */
+.date-selector {
+    margin-bottom: 24px;
+}
+
+.date-btn {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    border-radius: 8px !important;
+    height: auto !important;
+    padding: 12px 20px !important;
+    transition: all 0.3s ease !important;
+}
+
+.date-btn:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+}
+
+.date-btn.ant-btn-primary {
+    background: linear-gradient(135deg, #1890ff, #722ed1) !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Cinema Cards */
+/* Cinema Cards - Theme Support */
+.light-theme .cinema-card {
+    background: rgba(0, 0, 0, 0.02) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    border-radius: 12px !important;
+    margin-bottom: 16px;
+    transition: all 0.3s ease;
+}
+
+.dark-theme .cinema-card {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    margin-bottom: 16px;
+    transition: all 0.3s ease;
+}
+
+.light-theme .cinema-card:hover {
+    background: rgba(0, 0, 0, 0.04) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.dark-theme .cinema-card:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.light-theme .cinema-card .ant-typography {
+    color: #374151;
+}
+
+.dark-theme .cinema-card .ant-typography {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.light-theme .cinema-card .ant-typography-secondary {
+    color: #6b7280 !important;
+}
+
+.dark-theme .cinema-card .ant-typography-secondary {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.showtime-btn {
+    background: rgba(24, 144, 255, 0.1) !important;
+    border: 1px solid rgba(24, 144, 255, 0.3) !important;
+    color: #69c0ff !important;
+    border-radius: 6px !important;
+    padding: 8px 16px !important;
+    height: auto !important;
+    transition: all 0.3s ease !important;
+    font-weight: 500 !important;
+}
+
+.showtime-btn:hover {
+    background: rgba(24, 144, 255, 0.2) !important;
+    color: white !important;
+}
+
+/* Comments - Theme Support */
+.light-theme .add-comment {
+    background: rgba(0, 0, 0, 0.02);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+}
+
+.dark-theme .add-comment {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 24px;
+}
+
+.light-theme .comment-input {
+    background: rgba(0, 0, 0, 0.02) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    color: #374151 !important;
+    border-radius: 8px !important;
+}
+
+.dark-theme .comment-input {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    border-radius: 8px !important;
+}
+
+.light-theme .comment-input:focus {
+    background: rgba(0, 0, 0, 0.04) !important;
+    border-color: #1890ff !important;
+}
+
+.dark-theme .comment-input:focus {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: #1890ff !important;
+}
+
+.light-theme .comment-input::placeholder {
+    color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark-theme .comment-input::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* List Items */
+/* List Items - Theme Support */
+.light-theme .ant-list-item {
+    background: rgba(0, 0, 0, 0.02);
+    margin-bottom: 16px;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.dark-theme .ant-list-item {
+    background: rgba(255, 255, 255, 0.05);
+    margin-bottom: 16px;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.light-theme .ant-list-item:hover {
+    background: rgba(0, 0, 0, 0.04);
+    transform: translateY(-2px);
+}
+
+.dark-theme .ant-list-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+.light-theme .ant-list-item-meta-title {
+    color: #374151 !important;
+    font-weight: 600 !important;
+}
+
+.dark-theme .ant-list-item-meta-title {
+    color: white !important;
+    font-weight: 600 !important;
+}
+
+.light-theme .ant-list-item-meta-description {
+    color: #6b7280 !important;
+}
+
+.dark-theme .ant-list-item-meta-description {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.ant-list-item-action {
+    margin-left: 48px;
+}
+
+.ant-list-item-action>li {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+.ant-list-item-action>li:hover {
+    color: #1890ff;
+}
+
+/* Movie Info Hero */
+.movie-info-hero {
+    padding-left: 32px;
+}
+
+.movie-actions-top {
+    margin-bottom: 32px;
+}
+
+.back-btn,
+.favorite-btn,
+.share-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    border-radius: 15px;
+    height: 44px;
+    padding: 0 20px;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.back-btn::before,
+.favorite-btn::before,
+.share-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.back-btn:hover::before,
+.favorite-btn:hover::before,
+.share-btn:hover::before {
+    left: 100%;
+}
+
+.back-btn:hover,
+.favorite-btn:hover,
+.share-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.favorite-btn.favorited {
+    background: linear-gradient(135deg, rgba(255, 77, 79, 0.2), rgba(255, 107, 53, 0.2));
+    border-color: #ff4d4f;
+    color: #ff7875;
+    box-shadow: 0 6px 20px rgba(255, 77, 79, 0.3);
+}
+
+.movie-title-hero {
+    color: white !important;
+    font-size: 3.5rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 24px !important;
+    text-shadow:
+        2px 2px 4px rgba(0, 0, 0, 0.7),
+        0 0 20px rgba(255, 255, 255, 0.1);
+    line-height: 1.1 !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.movie-meta-info {
+    margin-bottom: 28px;
+}
+
+.movie-meta-info .ant-typography {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.movie-genres {
+    margin-bottom: 28px;
+}
+
+.genre-tag-hero {
+    background: linear-gradient(135deg,
+            rgba(24, 144, 255, 0.15) 0%,
+            rgba(114, 46, 209, 0.15) 100%) !important;
+    border: 1px solid rgba(24, 144, 255, 0.3) !important;
+    color: #91d5ff !important;
+    border-radius: 25px !important;
+    padding: 6px 18px !important;
+    font-weight: 500 !important;
+    margin: 4px !important;
+    transition: all 0.3s ease !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.genre-tag-hero:hover {
+    background: linear-gradient(135deg,
+            rgba(24, 144, 255, 0.25) 0%,
+            rgba(114, 46, 209, 0.25) 100%) !important;
+    border-color: rgba(24, 144, 255, 0.5) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(24, 144, 255, 0.3);
+}
+
+.movie-overview {
+    color: rgba(255, 255, 255, 0.95) !important;
+    font-size: 18px !important;
+    line-height: 1.8 !important;
+    margin-bottom: 36px !important;
+    font-weight: 400 !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.movie-stats {
+    margin-bottom: 36px;
+}
+
+.stat-item {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.03) 100%);
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.stat-item:hover {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.12) 0%,
+            rgba(255, 255, 255, 0.06) 100%);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.stat-item .ant-typography {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 8px;
+}
+
+.book-ticket-btn-hero {
+    background: linear-gradient(135deg, #52c41a 0%, #73d13d 50%, #95de64 100%);
+    border: none;
+    border-radius: 25px;
+    height: 52px;
+    font-weight: 700;
+    font-size: 17px;
+    padding: 0 36px;
+    box-shadow:
+        0 12px 35px rgba(82, 196, 26, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.book-ticket-btn-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.book-ticket-btn-hero:hover::before {
+    left: 100%;
+}
+
+.book-ticket-btn-hero:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 16px 45px rgba(82, 196, 26, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .movie-title-hero {
+        font-size: 2rem !important;
+    }
+
+    .movie-poster-main {
+        max-width: 250px;
+    }
+
+    .container {
+        padding: 0 16px;
+    }
+
+    .movie-hero-section {
+        padding: 32px 0;
+    }
+
+    .movie-content-section {
+        padding: 32px 0;
+    }
+
+    .movie-tabs .ant-tabs-tab {
+        padding: 10px 16px !important;
+        font-size: 14px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .movie-title-hero {
+        font-size: 1.75rem !important;
+    }
+
+    .movie-overview {
+        font-size: 14px !important;
+    }
+
+    .cast-member {
+        padding: 12px;
+    }
+
+    .date-btn {
+        padding: 10px 16px !important;
+        font-size: 14px !important;
+    }
+
+    .movie-poster-main {
+        max-width: 220px;
+    }
+
+    .trailer-btn-hero,
+    .book-ticket-btn-hero {
+        height: 40px;
+        font-size: 14px;
+    }
+}
+
+/* Loading and Error States */
+.movie-detail-loading,
+.movie-detail-error {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0a0a;
+}
+
+.movie-detail-loading .ant-card,
+.movie-detail-error .ant-empty {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+.movie-detail-error .ant-empty-description {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Rate Stars */
+.ant-rate-star {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.ant-rate-star-full {
+    color: #faad14;
+}
+
+/* Progress */
+.ant-progress-bg {
+    border-radius: 4px;
+}
+
+/* Custom Scrollbar */
+.movie-detail-modern ::-webkit-scrollbar {
+    width: 8px;
+}
+
+.movie-detail-modern ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.movie-detail-modern ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+.movie-detail-modern ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.movie-detail-modern .ant-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.movie-detail-modern .ant-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.movie-detail-modern .ant-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+/* Clean up overrides */
+.movie-detail-modern .ant-btn {
+    font-weight: 500;
+}
+
+.movie-detail-modern .ant-typography {
+    color: inherit;
+}
+
+.movie-detail-modern .ant-card-head {
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.movie-detail-modern .ant-divider {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Cards */
+.movie-details-card,
+.movie-cast-card,
+.movie-ratings-card,
+.movie-stats-card,
+.showtimes-card,
+.comments-card {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.04) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 20px !important;
+    backdrop-filter: blur(30px) !important;
+    margin-bottom: 32px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.movie-details-card::before,
+.movie-cast-card::before,
+.movie-ratings-card::before,
+.movie-stats-card::before,
+.showtimes-card::before,
+.comments-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.movie-details-card:hover,
+.movie-cast-card:hover,
+.movie-ratings-card:hover,
+.movie-stats-card:hover,
+.showtimes-card:hover,
+.comments-card:hover {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.12) 0%,
+            rgba(255, 255, 255, 0.06) 100%) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-4px);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.movie-details-card .ant-card-head,
+.movie-cast-card .ant-card-head,
+.movie-ratings-card .ant-card-head,
+.movie-stats-card .ant-card-head,
+.showtimes-card .ant-card-head,
+.comments-card .ant-card-head {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.06) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px 20px 0 0;
+}
+
+.movie-details-card .ant-card-head-title,
+.movie-cast-card .ant-card-head-title,
+.movie-ratings-card .ant-card-head-title,
+.movie-stats-card .ant-card-head-title,
+.showtimes-card .ant-card-head-title,
+.comments-card .ant-card-head-title {
+    color: white !important;
+    font-weight: 700 !important;
+    font-size: 18px !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.movie-details-card .ant-typography,
+.movie-cast-card .ant-typography,
+.movie-ratings-card .ant-typography,
+.movie-stats-card .ant-typography,
+.showtimes-card .ant-typography,
+.comments-card .ant-typography {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.movie-details-card .ant-typography-secondary,
+.movie-cast-card .ant-typography-secondary,
+.movie-ratings-card .ant-typography-secondary,
+.movie-stats-card .ant-typography-secondary,
+.showtimes-card .ant-typography-secondary,
+.comments-card .ant-typography-secondary {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Cast Members */
+.cast-member {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.06) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.cast-member::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.cast-member:hover {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.05) 100%);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-6px);
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.cast-info {
+    margin-top: 16px;
+}
+
+.cast-name {
+    display: block;
+    color: white !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    margin-bottom: 6px !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.cast-character {
+    display: block;
+    color: rgba(255, 255, 255, 0.75) !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+}
+
+/* Date Selector */
+.date-selector {
+    margin-bottom: 32px;
+}
+
+.date-btn {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.04) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 15px !important;
+    height: auto !important;
+    padding: 14px 24px !important;
+    font-weight: 600 !important;
+    backdrop-filter: blur(20px) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.date-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.date-btn:hover::before {
+    left: 100%;
+}
+
+.date-btn:hover {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.15) 0%,
+            rgba(255, 255, 255, 0.08) 100%) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    color: white !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.date-btn.ant-btn-primary {
+    background: linear-gradient(135deg, #1890ff 0%, #722ed1 50%, #eb2f96 100%) !important;
+    color: white !important;
+    border: none !important;
+    box-shadow:
+        0 6px 20px rgba(24, 144, 255, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.date-btn.ant-btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 10px 30px rgba(24, 144, 255, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Cinema Cards */
+.cinema-card {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.06) 0%,
+            rgba(255, 255, 255, 0.02) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 16px !important;
+    backdrop-filter: blur(20px) !important;
+    transition: all 0.3s ease !important;
+    margin-bottom: 16px;
+}
+
+.cinema-card:hover {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.05) 100%) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.cinema-card .ant-typography {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 500;
+}
+
+.cinema-card .ant-typography-secondary {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.showtime-btn {
+    background: linear-gradient(135deg,
+            rgba(24, 144, 255, 0.15) 0%,
+            rgba(114, 46, 209, 0.15) 100%) !important;
+    border: 1px solid rgba(24, 144, 255, 0.3) !important;
+    color: #91d5ff !important;
+    border-radius: 12px !important;
+    padding: 10px 18px !important;
+    height: auto !important;
+    font-weight: 600 !important;
+    backdrop-filter: blur(10px) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.showtime-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.showtime-btn:hover::before {
+    left: 100%;
+}
+
+.showtime-btn:hover {
+    background: linear-gradient(135deg,
+            rgba(24, 144, 255, 0.25) 0%,
+            rgba(114, 46, 209, 0.25) 100%) !important;
+    border-color: rgba(24, 144, 255, 0.5) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(24, 144, 255, 0.3);
+}
+
+/* Comments */
+.add-comment {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.06) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    margin-bottom: 24px;
+}
+
+.comment-input {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.04) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: white !important;
+    border-radius: 12px !important;
+    backdrop-filter: blur(20px) !important;
+    transition: all 0.3s ease !important;
+}
+
+.comment-input:focus {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.12) 0%,
+            rgba(255, 255, 255, 0.06) 100%) !important;
+    border-color: #1890ff !important;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
+}
+
+.comment-input::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* List Items */
+.ant-list-item {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.06) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    margin-bottom: 20px;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+}
+
+.ant-list-item:hover {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.05) 100%);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.ant-list-item-meta-title {
+    color: white !important;
+    font-weight: 600 !important;
+}
+
+.ant-list-item-meta-description {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.ant-list-item-action {
+    margin-left: 48px;
+}
+
+.ant-list-item-action>li {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
+
+.ant-list-item-action>li:hover {
+    color: #40a9ff;
+}
+
+/* Statistics */
+.ant-statistic-title {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.ant-statistic-content {
+    color: white !important;
+}
+
+/* Progress */
+.ant-progress-bg {
+    border-radius: 4px;
+}
+
+/* Rate */
+.ant-rate-star {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.ant-rate-star-full {
+    color: #faad14;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .movie-title-hero {
+        font-size: 2.5rem !important;
+    }
+
+    .movie-info-hero {
+        padding-left: 0;
+        margin-top: 32px;
+    }
+
+    .movie-poster-main {
+        max-width: 280px;
+    }
+
+    .container {
+        padding: 0 16px;
+    }
+
+    .movie-hero-section {
+        padding: 32px 0 80px;
+    }
+
+    .movie-content-section {
+        padding: 40px 0 80px;
+    }
+
+    .movie-tabs .ant-tabs-tab {
+        padding: 12px 20px !important;
+        font-size: 14px !important;
+        margin: 0 4px !important;
+    }
+
+    .movie-actions-top .ant-space-item {
+        margin-bottom: 8px;
+    }
+
+    .movie-stats .ant-col {
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .movie-title-hero {
+        font-size: 2rem !important;
+    }
+
+    .movie-overview {
+        font-size: 16px !important;
+    }
+
+    .movie-tabs .ant-tabs-tab {
+        padding: 10px 16px !important;
+        font-size: 13px !important;
+        margin: 0 2px !important;
+    }
+
+    .cast-member {
+        padding: 16px;
+    }
+
+    .date-btn {
+        padding: 12px 18px !important;
+        font-size: 14px !important;
+    }
+
+    .showtime-btn {
+        padding: 8px 14px !important;
+        font-size: 13px !important;
+    }
+
+    .movie-poster-main {
+        max-width: 240px;
+    }
+
+    .trailer-btn-hero,
+    .book-ticket-btn-hero {
+        height: 46px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 360px) {
+    .movie-title-hero {
+        font-size: 1.75rem !important;
+    }
+
+    .movie-tabs .ant-tabs-nav {
+        padding: 8px;
+    }
+
+    .movie-tabs .ant-tabs-tab {
+        padding: 8px 12px !important;
+        font-size: 12px !important;
+        margin: 0 1px !important;
+    }
+
+    .container {
+        padding: 0 12px;
+    }
+}
+
+/* Loading and Error States */
+.movie-detail-loading,
+.movie-detail-error {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 25%, #2d1b69 50%, #1e3c72 75%, #0f4c75 100%);
+    position: relative;
+}
+
+.movie-detail-loading::before,
+.movie-detail-error::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 30% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 70% 60%, rgba(255, 118, 117, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.movie-detail-loading .ant-card,
+.movie-detail-error .ant-empty {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.04) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    backdrop-filter: blur(30px);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.movie-detail-error .ant-empty-description {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(24, 144, 255, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(24, 144, 255, 0.6);
+    }
+}
+
+.movie-detail-modern .ant-card {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.movie-detail-modern .ant-card:nth-child(1) {
+    animation: slideInLeft 0.8s ease-out;
+}
+
+.movie-detail-modern .ant-card:nth-child(2) {
+    animation: fadeInUp 0.8s ease-out 0.1s;
+    animation-fill-mode: both;
+}
+
+.movie-detail-modern .ant-card:nth-child(3) {
+    animation: slideInRight 0.8s ease-out 0.2s;
+    animation-fill-mode: both;
+}
+
+.movie-poster-main {
+    animation: float 6s ease-in-out infinite;
+}
+
+.trailer-btn-hero.ant-btn-primary,
+.book-ticket-btn-hero.ant-btn-primary {
+    animation: glow 2s ease-in-out infinite;
+}
+
+/* Custom Scrollbar */
+.movie-detail-modern ::-webkit-scrollbar {
+    width: 10px;
+}
+
+.movie-detail-modern ::-webkit-scrollbar-track {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border-radius: 8px;
+}
+
+.movie-detail-modern ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg,
+            rgba(24, 144, 255, 0.6) 0%,
+            rgba(114, 46, 209, 0.6) 100%);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.movie-detail-modern ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg,
+            rgba(24, 144, 255, 0.8) 0%,
+            rgba(114, 46, 209, 0.8) 100%);
+}
+
+/* Special Effects */
+.movie-detail-modern .container::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 118, 117, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(56, 178, 172, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+    animation: float 15s ease-in-out infinite;
+}
+
+/* Button Hover Effects */
+.ant-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.ant-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.ant-btn:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Text Gradients */
+.movie-title-hero {
+    background: linear-gradient(135deg,
+            #ffffff 0%,
+            #e6f7ff 50%,
+            #91d5ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Movie Actions */
+.movie-actions-main {
+    margin-top: 32px;
+    padding: 24px;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.04) 100%);
+    border-radius: 20px;
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation: fadeInUp 0.8s ease-out 0.4s;
+    animation-fill-mode: both;
+}
+
+.book-ticket-btn {
+    background: linear-gradient(135deg, #52c41a 0%, #73d13d 50%, #95de64 100%);
+    border: none;
+    border-radius: 15px;
+    height: 52px;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 0 32px;
+    box-shadow:
+        0 8px 25px rgba(82, 196, 26, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.book-ticket-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.book-ticket-btn:hover::before {
+    left: 100%;
+}
+
+.book-ticket-btn:hover {
+    background: linear-gradient(135deg, #73d13d 0%, #95de64 50%, #b7eb8f 100%);
+    transform: translateY(-3px);
+    box-shadow:
+        0 12px 35px rgba(82, 196, 26, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.trailer-btn {
+    border: 2px solid #1890ff;
+    color: #1890ff;
+    border-radius: 15px;
+    height: 52px;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 0 32px;
+    background: linear-gradient(135deg,
+            rgba(24, 144, 255, 0.1) 0%,
+            rgba(114, 46, 209, 0.1) 100%);
+    backdrop-filter: blur(20px);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.trailer-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(24, 144, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.trailer-btn:hover::before {
+    left: 100%;
+}
+
+.trailer-btn:hover {
+    background: linear-gradient(135deg,
+            rgba(24, 144, 255, 0.2) 0%,
+            rgba(114, 46, 209, 0.2) 100%);
+    border-color: #40a9ff;
+    color: #40a9ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(24, 144, 255, 0.3);
+}
+
+.rating-stars {
+    font-size: 28px;
+    margin: 8px 0;
+}
+
+.rating-stars .ant-rate-star {
+    margin-right: 12px;
+    transition: all 0.3s ease;
+}
+
+.rating-stars .ant-rate-star:hover {
+    transform: scale(1.1);
+}
+
+.rating-stars .ant-rate-star-half .ant-rate-star-first,
+.rating-stars .ant-rate-star-full .ant-rate-star-second {
+    color: #faad14;
+    text-shadow: 0 0 10px rgba(250, 173, 20, 0.5);
+}
+
+/* Modal Enhancements - Theme Support */
+.ant-modal-mask {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.ant-modal-wrap {
+    backdrop-filter: blur(10px);
+}
+
+.ant-modal {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.light-theme .ant-modal {
+    box-shadow:
+        0 16px 48px rgba(0, 0, 0, 0.15),
+        0 0 80px rgba(59, 130, 246, 0.1);
+}
+
+.dark-theme .ant-modal {
+    box-shadow:
+        0 16px 48px rgba(0, 0, 0, 0.5),
+        0 0 80px rgba(24, 144, 255, 0.1);
+}
+
+.light-theme .ant-modal-header {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(248, 250, 252, 0.95) 100%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(30px);
+    padding: 20px 24px;
+}
+
+.dark-theme .ant-modal-header {
+    background: linear-gradient(135deg,
+            rgba(26, 26, 26, 0.95) 0%,
+            rgba(42, 42, 42, 0.95) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(30px);
+    padding: 20px 24px;
+}
+
+.light-theme .ant-modal-title {
+    color: #1f2937 !important;
+    font-weight: 600 !important;
+    font-size: 18px !important;
+}
+
+.dark-theme .ant-modal-title {
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: 18px !important;
+}
+
+.light-theme .ant-modal-content {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(248, 250, 252, 0.95) 100%);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(30px);
+}
+
+.dark-theme .ant-modal-content {
+    background: linear-gradient(135deg,
+            rgba(26, 26, 26, 0.95) 0%,
+            rgba(42, 42, 42, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(30px);
+}
+
+.light-theme .ant-modal-body {
+    background: transparent;
+    color: #374151;
+    padding: 24px;
+}
+
+.dark-theme .ant-modal-body {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.95);
+    padding: 24px;
+}
+
+.light-theme .ant-modal-footer {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(248, 250, 252, 0.95) 100%);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(30px);
+    padding: 16px 24px;
+}
+
+.dark-theme .ant-modal-footer {
+    background: linear-gradient(135deg,
+            rgba(26, 26, 26, 0.95) 0%,
+            rgba(42, 42, 42, 0.95) 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(30px);
+    padding: 16px 24px;
+}
+
+.ant-modal-footer .ant-btn {
+    border-radius: 10px;
+    height: 40px;
+    font-weight: 600;
+    border: none;
+}
+
+.ant-modal-footer .ant-btn-primary {
+    background: linear-gradient(135deg, #1890ff 0%, #722ed1 100%);
+    box-shadow: 0 4px 15px rgba(24, 144, 255, 0.3);
+}
+
+.ant-modal-footer .ant-btn-primary:hover {
+    background: linear-gradient(135deg, #40a9ff 0%, #9254de 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(24, 144, 255, 0.4);
+}
+
+.light-theme .ant-modal-close {
+    color: #6b7280 !important;
+    background: rgba(0, 0, 0, 0.05) !important;
+    border-radius: 50% !important;
+    width: 32px !important;
+    height: 32px !important;
+    transition: all 0.3s ease !important;
+}
+
+.light-theme .ant-modal-close:hover {
+    background: rgba(0, 0, 0, 0.1) !important;
+    color: #1f2937 !important;
+    transform: rotate(90deg);
+}
+
+.dark-theme .ant-modal-close {
+    color: rgba(255, 255, 255, 0.7) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 50% !important;
+    width: 32px !important;
+    height: 32px !important;
+    transition: all 0.3s ease !important;
+}
+
+.dark-theme .ant-modal-close:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    transform: rotate(90deg);
+}
+
+/* Review Modal */
+.ant-rate {
+    color: #faad14 !important;
+}
+
+.ant-rate-star-zero,
+.ant-rate-star-half,
+.ant-rate-star-full {
+    transition: all 0.3s ease;
+}
+
+.ant-rate-star:hover {
+    transform: scale(1.1);
+}
+
+/* Input and Textarea - Theme Support */
+.light-theme .ant-input,
+.light-theme .ant-input-group,
+.light-theme .ant-textarea {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: #1f2937 !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+}
+
+.dark-theme .ant-input,
+.dark-theme .ant-input-group,
+.dark-theme .ant-textarea {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.04) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: white !important;
+    border-radius: 12px !important;
+    backdrop-filter: blur(20px) !important;
+    transition: all 0.3s ease !important;
+}
+
+.light-theme .ant-input:focus,
+.light-theme .ant-input:hover,
+.light-theme .ant-textarea:focus,
+.light-theme .ant-textarea:hover {
+    background: rgba(255, 255, 255, 1) !important;
+    border-color: #1890ff !important;
+    box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.15) !important;
+}
+
+.dark-theme .ant-input:focus,
+.dark-theme .ant-input:hover,
+.dark-theme .ant-textarea:focus,
+.dark-theme .ant-textarea:hover {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.12) 0%,
+            rgba(255, 255, 255, 0.06) 100%) !important;
+    border-color: #1890ff !important;
+    box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.15) !important;
+}
+
+.light-theme .ant-input::placeholder,
+.light-theme .ant-textarea::placeholder {
+    color: #9ca3af !important;
+}
+
+.dark-theme .ant-input::placeholder,
+.dark-theme .ant-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Button Default - Theme Support */
+.light-theme .ant-btn-default {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: #374151 !important;
+    border-radius: 12px !important;
+    height: 44px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.dark-theme .ant-btn-default {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.04) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 12px !important;
+    height: 44px !important;
+    font-weight: 500 !important;
+    backdrop-filter: blur(20px) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.ant-btn-default::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.ant-btn-default:hover::before {
+    left: 100%;
+}
+
+.light-theme .ant-btn-default:hover {
+    background: rgba(255, 255, 255, 1) !important;
+    border-color: rgba(59, 130, 246, 0.5) !important;
+    color: #1f2937 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .ant-btn-default:hover {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.15) 0%,
+            rgba(255, 255, 255, 0.08) 100%) !important;
+    border-color: rgba(24, 144, 255, 0.5) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.ant-btn-default:hover::before {
+    left: 100%;
+}
+
+.ant-btn-default:hover {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.15) 0%,
+            rgba(255, 255, 255, 0.08) 100%) !important;
+    border-color: rgba(24, 144, 255, 0.5) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.ant-btn-primary {
+    background: linear-gradient(135deg, #1890ff 0%, #722ed1 50%, #eb2f96 100%) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    height: 44px !important;
+    font-weight: 600 !important;
+    box-shadow:
+        0 6px 20px rgba(24, 144, 255, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.ant-btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.ant-btn-primary:hover::before {
+    left: 100%;
+}
+
+.ant-btn-primary:hover {
+    background: linear-gradient(135deg, #40a9ff 0%, #9254de 50%, #f759ab 100%) !important;
+    transform: translateY(-2px);
+    box-shadow:
+        0 8px 25px rgba(24, 144, 255, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Enhanced Stats */
+.movie-stats .stat-item {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.04) 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(30px);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.movie-stats .stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.movie-stats .stat-item:hover {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.12) 0%,
+            rgba(255, 255, 255, 0.06) 100%);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px);
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.ant-statistic-title {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    margin-bottom: 8px !important;
+}
+
+.ant-statistic-content {
+    font-weight: 700 !important;
+    color: white !important;
+}
+
+/* Animation Effects */
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -468px 0;
+    }
+
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+.movie-actions-main {
+    animation: fadeInUp 0.8s ease-out 0.6s;
+    animation-fill-mode: both;
+}
+
+.movie-stats {
+    animation: fadeInUp 0.8s ease-out 0.8s;
+    animation-fill-mode: both;
+}
+
+.book-ticket-btn:hover {
+    animation: pulse 0.5s ease-in-out;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .movie-actions-main {
+        padding: 20px;
+        margin-top: 24px;
+    }
+
+    .book-ticket-btn,
+    .trailer-btn {
+        height: 48px;
+        font-size: 15px;
+        padding: 0 24px;
+        margin-bottom: 12px;
+        width: 100%;
+    }
+
+    .rating-stars {
+        font-size: 24px;
+        text-align: center;
+        margin: 16px 0;
+    }
+
+    .movie-stats .stat-item {
+        padding: 16px;
+        margin-bottom: 12px;
+    }
+
+    .ant-modal {
+        margin: 20px;
+        max-width: calc(100vw - 40px);
+    }
+
+    .ant-modal-body {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .movie-actions-main {
+        padding: 16px;
+    }
+
+    .book-ticket-btn,
+    .trailer-btn {
+        height: 44px;
+        font-size: 14px;
+        padding: 0 20px;
+    }
+
+    .rating-stars {
+        font-size: 22px;
+    }
+
+    .movie-stats .stat-item {
+        padding: 14px;
+    }
+
+    .ant-modal-title {
+        font-size: 16px !important;
+    }
+
+    .ant-modal-body {
+        padding: 16px;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    .movie-actions-main,
+    .movie-stats,
+    .book-ticket-btn,
+    .trailer-btn,
+    .rating-stars .ant-rate-star,
+    .movie-stats .stat-item {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .movie-actions-main {
+        border: 2px solid white;
+    }
+
+    .book-ticket-btn,
+    .trailer-btn {
+        border: 2px solid currentColor;
+    }
+}

@@ -2,11 +2,11 @@
 .admin-page {
   padding: 0;
   background: #f8fafc;
-  min-height: 100vh;
+  min-height: calc(100vh - 88px);
+  width: 100%;
 }
 
-.admin-header {
-  /* width: 100vw; */
+.admin-page-header {
   background: white;
   padding: 2rem;
   border-bottom: 1px solid #e2e8f0;
@@ -14,9 +14,11 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin: -24px -24px 0 -24px;
+  margin-bottom: 24px;
 }
 
-.admin-header h1 {
+.admin-page-header h1 {
   margin: 0;
   color: #1a202c;
   font-size: 2rem;
@@ -46,7 +48,7 @@
   transform: translateY(0);
 }
 
-.admin-content {
+.admin-page-content {
   padding: 2rem;
 }
 
@@ -140,6 +142,21 @@
 .btn-delete:hover {
   background: #fecaca;
   transform: translateY(-1px);
+}
+
+/* Cinema Name Link Styles */
+.cinema-name-link {
+  color: #1890ff !important;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.cinema-name-link:hover {
+  color: #40a9ff !important;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 /* Modern Modal Styles */
@@ -419,18 +436,18 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .admin-header {
+  .admin-page-header {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
     padding: 1.5rem;
   }
 
-  .admin-header h1 {
+  .admin-page-header h1 {
     font-size: 1.5rem;
   }
 
-  .admin-content {
+  .admin-page-content {
     padding: 1rem;
   }
 
@@ -486,15 +503,15 @@
 }
 
 @media (max-width: 480px) {
-  .admin-header {
+  .admin-page-header {
     padding: 1rem;
   }
 
-  .admin-header h1 {
+  .admin-page-header h1 {
     font-size: 1.25rem;
   }
 
-  .admin-content {
+  .admin-page-content {
     padding: 0.75rem;
   }
 

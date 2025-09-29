@@ -3,12 +3,13 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  // Ưu tiên lấy theme từ localStorage, nếu không có thì lấy theo hệ điều hành
+  // Ưu tiên lấy theme từ localStorage, nếu không có thì mặc định là light mode
   const getInitialTheme = () => {
     if (typeof window !== 'undefined' && window.localStorage) {
       const stored = window.localStorage.getItem('theme');
       if (stored) return stored;
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+      // Luôn mặc định light mode thay vì theo hệ điều hành
+      // if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
     }
     return 'light';
   };
@@ -31,4 +32,15 @@ export const ThemeProvider = ({ children }) => {
   );
 };
 
-export const useTheme = () => useContext(ThemeContext); 
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    console.warn('useTheme must be used within a ThemeProvider. Using default light theme.');
+    return {
+      theme: 'light',
+      setTheme: () => { },
+      toggleTheme: () => { }
+    };
+  }
+  return context;
+}; 

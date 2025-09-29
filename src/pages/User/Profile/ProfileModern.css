@@ -1,0 +1,425 @@
+/* Profile Modern Styles */
+.profile-modern {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+/* Breadcrumb Section */
+.breadcrumb-section {
+  background: #ffffff;
+  padding: 16px 0;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.breadcrumb-section .ant-breadcrumb {
+  font-size: 14px;
+}
+
+.breadcrumb-section .ant-breadcrumb a {
+  color: #6b7280;
+  transition: color 0.3s ease;
+}
+
+.breadcrumb-section .ant-breadcrumb a:hover {
+  color: #ff6b35;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Profile Header Card */
+.profile-header-card {
+  margin: 30px 0;
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, #ff6b35 0%, #f59e0b 100%);
+  color: white;
+  overflow: hidden;
+  position: relative;
+}
+
+.profile-header-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><circle cx="200" cy="50" r="30"/><circle cx="400" cy="20" r="20"/><circle cx="600" cy="70" r="25"/><circle cx="800" cy="40" r="15"/></svg>') no-repeat;
+  background-size: cover;
+  opacity: 0.3;
+}
+
+.profile-header-card .ant-card-body {
+  position: relative;
+  z-index: 1;
+  padding: 30px;
+}
+
+/* Avatar Section */
+.avatar-section {
+  text-align: center;
+  position: relative;
+}
+
+.profile-avatar {
+  border: 4px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.user-level {
+  margin-top: 12px;
+}
+
+.user-level .ant-badge-count {
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Profile Info */
+.profile-info {
+  color: white;
+}
+
+.profile-info .ant-typography h2 {
+  color: white !important;
+  margin-bottom: 8px;
+}
+
+.profile-info .ant-typography {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Loyalty Progress */
+.loyalty-progress {
+  margin-top: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.loyalty-progress .ant-progress-bg {
+  border-radius: 4px;
+}
+
+/* Stats Section */
+.stats-section {
+  margin: 30px 0;
+}
+
+.stat-card {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  text-align: center;
+  background: white;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.stat-card .ant-statistic-title {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.stat-card .ant-statistic-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Content Tabs Card */
+.content-tabs-card {
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: white;
+}
+
+.content-tabs-card .ant-tabs-tab {
+  padding: 12px 20px;
+  font-weight: 500;
+  border-radius: 8px;
+  margin-right: 8px;
+}
+
+.content-tabs-card .ant-tabs-tab-active {
+  background: #ff6b35;
+  color: white;
+}
+
+.content-tabs-card .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: white;
+}
+
+/* Form Styling */
+.profile-modern .ant-form-item-label > label {
+  font-weight: 600;
+  color: #374151;
+}
+
+.profile-modern .ant-input,
+.profile-modern .ant-select-selector,
+.profile-modern .ant-picker {
+  border-radius: 8px;
+  border-color: #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.profile-modern .ant-input:focus,
+.profile-modern .ant-select-focused .ant-select-selector,
+.profile-modern .ant-picker-focused {
+  border-color: #ff6b35;
+  box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
+}
+
+.profile-modern .ant-btn {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.profile-modern .ant-btn-primary {
+  background: #ff6b35;
+  border-color: #ff6b35;
+}
+
+.profile-modern .ant-btn-primary:hover {
+  background: #e55a2b;
+  border-color: #e55a2b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+/* Booking History Table */
+.booking-history-table .ant-table-thead > tr > th {
+  background: #f8fafc;
+  border-bottom: 2px solid #e5e7eb;
+  font-weight: 600;
+  color: #374151;
+}
+
+.booking-history-table .ant-table-tbody > tr:hover > td {
+  background: #f8fafc;
+}
+
+.booking-history-table .ant-table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Favorite Movies */
+.favorite-movie-card {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.favorite-movie-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.favorite-movie-card .ant-card-cover {
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+
+.favorite-movie-card .ant-card-cover img {
+  transition: transform 0.3s ease;
+}
+
+.favorite-movie-card:hover .ant-card-cover img {
+  transform: scale(1.05);
+}
+
+/* Settings */
+.setting-item {
+  padding: 12px 16px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.setting-item:hover {
+  background: #f1f5f9;
+  border-color: #d1d5db;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  .profile-header-card {
+    margin: 20px 0;
+    border-radius: 12px;
+  }
+  
+  .profile-header-card .ant-card-body {
+    padding: 20px;
+  }
+  
+  .profile-avatar {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  
+  .stats-section {
+    margin: 20px 0;
+  }
+  
+  .stat-card {
+    margin-bottom: 12px;
+  }
+  
+  .content-tabs-card {
+    border-radius: 12px;
+  }
+  
+  .content-tabs-card .ant-tabs-tab {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .loyalty-progress {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+  
+  .profile-header-card {
+    margin: 16px 0;
+  }
+  
+  .profile-header-card .ant-card-body {
+    padding: 16px;
+  }
+  
+  .profile-avatar {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .profile-info .ant-typography h2 {
+    font-size: 20px;
+  }
+  
+  .stat-card .ant-statistic-content {
+    font-size: 16px;
+  }
+  
+  .content-tabs-card .ant-tabs-tab {
+    padding: 6px 8px;
+    font-size: 12px;
+    margin-right: 4px;
+  }
+}
+
+/* Enhanced animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stat-card,
+.favorite-movie-card {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Custom scrollbar */
+.profile-modern::-webkit-scrollbar {
+  width: 6px;
+}
+
+.profile-modern::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.profile-modern::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #ff6b35, #f59e0b);
+  border-radius: 3px;
+}
+
+.profile-modern::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #e55a2b, #d97706);
+}
+
+/* Tab content padding */
+.content-tabs-card .ant-tabs-content-holder {
+  padding: 0 4px;
+}
+
+/* Badge styling */
+.profile-modern .ant-badge-count {
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  min-width: auto;
+  height: auto;
+  line-height: 1.2;
+  padding: 2px 6px;
+}
+
+/* Progress bar customization */
+.loyalty-progress .ant-progress-outer {
+  padding-right: 0;
+}
+
+.loyalty-progress .ant-progress-inner {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* Table customization */
+.booking-history-table .ant-table-pagination {
+  margin: 24px 0 0 0;
+  text-align: center;
+}
+
+.booking-history-table .ant-pagination-item {
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.booking-history-table .ant-pagination-item:hover {
+  border-color: #ff6b35;
+  transform: translateY(-1px);
+}
+
+.booking-history-table .ant-pagination-item-active {
+  border-color: #ff6b35;
+  background: #ff6b35;
+}

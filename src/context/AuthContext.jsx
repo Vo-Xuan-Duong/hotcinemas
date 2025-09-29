@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
         try {
           // Verify token with backend
           await apiService.get('/auth/verify');
-          
+
           dispatch({
             type: AUTH_ACTIONS.LOGIN_SUCCESS,
             payload: {
@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const response = await apiService.post('/auth/login', { email, password });
-      
+
       // Store token and user info
       apiService.setAuthToken(response.token);
       localStorage.setItem(STORAGE_KEYS.USER_INFO, JSON.stringify(response.user));
@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const response = await apiService.post('/auth/register', userData);
-      
+
       // Store token and user info
       apiService.setAuthToken(response.token);
       localStorage.setItem(STORAGE_KEYS.USER_INFO, JSON.stringify(response.user));
@@ -106,7 +106,7 @@ export const AuthProvider = ({ children }) => {
     // Clear storage
     apiService.removeAuthToken();
     localStorage.removeItem(STORAGE_KEYS.USER_INFO);
-    
+
     dispatch({ type: AUTH_ACTIONS.LOGOUT });
   };
 
@@ -129,13 +129,30 @@ export const AuthProvider = ({ children }) => {
     dispatch({ type: AUTH_ACTIONS.CLEAR_ERROR });
   };
 
+  // Set mock user for demo purposes
+  const setMockUser = (mockUser, token = 'mock-jwt-token-' + Date.now()) => {
+    // Store in localStorage
+    localStorage.setItem(STORAGE_KEYS.USER_TOKEN, token);
+    localStorage.setItem(STORAGE_KEYS.USER_INFO, JSON.stringify(mockUser));
+
+    // Update context state
+    dispatch({
+      type: AUTH_ACTIONS.LOGIN_SUCCESS,
+      payload: {
+        user: mockUser,
+        token: token
+      }
+    });
+  };
+
   const value = {
     ...state,
     login,
     register,
     logout,
     updateProfile,
-    clearError
+    clearError,
+    setMockUser
   };
 
   return (

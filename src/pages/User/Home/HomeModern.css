@@ -1,0 +1,586 @@
+/* Modern Home Page Styles */
+.home-modern {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Loading States */
+.home-loading-modern {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.loading-spinner-modern {
+  text-align: center;
+}
+
+.loading-spinner-modern .ant-spin-text {
+  color: #6b7280;
+  font-size: 16px;
+  margin-top: 16px;
+}
+
+.loading-placeholder {
+  width: 300px;
+  height: 200px;
+  background: transparent;
+}
+
+/* Section Layouts */
+.hero-section-modern {
+  position: relative;
+  margin-bottom: 0;
+  overflow: hidden;
+  /* Remove background as HeroModern handles its own background */
+}
+
+.showcase-section-modern {
+  padding: 30px 0;
+  position: relative;
+  background: #ffffff;
+  margin-bottom: 10px;
+  border-radius: 0;
+}
+
+/* Clean Floating Support Buttons */
+.floating-support-clean {
+  z-index: 1000 !important;
+}
+
+.floating-support-clean .ant-float-btn {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  backdrop-filter: blur(10px) !important;
+  width: 48px !important;
+  height: 48px !important;
+}
+
+.floating-support-clean .ant-float-btn:hover {
+  transform: translateY(-3px) scale(1.05) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+}
+
+.floating-support-clean .ant-float-btn-primary {
+  background: linear-gradient(135deg, #1890ff, #722ed1) !important;
+  border: none !important;
+  width: 52px !important;
+  height: 52px !important;
+  box-shadow: 0 8px 25px rgba(24, 144, 255, 0.4) !important;
+}
+
+.floating-support-clean .ant-float-btn-primary:hover {
+  background: linear-gradient(135deg, #40a9ff, #9254de) !important;
+  transform: translateY(-4px) scale(1.1) !important;
+  box-shadow: 0 12px 35px rgba(24, 144, 255, 0.6) !important;
+}
+
+/* Smooth Pulse Animation */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 8px 25px rgba(24, 144, 255, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 8px 25px rgba(24, 144, 255, 0.6);
+  }
+
+  100% {
+    box-shadow: 0 8px 25px rgba(24, 144, 255, 0.4);
+  }
+}
+
+.floating-support-clean .ant-float-btn-primary {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.floating-support-clean .ant-float-btn-primary:hover {
+  animation: none;
+}
+
+/* Clean Back to Top Button */
+.back-to-top-modern {
+  z-index: 1000 !important;
+}
+
+.back-to-top-modern .ant-back-top-content {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.back-to-top-button {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-radius: 50%;
+  color: white;
+  font-size: 16px;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.back-to-top-button:hover {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.6);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.back-to-top-button .anticon {
+  font-size: 16px;
+  color: #fff;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .modern-float-support {
+    right: 16px;
+    bottom: 80px;
+  }
+
+  .back-to-top-modern {
+    right: 16px !important;
+    bottom: 16px !important;
+  }
+
+  .support-group-modern .ant-float-btn-primary {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .support-group-modern .ant-float-btn {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .back-to-top-button {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
+  }
+}
+
+/* Modern Glass Effect for Cards */
+.showcase-section-modern .ant-card {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth Transitions */
+.home-modern * {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Section Spacing */
+.home-modern section:not(:last-child) {
+  margin-bottom: 0;
+}
+
+/* Custom floating button classes for enhanced visibility everywhere */
+.floating-support-buttons {
+  z-index: 99999 !important;
+  position: fixed !important;
+  right: 24px !important;
+  bottom: 90px !important;
+}
+
+.floating-support-buttons .ant-float-btn {
+  backdrop-filter: blur(15px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  width: 50px !important;
+  height: 50px !important;
+  z-index: 99999 !important;
+  position: relative !important;
+}
+
+.floating-support-buttons .ant-float-btn:hover {
+  transform: translateY(-4px) scale(1.1) !important;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25) !important;
+  z-index: 99999 !important;
+}
+
+/* Stacked floating buttons layout */
+.floating-buttons-container {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@keyframes floatPulse {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+  }
+
+  50% {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(255, 107, 53, 0.6);
+  }
+}
+
+/* Ensure support buttons are always visible on scroll */
+.ant-float-btn-group,
+.floating-support-buttons {
+  will-change: transform;
+  isolation: isolate;
+  pointer-events: auto !important;
+  z-index: 99999 !important;
+}
+
+/* Override any potential z-index conflicts for support buttons */
+.ant-float-btn-group *,
+.floating-support-buttons * {
+  z-index: inherit !important;
+}
+
+/* Global z-index override for floating support buttons */
+.ant-float-btn,
+.ant-float-btn-primary {
+  z-index: 99999 !important;
+}
+
+/* Responsive floating support buttons - Bottom right positioning */
+@media (max-width: 768px) {
+  .ant-float-btn-group {
+    right: 16px !important;
+    bottom: 90px !important;
+    z-index: 99999 !important;
+  }
+
+  .floating-support-buttons {
+    right: 16px !important;
+    bottom: 90px !important;
+    z-index: 99999 !important;
+  }
+
+  .ant-float-btn-group .ant-float-btn,
+  .floating-support-buttons .ant-float-btn {
+    width: 45px !important;
+    height: 45px !important;
+    z-index: 99999 !important;
+  }
+
+  .ant-float-btn-group .ant-float-btn-primary {
+    width: 45px !important;
+    height: 45px !important;
+    z-index: 99999 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .ant-float-btn-group {
+    right: 12px !important;
+    bottom: 80px !important;
+    z-index: 99999 !important;
+  }
+
+  .floating-support-buttons {
+    right: 12px !important;
+    bottom: 80px !important;
+    z-index: 99999 !important;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .showcase-section-modern {
+    padding: 60px 0;
+    margin-bottom: 20px;
+  }
+
+  .featured-section-modern,
+  .features-section-modern {
+    padding: 60px 0;
+  }
+
+  .hero-section-modern {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .showcase-section-modern {
+    padding: 40px 0;
+  }
+
+  .featured-section-modern,
+  .features-section-modern {
+    padding: 40px 0;
+  }
+}
+
+/* Enhanced Back to Top - Always floating on top everywhere */
+.ant-back-top {
+  z-index: 99999 !important;
+  position: fixed !important;
+  right: 24px !important;
+  bottom: 24px !important;
+}
+
+.ant-back-top .ant-back-top-content {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  z-index: 99999 !important;
+  position: relative !important;
+}
+
+.ant-back-top:hover .ant-back-top-content {
+  transform: translateY(-4px) scale(1.1) !important;
+  box-shadow: 0 12px 35px rgba(255, 107, 53, 0.5) !important;
+  background-color: #e55a2b !important;
+  z-index: 99999 !important;
+}
+
+/* Pulse animation for better visibility */
+.ant-back-top .ant-back-top-content::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ff6b35, #f59e0b, #ff6b35);
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+/* Custom Floating Support System */
+.custom-floating-support {
+  position: fixed;
+  right: 24px;
+  bottom: 100px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.support-buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.custom-floating-support:hover .support-buttons-container {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.support-button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  color: white;
+  font-size: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.support-button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.phone-support {
+  background: linear-gradient(135deg, #52c41a, #389e0d);
+}
+
+.phone-support:hover {
+  background: linear-gradient(135deg, #73d13d, #52c41a);
+  box-shadow: 0 8px 24px rgba(82, 196, 26, 0.4);
+}
+
+.chat-support {
+  background: linear-gradient(135deg, #722ed1, #531dab);
+}
+
+.chat-support:hover {
+  background: linear-gradient(135deg, #9254de, #722ed1);
+  box-shadow: 0 8px 24px rgba(114, 46, 209, 0.4);
+}
+
+.main-support-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1890ff, #096dd9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  box-shadow: 0 6px 20px rgba(24, 144, 255, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.main-support-button:hover {
+  background: linear-gradient(135deg, #40a9ff, #1890ff);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(24, 144, 255, 0.6);
+}
+
+/* Tooltip Styles */
+.tooltip-text {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  margin-right: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.tooltip-text::after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-left-color: rgba(0, 0, 0, 0.8);
+}
+
+.support-button:hover .tooltip-text,
+.main-support-button:hover .tooltip-text {
+  opacity: 1;
+}
+
+/* Pulse Animation for Main Button */
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 6px 20px rgba(24, 144, 255, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 6px 20px rgba(24, 144, 255, 0.6);
+  }
+
+  100% {
+    box-shadow: 0 6px 20px rgba(24, 144, 255, 0.4);
+  }
+}
+
+.main-support-button {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.main-support-button:hover {
+  animation: none;
+}
+
+/* Custom Back to Top Button */
+.custom-back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  animation: slideInUp 0.3s ease-out;
+}
+
+.custom-back-to-top:hover {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.6);
+}
+
+.custom-back-to-top .anticon {
+  font-size: 18px;
+  color: white;
+}
+
+/* Slide in animation for back to top */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modern Scrollbar */
+.home-modern::-webkit-scrollbar {
+  width: 8px;
+}
+
+.home-modern::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.home-modern::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #ff6b35, #f59e0b);
+  border-radius: 4px;
+}
+
+.home-modern::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #e55a2b, #d97706);
+}

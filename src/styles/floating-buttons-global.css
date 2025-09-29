@@ -1,0 +1,140 @@
+/* Global CSS to ensure floating buttons are always on top */
+
+/* Highest possible z-index for floating buttons */
+.ant-float-btn-group,
+.ant-back-top,
+.floating-support-buttons,
+.floating-back-top,
+.global-back-top {
+    z-index: 2147483647 !important;
+    /* Maximum z-index value */
+    position: fixed !important;
+    pointer-events: auto !important;
+}
+
+/* BackTop visibility control - hide when at top */
+.ant-back-top {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(20px) scale(0.8) !important;
+}
+
+/* Show BackTop when scrolled */
+.ant-back-top.ant-back-top-show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) scale(1) !important;
+}
+
+/* Override any component z-index that might interfere */
+.ant-modal-mask,
+.ant-modal-wrap,
+.ant-drawer-mask,
+.ant-drawer,
+.ant-notification,
+.ant-message,
+.ant-tooltip {
+    z-index: 2147483646 !important;
+    /* One less than floating buttons */
+}
+
+/* Ensure floating button children inherit the z-index */
+.ant-float-btn-group *,
+.ant-back-top *,
+.floating-support-buttons *,
+.floating-back-top *,
+.global-back-top * {
+    z-index: inherit !important;
+}
+
+/* Force positioning and visibility */
+.ant-float-btn,
+.ant-float-btn-primary,
+.ant-back-top-content {
+    z-index: 2147483647 !important;
+    position: relative !important;
+    pointer-events: auto !important;
+}
+
+/* Override any potential CSS resets - Allow BackTop to control its own visibility */
+.ant-float-btn-group {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Let BackTop handle its own visibility completely */
+.ant-back-top {
+    display: block !important;
+    /* Remove all visibility/opacity overrides to let Ant Design control them */
+}
+
+/* Global Back to Top styling */
+.global-back-top {
+    animation: floatPulse 3s ease-in-out infinite;
+}
+
+.global-back-top .ant-back-top-content {
+    transition: all 0.3s ease !important;
+    backdrop-filter: blur(10px) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.global-back-top:hover .ant-back-top-content {
+    transform: translateY(-2px) scale(1.05) !important;
+    box-shadow: 0 12px 35px rgba(255, 107, 53, 0.6) !important;
+    background-color: #e55a2b !important;
+}
+
+/* Float pulse animation */
+@keyframes floatPulse {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+        box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+    }
+
+    50% {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 35px rgba(255, 107, 53, 0.6);
+    }
+}
+
+/* Responsive positioning for global back top */
+@media (max-width: 768px) {
+    .global-back-top {
+        right: 16px !important;
+        bottom: 16px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .global-back-top {
+        right: 12px !important;
+        bottom: 12px !important;
+    }
+}
+
+/* Enhanced fade transitions for BackTop */
+.ant-back-top {
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Ensure buttons work on all pages and layouts */
+body .ant-float-btn-group,
+body .ant-back-top,
+#root .ant-float-btn-group,
+#root .ant-back-top {
+    z-index: 2147483647 !important;
+}
+
+/* Prevent any stacking context issues */
+.ant-float-btn-group,
+.ant-back-top {
+    isolation: isolate !important;
+    contain: layout style !important;
+}
