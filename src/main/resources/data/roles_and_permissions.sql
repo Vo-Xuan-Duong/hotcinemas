@@ -66,8 +66,8 @@ AND p.code IN (
     'BOOKING_READ', 'BOOKING_UPDATE', 'BOOKING_CANCEL', 'BOOKING_CONFIRM',
     -- Payment Management
     'PAYMENT_READ', 'PAYMENT_PROCESS', 'PAYMENT_REFUND',
-    -- Promotion Management
-    'PROMOTION_CREATE', 'PROMOTION_READ', 'PROMOTION_UPDATE', 'PROMOTION_ACTIVATE', 'PROMOTION_DEACTIVATE',
+    -- Voucher Management
+    'VOUCHER_CREATE', 'VOUCHER_READ', 'VOUCHER_UPDATE', 'VOUCHER_ACTIVATE', 'VOUCHER_DEACTIVATE',
     -- User Management (limited)
     'USER_READ', 'USER_ACTIVATE', 'USER_DEACTIVATE',
     -- Analytics
@@ -93,8 +93,8 @@ AND p.code IN (
     'BOOKING_CREATE', 'BOOKING_READ', 'BOOKING_UPDATE', 'BOOKING_CANCEL', 'BOOKING_CONFIRM',
     -- Payment Management
     'PAYMENT_CREATE', 'PAYMENT_READ', 'PAYMENT_PROCESS',
-    -- Promotion Management (read only)
-    'PROMOTION_READ',
+    -- Voucher Management (read only)
+    'VOUCHER_READ',
     -- User Management (read only)
     'USER_READ'
 );
@@ -118,8 +118,8 @@ AND p.code IN (
     'BOOKING_CREATE', 'BOOKING_READ', 'BOOKING_CANCEL',
     -- Payment Management (limited)
     'PAYMENT_CREATE', 'PAYMENT_READ',
-    -- Promotion Management (read only)
-    'PROMOTION_READ',
+    -- Voucher Management (read only)
+    'VOUCHER_READ',
     -- User Management (self only)
     'USER_READ', 'USER_UPDATE'
 );

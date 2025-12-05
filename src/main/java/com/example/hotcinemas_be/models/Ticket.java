@@ -1,17 +1,9 @@
 package com.example.hotcinemas_be.models;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +11,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tickets")
+@Table(name = "tickets",
+        // 1. QUAN TRỌNG NHẤT: Ràng buộc duy nhất để chống trùng vé
+        // Không bao giờ cho phép 1 ghế bán 2 lần trong 1 suất chiếu
+        uniqueConstraints = {
+                @UniqueConstraint(name = "uk_showtime_seat", columnNames = {"showtime_id", "seat_name"})
+        }
+)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,24 +27,43 @@ public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
+    // Vé thuộc về đơn hàng nào?
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id", nullable = false)
     private Booking booking;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "showtime_seat_id", unique = true, nullable = false)
-    private ShowtimeSeat showtimeSeat; // Direct link to ShowtimeSeat
+    // Vé của suất chiếu nào?
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "showtime_id", nullable = false)
+    private Showtime showtime;
 
-    @Column(name = "price", nullable = false)
-    private BigDecimal price; // DECIMAL(10,2) in DB, Double in Java
+    // 2. Tên ghế (SNAPSHOT): Dữ liệu quan trọng nhất để in vé
+    @Column(name = "seat_name", length = 10, nullable = false)
+    private String seatName;
 
-    @Column(name = "qr_code_url")
-    private String qrCodeUrl;
+    // 3. (Tùy chọn) Liên kết lỏng lẻo đến bảng Seats
+    // Để NULLABLE (không bắt buộc) phòng khi rạp sửa đổi xóa ghế vật lý
+    // Dùng để thống kê sau này (VD: Ghế nào hay được ngồi nhất?)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seat_id", nullable = true)
+    private Seat seat;
 
+    // 4. Giá tiền: Tuyệt đối dùng BigDecimal, KHÔNG dùng Double
+    // Double sẽ bị lỗi làm tròn số (Floating Point Error)
+    @Column(name = "price", precision = 10, scale = 2, nullable = false)
+    private BigDecimal price;
+
+    @Column(name = "ticket_code", unique = true, length = 100)
+    private String ticketCode;
+
+    // Trạng thái vé: Đã soát vé vào rạp chưa?
     @Builder.Default
     @Column(name = "is_used", nullable = false)
     private Boolean isUsed = false;
+
+    // Thời gian soát vé (Check-in time)
+    @Column(name = "used_at")
+    private LocalDateTime usedAt;
 }

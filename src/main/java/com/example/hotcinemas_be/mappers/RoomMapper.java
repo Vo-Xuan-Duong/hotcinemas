@@ -15,8 +15,7 @@ public class RoomMapper {
                 .id(room.getId())
                 .name(room.getName())
                 .roomType(room.getRoomType().name()) // Assuming roomType is an enum
-                .rowsCount(room.getRowsCount())
-                .seatsPerRow(room.getSeatsPerRow())
+                .price(room.getPrice())
                 .isActive(room.getIsActive())
                 .build();
     }

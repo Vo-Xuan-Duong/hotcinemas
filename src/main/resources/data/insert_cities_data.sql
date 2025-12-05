@@ -1,0 +1,106 @@
+-- Insert data for Vietnamese cities
+-- This file contains comprehensive data for major cities in Vietnam
+
+-- Clear existing data (optional - uncomment if needed)
+-- DELETE FROM cities;
+
+-- Insert major cities in Vietnam
+INSERT INTO cities (name, code, country, is_active, created_at, updated_at) VALUES
+-- Northern Vietnam
+('Ha Noi', 'HN', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Hai Phong', 'HP', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Nam Dinh', 'ND', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Thai Binh', 'TB', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Ninh Binh', 'NB', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Thanh Hoa', 'TH', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Vinh', 'VH', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Hue', 'HU', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+
+-- Central Vietnam
+('Da Nang', 'DN', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Quang Nam', 'QN', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Quang Ngai', 'QG', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Binh Dinh', 'BD', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Quy Nhon', 'QN', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Phu Yen', 'PY', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Tuy Hoa', 'TH', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Khanh Hoa', 'KH', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Nha Trang', 'NT', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Ninh Thuan', 'NT', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Phan Rang', 'PR', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Binh Thuan', 'BT', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Phan Thiet', 'PT', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+
+-- Southern Vietnam
+('Ho Chi Minh City', 'HCM', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Binh Duong', 'BD', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Thu Dau Mot', 'TDM', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Dong Nai', 'DN', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Bien Hoa', 'BH', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Ba Ria - Vung Tau', 'VT', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Vung Tau', 'VT', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Tay Ninh', 'TN', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Binh Phuoc', 'BP', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Long An', 'LA', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Tien Giang', 'TG', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('My Tho', 'MT', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Ben Tre', 'BT', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Tra Vinh', 'TV', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Vinh Long', 'VL', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Dong Thap', 'DT', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Cao Lanh', 'CL', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('An Giang', 'AG', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Long Xuyen', 'LX', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Chau Doc', 'CD', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Kien Giang', 'KG', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Rach Gia', 'RG', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Phu Quoc', 'PQ', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Ca Mau', 'CM', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Bac Lieu', 'BL', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Soc Trang', 'ST', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Hau Giang', 'HG', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Vi Thanh', 'VT', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Can Tho', 'CT', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+
+-- Highland Vietnam
+('Lam Dong', 'LD', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Da Lat', 'DL', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Dak Lak', 'DL', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Buon Ma Thuot', 'BMT', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Dak Nong', 'DN', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Gia Lai', 'GL', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Pleiku', 'PL', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Kon Tum', 'KT', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+
+-- Additional major cities for cinema business
+('Vinh Phuc', 'VP', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Bac Ninh', 'BN', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Hung Yen', 'HY', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Hai Duong', 'HD', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Quang Ninh', 'QN', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Ha Long', 'HL', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Thai Nguyen', 'TN', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Lang Son', 'LS', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Cao Bang', 'CB', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Lao Cai', 'LC', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Sapa', 'SP', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Dien Bien', 'DB', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Son La', 'SL', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Hoa Binh', 'HB', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Yen Bai', 'YB', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Tuyen Quang', 'TQ', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Phu Tho', 'PT', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Vinh Phuc', 'VP', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Bac Giang', 'BG', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Bac Kan', 'BK', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Cao Bang', 'CB', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Ha Giang', 'HG', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Lai Chau', 'LC', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Dien Bien Phu', 'DBP', 'Vietnam', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- Update any duplicate codes (if any)
+-- Note: Some cities might have similar codes, you may want to adjust them
+
+-- Verify the data
+SELECT COUNT(*) as total_cities FROM cities;
+SELECT name, code, country FROM cities ORDER BY name;

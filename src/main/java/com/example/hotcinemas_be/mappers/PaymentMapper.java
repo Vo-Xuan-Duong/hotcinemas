@@ -13,15 +13,12 @@ public class PaymentMapper {
         }
 
         return PaymentResponse.builder()
-                .paymentId(payment.getPaymentId())
-                .bookingId(payment.getBooking() != null ? payment.getBooking().getId() : null)
+                .paymentId(payment.getId())
                 .paymentDate(payment.getPaymentDate())
                 .amount(payment.getAmount())
                 .paymentMethod(payment.getPaymentMethod())
-                .transactionId(payment.getTransactionId())
+                .bookingCode(payment.getBookingCode())
                 .status(payment.getStatus())
-                .currency(payment.getCurrency())
-                .notes(payment.getNotes())
                 .build();
     }
 }

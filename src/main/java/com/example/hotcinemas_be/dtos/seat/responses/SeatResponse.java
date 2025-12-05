@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SeatResponse {
     private Long id;
-    private String rowLabel;
-    private String seatNumber;
+    private String name;
     private SeatType seatType;
     private SeatStatus status;
     private Integer col;

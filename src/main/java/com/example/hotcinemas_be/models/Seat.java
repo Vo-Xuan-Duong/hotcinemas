@@ -49,11 +49,8 @@ public class Seat {
     @JoinColumn(name = "room_id", nullable = false)
     private Room room;
 
-    @Column(name = "row_label", nullable = false)
-    private String rowLabel;
-
-    @Column(name = "seat_number", nullable = false)
-    private String seatNumber;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @Builder.Default
     @Enumerated(EnumType.STRING)

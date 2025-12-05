@@ -16,9 +16,13 @@ public class CinemaRequest {
     @NotBlank(message = "Address is required")
     private String address;
     @NotBlank(message = "Phone number is required")
-    private String phoneNumber;
+    private String phone;
+    @NotBlank(message = "Email is required")
+    private String email;
     @NotBlank(message = "City is required")
-    private String city;
+    private Long cityId;
+    private Double latitude;
+    private Double longitude;
 
 }
 

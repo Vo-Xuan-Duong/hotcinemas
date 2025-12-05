@@ -1,6 +1,7 @@
 package com.example.hotcinemas_be.dtos.movie.responses;
 
 import com.example.hotcinemas_be.dtos.genre.responses.GenreResponse;
+import com.example.hotcinemas_be.enums.MovieStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class MovieResponse {
     private String trailerUrl;
     private String posterPath;
     private String backdropPath;
+    private MovieStatus status;
     private List<GenreResponse> genres;
     private List<String> originCountry;
     private List<String> casts;

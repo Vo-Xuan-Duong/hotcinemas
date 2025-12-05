@@ -4,34 +4,17 @@ package com.example.hotcinemas_be.models;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+import com.example.hotcinemas_be.dtos.seat.SeatSnapshot;
 import com.example.hotcinemas_be.enums.BookingStatus;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Table(name = "bookings")
@@ -62,6 +45,12 @@ public class Booking {
     @Column(name = "booking_date", nullable = false)
     private LocalDateTime bookingDate = LocalDateTime.now();
 
+    @Column(name = "original_price", nullable = false, precision = 10, scale = 2)
+    private BigDecimal originalPrice; // DECIMAL(10,2) in DB, Double in Java
+
+    @Column(name = "discount_amount", precision = 10, scale = 2)
+    private BigDecimal discountAmount; // DECIMAL(10,2) in DB, Double in Java
+
     @Column(name = "total_amount", nullable = false, precision = 10, scale = 2)
     private BigDecimal totalAmount; // DECIMAL(10,2) in DB, Double in Java
 
@@ -78,36 +67,26 @@ public class Booking {
     @UpdateTimestamp
     private LocalDateTime updatedAt; // Automatically set to current time
 
-    // Relationships
-    @Builder.Default
-    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Payment> payments = new ArrayList<>();
+    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Payment payments;
 
     @Builder.Default
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ticket> tickets = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "booking_promotions",
-            joinColumns = @JoinColumn(name = "booking_id"),
-            inverseJoinColumns = @JoinColumn(name = "promotion_id")
-    )
-    @Builder.Default
-    private List<Promotion> promotions = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "voucher_id")
+    private Voucher voucher;
+
+    @Column(name = "voucher_code", length = 50)
+    private String voucherCode; // Store voucher code for reference
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "seat_details_snapshot", columnDefinition = "jsonb")
+    private List<SeatSnapshot> seatSnapshots;
 
     // Helper methods
     public Integer getTotalSeats() {
         return tickets.size();
-    }
-
-    public boolean hasPromotion() {
-        return !promotions.isEmpty();
-    }
-
-    public BigDecimal getPromotionDiscount() {
-        return promotions.stream()
-                .map(Promotion::getDiscountValue)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

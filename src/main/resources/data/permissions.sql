@@ -99,14 +99,14 @@ INSERT INTO permissions (code, name, description, is_active) VALUES
 ('PAYMENT_PROCESS', 'Xử lý thanh toán', 'Cho phép xử lý giao dịch thanh toán', true),
 ('PAYMENT_REFUND', 'Hoàn tiền', 'Cho phép thực hiện hoàn tiền', true);
 
--- ========== PROMOTION MANAGEMENT PERMISSIONS ==========
+-- ========== VOUCHER MANAGEMENT PERMISSIONS ==========
 INSERT INTO permissions (code, name, description, is_active) VALUES 
-('PROMOTION_CREATE', 'Tạo khuyến mãi mới', 'Cho phép tạo chương trình khuyến mãi mới', true),
-('PROMOTION_READ', 'Xem thông tin khuyến mãi', 'Cho phép xem danh sách và chi tiết khuyến mãi', true),
-('PROMOTION_UPDATE', 'Cập nhật thông tin khuyến mãi', 'Cho phép cập nhật thông tin khuyến mãi', true),
-('PROMOTION_DELETE', 'Xóa khuyến mãi', 'Cho phép xóa khuyến mãi khỏi hệ thống', true),
-('PROMOTION_ACTIVATE', 'Kích hoạt khuyến mãi', 'Cho phép kích hoạt chương trình khuyến mãi', true),
-('PROMOTION_DEACTIVATE', 'Vô hiệu hóa khuyến mãi', 'Cho phép vô hiệu hóa chương trình khuyến mãi', true);
+('VOUCHER_CREATE', 'Tạo voucher mới', 'Cho phép tạo voucher khuyến mãi mới', true),
+('VOUCHER_READ', 'Xem thông tin voucher', 'Cho phép xem danh sách và chi tiết voucher', true),
+('VOUCHER_UPDATE', 'Cập nhật thông tin voucher', 'Cho phép cập nhật thông tin voucher', true),
+('VOUCHER_DELETE', 'Xóa voucher', 'Cho phép xóa voucher khỏi hệ thống', true),
+('VOUCHER_ACTIVATE', 'Kích hoạt voucher', 'Cho phép kích hoạt voucher', true),
+('VOUCHER_DEACTIVATE', 'Vô hiệu hóa voucher', 'Cho phép vô hiệu hóa voucher', true);
 
 -- ========== SYSTEM MANAGEMENT PERMISSIONS ==========
 INSERT INTO permissions (code, name, description, is_active) VALUES 

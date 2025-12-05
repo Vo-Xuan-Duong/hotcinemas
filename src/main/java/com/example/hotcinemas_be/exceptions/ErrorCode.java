@@ -12,8 +12,8 @@ public enum ErrorCode {
     ERROR_TOKEN_NOT_FOUND("CINEMA_005", "Token not found", HttpStatus.UNAUTHORIZED),
     ERROR_INVALID_TOKEN("CINEMA_006", "Invalid token", HttpStatus.UNAUTHORIZED),
 
-    ERROR_MODEL_NOT_FOUND("CINEMA_010", "User not found", HttpStatus.NOT_FOUND),
-    ERROR_MODEL_ALREADY_EXISTS("CINEMA_011", "User already exists", HttpStatus.CONFLICT),
+    ERROR_MODEL_NOT_FOUND("CINEMA_010", "Model not found", HttpStatus.NOT_FOUND),
+    ERROR_MODEL_ALREADY_EXISTS("CINEMA_011", "Model already exists", HttpStatus.CONFLICT),
     PASSWORD_NOT_MATCH("CINEMA_012", "Password does not match", HttpStatus.BAD_REQUEST),
     CONFIRM_PASSWORD_AND_PASSWORD_NOT_MATCH("CINEMA_013", "Confirm password and password does not match",
             HttpStatus.BAD_REQUEST),
@@ -41,7 +41,7 @@ public enum ErrorCode {
     ERROR_BOOKING_NOT_FOUND("CINEMA_035", "Booking not found", HttpStatus.NOT_FOUND),
     ERROR_PAYMENT_FAILED("CINEMA_036", "Payment failed", HttpStatus.BAD_REQUEST),
     ERROR_TICKET_NOT_FOUND("CINEMA_037", "Ticket not found", HttpStatus.NOT_FOUND),
-    ERROR_PROMOTION_NOT_FOUND("CINEMA_038", "Promotion not found", HttpStatus.NOT_FOUND),
+    ERROR_VOUCHER_NOT_FOUND("CINEMA_038", "Voucher not found", HttpStatus.NOT_FOUND),
     ERROR_GENRE_NOT_FOUND("CINEMA_039", "Genre not found", HttpStatus.NOT_FOUND),
     ERROR_REVIEW_NOT_FOUND("CINEMA_040", "Review not found", HttpStatus.NOT_FOUND),
     ERROR_DUPLICATE_RESOURCE("CINEMA_041", "Duplicate resource", HttpStatus.CONFLICT),
@@ -55,7 +55,13 @@ public enum ErrorCode {
     ERROR_REQUEST_TIMEOUT("CINEMA_049", "Request timeout", HttpStatus.REQUEST_TIMEOUT),
     ERROR_DEPENDENCY_FAILURE("CINEMA_050", "Downstream dependency failure", HttpStatus.FAILED_DEPENDENCY),
     ERROR_CINEMA_CLUSTER_NOT_FOUND("CINEMA_051", "Cinema cluster not found", HttpStatus.NOT_FOUND),
-    ERROR_SHOWTIME_CONFLICT("CINEMA_052", "Showtime overlaps with an existing showtime in the same room", HttpStatus.CONFLICT)
+    ERROR_SHOWTIME_CONFLICT("CINEMA_052", "Showtime overlaps with an existing showtime in the same room", HttpStatus.CONFLICT),
+    ERROR_INVALID_OPERATION("CINEMA_053", "Invalid operation" , HttpStatus.BAD_REQUEST),
+    ERROR_MOVIE_CONFLICT("CINEMA_054", "Movie conflict", HttpStatus.CONFLICT),
+
+    ERROR_VOUCHER_INVALID("CINEMA_055", "", HttpStatus.BAD_REQUEST),
+    ERROR_VOUCHER_OUT_OF_STOCK("CINEMA_056", "", HttpStatus.BAD_REQUEST),
+    ERROR_SEAT_ALREADY_LOCKED("CINEMA_057","" , HttpStatus.CONFLICT )
     ;
 
     private final String code;

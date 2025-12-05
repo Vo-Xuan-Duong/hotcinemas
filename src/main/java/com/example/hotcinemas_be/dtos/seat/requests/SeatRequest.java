@@ -18,11 +18,8 @@ public class SeatRequest {
     @NotNull(message = "Room ID is required")
     private Long roomId;
 
-    @NotBlank(message = "Row label is required")
-    private String rowLabel;
-
-    @NotBlank(message = "Seat number is required")
-    private String seatNumber;
+    @NotBlank(message = "Seat name is required")
+    private String name;
 
     private SeatType seatType;
 

@@ -39,77 +39,47 @@ public class RoleController {
     @PostMapping
     public ResponseEntity<ResponseData<RoleResponse>> createRole(
             @Valid @RequestBody RoleRequest roleRequest) {
-        try {
-            log.info("Creating new role with code: {}", roleRequest.getCode());
-            RoleResponse roleResponse = roleService.createRole(roleRequest);
+        log.info("Creating new role with code: {}", roleRequest.getCode());
+        RoleResponse roleResponse = roleService.createRole(roleRequest);
 
-            ResponseData<RoleResponse> responseData = ResponseData.<RoleResponse>builder()
-                    .status(HttpStatus.CREATED.value())
-                    .message("Role has been successfully created")
-                    .data(roleResponse)
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.status(HttpStatus.CREATED).body(responseData);
-        } catch (Exception ex) {
-            log.error("Error creating role: {}", ex.getMessage());
-            ResponseData<RoleResponse> errorResponse = ResponseData.<RoleResponse>builder()
-                    .status(HttpStatus.BAD_REQUEST.value())
-                    .message(ex.getMessage())
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.badRequest().body(errorResponse);
-        }
+        ResponseData<RoleResponse> responseData = ResponseData.<RoleResponse>builder()
+                .status(HttpStatus.CREATED.value())
+                .message("Role has been successfully created")
+                .data(roleResponse)
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseData);
     }
 
     @Operation(summary = "Get all roles", description = "This endpoint retrieves all roles with pagination.")
     @GetMapping
     public ResponseEntity<ResponseData<Page<RoleResponse>>> getAllRoles(
             @Parameter(description = "Pagination parameters") Pageable pageable) {
-        try {
-            log.info("Retrieving all roles with pagination");
-            Page<RoleResponse> roles = roleService.getPageRoles(pageable);
+        log.info("Retrieving all roles with pagination");
+        Page<RoleResponse> roles = roleService.getPageRoles(pageable);
 
-            ResponseData<Page<RoleResponse>> responseData = ResponseData.<Page<RoleResponse>>builder()
-                    .status(HttpStatus.OK.value())
-                    .message("Roles retrieved successfully")
-                    .data(roles)
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            log.error("Error retrieving roles: {}", ex.getMessage());
-            ResponseData<Page<RoleResponse>> errorResponse = ResponseData.<Page<RoleResponse>>builder()
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                    .message("Error retrieving roles: " + ex.getMessage())
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-        }
+        ResponseData<Page<RoleResponse>> responseData = ResponseData.<Page<RoleResponse>>builder()
+                .status(HttpStatus.OK.value())
+                .message("Roles retrieved successfully")
+                .data(roles)
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
     @Operation(summary = "Get all roles (no pagination)", description = "This endpoint retrieves all roles without pagination.")
     @GetMapping("/all")
     public ResponseEntity<ResponseData<List<RoleResponse>>> getAllRolesList() {
-        try {
-            log.info("Retrieving all roles without pagination");
-            List<RoleResponse> roles = roleService.getAllRoles();
+        log.info("Retrieving all roles without pagination");
+        List<RoleResponse> roles = roleService.getAllRoles();
 
-            ResponseData<List<RoleResponse>> responseData = ResponseData.<List<RoleResponse>>builder()
-                    .status(HttpStatus.OK.value())
-                    .message("Roles retrieved successfully")
-                    .data(roles)
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            log.error("Error retrieving roles: {}", ex.getMessage());
-            ResponseData<List<RoleResponse>> errorResponse = ResponseData.<List<RoleResponse>>builder()
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                    .message("Error retrieving roles: " + ex.getMessage())
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-        }
+        ResponseData<List<RoleResponse>> responseData = ResponseData.<List<RoleResponse>>builder()
+                .status(HttpStatus.OK.value())
+                .message("Roles retrieved successfully")
+                .data(roles)
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
     @Operation(summary = "Get a role by ID", description = "This endpoint retrieves a role by its ID.")
@@ -120,26 +90,16 @@ public class RoleController {
     @GetMapping("/{id}")
     public ResponseEntity<ResponseData<RoleResponse>> getRoleById(
             @Parameter(description = "Role ID") @PathVariable Long id) {
-        try {
-            log.info("Retrieving role with ID: {}", id);
-            RoleResponse role = roleService.getRoleById(id);
+        log.info("Retrieving role with ID: {}", id);
+        RoleResponse role = roleService.getRoleById(id);
 
-            ResponseData<RoleResponse> responseData = ResponseData.<RoleResponse>builder()
-                    .status(HttpStatus.OK.value())
-                    .message("Role retrieved successfully")
-                    .data(role)
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            log.error("Error retrieving role with ID {}: {}", id, ex.getMessage());
-            ResponseData<RoleResponse> errorResponse = ResponseData.<RoleResponse>builder()
-                    .status(HttpStatus.NOT_FOUND.value())
-                    .message(ex.getMessage())
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-        }
+        ResponseData<RoleResponse> responseData = ResponseData.<RoleResponse>builder()
+                .status(HttpStatus.OK.value())
+                .message("Role retrieved successfully")
+                .data(role)
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
     @Operation(summary = "Get a role by code", description = "This endpoint retrieves a role by its code.")
@@ -150,26 +110,16 @@ public class RoleController {
     @GetMapping("/code/{code}")
     public ResponseEntity<ResponseData<RoleResponse>> getRoleByCode(
             @Parameter(description = "Role code") @PathVariable String code) {
-        try {
-            log.info("Retrieving role with code: {}", code);
-            RoleResponse role = roleService.getRoleByCode(code);
+        log.info("Retrieving role with code: {}", code);
+        RoleResponse role = roleService.getRoleByCode(code);
 
-            ResponseData<RoleResponse> responseData = ResponseData.<RoleResponse>builder()
-                    .status(HttpStatus.OK.value())
-                    .message("Role retrieved successfully")
-                    .data(role)
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            log.error("Error retrieving role with code {}: {}", code, ex.getMessage());
-            ResponseData<RoleResponse> errorResponse = ResponseData.<RoleResponse>builder()
-                    .status(HttpStatus.NOT_FOUND.value())
-                    .message(ex.getMessage())
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-        }
+        ResponseData<RoleResponse> responseData = ResponseData.<RoleResponse>builder()
+                .status(HttpStatus.OK.value())
+                .message("Role retrieved successfully")
+                .data(role)
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
     @Operation(summary = "Update a role", description = "This endpoint allows an admin to update an existing role.")
@@ -182,26 +132,16 @@ public class RoleController {
     public ResponseEntity<ResponseData<RoleResponse>> updateRole(
             @Parameter(description = "Role ID") @PathVariable Long id,
             @Valid @RequestBody RoleRequest roleRequest) {
-        try {
-            log.info("Updating role with ID: {}", id);
-            RoleResponse roleResponse = roleService.updateRole(id, roleRequest);
+        log.info("Updating role with ID: {}", id);
+        RoleResponse roleResponse = roleService.updateRole(id, roleRequest);
 
-            ResponseData<RoleResponse> responseData = ResponseData.<RoleResponse>builder()
-                    .status(HttpStatus.OK.value())
-                    .message("Role has been successfully updated")
-                    .data(roleResponse)
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            log.error("Error updating role with ID {}: {}", id, ex.getMessage());
-            ResponseData<RoleResponse> errorResponse = ResponseData.<RoleResponse>builder()
-                    .status(HttpStatus.BAD_REQUEST.value())
-                    .message(ex.getMessage())
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.badRequest().body(errorResponse);
-        }
+        ResponseData<RoleResponse> responseData = ResponseData.<RoleResponse>builder()
+                .status(HttpStatus.OK.value())
+                .message("Role has been successfully updated")
+                .data(roleResponse)
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
     @Operation(summary = "Partially update a role", description = "This endpoint allows an admin to partially update an existing role.")
@@ -214,26 +154,16 @@ public class RoleController {
     public ResponseEntity<ResponseData<RoleResponse>> partialUpdateRole(
             @Parameter(description = "Role ID") @PathVariable Long id,
             @RequestBody RoleRequest roleRequest) {
-        try {
-            log.info("Partially updating role with ID: {}", id);
-            RoleResponse roleResponse = roleService.updateRole(id, roleRequest);
+        log.info("Partially updating role with ID: {}", id);
+        RoleResponse roleResponse = roleService.updateRole(id, roleRequest);
 
-            ResponseData<RoleResponse> responseData = ResponseData.<RoleResponse>builder()
-                    .status(HttpStatus.OK.value())
-                    .message("Role has been partially updated")
-                    .data(roleResponse)
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            log.error("Error partially updating role with ID {}: {}", id, ex.getMessage());
-            ResponseData<RoleResponse> errorResponse = ResponseData.<RoleResponse>builder()
-                    .status(HttpStatus.BAD_REQUEST.value())
-                    .message(ex.getMessage())
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.badRequest().body(errorResponse);
-        }
+        ResponseData<RoleResponse> responseData = ResponseData.<RoleResponse>builder()
+                .status(HttpStatus.OK.value())
+                .message("Role has been partially updated")
+                .data(roleResponse)
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
     @Operation(summary = "Delete a role", description = "This endpoint allows an admin to delete a role by its ID.")
@@ -244,25 +174,15 @@ public class RoleController {
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseData<Void>> deleteRole(
             @Parameter(description = "Role ID") @PathVariable Long id) {
-        try {
-            log.info("Deleting role with ID: {}", id);
-            roleService.deleteRole(id);
+        log.info("Deleting role with ID: {}", id);
+        roleService.deleteRole(id);
 
-            ResponseData<Void> responseData = ResponseData.<Void>builder()
-                    .status(HttpStatus.OK.value())
-                    .message("Role has been successfully deleted")
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            log.error("Error deleting role with ID {}: {}", id, ex.getMessage());
-            ResponseData<Void> errorResponse = ResponseData.<Void>builder()
-                    .status(HttpStatus.NOT_FOUND.value())
-                    .message(ex.getMessage())
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-        }
+        ResponseData<Void> responseData = ResponseData.<Void>builder()
+                .status(HttpStatus.OK.value())
+                .message("Role has been successfully deleted")
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
     @Operation(summary = "Activate a role", description = "This endpoint activates a role.")
@@ -273,25 +193,15 @@ public class RoleController {
     @PatchMapping("/{id}/activate")
     public ResponseEntity<ResponseData<Void>> activateRole(
             @Parameter(description = "Role ID") @PathVariable Long id) {
-        try {
-            log.info("Activating role with ID: {}", id);
-            roleService.activateRole(id);
+        log.info("Activating role with ID: {}", id);
+        roleService.activateRole(id);
 
-            ResponseData<Void> responseData = ResponseData.<Void>builder()
-                    .status(HttpStatus.OK.value())
-                    .message("Role has been successfully activated")
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            log.error("Error activating role with ID {}: {}", id, ex.getMessage());
-            ResponseData<Void> errorResponse = ResponseData.<Void>builder()
-                    .status(HttpStatus.NOT_FOUND.value())
-                    .message(ex.getMessage())
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-        }
+        ResponseData<Void> responseData = ResponseData.<Void>builder()
+                .status(HttpStatus.OK.value())
+                .message("Role has been successfully activated")
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
     @Operation(summary = "Deactivate a role", description = "This endpoint deactivates a role.")
@@ -302,25 +212,15 @@ public class RoleController {
     @PatchMapping("/{id}/deactivate")
     public ResponseEntity<ResponseData<Void>> deactivateRole(
             @Parameter(description = "Role ID") @PathVariable Long id) {
-        try {
-            log.info("Deactivating role with ID: {}", id);
-            roleService.deactivateRole(id);
+        log.info("Deactivating role with ID: {}", id);
+        roleService.deactivateRole(id);
 
-            ResponseData<Void> responseData = ResponseData.<Void>builder()
-                    .status(HttpStatus.OK.value())
-                    .message("Role has been successfully deactivated")
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            log.error("Error deactivating role with ID {}: {}", id, ex.getMessage());
-            ResponseData<Void> errorResponse = ResponseData.<Void>builder()
-                    .status(HttpStatus.NOT_FOUND.value())
-                    .message(ex.getMessage())
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-        }
+        ResponseData<Void> responseData = ResponseData.<Void>builder()
+                .status(HttpStatus.OK.value())
+                .message("Role has been successfully deactivated")
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
     @Operation(summary = "Add permissions to role", description = "This endpoint adds permissions to a role.")
@@ -332,26 +232,16 @@ public class RoleController {
     public ResponseEntity<ResponseData<RoleResponse>> addPermissionsToRole(
             @Parameter(description = "Role ID") @PathVariable Long id,
             @RequestBody List<Long> permissionIds) {
-        try {
-            log.info("Adding permissions {} to role {}", permissionIds, id);
-            RoleResponse roleResponse = roleService.addPermissionsToRole(id, permissionIds);
+        log.info("Adding permissions {} to role {}", permissionIds, id);
+        RoleResponse roleResponse = roleService.addPermissionsToRole(id, permissionIds);
 
-            ResponseData<RoleResponse> responseData = ResponseData.<RoleResponse>builder()
-                    .status(HttpStatus.OK.value())
-                    .message("Permissions have been successfully added to role")
-                    .data(roleResponse)
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            log.error("Error adding permissions to role {}: {}", id, ex.getMessage());
-            ResponseData<RoleResponse> errorResponse = ResponseData.<RoleResponse>builder()
-                    .status(HttpStatus.NOT_FOUND.value())
-                    .message(ex.getMessage())
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-        }
+        ResponseData<RoleResponse> responseData = ResponseData.<RoleResponse>builder()
+                .status(HttpStatus.OK.value())
+                .message("Permissions have been successfully added to role")
+                .data(roleResponse)
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
     @Operation(summary = "Remove permissions from role", description = "This endpoint removes permissions from a role.")
@@ -363,25 +253,15 @@ public class RoleController {
     public ResponseEntity<ResponseData<RoleResponse>> removePermissionsFromRole(
             @Parameter(description = "Role ID") @PathVariable Long id,
             @RequestBody List<Long> permissionIds) {
-        try {
-            log.info("Removing permissions {} from role {}", permissionIds, id);
-            RoleResponse roleResponse = roleService.removePermissionsFromRole(id, permissionIds);
+        log.info("Removing permissions {} from role {}", permissionIds, id);
+        RoleResponse roleResponse = roleService.removePermissionsFromRole(id, permissionIds);
 
-            ResponseData<RoleResponse> responseData = ResponseData.<RoleResponse>builder()
-                    .status(HttpStatus.OK.value())
-                    .message("Permissions have been successfully removed from role")
-                    .data(roleResponse)
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            log.error("Error removing permissions from role {}: {}", id, ex.getMessage());
-            ResponseData<RoleResponse> errorResponse = ResponseData.<RoleResponse>builder()
-                    .status(HttpStatus.NOT_FOUND.value())
-                    .message(ex.getMessage())
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-        }
+        ResponseData<RoleResponse> responseData = ResponseData.<RoleResponse>builder()
+                .status(HttpStatus.OK.value())
+                .message("Permissions have been successfully removed from role")
+                .data(roleResponse)
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 }

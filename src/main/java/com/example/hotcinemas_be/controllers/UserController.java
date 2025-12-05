@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -114,7 +115,7 @@ public class UserController {
         public ResponseEntity<ResponseData<Page<UserResponse>>> getAllUsers(
                         @Parameter(description = "Page number (0-based)") @RequestParam(defaultValue = "0") int page,
                         @Parameter(description = "Page size") @RequestParam(defaultValue = "10") int size,
-                        @Parameter(description = "Sort by field") @RequestParam(defaultValue = "userId") String sortBy,
+                        @Parameter(description = "Sort by field") @RequestParam(defaultValue = "createdAt") String sortBy,
                         @Parameter(description = "Sort direction") @RequestParam(defaultValue = "asc") String sortDir) {
 
                 log.info("Getting all users - page: {}, size: {}, sortBy: {}, sortDir: {}", page, size, sortBy,
@@ -357,15 +358,13 @@ public class UserController {
         @ApiResponses(value = {
                         @ApiResponse(responseCode = "200", description = "Users retrieved successfully")
         })
-        @GetMapping("/role/{roleName}")
+        @GetMapping("/role/{code}")
         public ResponseEntity<ResponseData<Page<UserResponse>>> getUsersByRole(
-                        @Parameter(description = "Role name") @PathVariable String roleName,
-                        @Parameter(description = "Page number (0-based)") @RequestParam(defaultValue = "0") int page,
-                        @Parameter(description = "Page size") @RequestParam(defaultValue = "10") int size) {
+                        @Parameter(description = "Role code") @PathVariable String code,
+                        @PageableDefault(page = 0, size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
 
-                log.info("Getting users by role: {}", roleName);
-                Pageable pageable = PageRequest.of(page, size);
-                Page<UserResponse> users = userService.getUsersByRole(roleName, pageable);
+                log.info("Getting users by role: {}", code);
+                Page<UserResponse> users = userService.getUsersByRole(code, pageable);
 
                 ResponseData<Page<UserResponse>> responseData = ResponseData.<Page<UserResponse>>builder()
                                 .status(HttpStatus.OK.value())

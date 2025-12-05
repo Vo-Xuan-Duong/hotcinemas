@@ -39,7 +39,7 @@ public class AuthController {
 
     @Operation(summary = "Refresh token", description = "Refresh JWT token using refresh token")
     @GetMapping("/refresh")
-    public ResponseEntity<?> refreshToken(@RequestBody String refreshToken) {
+    public ResponseEntity<?> refreshToken(@RequestParam String refreshToken) {
         ResponseData<?> responseData = ResponseData.builder()
                 .status(200)
                 .message("Successfully refreshed token")
@@ -51,10 +51,10 @@ public class AuthController {
     @Operation(summary = "Register user", description = "Register a new user with email and password")
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest) {
+        authService.registerHandler(registerRequest);
         ResponseData<?> responseData = ResponseData.builder()
                 .status(200)
                 .message("Successfully registered")
-                .data(authService.registerHandler(registerRequest))
                 .build();
         return ResponseEntity.ok(responseData);
     }
@@ -71,13 +71,25 @@ public class AuthController {
         return ResponseEntity.ok(responseData);
     }
 
+    @GetMapping("/resend-otp")
+    @Operation(summary = "Resend OTP", description = "Resend OTP to email for user registration")
+    public ResponseEntity<?> resendOtp(@RequestParam String email) {
+        authService.resendOTP(email);
+        ResponseData<?> responseData = ResponseData.builder()
+                .status(200)
+                .message("OTP resent successfully")
+                .data(null)
+                .build();
+        return ResponseEntity.ok(responseData);
+    }
+
     @Operation(summary = "Get current user", description = "Get details of the currently logged-in user")
     @GetMapping("/current-user")
     public ResponseEntity<?> currentUser() {
         ResponseData<?> responseData = ResponseData.builder()
                 .status(200)
                 .message("Successfully retrieved current user")
-                .data(authService.currentUser())
+                .data(authService.getCurrentUser())
                 .build();
         return ResponseEntity.ok(responseData);
     }

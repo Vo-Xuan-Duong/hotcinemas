@@ -17,7 +17,6 @@ import java.util.*;
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor @Builder
 public class Movie {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -96,7 +95,7 @@ public class Movie {
 
     @Builder.Default
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Review> reviews = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
 
     // ====== Status ======
     @Builder.Default

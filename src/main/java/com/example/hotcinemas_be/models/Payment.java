@@ -7,17 +7,7 @@ import java.time.LocalDateTime;
 import com.example.hotcinemas_be.enums.PaymentMethod;
 import com.example.hotcinemas_be.enums.PaymentStatus;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,10 +25,10 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payment_id")
-    private Long paymentId;
+    @Column(name = "id")
+    private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id", nullable = false)
     private Booking booking;
 
@@ -53,18 +43,11 @@ public class Payment {
     @Column(name = "payment_method", nullable = false) // Use custom type
     private PaymentMethod paymentMethod;
 
-    @Column(name = "transaction_id", unique = true, length = 100)
-    private String transactionId;
+    @Column(name = "booking_code", unique = true, length = 100)
+    private String bookingCode; // Unique transaction identifier
 
     @Builder.Default
     @Enumerated(EnumType.STRING) // Map ENUM to String in DB
     @Column(name = "status", nullable = false) // Use custom type
     private PaymentStatus status = PaymentStatus.PENDING;
-
-    @Builder.Default
-    @Column(name = "currency", nullable = false, length = 10)
-    private String currency = "VND";
-
-    @Column(name = "notes", columnDefinition = "TEXT")
-    private String notes;
 }

@@ -1,10 +1,13 @@
 package com.example.hotcinemas_be.models;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import com.example.hotcinemas_be.enums.MovieFormat;
 import com.example.hotcinemas_be.enums.ShowTimeStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -35,24 +38,26 @@ public class Showtime {
     @JoinColumn(name = "room_id", nullable = false)
     private Room room;
 
+    @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> tickets;
+
+    @Column(name = "date", nullable = false)
+    private LocalDate date;
+
     @Column(name = "start_time", nullable = false)
-    private LocalDateTime startTime;
+    private LocalTime startTime;
 
     @Column(name = "end_time", nullable = false)
-    private LocalDateTime endTime;
+    private LocalTime endTime;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private ShowTimeStatus status;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "movie_format", nullable = false)
+    private MovieFormat movieFormat;
+
     @Column(name = "ticket_price", nullable = false)
     private BigDecimal ticketPrice;
-
-    @Column(name = "is_active", nullable = false)
-    private Boolean isActive;
-
-    // Relationships
-    @Builder.Default
-    @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ShowtimeSeat> showtimeSeats = new HashSet<>();
 }

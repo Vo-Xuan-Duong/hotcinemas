@@ -2,14 +2,19 @@ package com.example.hotcinemas_be.controllers;
 
 import com.example.hotcinemas_be.dtos.common.ResponseData;
 import com.example.hotcinemas_be.dtos.showtime.requests.ShowtimeRequest;
+import com.example.hotcinemas_be.dtos.showtime.requests.ShowtimeFilterRequest;
 import com.example.hotcinemas_be.services.ShowtimeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @RestController
 @RequestMapping("/api/v1/showtime")
@@ -24,176 +29,218 @@ public class ShowtimeController {
     @Operation(summary = "Create a new showtime", description = "Creates a new showtime for a movie in a specific cinema hall.")
     @PostMapping()
     public ResponseEntity<?> createShowtime(@RequestBody ShowtimeRequest showtimeRequest) {
-        try {
-            ResponseData<?> responseData = ResponseData.builder()
-                    .status(201)
-                    .message("Showtime created successfully")
-                    .data(showtimeService.createShowtime(showtimeRequest))
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.status(201).body(responseData);
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().body("Error creating showtime: " + ex.getMessage());
-        }
+        ResponseData<?> responseData = ResponseData.builder()
+                .status(201)
+                .message("Showtime created successfully")
+                .data(showtimeService.createShowtime(showtimeRequest))
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.status(201).body(responseData);
     }
 
     @Operation(summary = "Get showtime by ID", description = "Retrieves a showtime by its ID.")
     @GetMapping("/{id}")
     public ResponseEntity<?> getShowtimeById(@PathVariable Long id) {
-        try {
-            ResponseData<?> responseData = ResponseData.builder()
-                    .status(200)
-                    .message("Showtime retrieved successfully")
-                    .data(showtimeService.getShowtimeById(id))
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().body("Error retrieving showtime: " + ex.getMessage());
-        }
+        ResponseData<?> responseData = ResponseData.builder()
+                .status(200)
+                .message("Showtime retrieved successfully")
+                .data(showtimeService.getShowtimeById(id))
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
     @Operation(summary = "Update showtime by ID", description = "Updates an existing showtime by its ID.")
     @PutMapping("/{id}")
     public ResponseEntity<?> updateShowtime(@PathVariable Long id, @RequestBody ShowtimeRequest showtimeRequest) {
-        try {
-            ResponseData<?> responseData = ResponseData.builder()
-                    .status(200)
-                    .message("Showtime updated successfully")
-                    .data(showtimeService.updateShowtime(id, showtimeRequest))
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().body("Error updating showtime: " + ex.getMessage());
-        }
+        ResponseData<?> responseData = ResponseData.builder()
+                .status(200)
+                .message("Showtime updated successfully")
+                .data(showtimeService.updateShowtime(id, showtimeRequest))
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
     @Operation(summary = "Delete showtime by ID", description = "Deletes a showtime by its ID.")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteShowtime(@PathVariable Long id) {
-        try {
-            showtimeService.deleteShowtime(id);
-            ResponseData<?> responseData = ResponseData.builder()
-                    .status(200)
-                    .message("Showtime deleted successfully")
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().body("Error deleting showtime: " + ex.getMessage());
-        }
+        showtimeService.deleteShowtime(id);
+        ResponseData<?> responseData = ResponseData.builder()
+                .status(200)
+                .message("Showtime deleted successfully")
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
-    @Operation(summary = "Get all showtimes", description = "Retrieves all showtimes with pagination.")
+    @Operation(summary = "Get all showtime", description = "Retrieves all showtime with pagination.")
     @GetMapping
-    public ResponseEntity<?> getAllShowtimes(Pageable pageable) {
-        try {
-            ResponseData<?> responseData = ResponseData.builder()
-                    .status(200)
-                    .message("Showtimes retrieved successfully")
-                    .data(showtimeService.getAllShowTimes(pageable))
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().body("Error retrieving showtimes: " + ex.getMessage());
-        }
+    public ResponseEntity<?> getAllShowtime(@PageableDefault(page = 0, size = 10, sort = "date", direction = Sort.Direction.DESC) Pageable pageable) {
+        ResponseData<?> responseData = ResponseData.builder()
+                .status(200)
+                .message("Showtimes retrieved successfully")
+                .data(showtimeService.getAllShowTimes(pageable))
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
+    }
+
+    @Operation(summary = "Get showtimes with filters", description = "Retrieves showtimes with filters.")
+    @GetMapping("/filters")
+    public ResponseEntity<?> getShowtimesWithFilters(
+            @RequestBody ShowtimeFilterRequest filterRequest) {
+        ResponseData<?> responseData = ResponseData.builder()
+                .status(200)
+                .message("Showtimes retrieved successfully")
+                .data(showtimeService.getShowtimesWithFilters(filterRequest))
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
     @Operation(summary = "Get showtimes by movie ID", description = "Retrieves showtimes for a specific movie with pagination.")
     @GetMapping("/movie/{movieId}")
     public ResponseEntity<?> getShowtimesByMovieId(@PathVariable Long movieId, Pageable pageable) {
-        try {
-            ResponseData<?> responseData = ResponseData.builder()
-                    .status(200)
-                    .message("Showtimes for movie retrieved successfully")
-                    .data(showtimeService.getShowtimesByMovieId(movieId, pageable))
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().body("Error retrieving showtimes for movie: " + ex.getMessage());
-        }
+        ResponseData<?> responseData = ResponseData.builder()
+                .status(200)
+                .message("Showtimes for movie retrieved successfully")
+                .data(showtimeService.getShowtimesByMovieId(movieId, pageable))
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
     @Operation(summary = "Get showtimes by room ID", description = "Retrieves showtimes for a specific cinema hall with pagination.")
     @GetMapping("/room/{roomId}")
     public ResponseEntity<?> getShowtimesByRoomId(@PathVariable Long roomId, Pageable pageable) {
-        try {
-            ResponseData<?> responseData = ResponseData.builder()
-                    .status(200)
-                    .message("Showtimes for room retrieved successfully")
-                    .data(showtimeService.getShowtimesByRoomId(roomId, pageable))
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().body("Error retrieving showtimes for room: " + ex.getMessage());
-        }
-    }
-
-    @Operation(summary = "Activate showtime", description = "Activates a showtime by its ID.")
-    @PostMapping("/{id}/activate")
-    public ResponseEntity<?> activateShowtime(@PathVariable Long id) {
-        try {
-            showtimeService.activateShowtime(id);
-            ResponseData<?> responseData = ResponseData.builder()
-                    .status(200)
-                    .message("Showtime activated successfully")
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().body("Error activating showtime: " + ex.getMessage());
-        }
-    }
-
-    @Operation(summary = "Deactivate showtime", description = "Deactivates a showtime by its ID.")
-    @PostMapping("/{id}/deactivate")
-    public ResponseEntity<?> deactivateShowtime(@PathVariable Long id) {
-        try {
-            showtimeService.deactivateShowtime(id);
-            ResponseData<?> responseData = ResponseData.builder()
-                    .status(200)
-                    .message("Showtime deactivated successfully")
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().body("Error deactivating showtime: " + ex.getMessage());
-        }
+        ResponseData<?> responseData = ResponseData.builder()
+                .status(200)
+                .message("Showtimes for room retrieved successfully")
+                .data(showtimeService.getShowtimesByRoomId(roomId, pageable))
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
     @Operation(summary = "Delete showtimes by movie ID", description = "Deletes all showtimes for a specific movie.")
     @DeleteMapping("/movie/{movieId}")
     public ResponseEntity<?> deleteShowtimesByMovieId(@PathVariable Long movieId) {
-        try {
-            showtimeService.deleteShowtimesByMovieId(movieId);
-            ResponseData<?> responseData = ResponseData.builder()
-                    .status(200)
-                    .message("Showtimes for movie deleted successfully")
-                    .timestamp(LocalDateTime.now())
-                    .build();
-            return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().body("Error deleting showtimes for movie: " + ex.getMessage());
-        }
+        showtimeService.deleteShowtimesByMovieId(movieId);
+        ResponseData<?> responseData = ResponseData.builder()
+                .status(200)
+                .message("Showtimes for movie deleted successfully")
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 
     @Operation(summary = "Delete showtimes by room ID", description = "Deletes all showtimes for a specific cinema hall.")
     @DeleteMapping("/room/{roomId}")
     public ResponseEntity<?> deleteShowtimesByRoomId(@PathVariable Long roomId) {
-        try {
-            showtimeService.deleteShowtimesByRoomId(roomId);
+        showtimeService.deleteShowtimesByRoomId(roomId);
+        ResponseData<?> responseData = ResponseData.builder()
+                .status(200)
+                .message("Showtimes for room deleted successfully")
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
+    }
+
+    @Operation(summary = "Update showtime status", description = "Updates the status of a showtime (e.g., SCHEDULED, ONGOING, COMPLETED, CANCELED).")
+    @PutMapping("/{id}/status")
+    public ResponseEntity<?> updateShowtimeStatus(@PathVariable Long id, @RequestParam String status) {
+        boolean updated = showtimeService.updateShowtimeStatus(id,
+                Enum.valueOf(com.example.hotcinemas_be.enums.ShowTimeStatus.class, status));
+        if (updated) {
             ResponseData<?> responseData = ResponseData.builder()
                     .status(200)
-                    .message("Showtimes for room deleted successfully")
+                    .message("Showtime status updated successfully")
                     .timestamp(LocalDateTime.now())
                     .build();
             return ResponseEntity.ok(responseData);
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().body("Error deleting showtimes for room: " + ex.getMessage());
+        } else {
+            ResponseData<?> error = ResponseData.builder()
+                    .status(400)
+                    .message("Error updating showtime status: Showtime not found")
+                    .timestamp(LocalDateTime.now())
+                    .build();
+            return ResponseEntity.badRequest().body(error);
         }
+    }
+
+    @Operation(summary = "Get cinema showtimes by movie and date",
+               description = "Retrieves cinemas showing a movie on a specific date with pagination. Returns cinemas grouped by formats. " +
+                       "Optionally filtered by city or sorted by distance if coordinates are provided.")
+    @GetMapping("/movie/{movieId}/date/{date}")
+    public ResponseEntity<?> getCinemaShowtimesByMovieAndDate(
+            @PathVariable Long movieId,
+            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+            @RequestParam(required = false) Long cityId,
+            @RequestParam(required = false) Double latitude,
+            @RequestParam(required = false) Double longitude,
+            @PageableDefault(page = 0, size = 5) Pageable pageable) {
+        ResponseData<?> responseData = ResponseData.builder()
+                .status(200)
+                .message("Cinema showtimes retrieved successfully")
+                .data(showtimeService.getCinemaShowtimesByMovieAndDate(movieId, date, cityId, latitude, longitude, pageable))
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
+    }
+
+    @Operation(summary = "Get showtimes by cinema and date",
+               description = "Retrieves showtimes for a specific cinema on a given date with pagination.")
+    @GetMapping("/cinema/{cinemaId}/date/{date}")
+    public ResponseEntity<?> getShowtimesByCinemaAndDate(
+            @PathVariable("cinemaId") Long cinemaId,
+            @PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+            @PageableDefault(page = 0, size = 5) Pageable pageable) {
+        ResponseData<?> responseData = ResponseData.builder()
+                .status(200)
+                .message("Showtimes retrieved successfully")
+                .data(showtimeService.getShowtimesByCinemaAndDate(cinemaId, date, pageable))
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
+    }
+
+    @Operation(summary = "Get seats by showtime ID", description = "Retrieves all seats for a specific showtime.")
+    @GetMapping("/{showtimeId}/seats")
+    public ResponseEntity<?> getSeatsByShowtimeId(@PathVariable Long showtimeId) {
+        ResponseData<?> responseData = ResponseData.builder()
+                .status(200)
+                .message("Seats retrieved successfully for showtime ID: " + showtimeId)
+                .data(showtimeService.getSeatsByShowtimeId(showtimeId))
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
+    }
+
+    @PostMapping("/{showtimeId}/lock-seat/{seatId}" )
+    public ResponseEntity<?> lockSeat(
+            @PathVariable Long showtimeId,
+            @PathVariable Long seatId,
+            @RequestParam(name = "userId") Long userId) {
+        showtimeService.lockSeatForShowtime(showtimeId, seatId, userId != null ? userId : 0L);
+        ResponseData<?> responseData = ResponseData.builder()
+                .status(200)
+                .message("Seat locked successfully")
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
+    }
+
+    @PostMapping("/{showtimeId}/unlock-seat/{seatId}" )
+    public ResponseEntity<?> unlockSeat(
+            @PathVariable Long showtimeId,
+            @PathVariable Long seatId) {
+        showtimeService.unlockSeatForShowtime(showtimeId, seatId);
+        ResponseData<?> responseData = ResponseData.builder()
+                .status(200)
+                .message("Seat unlocked successfully")
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(responseData);
     }
 }

@@ -21,11 +21,7 @@ public interface SeatRepository extends JpaRepository<Seat, Long> {
 
     List<Seat> findByRoomIdAndSeatType(Long roomId, SeatType seatType);
 
-    Optional<Seat> findByRoomIdAndRowLabelAndSeatNumber(Long roomId, String rowLabel, String seatNumber);
-
-    @Query("SELECT s FROM Seat s WHERE s.room.id = :roomId AND s.rowLabel = :rowLabel AND s.seatNumber = :seatNumber")
-    Optional<Seat> findSeatByRoomAndPosition(@Param("roomId") Long roomId, @Param("rowLabel") String rowLabel,
-            @Param("seatNumber") String seatNumber);
+    Optional<Seat> findByRoomIdAndName(Long roomId, String name);
 
     Page<Seat> findByRoomId(Long roomId, Pageable pageable);
 

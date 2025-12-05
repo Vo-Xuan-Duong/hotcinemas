@@ -1,7 +1,9 @@
 package com.example.hotcinemas_be.models;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.example.hotcinemas_be.enums.RoomType;
@@ -37,12 +39,6 @@ public class Room {
     @Column(name = "room_type", nullable = false)
     private RoomType roomType;
 
-    @Column(name = "rows_count", nullable = false)
-    private Integer rowsCount;
-
-    @Column(name = "seats_per_row", nullable = false)
-    private Integer seatsPerRow;
-
     private BigDecimal price;
 
     @Column(name = "is_active", nullable = false)
@@ -51,5 +47,9 @@ public class Room {
     // Relationships
     @Builder.Default
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Seat> seats = new HashSet<>();
+    private List<Seat> seats = new ArrayList<>();
+
+    public Integer getTotalSeats() {
+        return seats != null ? seats.size() : 0;
+    }
 }

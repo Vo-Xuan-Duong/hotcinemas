@@ -92,13 +92,13 @@ public enum PermissionType {
     PAYMENT_PROCESS("PAYMENT_PROCESS", "Xử lý thanh toán"),
     PAYMENT_REFUND("PAYMENT_REFUND", "Hoàn tiền"),
 
-    // ========== PROMOTION MANAGEMENT ==========
-    PROMOTION_CREATE("PROMOTION_CREATE", "Tạo khuyến mãi mới"),
-    PROMOTION_READ("PROMOTION_READ", "Xem thông tin khuyến mãi"),
-    PROMOTION_UPDATE("PROMOTION_UPDATE", "Cập nhật thông tin khuyến mãi"),
-    PROMOTION_DELETE("PROMOTION_DELETE", "Xóa khuyến mãi"),
-    PROMOTION_ACTIVATE("PROMOTION_ACTIVATE", "Kích hoạt khuyến mãi"),
-    PROMOTION_DEACTIVATE("PROMOTION_DEACTIVATE", "Vô hiệu hóa khuyến mãi"),
+    // ========== VOUCHER MANAGEMENT ==========
+    VOUCHER_CREATE("VOUCHER_CREATE", "Tạo voucher mới"),
+    VOUCHER_READ("VOUCHER_READ", "Xem thông tin voucher"),
+    VOUCHER_UPDATE("VOUCHER_UPDATE", "Cập nhật thông tin voucher"),
+    VOUCHER_DELETE("VOUCHER_DELETE", "Xóa voucher"),
+    VOUCHER_ACTIVATE("VOUCHER_ACTIVATE", "Kích hoạt voucher"),
+    VOUCHER_DEACTIVATE("VOUCHER_DEACTIVATE", "Vô hiệu hóa voucher"),
 
     // ========== SYSTEM MANAGEMENT ==========
     SYSTEM_READ_LOGS("SYSTEM_READ_LOGS", "Xem nhật ký hệ thống"),

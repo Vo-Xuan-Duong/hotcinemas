@@ -1,11 +1,14 @@
 package com.example.hotcinemas_be.dtos.showtime.requests;
 
+import com.example.hotcinemas_be.enums.MovieFormat;
+import com.example.hotcinemas_be.enums.ShowTimeStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Builder
 @Data
@@ -14,7 +17,9 @@ import java.time.LocalDateTime;
 public class ShowtimeRequest {
     private Long roomId;
     private Long movieId;
-    private LocalDateTime startTime;
+    private LocalDate date;
+    private LocalTime startTime;
     private Double ticketPrice;
-    private Boolean isActive;
+    private MovieFormat movieFormat;
+    private ShowTimeStatus status;
 }

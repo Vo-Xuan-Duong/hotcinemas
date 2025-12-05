@@ -12,8 +12,7 @@ public class SeatMapper {
         }
         return SeatResponse.builder()
                 .id(seat.getId())
-                .rowLabel(seat.getRowLabel())
-                .seatNumber(seat.getSeatNumber())
+                .name(seat.getName())
                 .seatType(seat.getSeatType())
                 .status(seat.getStatus())
                 .col(seat.getCol())

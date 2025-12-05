@@ -11,10 +11,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CinemaResponse {
     private Long id;
+    private String iconUrl;
     private String name;
     private String address;
-    private String phoneNumber;
+    private String phone;
+    private String email;
     private String city;
+    private Double latitude;
+    private Double longitude;
+    private Integer numberOfRooms;
     private String createdAt;
     private String updatedAt;
 }

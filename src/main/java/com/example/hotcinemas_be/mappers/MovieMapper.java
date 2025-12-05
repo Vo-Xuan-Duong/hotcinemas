@@ -3,13 +3,16 @@ package com.example.hotcinemas_be.mappers;
 import com.example.hotcinemas_be.dtos.movie.responses.MovieResponse;
 import com.example.hotcinemas_be.dtos.movie.responses.MovieListItemResponse;
 import com.example.hotcinemas_be.models.Movie;
+import com.example.hotcinemas_be.services.CommentService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MovieMapper {
     private final GenreMapper genreMapper;
+    private final CommentService commentService;
 
-    public MovieMapper(GenreMapper genreMapper) {
+    public MovieMapper(GenreMapper genreMapper, CommentService commentService) {
+        this.commentService = commentService;
         this.genreMapper = genreMapper;
     }
 
@@ -28,10 +31,11 @@ public class MovieMapper {
                 .releaseDate(movie.getReleaseDate())
                 .originalLanguage(movie.getOriginalLanguage())
                 .format(movie.getFormat())
-                .ageRating(movie.getAgeRating())
+                .ageRating(commentService.getAverageRatingByMovieId(movie.getId()).toString())
                 .trailerUrl(movie.getTrailerUrl())
                 .posterPath(movie.getPosterPath())
                 .backdropPath(movie.getBackdropPath())
+                .status(movie.getStatus())
                 .genres(movie.getGenres() != null ? movie.getGenres().stream().map(genreMapper::mapToResponse).toList()
                         : null)
                 .originCountry(movie.getOriginCountry())
@@ -50,15 +54,18 @@ public class MovieMapper {
         return MovieListItemResponse.builder()
                 .id(movie.getId())
                 .title(movie.getTitle())
+                .overview(movie.getOverview())
                 .releaseDate(movie.getReleaseDate())
                 .posterPath(movie.getPosterPath())
                 .backdropPath(movie.getBackdropPath())
+                .trailerUrl(movie.getTrailerUrl())
                 .duration(movie.getDurationMinutes())
                 .format(movie.getFormat())
                 .genres(movie.getGenres() != null ? movie.getGenres().stream().map(genreMapper::mapToResponse).toList()
                         : null)
-                .ageRating(movie.getAgeRating())
+                .ageRating(commentService.getAverageRatingByMovieId(movie.getId()).toString())
                 .voteAverage(movie.getVoteAverage())
+                .status(movie.getStatus())
                 .isActive(movie.getIsActive())
                 .build();
     }

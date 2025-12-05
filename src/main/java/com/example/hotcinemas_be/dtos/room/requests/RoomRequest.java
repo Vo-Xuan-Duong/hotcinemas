@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Builder
 @Data
@@ -17,6 +18,7 @@ public class RoomRequest {
     private RoomType roomType;
     private Integer rowsCount;
     private Integer seatsPerRow;
+    private List<Long> rowVip;
     private BigDecimal price;
     private Boolean isActive;
 }

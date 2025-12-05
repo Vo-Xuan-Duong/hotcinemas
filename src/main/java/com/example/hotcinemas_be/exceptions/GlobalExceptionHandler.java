@@ -63,7 +63,7 @@ public class GlobalExceptionHandler {
                 errorCode.getCode(), ex.getMessage(), ex);
         ResponseData<?> error = ResponseData.builder()
                 .status(errorCode.getHttpStatus().value())
-                .message(errorCode.getMessage())
+                .message(ex.getMessage() != null ? ex.getMessage() : errorCode.getMessage())
                 .path(request.getRequestURI())
                 .timestamp(LocalDateTime.now())
                 .build();

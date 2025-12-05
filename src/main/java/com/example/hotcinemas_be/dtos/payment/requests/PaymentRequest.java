@@ -20,18 +20,6 @@ public class PaymentRequest {
     @NotNull(message = "Booking ID is required")
     private Long bookingId;
 
-    @NotNull(message = "Amount is required")
-    @DecimalMin(value = "0.01", message = "Amount must be greater than 0")
-    private BigDecimal amount;
-
     @NotNull(message = "Payment method is required")
     private PaymentMethod paymentMethod;
-
-    private String transactionId;
-
-    private PaymentStatus status;
-
-    private String currency;
-
-    private String notes;
 }
