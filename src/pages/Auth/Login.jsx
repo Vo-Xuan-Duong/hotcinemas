@@ -1,56 +1,33 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import useAuth from '../../context/useAuth';
+import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import LoginForm from '../../components/Auth/LoginForm';
 import './Auth.css';
 
-const Login = ({ onSwitchToRegister }) => {
-  const { login, isLoading, error, clearError } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || '/';
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    clearError();
-    try {
-      await login(email, password);
-      navigate('/');
-    } catch {
-      // Không làm gì
-    }
+  const handleSwitchToRegister = () => {
+    navigate('/register');
+  };
+
+  const handleClose = () => {
+    // After successful login, redirect to the intended page
+    navigate(from);
   };
 
   return (
-    <div className="auth-container">
-      <form className="auth-form" onSubmit={handleSubmit}>
-        <h2>Đăng nhập</h2>
-        {error && <div className="error-message">{error}</div>}
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          required
+    <div className="auth-page-container">
+      <div className="auth-page-card">
+        <div className="auth-page-brand">
+          <h1>🎬 HotCinemas</h1>
+        </div>
+        <LoginForm
+          onSwitchToRegister={handleSwitchToRegister}
+          onClose={handleClose}
         />
-        <input
-          type="password"
-          placeholder="Mật khẩu"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Đang đăng nhập...' : 'Đăng nhập'}
-        </button>
-        <p className="auth-link">
-          Chưa có tài khoản?{' '}
-          {onSwitchToRegister ? (
-            <span className="switch-link" onClick={onSwitchToRegister} style={{ color: '#007bff', cursor: 'pointer' }}>Đăng ký</span>
-          ) : (
-            <Link to="/register">Đăng ký</Link>
-          )}
-        </p>
-      </form>
+      </div>
     </div>
   );
 };

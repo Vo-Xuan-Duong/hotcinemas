@@ -37,8 +37,15 @@ const SearchResults = () => {
 
         setLoading(true);
         try {
-            const allMovies = await movieService.getAllMovies();
-            const allCinemas = await cinemaService.getAllCinemas();
+            const [moviesResponse, allCinemas] = await Promise.all([
+                movieService.getAllMovies(),
+                cinemaService.getAllCinemas()
+            ]);
+
+            // Handle Page object from getAllMovies
+            const allMovies = Array.isArray(moviesResponse)
+                ? moviesResponse
+                : (moviesResponse?.content || []);
 
             let movieResults = [];
             let cinemaResults = [];

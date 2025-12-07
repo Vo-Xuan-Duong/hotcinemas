@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Table,
@@ -18,7 +18,7 @@ import {
   Tag,
   Image,
   Tooltip,
-  Divider
+  Pagination
 } from 'antd';
 import {
   PlusOutlined,
@@ -31,8 +31,9 @@ import {
   MailOutlined
 } from '@ant-design/icons';
 
-// Import data
-import cinemasData from '../../../data/cinemas.json';
+// Import services
+import cinemaService from '../../../services/cinemaService';
+import cityService from '../../../services/cityService';
 import './CinemasAntd.css';
 
 const { Title, Text } = Typography;
@@ -40,7 +41,8 @@ const { Option } = Select;
 
 const Cinemas = () => {
   const navigate = useNavigate();
-  const [cinemas, setCinemas] = useState(cinemasData);
+  const [cinemas, setCinemas] = useState([]);
+  const [cities, setCities] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
@@ -48,75 +50,186 @@ const Cinemas = () => {
   const [form] = Form.useForm();
   const [searchText, setSearchText] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
+  const [cityFilter, setCityFilter] = useState(null);
 
-  // Tính toán thống kê
-  const cinemaStats = {
-    total: cinemas.length,
-    active: cinemas.filter(c => c.status === 'active').length,
-    totalRooms: cinemas.reduce((sum, c) => sum + (c.rooms?.length || 0), 0),
-    totalSeats: cinemas.reduce((sum, c) =>
-      sum + (c.rooms?.reduce((roomSum, room) => roomSum + (room.capacity || 0), 0) || 0), 0)
-  };
-
-  // Lọc rạp
-  const filteredCinemas = cinemas.filter(cinema => {
-    const matchesSearch = cinema.name?.toLowerCase().includes(searchText.toLowerCase()) ||
-      cinema.address?.toLowerCase().includes(searchText.toLowerCase());
-    const matchesStatus = statusFilter === 'all' || cinema.status === statusFilter;
-    return matchesSearch && matchesStatus;
+  // Pagination state
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 10,
+    total: 0
   });
 
-  // Xử lý thêm rạp
-  const handleAddCinema = (values) => {
-    const newCinema = {
-      id: Math.max(...cinemas.map(c => c.id || 0)) + 1,
-      ...values,
-      rooms: [],
-      status: values.status || 'active',
-      facilities: values.facilities || []
-    };
+  // Load data when component mounts or when filters/pagination change
+  useEffect(() => {
+    loadCinemas();
+  }, [pagination.current, pagination.pageSize, statusFilter, cityFilter]);
 
-    setCinemas([...cinemas, newCinema]);
-    setIsAddModalVisible(false);
-    form.resetFields();
-    message.success('Thêm rạp chiếu phim thành công!');
+  const loadCinemas = async () => {
+    try {
+      setLoading(true);
+
+      const params = {
+        page: pagination.current - 1, // Backend uses 0-based indexing
+        size: pagination.pageSize
+      };
+
+      // Apply filters
+      if (statusFilter !== 'all') {
+        params.status = statusFilter;
+      }
+      if (cityFilter) {
+        params.cityId = cityFilter;
+      }
+
+      const response = await cinemaService.getAllCinemas(params);
+      console.log('Cinemas response:', response);
+
+      // Handle paginated response
+      const cinemasData = response?.data?.content || response?.data || [];
+      const total = response?.data?.totalElements || cinemasData.length;
+
+      setCinemas(cinemasData);
+      setPagination(prev => ({
+        ...prev,
+        total
+      }));
+    } catch (error) {
+      console.error('Error loading cinemas:', error);
+      message.error('Lỗi khi tải danh sách rạp');
+      setCinemas([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // Xử lý chỉnh sửa rạp
-  const handleEditCinema = (values) => {
-    const updatedCinemas = cinemas.map(cinema =>
-      cinema.id === selectedCinema.id
-        ? { ...cinema, ...values }
-        : cinema
-    );
+  const loadCities = async () => {
+    try {
+      const citiesResponse = await cityService.getActiveCities();
+      console.log('Cities response:', citiesResponse);
 
-    setCinemas(updatedCinemas);
-    setIsEditModalVisible(false);
-    setSelectedCinema(null);
-    form.resetFields();
-    message.success('Cập nhật rạp chiếu phim thành công!');
+      let citiesData = [];
+      if (Array.isArray(citiesResponse?.data)) {
+        citiesData = citiesResponse.data;
+      } else if (Array.isArray(citiesResponse?.data?.data)) {
+        citiesData = citiesResponse.data.data;
+      } else if (citiesResponse?.data) {
+        citiesData = citiesResponse.data.content || citiesResponse.data.cities || [];
+      }
+
+      setCities(citiesData);
+    } catch (error) {
+      console.error('Error loading cities:', error);
+      message.error('Lỗi khi tải danh sách thành phố');
+    }
   };
 
-  // Xử lý xóa rạp
-  const handleDeleteCinema = (cinemaId) => {
-    const updatedCinemas = cinemas.filter(cinema => cinema.id !== cinemaId);
-    setCinemas(updatedCinemas);
-    message.success('Xóa rạp chiếu phim thành công!');
+  // Filter cinemas by search text
+  const getFilteredCinemas = () => {
+    if (!searchText) return cinemas;
+    return cinemas.filter(cinema => {
+      const matchesSearch = cinema.name?.toLowerCase().includes(searchText.toLowerCase()) ||
+        cinema.address?.toLowerCase().includes(searchText.toLowerCase());
+      return matchesSearch;
+    });
   };
 
-  // Hiển thị modal
-  const showAddModal = () => {
+  // Calculate statistics
+  const cinemaStats = {
+    total: pagination.total,
+    active: cinemas.filter(c => c.status === 'active' || c.isActive).length,
+    totalRooms: cinemas.reduce((sum, c) => sum + (c.numberOfRooms || 0), 0),
+  };
+
+  // Handle add cinema
+  const handleAddCinema = async (values) => {
+    try {
+      await cinemaService.createCinema(values);
+      message.success('Thêm rạp chiếu phim thành công!');
+      setIsAddModalVisible(false);
+      form.resetFields();
+      await loadCinemas(); // Reload current page
+    } catch (error) {
+      console.error('Error adding cinema:', error);
+      message.error(error.response?.data?.message || 'Lỗi khi thêm rạp');
+    }
+  };
+
+  // Handle edit cinema
+  const handleEditCinema = async (values) => {
+    try {
+      await cinemaService.updateCinema(selectedCinema.id, values);
+      message.success('Cập nhật rạp chiếu phim thành công!');
+      setIsEditModalVisible(false);
+      setSelectedCinema(null);
+      form.resetFields();
+      await loadCinemas(); // Reload current page
+    } catch (error) {
+      console.error('Error updating cinema:', error);
+      message.error(error.response?.data?.message || 'Lỗi khi cập nhật rạp');
+    }
+  };
+
+  // Handle delete cinema
+  const handleDeleteCinema = async (cinemaId) => {
+    try {
+      await cinemaService.deleteCinema(cinemaId);
+      message.success('Xóa rạp chiếu phim thành công!');
+      await loadCinemas(); // Reload current page
+    } catch (error) {
+      console.error('Error deleting cinema:', error);
+      message.error(error.response?.data?.message || 'Lỗi khi xóa rạp');
+    }
+  };
+
+  // Show add modal
+  const showAddModal = async () => {
+    if (cities.length === 0) {
+      await loadCities();
+    }
     setIsAddModalVisible(true);
     form.resetFields();
   };
 
-  const showEditModal = (cinema) => {
+  // Show edit modal
+  const showEditModal = async (cinema) => {
+    if (cities.length === 0) {
+      await loadCities();
+    }
     setSelectedCinema(cinema);
     setIsEditModalVisible(true);
+
+    console.log('Cinema data for edit:', cinema);
+
     form.setFieldsValue({
-      ...cinema,
-      facilities: cinema.facilities || []
+      name: cinema.name,
+      status: cinema.status,
+      cityId: cinema.cityId || cinema.city?.id,
+      address: cinema.address,
+      phone: cinema.phone,
+      email: cinema.email,
+      description: cinema.description || '',
+      image: cinema.image || ''
     });
+  };
+
+  // Handle pagination change
+  const handlePageChange = (page, pageSize) => {
+    setPagination(prev => ({
+      ...prev,
+      current: page,
+      pageSize
+    }));
+  };
+
+  // Handle filter change
+  const handleStatusFilterChange = (value) => {
+    setStatusFilter(value);
+    setPagination(prev => ({ ...prev, current: 1 })); // Reset to first page
+  };
+
+  const handleCityFilterChange = (value) => {
+    setCityFilter(value);
+    setPagination(prev => ({ ...prev, current: 1 })); // Reset to first page
   };
 
   // Render trạng thái
@@ -186,11 +299,11 @@ const Cinemas = () => {
     },
     {
       title: 'Phòng chiếu',
-      dataIndex: 'rooms',
-      key: 'rooms',
+      dataIndex: 'numberOfRooms',
+      key: 'numberOfRooms',
       width: 100,
       align: 'center',
-      render: (rooms) => rooms?.length || 0,
+      // render: (rooms) => rooms?.length || 0,
     },
     {
       title: 'Trạng thái',
@@ -264,54 +377,10 @@ const Cinemas = () => {
         </Button>
       </div>
 
-      {/* Statistics */}
-      <Row gutter={[16, 16]} className="quick-stats">
-        <Col xs={24} sm={12} md={6}>
-          <Card className="stat-card">
-            <Statistic
-              title="Tổng số rạp"
-              value={cinemaStats.total}
-              prefix={<ShopOutlined className="stat-icon" style={{ color: '#1890ff' }} />}
-              valueStyle={{ color: '#1890ff' }}
-            />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={6}>
-          <Card className="stat-card">
-            <Statistic
-              title="Rạp hoạt động"
-              value={cinemaStats.active}
-              prefix={<ShopOutlined className="stat-icon" style={{ color: '#52c41a' }} />}
-              valueStyle={{ color: '#52c41a' }}
-            />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={6}>
-          <Card className="stat-card">
-            <Statistic
-              title="Tổng phòng chiếu"
-              value={cinemaStats.totalRooms}
-              prefix={<ShopOutlined className="stat-icon" style={{ color: '#faad14' }} />}
-              valueStyle={{ color: '#faad14' }}
-            />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={6}>
-          <Card className="stat-card">
-            <Statistic
-              title="Tổng ghế ngồi"
-              value={cinemaStats.totalSeats}
-              prefix={<ShopOutlined className="stat-icon" style={{ color: '#722ed1' }} />}
-              valueStyle={{ color: '#722ed1' }}
-            />
-          </Card>
-        </Col>
-      </Row>
-
       {/* Search and Filter */}
       <Card className="search-filter-section">
         <Row gutter={[16, 16]}>
-          <Col xs={24} md={12}>
+          <Col xs={24} md={8}>
             <Input.Search
               placeholder="Tìm kiếm theo tên rạp, địa chỉ..."
               value={searchText}
@@ -320,11 +389,11 @@ const Cinemas = () => {
               size="large"
             />
           </Col>
-          <Col xs={24} md={12}>
+          <Col xs={24} md={8}>
             <Select
               placeholder="Lọc theo trạng thái"
               value={statusFilter}
-              onChange={setStatusFilter}
+              onChange={handleStatusFilterChange}
               style={{ width: '100%' }}
               size="large"
             >
@@ -334,26 +403,52 @@ const Cinemas = () => {
               <Option value="maintenance">Bảo trì</Option>
             </Select>
           </Col>
+          <Col xs={24} md={8}>
+            <Select
+              placeholder="Lọc theo thành phố"
+              value={cityFilter}
+              onChange={handleCityFilterChange}
+              style={{ width: '100%' }}
+              size="large"
+              allowClear
+              onDropdownVisibleChange={(open) => {
+                if (open && cities.length === 0) {
+                  loadCities();
+                }
+              }}
+            >
+              {cities.map(city => (
+                <Option key={city.id} value={city.id}>
+                  {city.name}
+                </Option>
+              ))}
+            </Select>
+          </Col>
         </Row>
       </Card>
 
       {/* Cinemas Table */}
-      <Card>
+      <Card title="Danh sách rạp chiếu phim">
         <Table
           columns={columns}
-          dataSource={filteredCinemas}
+          dataSource={getFilteredCinemas()}
           rowKey="id"
           loading={loading}
-          pagination={{
-            total: filteredCinemas.length,
-            pageSize: 10,
-            showSizeChanger: true,
-            showQuickJumper: true,
-            showTotal: (total, range) =>
-              `${range[0]}-${range[1]} của ${total} rạp chiếu phim`,
-          }}
+          pagination={false}
           scroll={{ x: 1200 }}
+          locale={{ emptyText: 'Không có rạp nào' }}
         />
+        <div style={{ marginTop: 16, textAlign: 'right' }}>
+          <Pagination
+            current={pagination.current}
+            pageSize={pagination.pageSize}
+            total={pagination.total}
+            onChange={handlePageChange}
+            showSizeChanger
+            showTotal={(total) => `Tổng ${total} rạp`}
+            pageSizeOptions={['5', '10', '20', '50']}
+          />
+        </div>
       </Card>
 
       {/* Add Cinema Modal */}
@@ -390,7 +485,7 @@ const Cinemas = () => {
                 rules={[{ required: true, message: 'Vui lòng chọn trạng thái!' }]}
                 initialValue="active"
               >
-                <Select>
+                <Select getPopupContainer={(trigger) => trigger.parentElement}>
                   <Option value="active">Hoạt động</Option>
                   <Option value="inactive">Không hoạt động</Option>
                   <Option value="maintenance">Bảo trì</Option>
@@ -398,6 +493,32 @@ const Cinemas = () => {
               </Form.Item>
             </Col>
           </Row>
+
+          <Form.Item
+            name="cityId"
+            label="Thành phố"
+            rules={[{ required: true, message: 'Vui lòng chọn thành phố!' }]}
+          >
+            <Select
+              placeholder="Chọn thành phố"
+              showSearch
+              optionFilterProp="children"
+              getPopupContainer={(trigger) => trigger.parentElement}
+              filterOption={(input, option) =>
+                option?.children?.toLowerCase().includes(input.toLowerCase())
+              }
+              loading={cities.length === 0}
+              notFoundContent={cities.length === 0 ? 'Đang tải...' : 'Không có dữ liệu'}
+            >
+              {cities && cities.length > 0 ? (
+                cities.map(city => (
+                  <Option key={city.id} value={city.id}>
+                    {city.name}
+                  </Option>
+                ))
+              ) : null}
+            </Select>
+          </Form.Item>
 
           <Form.Item
             name="address"
@@ -446,25 +567,6 @@ const Cinemas = () => {
             label="Hình ảnh URL"
           >
             <Input placeholder="Nhập URL hình ảnh" />
-          </Form.Item>
-
-          <Form.Item
-            name="facilities"
-            label="Tiện ích"
-          >
-            <Select
-              mode="tags"
-              placeholder="Nhập hoặc chọn tiện ích"
-              options={[
-                { label: 'Parking', value: 'Parking' },
-                { label: 'Food Court', value: 'Food Court' },
-                { label: 'AC', value: 'AC' },
-                { label: 'WiFi', value: 'WiFi' },
-                { label: 'ATM', value: 'ATM' },
-                { label: '3D', value: '3D' },
-                { label: 'IMAX', value: 'IMAX' },
-              ]}
-            />
           </Form.Item>
 
           <Form.Item>
@@ -517,7 +619,7 @@ const Cinemas = () => {
                 label="Trạng thái"
                 rules={[{ required: true, message: 'Vui lòng chọn trạng thái!' }]}
               >
-                <Select>
+                <Select getPopupContainer={(trigger) => trigger.parentElement}>
                   <Option value="active">Hoạt động</Option>
                   <Option value="inactive">Không hoạt động</Option>
                   <Option value="maintenance">Bảo trì</Option>
@@ -525,6 +627,32 @@ const Cinemas = () => {
               </Form.Item>
             </Col>
           </Row>
+
+          <Form.Item
+            name="cityId"
+            label="Thành phố"
+            rules={[{ required: true, message: 'Vui lòng chọn thành phố!' }]}
+          >
+            <Select
+              placeholder="Chọn thành phố"
+              showSearch
+              optionFilterProp="children"
+              getPopupContainer={(trigger) => trigger.parentElement}
+              filterOption={(input, option) =>
+                option?.children?.toLowerCase().includes(input.toLowerCase())
+              }
+              loading={cities.length === 0}
+              notFoundContent={cities.length === 0 ? 'Đang tải...' : 'Không có dữ liệu'}
+            >
+              {cities && cities.length > 0 ? (
+                cities.map(city => (
+                  <Option key={city.id} value={city.id}>
+                    {city.name}
+                  </Option>
+                ))
+              ) : null}
+            </Select>
+          </Form.Item>
 
           <Form.Item
             name="address"
@@ -573,25 +701,6 @@ const Cinemas = () => {
             label="Hình ảnh URL"
           >
             <Input placeholder="Nhập URL hình ảnh" />
-          </Form.Item>
-
-          <Form.Item
-            name="facilities"
-            label="Tiện ích"
-          >
-            <Select
-              mode="tags"
-              placeholder="Nhập hoặc chọn tiện ích"
-              options={[
-                { label: 'Parking', value: 'Parking' },
-                { label: 'Food Court', value: 'Food Court' },
-                { label: 'AC', value: 'AC' },
-                { label: 'WiFi', value: 'WiFi' },
-                { label: 'ATM', value: 'ATM' },
-                { label: '3D', value: '3D' },
-                { label: 'IMAX', value: 'IMAX' },
-              ]}
-            />
           </Form.Item>
 
           <Form.Item>

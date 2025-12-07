@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { List, Card, Typography, Tag, Button, Empty, Avatar, Space } from 'antd';
+import { List, Card, Typography, Tag, Button, Empty, Avatar, Space, message } from 'antd';
 import { BellOutlined, CheckOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
 import './Notifications.css';
+import notificationService from '../../../services/notificationService';
 
 const { Title, Text } = Typography;
 
@@ -10,50 +11,28 @@ const Notifications = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Mock notifications data
-        const mockNotifications = [
-            {
-                id: 1,
-                type: 'booking',
-                title: 'Đặt vé thành công',
-                message: 'Bạn đã đặt thành công 2 vé xem phim "Transformer: Rise of the Beasts" tại CGV Nguyễn Văn Cừ',
-                time: '2 phút trước',
-                read: false,
-                priority: 'high'
-            },
-            {
-                id: 2,
-                type: 'promotion',
-                title: 'Khuyến mãi mới',
-                message: 'Giảm 50% cho tất cả suất chiếu vào thứ 3 hàng tuần. Áp dụng đến hết tháng này!',
-                time: '1 giờ trước',
-                read: false,
-                priority: 'medium'
-            },
-            {
-                id: 3,
-                type: 'reminder',
-                title: 'Nhắc nhở xem phim',
-                message: 'Chỉ còn 30 phút nữa đến giờ chiếu phim "Avatar: The Way of Water" tại Galaxy Nguyễn Du',
-                time: '3 giờ trước',
-                read: true,
-                priority: 'high'
-            },
-            {
-                id: 4,
-                type: 'system',
-                title: 'Cập nhật hệ thống',
-                message: 'Hệ thống đã được cập nhật với tính năng mới. Bạn có thể đặt vé trước 7 ngày.',
-                time: '1 ngày trước',
-                read: true,
-                priority: 'low'
+        const fetchNotifications = async () => {
+            setLoading(true);
+            try {
+                const data = await notificationService.list();
+                // Normalize payload shape
+                const items = Array.isArray(data) ? data : (data?.items || []);
+                setNotifications(items.map(n => ({
+                    id: n.id ?? n._id,
+                    type: n.type || 'system',
+                    title: n.title || 'Thông báo',
+                    message: n.message || n.content || '',
+                    time: n.time || n.createdAt || '',
+                    read: !!(n.read ?? n.isRead),
+                    priority: n.priority || 'low'
+                })));
+            } catch (err) {
+                message.error(err.message || 'Không tải được danh sách thông báo');
+            } finally {
+                setLoading(false);
             }
-        ];
-
-        setTimeout(() => {
-            setNotifications(mockNotifications);
-            setLoading(false);
-        }, 1000);
+        };
+        fetchNotifications();
     }, []);
 
     const getNotificationIcon = (type) => {
@@ -75,22 +54,37 @@ const Notifications = () => {
         return colors[priority] || 'default';
     };
 
-    const markAsRead = (id) => {
-        setNotifications(prev =>
-            prev.map(notif =>
-                notif.id === id ? { ...notif, read: true } : notif
-            )
-        );
+    const markAsRead = async (id) => {
+        // Optimistic UI
+        setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
+        try {
+            await notificationService.markAsRead(id);
+        } catch (err) {
+            message.error('Không thể đánh dấu đã đọc');
+        }
     };
 
-    const deleteNotification = (id) => {
-        setNotifications(prev => prev.filter(notif => notif.id !== id));
+    const deleteNotification = async (id) => {
+        const prev = notifications;
+        setNotifications(prev.filter(n => n.id !== id));
+        try {
+            await notificationService.delete(id);
+        } catch (err) {
+            message.error('Xóa thất bại');
+            setNotifications(prev);
+        }
     };
 
-    const markAllAsRead = () => {
-        setNotifications(prev =>
-            prev.map(notif => ({ ...notif, read: true }))
-        );
+    const markAllAsRead = async () => {
+        // Optimistic UI
+        const prev = notifications;
+        setNotifications(prev.map(n => ({ ...n, read: true })));
+        try {
+            await notificationService.markAllAsRead();
+        } catch (err) {
+            message.error('Không thể đánh dấu tất cả đã đọc');
+            setNotifications(prev);
+        }
     };
 
     const unreadCount = notifications.filter(notif => !notif.read).length;

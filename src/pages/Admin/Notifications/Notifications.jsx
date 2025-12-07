@@ -102,10 +102,10 @@ const Notifications = () => {
           const updatedList = notificationList.map(item =>
             item.id === selectedNotification.id
               ? {
-                  ...item,
-                  ...values,
-                  schedule: values.schedule && values.schedule.toISOString ? values.schedule.toISOString() : item.schedule
-                }
+                ...item,
+                ...values,
+                schedule: values.schedule && values.schedule.toISOString ? values.schedule.toISOString() : item.schedule
+              }
               : item
           );
           setNotificationList(updatedList);
@@ -259,44 +259,8 @@ const Notifications = () => {
     });
   };
 
-  const stats = [
-    {
-      title: 'Tổng số thông báo',
-      value: notificationList.length,
-      icon: <BellOutlined />,
-    },
-    {
-      title: 'Thông báo đã gửi',
-      value: notificationList.filter(item => item.status === 'Đã gửi').length,
-      icon: <SendOutlined />,
-    },
-    {
-      title: 'Thông báo chưa gửi',
-      value: notificationList.filter(item => item.status === 'Chưa gửi').length,
-      icon: <ClockCircleOutlined />,
-    },
-    {
-      title: 'Tỷ lệ mở',
-      value: notificationList.length > 0 ? Math.round((notificationList.reduce((acc, cur) => acc + (cur.opened || 0), 0) / (notificationList.reduce((acc, cur) => acc + (cur.sentTo || 1), 0)) * 100) || 0) + '%' : '0%',
-      icon: <CheckCircleOutlined />,
-    },
-  ];
-
   return (
     <div className={styles['notifications-container']}>
-      {/* Statistics Cards - horizontal row */}
-      <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
-        {stats.map((stat, idx) => (
-          <Card key={idx} className={styles['notifications-card']} style={{ flex: 1, minWidth: 0 }}>
-            <Statistic
-              title={stat.title}
-              value={stat.value}
-              prefix={stat.icon}
-            />
-          </Card>
-        ))}
-      </div>
-
       {/* Notification List & Tabs */}
       <Card className={styles['notifications-card']}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
@@ -319,19 +283,19 @@ const Notifications = () => {
               label: 'Tất cả',
               children: (
                 loading ? <Spin /> :
-                <Table
-                  columns={columns}
-                  dataSource={notificationList}
-                  rowKey="id"
-                  className={styles['notifications-table']}
-                  pagination={{
-                    total: notificationList.length,
-                    pageSize: 10,
-                    showSizeChanger: true,
-                    showQuickJumper: true,
-                    showTotal: (total, range) => `${range[0]}-${range[1]} của ${total} thông báo`
-                  }}
-                />
+                  <Table
+                    columns={columns}
+                    dataSource={notificationList}
+                    rowKey="id"
+                    className={styles['notifications-table']}
+                    pagination={{
+                      total: notificationList.length,
+                      pageSize: 10,
+                      showSizeChanger: true,
+                      showQuickJumper: true,
+                      showTotal: (total, range) => `${range[0]}-${range[1]} của ${total} thông báo`
+                    }}
+                  />
               )
             },
             {
@@ -411,7 +375,14 @@ const Notifications = () => {
                   <Row gutter={16}>
                     <Col span={12}>
                       <Card title="Tỷ lệ mở thông báo" className={styles['notifications-card']}>
-                        <Progress percent={parseInt(stats[3].value)} strokeColor="#e50914" />
+                        <Progress
+                          percent={
+                            notificationList.length > 0
+                              ? Math.round((notificationList.reduce((acc, cur) => acc + (cur.opened || 0), 0) / (notificationList.reduce((acc, cur) => acc + (cur.sentTo || 1), 0)) * 100) || 0)
+                              : 0
+                          }
+                          strokeColor="#e50914"
+                        />
                       </Card>
                     </Col>
                     <Col span={12}>

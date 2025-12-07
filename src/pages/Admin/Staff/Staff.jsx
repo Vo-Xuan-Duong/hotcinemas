@@ -122,8 +122,8 @@ const Staff = () => {
   const roleCount = new Set(staff.map(s => s.role)).size;
 
   const handleStatusChange = (checked, record) => {
-    const updatedStaff = staff.map(s => 
-      s.id === record.id 
+    const updatedStaff = staff.map(s =>
+      s.id === record.id
         ? { ...s, status: checked ? 'active' : 'inactive' }
         : s
     );
@@ -176,7 +176,7 @@ const Staff = () => {
       message.error(`Không thể xóa vai trò "${role.name}" vì có ${staffUsingRole.length} nhân viên đang sử dụng`);
       return;
     }
-    
+
     const updatedRoles = roles.filter(r => r.id !== role.id);
     setRoles(updatedRoles);
     message.success(`Đã xóa vai trò "${role.name}"`);
@@ -186,15 +186,15 @@ const Staff = () => {
     roleForm.validateFields().then((values) => {
       if (isRoleEditMode) {
         // Cập nhật vai trò
-        const updatedRoles = roles.map(r => 
-          r.id === selectedRole.id 
-            ? { 
-                ...r, 
-                name: values.name,
-                key: values.key,
-                description: values.description,
-                permissions: values.permissions || []
-              }
+        const updatedRoles = roles.map(r =>
+          r.id === selectedRole.id
+            ? {
+              ...r,
+              name: values.name,
+              key: values.key,
+              description: values.description,
+              permissions: values.permissions || []
+            }
             : r
         );
         setRoles(updatedRoles);
@@ -242,16 +242,16 @@ const Staff = () => {
     form.validateFields().then((values) => {
       if (isEditMode) {
         // Cập nhật nhân viên
-        const updatedStaff = staff.map(s => 
-          s.id === selectedStaff.id 
-            ? { 
-                ...s, 
-                name: values.name,
-                email: values.email,
-                role: values.role,
-                department: values.department,
-                status: values.status ? 'active' : 'inactive'
-              }
+        const updatedStaff = staff.map(s =>
+          s.id === selectedStaff.id
+            ? {
+              ...s,
+              name: values.name,
+              email: values.email,
+              role: values.role,
+              department: values.department,
+              status: values.status ? 'active' : 'inactive'
+            }
             : s
         );
         setStaff(updatedStaff);
@@ -377,9 +377,9 @@ const Staff = () => {
             />
           </Tooltip>
           <Tooltip title="Chỉnh sửa">
-            <Button 
-              type="text" 
-              icon={<EditOutlined />} 
+            <Button
+              type="text"
+              icon={<EditOutlined />}
               size="small"
               onClick={() => handleEditStaff(record)}
             />
@@ -441,45 +441,6 @@ const Staff = () => {
         <Text className={styles['staff-subtitle']}>
           Quản lý nhân viên, vai trò và quyền hạn trong hệ thống
         </Text>
-      </div>
-
-      <div className={styles['quick-stats']}>
-        <div>
-          <Card className={styles['stat-card'] + ' ' + styles['blue']}>
-            <Statistic
-              title="Tổng nhân viên"
-              value={totalStaff}
-              prefix={<TeamOutlined className={styles['stat-icon']} />}
-            />
-          </Card>
-        </div>
-        <div>
-          <Card className={styles['stat-card'] + ' ' + styles['green']}>
-            <Statistic
-              title="Đang hoạt động"
-              value={activeStaff}
-              prefix={<CheckCircleOutlined className={styles['stat-icon']} />}
-            />
-          </Card>
-        </div>
-        <div>
-          <Card className={styles['stat-card'] + ' ' + styles['purple']}>
-            <Statistic
-              title="Vai trò"
-              value={roleCount}
-              prefix={<CrownOutlined className={styles['stat-icon']} />}
-            />
-          </Card>
-        </div>
-        <div>
-          <Card className={styles['stat-card'] + ' ' + styles['orange']}>
-            <Statistic
-              title="Lịch sử hoạt động"
-              value={staff.length}
-              prefix={<SettingOutlined className={styles['stat-icon']} />}
-            />
-          </Card>
-        </div>
       </div>
 
       <Card className={styles['staff-card']}>
@@ -550,9 +511,9 @@ const Staff = () => {
                           renderItem={(role) => (
                             <List.Item
                               actions={[
-                                <Button 
-                                  type="text" 
-                                  icon={<EditOutlined />} 
+                                <Button
+                                  type="text"
+                                  icon={<EditOutlined />}
                                   size="small"
                                   onClick={() => handleEditRole(role)}
                                 >
@@ -565,10 +526,10 @@ const Staff = () => {
                                   okText="Xóa"
                                   cancelText="Hủy"
                                 >
-                                  <Button 
-                                    type="text" 
-                                    icon={<DeleteOutlined />} 
-                                    size="small" 
+                                  <Button
+                                    type="text"
+                                    icon={<DeleteOutlined />}
+                                    size="small"
                                     danger
                                   >
                                     Xóa
@@ -695,9 +656,9 @@ const Staff = () => {
           <Button key="close" onClick={() => setIsDetailModalVisible(false)}>
             Đóng
           </Button>,
-          <Button 
-            key="edit" 
-            type="primary" 
+          <Button
+            key="edit"
+            type="primary"
             icon={<EditOutlined />}
             onClick={() => {
               setIsDetailModalVisible(false);
@@ -783,7 +744,7 @@ const Staff = () => {
             label="Mô tả"
             rules={[{ required: true, message: 'Vui lòng nhập mô tả!' }]}
           >
-            <Input.TextArea 
+            <Input.TextArea
               placeholder="Mô tả chức năng và quyền hạn của vai trò"
               rows={3}
             />

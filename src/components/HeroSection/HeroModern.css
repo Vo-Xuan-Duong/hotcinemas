@@ -1,10 +1,8 @@
 /* Hero Compact - Thiết kế nhỏ gọn mới */
 .hero-compact {
   position: relative;
-  height: 45vh;
-  /* Giảm từ 60vh xuống 45vh để thu gọn */
-  padding: 20px 0;
-  /* Thêm padding nhỏ thay vì dựa vào height */
+  height: 60vh;
+  padding: 15px 0;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -23,30 +21,51 @@
   inset: 0;
   background-size: cover;
   background-position: center;
-  filter: blur(10px) brightness(0.4);
-  transform: scale(1.05);
+  /* Giảm blur, tăng brightness để thấy hình rõ hơn */
+  filter: blur(8px) brightness(0.75) saturate(1.3);
+  transform: scale(1.08);
   transition: all 1.5s ease;
+  /* Thêm animation cho parallax effect */
+  animation: bgImageFloat 20s ease-in-out infinite;
+}
+
+@keyframes bgImageFloat {
+
+  0%,
+  100% {
+    transform: scale(1.08) translateY(0);
+  }
+
+  50% {
+    transform: scale(1.10) translateY(-10px);
+  }
 }
 
 .bg-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.95) 0%,
-      rgba(248, 250, 252, 0.9) 50%,
-      rgba(241, 245, 249, 0.85) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  /* Giảm opacity để thấy background rõ hơn, tạo depth */
+  background-image:
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.45) 0%,
+      rgba(248, 250, 252, 0.35) 50%,
+      rgba(241, 245, 249, 0.40) 100%),
+    radial-gradient(circle at 30% 20%, rgba(255, 107, 53, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 50%);
+  /* Giảm blur cho mượt hơn và tiết kiệm performance */
+  backdrop-filter: blur(4px) brightness(1.2) saturate(1.4);
+  -webkit-backdrop-filter: blur(4px) brightness(1.2) saturate(1.4);
 }
 
 /* Dark theme support for bg-overlay */
 [data-theme="dark"] .bg-overlay {
-  background: linear-gradient(135deg,
-      rgba(15, 23, 42, 0.9) 0%,
-      rgba(26, 32, 44, 0.85) 50%,
-      rgba(45, 55, 72, 0.8) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background-image:
+    linear-gradient(135deg,
+      rgba(15, 23, 42, 0.70) 0%,
+      rgba(26, 32, 44, 0.65) 50%,
+      rgba(45, 55, 72, 0.60) 100%),
+    radial-gradient(circle at 30% 20%, rgba(255, 107, 53, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(59, 130, 246, 0.12) 0%, transparent 50%);
 }
 
 /* Container */
@@ -60,13 +79,13 @@
 }
 
 .hero-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 40px;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0;
-  animation: heroFloat 6s ease-in-out infinite;
+  padding: 0;
 }
 
 @keyframes heroFloat {
@@ -83,6 +102,8 @@
 
 /* Text Section */
 .hero-text {
+  flex: 1 1 400px;
+  min-width: 300px;
   color: #1f2937;
   /* Dark text for light background */
 }
@@ -153,7 +174,7 @@
 .subtitle {
   font-size: 0.9rem;
   /* Giữ nguyên từ 0.9rem */
-  color: rgba(31, 41, 55, 0.8);
+  color: #000000;
   margin-bottom: 10px;
   /* Giữ nguyên từ 10px */
   display: block;
@@ -198,6 +219,30 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
+/* Movie Info Badges */
+.movie-info-badges {
+  margin-bottom: 12px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 0.5s forwards;
+}
+
+.movie-info-badges .ant-tag {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 500;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Dark theme support for movie info badges */
+[data-theme="dark"] .movie-info-badges .ant-tag {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
 /* Features */
 .features-list {
   display: flex;
@@ -212,22 +257,23 @@
 
 .feature-tag {
   font-size: 0.75rem;
-  /* Giữ nguyên từ 0.75rem */
-  color: #4f46e5;
+  color: #000000;
   background: linear-gradient(135deg,
-      rgba(79, 70, 229, 0.1) 0%,
-      rgba(99, 102, 241, 0.05) 100%);
-  padding: 3px 6px;
-  /* Giữ nguyên từ 3px 6px */
-  border-radius: 6px;
-  /* Giữ nguyên từ 6px */
-  border: 1px solid rgba(79, 70, 229, 0.2);
-  font-weight: 500;
+      rgba(79, 70, 229, 0.25) 0%,
+      rgba(99, 102, 241, 0.20) 100%);
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(79, 70, 229, 0.5);
+  font-weight: 700;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 1;
 }
 
 .feature-tag::before {
@@ -256,11 +302,11 @@
 
 /* Dark theme support for feature-tag */
 [data-theme="dark"] .feature-tag {
-  color: #60a5fa;
+  color: #3b82f6;
   background: linear-gradient(135deg,
-      rgba(96, 165, 250, 0.1) 0%,
-      rgba(59, 130, 246, 0.05) 100%);
-  border: 1px solid rgba(96, 165, 250, 0.2);
+      rgba(96, 165, 250, 0.15) 0%,
+      rgba(59, 130, 246, 0.10) 100%);
+  border: 1px solid rgba(96, 165, 250, 0.3);
 }
 
 [data-theme="dark"] .feature-tag::before {
@@ -395,32 +441,31 @@
 
 /* Image Section */
 .hero-image {
+  flex: 0 0 auto;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .image-container {
   position: relative;
-  width: 100%;
-  max-width: 260px;
-  /* Giảm từ 280px xuống 260px */
+  width: auto;
+  max-width: 250px;
+  flex-shrink: 0;
   border-radius: 12px;
-  /* Giảm từ 16px xuống 12px */
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  /* Giảm shadow */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border: none;
 }
 
 .main-image {
-  width: 100%;
-  height: 180px;
-  /* Giảm từ 200px xuống 180px */
+  width: auto;
+  max-width: 250px;
+  height: auto;
+  max-height: 360px;
+  aspect-ratio: 2 / 3;
   object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.image-container:hover .main-image {
-  transform: scale(1.05);
+  display: block;
 }
 
 .image-overlay {
@@ -488,62 +533,233 @@
 /* Responsive */
 @media (max-width: 768px) {
   .hero-compact {
-    height: 45vh;
-    /* Giảm từ 50vh xuống 45vh */
+    height: auto;
+    min-height: 85vh;
+    padding: 20px 0 30px;
+  }
+
+  /* Ẩn background image và overlay trên mobile */
+  .bg-image {
+    display: none;
+  }
+
+  .bg-overlay {
+    display: none;
   }
 
   .hero-container {
-    padding: 0 12px;
-    /* Giảm từ 16px xuống 12px */
+    padding: 0 16px;
   }
 
   .hero-content {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .hero-text {
+    flex: 1 1 auto;
+    width: 100%;
     text-align: center;
+    order: 2;
+    padding: 0;
+  }
+
+  .hero-image {
+    order: 1;
+    margin-bottom: 10px;
+  }
+
+  .badge-area {
+    margin-bottom: 12px;
+  }
+
+  .main-badge {
+    font-size: 11px !important;
+    padding: 4px 12px !important;
+    height: auto !important;
   }
 
   .main-title {
-    font-size: 1.4rem !important;
-    /* Giảm từ 1.5rem xuống 1.4rem */
+    font-size: 1.5rem !important;
+    margin-bottom: 8px !important;
+    line-height: 1.3 !important;
+  }
+
+  .subtitle {
+    font-size: 13px !important;
+    margin-bottom: 10px !important;
+    display: block;
+  }
+
+  .description {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 12px !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .movie-info-badges {
+    margin: 12px 0;
+  }
+
+  .movie-info-badges .ant-space {
+    justify-content: center;
+  }
+
+  .movie-info-badges .ant-tag {
+    font-size: 11px !important;
+    padding: 2px 8px !important;
+    margin: 2px !important;
+  }
+
+  .features-list {
+    gap: 6px;
+    margin: 12px 0;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .feature-tag {
+    font-size: 11px !important;
+    padding: 4px 10px !important;
   }
 
   .action-buttons {
-    flex-direction: column;
-    gap: 6px;
-    /* Giảm từ 8px xuống 6px */
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  .action-buttons a {
+    flex: 1;
   }
 
   .primary-button,
   .secondary-button {
     width: 100%;
-    height: 32px !important;
-    /* Giảm từ 36px xuống 32px */
-    font-size: 12px !important;
-    /* Giảm từ 13px xuống 12px */
+    height: 38px !important;
+    font-size: 13px !important;
+    padding: 0 12px !important;
+  }
+
+  .primary-button .ant-btn-icon,
+  .secondary-button .ant-btn-icon {
+    font-size: 14px;
   }
 
   .image-container {
-    max-width: 220px;
-    /* Giảm từ 240px xuống 220px */
+    max-width: 160px;
   }
 
   .main-image {
-    height: 140px;
-    /* Giảm từ 160px xuống 140px */
+    width: auto !important;
+    max-width: 160px !important;
+    height: auto !important;
+    max-height: 240px !important;
+  }
+
+  .rating-badge {
+    padding: 4px 10px !important;
+    font-size: 13px !important;
   }
 
   .indicators {
-    margin-top: 16px;
-    /* Giảm từ 20px xuống 16px */
-    gap: 4px;
-    /* Giảm từ 6px xuống 4px */
+    display: none;
+  }
+}
+
+/* Tablet responsive */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .image-container {
+    max-width: 220px;
   }
 
-  .dot {
-    width: 5px;
-    /* Giảm từ 6px xuống 5px */
-    height: 5px;
+  .main-image {
+    max-width: 220px;
+    max-height: 330px;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 576px) {
+  .hero-compact {
+    min-height: 90vh;
+    padding: 15px 0 25px;
+  }
+
+  .hero-container {
+    padding: 0 12px;
+  }
+
+  .hero-content {
+    gap: 16px;
+  }
+
+  .hero-text {
+    width: 100%;
+  }
+
+  .main-title {
+    font-size: 1.3rem !important;
+  }
+
+  .subtitle {
+    font-size: 12px !important;
+  }
+
+  .description {
+    font-size: 12px !important;
+    -webkit-line-clamp: 2;
+  }
+
+  .movie-info-badges .ant-tag {
+    font-size: 10px !important;
+    padding: 2px 6px !important;
+  }
+
+  .feature-tag {
+    font-size: 10px !important;
+    padding: 3px 8px !important;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .action-buttons a {
+    width: 100%;
+  }
+
+  .primary-button,
+  .secondary-button {
+    height: 36px !important;
+    font-size: 12px !important;
+  }
+
+  .image-container {
+    max-width: 140px;
+  }
+
+  .main-image {
+    width: auto !important;
+    max-width: 140px !important;
+    height: auto !important;
+    max-height: 210px !important;
+  }
+
+  .hero-image {
+    margin-bottom: 8px;
+  }
+
+  .indicators {
+    display: none;
   }
 }
 
@@ -749,13 +965,15 @@
   width: 100%;
   height: 100%;
   display: flex;
-  gap: 60px;
+  flex-wrap: wrap;
+  gap: 20px;
   align-items: center;
-  padding: 30px;
+  justify-content: center;
+  padding: 0;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background: transparent;
+  border: none;
+  backdrop-filter: none;
 }
 
 /* Tab toggle switch */
@@ -1872,5 +2090,28 @@
   .hero-content.tab-sliding-in {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 !important;
+  }
+
+  .hero-content .container {
+    padding: 0 16px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-content {
+    gap: 16px;
+  }
+
+  .hero-content .container {
+    padding: 0 12px !important;
   }
 }

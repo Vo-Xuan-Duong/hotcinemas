@@ -1,73 +1,29 @@
 import { apiClient } from '../utils/apiClient';
 import { ENDPOINTS } from '../utils/constants';
 
-// Import local data as fallback
-import showtimesData from '../data/showtimes.json';
-
 class ScheduleService {
-    async getAllSchedules() {
-        try {
-            // Try to fetch from API first
-            const response = await apiClient.get(ENDPOINTS.SCHEDULES);
-            return response.data;
-        } catch (error) {
-            console.warn('API call failed, using local data:', error);
-            // Fallback to local data
-            return showtimesData;
-        }
+    async getAllSchedules(params) {
+        return apiClient.get(ENDPOINTS.SCHEDULES, { params });
     }
 
     async getSchedulesByDate(date) {
-        try {
-            const allSchedules = await this.getAllSchedules();
-            return allSchedules.filter(schedule => schedule.date === date);
-        } catch (error) {
-            console.error('Error fetching schedules by date:', error);
-            throw error;
-        }
+        return apiClient.get(ENDPOINTS.SCHEDULES, { params: { date } });
     }
 
     async getSchedulesByCinema(cinemaId) {
-        try {
-            const allSchedules = await this.getAllSchedules();
-            return allSchedules.filter(schedule => schedule.cinemaId === cinemaId);
-        } catch (error) {
-            console.error('Error fetching schedules by cinema:', error);
-            throw error;
-        }
+        return apiClient.get(ENDPOINTS.SCHEDULES, { params: { cinemaId } });
     }
 
     async getSchedulesByMovie(movieId) {
-        try {
-            const allSchedules = await this.getAllSchedules();
-            return allSchedules.filter(schedule => schedule.movieId === movieId);
-        } catch (error) {
-            console.error('Error fetching schedules by movie:', error);
-            throw error;
-        }
+        return apiClient.get(ENDPOINTS.SCHEDULES, { params: { movieId } });
     }
 
     async getSchedulesByDateAndCinema(date, cinemaId) {
-        try {
-            const allSchedules = await this.getAllSchedules();
-            return allSchedules.filter(schedule =>
-                schedule.date === date &&
-                (!cinemaId || schedule.cinemaId === cinemaId)
-            );
-        } catch (error) {
-            console.error('Error fetching schedules by date and cinema:', error);
-            throw error;
-        }
+        return apiClient.get(ENDPOINTS.SCHEDULES, { params: { date, cinemaId } });
     }
 
     async getScheduleById(id) {
-        try {
-            const allSchedules = await this.getAllSchedules();
-            return allSchedules.find(schedule => schedule.id === id);
-        } catch (error) {
-            console.error('Error fetching schedule by id:', error);
-            throw error;
-        }
+        return apiClient.get(`${ENDPOINTS.SCHEDULES}/${id}`);
     }
 
     // Generate upcoming dates for schedule display

@@ -15,17 +15,22 @@ import {
   Typography,
   message,
   Popconfirm,
-  Rate
+  Rate,
+  DatePicker,
+  Upload,
+  Switch
 } from 'antd';
 import {
   PlusOutlined,
   EditOutlined,
   DeleteOutlined,
   EyeOutlined,
-  SearchOutlined
+  SearchOutlined,
+  UploadOutlined
 } from '@ant-design/icons';
+import dayjs from 'dayjs';
 import './Movies.css';
-import moviesData from '../../../data/movies.json';
+import movieService from '../../../services/movieService';
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
@@ -40,19 +45,45 @@ const Movies = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [searchText, setSearchText] = useState('');
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 10,
+    total: 0
+  });
 
   useEffect(() => {
     loadMovies();
-  }, []);
+  }, [pagination.current, pagination.pageSize]);
 
   const loadMovies = async () => {
     try {
       setLoading(true);
-      // Sử dụng dữ liệu mẫu thay vì gọi API
-      setMovies(moviesData);
+      const response = await movieService.getAllMovies({
+        page: pagination.current - 1, // Backend uses 0-based index
+        size: pagination.pageSize,
+        sort: 'releaseDate,desc' // Sắp xếp theo ngày phát hành từ mới đến cũ
+      });
+
+      // response bây giờ là Page object: { content, totalElements, totalPages, size, number, ... }
+      if (response && Array.isArray(response.content)) {
+        setMovies(response.content);
+        setPagination(prev => ({
+          ...prev,
+          total: response.totalElements || 0
+        }));
+      } else if (Array.isArray(response)) {
+        // Fallback nếu backend trả về array trực tiếp
+        setMovies(response);
+        setPagination(prev => ({ ...prev, total: response.length }));
+      } else {
+        setMovies([]);
+        setPagination(prev => ({ ...prev, total: 0 }));
+      }
     } catch (error) {
       console.error('Error loading movies:', error);
       message.error('Lỗi khi tải danh sách phim');
+      setMovies([]);
+      setPagination(prev => ({ ...prev, total: 0 }));
     } finally {
       setLoading(false);
     }
@@ -67,60 +98,93 @@ const Movies = () => {
     setSelectedMovie(movie);
     form.setFieldsValue({
       title: movie.title,
-      genre: movie.genre,
-      releaseDate: movie.releaseDate,
-      poster: movie.poster,
-      backgroundImage: movie.backgroundImage,
-      description: movie.description,
-      duration: movie.duration,
-      rating: movie.rating,
-      ageLabel: movie.ageLabel,
-      format: movie.format,
-      trailer: movie.trailer,
+      genre: Array.isArray(movie.genres)
+        ? movie.genres.map(g => g.name || g).join(', ')
+        : movie.genre,
+      releaseDate: movie.releaseDate ? dayjs(movie.releaseDate) : null,
+      posterPath: movie.posterPath || movie.poster,
+      backdropPath: movie.backdropPath || movie.backgroundImage,
+      overview: movie.overview || movie.description,
+      runtime: movie.runtime || movie.duration,
+      voteAverage: movie.voteAverage || movie.rating,
+      trailerUrl: movie.trailerUrl || movie.trailer,
       director: movie.director,
-      productionStudio: movie.productionStudio
+      productionCompany: movie.productionCompany || movie.productionStudio,
+      isActive: movie.isActive !== undefined ? movie.isActive : true
     });
     setShowEditModal(true);
   };
 
   const handleDeleteMovie = async (movieId) => {
     try {
-      // Mô phỏng xóa phim từ dữ liệu mẫu
-      setMovies(movies.filter(movie => movie.id !== movieId));
+      await movieService.deleteMovie(movieId);
       message.success('Xóa phim thành công!');
-      console.log('Deleted movie with ID:', movieId);
+      loadMovies(); // Reload danh sách
     } catch (error) {
       console.error('Error deleting movie:', error);
-      message.error('Lỗi khi xóa phim');
+      message.error(error.response?.data?.message || 'Lỗi khi xóa phim');
+    }
+  };
+
+  const handleToggleActive = async (movieId, currentStatus) => {
+    try {
+      // Gọi API activate hoặc deactivate
+      if (currentStatus) {
+        // Nếu đang active thì deactivate
+        await movieService.deactiveMovie(movieId);
+        message.success('Vô hiệu hóa phim thành công!');
+      } else {
+        // Nếu đang inactive thì activate
+        await movieService.activeMovie(movieId);
+        message.success('Kích hoạt phim thành công!');
+      }
+
+      loadMovies(); // Reload danh sách
+    } catch (error) {
+      console.error('Error toggling movie status:', error);
+      message.error(error.response?.data?.message || 'Lỗi khi cập nhật trạng thái phim');
     }
   };
 
   const handleSubmit = async (values) => {
     try {
-      if (showEditModal) {
-        const updatedMovie = { ...selectedMovie, ...values };
-        // Mô phỏng cập nhật phim
-        setMovies(movies.map(movie => movie.id === selectedMovie.id ? updatedMovie : movie));
+      // Chuẩn bị data theo format API
+      const movieData = {
+        title: values.title,
+        overview: values.overview,
+        releaseDate: values.releaseDate ? values.releaseDate.format('YYYY-MM-DD') : null,
+        runtime: values.runtime,
+        voteAverage: values.voteAverage,
+        posterPath: values.posterPath,
+        backdropPath: values.backdropPath,
+        trailerUrl: values.trailerUrl,
+        director: values.director,
+        productionCompany: values.productionCompany,
+        isActive: values.isActive !== undefined ? values.isActive : true,
+        // Genres - chuyển từ string thành array nếu cần
+        genres: values.genre
+          ? values.genre.split(',').map(g => ({ name: g.trim() }))
+          : []
+      };
+
+      if (showEditModal && selectedMovie) {
+        // Update existing movie
+        await movieService.updateMovie(selectedMovie.id, movieData);
         message.success('Cập nhật phim thành công!');
         setShowEditModal(false);
-        console.log('Updated movie:', updatedMovie);
       } else {
-        const newMovie = {
-          id: Date.now(), // Tạo ID tạm thời
-          ...values,
-          cast: []
-        };
-        // Mô phỏng thêm phim mới
-        setMovies([...movies, newMovie]);
+        // Create new movie
+        await movieService.createMovie(movieData);
         message.success('Thêm phim mới thành công!');
         setShowAddModal(false);
-        console.log('Added new movie:', newMovie);
       }
+
       form.resetFields();
       setSelectedMovie(null);
+      loadMovies(); // Reload danh sách
     } catch (error) {
       console.error('Error saving movie:', error);
-      message.error('Lỗi khi lưu phim');
+      message.error(error.response?.data?.message || 'Lỗi khi lưu phim');
     }
   };
 
@@ -130,18 +194,29 @@ const Movies = () => {
 
   const filteredMovies = movies.filter(movie =>
     movie.title?.toLowerCase().includes(searchText.toLowerCase()) ||
-    movie.genre?.toLowerCase().includes(searchText.toLowerCase())
+    movie.genre?.toLowerCase().includes(searchText.toLowerCase()) ||
+    (Array.isArray(movie.genres) && movie.genres.some(g =>
+      (g.name || g).toLowerCase().includes(searchText.toLowerCase())
+    ))
   );
+
+  const handleTableChange = (newPagination) => {
+    setPagination({
+      current: newPagination.current,
+      pageSize: newPagination.pageSize,
+      total: pagination.total
+    });
+  };
 
   const columns = [
     {
       title: 'Poster',
-      dataIndex: 'poster',
-      key: 'poster',
+      dataIndex: 'posterPath',
+      key: 'posterPath',
       width: 100,
-      render: (poster, record) => (
+      render: (posterPath, record) => (
         <Image
-          src={poster}
+          src={posterPath || record.poster}
           alt={record.title}
           width={60}
           height={80}
@@ -166,39 +241,83 @@ const Movies = () => {
     },
     {
       title: 'Thể Loại',
-      dataIndex: 'genre',
-      key: 'genre',
-      render: (genre) => (
-        <div>
-          {genre?.split(', ').slice(0, 3).map((g, index) => (
-            <Tag key={index} color="blue" style={{ marginBottom: '4px' }}>
-              {g}
-            </Tag>
-          ))}
-          {genre?.split(', ').length > 3 && <Text type="secondary">...</Text>}
-        </div>
-      ),
+      dataIndex: 'genres',
+      key: 'genres',
+      render: (genres, record) => {
+        const genreList = Array.isArray(genres)
+          ? genres.map(g => g.name || g)
+          : (record.genre || '').split(', ');
+
+        return (
+          <div>
+            {genreList.slice(0, 3).map((g, index) => (
+              <Tag key={index} color="blue" style={{ marginBottom: '4px' }}>
+                {g}
+              </Tag>
+            ))}
+            {genreList.length > 3 && <Text type="secondary">...</Text>}
+          </div>
+        );
+      },
     },
     {
       title: 'Ngày Phát Hành',
       dataIndex: 'releaseDate',
       key: 'releaseDate',
+      render: (date) => date ? dayjs(date).format('DD/MM/YYYY') : '-'
     },
     {
       title: 'Thời Lượng',
-      dataIndex: 'duration',
-      key: 'duration',
-      render: (duration) => `${duration} phút`,
+      dataIndex: 'runtime',
+      key: 'runtime',
+      render: (runtime, record) => `${runtime || record.duration || 0} phút`,
     },
     {
       title: 'Đánh Giá',
-      dataIndex: 'rating',
-      key: 'rating',
-      render: (rating) => (
-        <Space>
-          <Rate disabled value={rating / 2} allowHalf style={{ fontSize: '14px' }} />
-          <Text>{rating}/10</Text>
-        </Space>
+      dataIndex: 'voteAverage',
+      key: 'voteAverage',
+      render: (voteAverage, record) => {
+        const rating = voteAverage || record.rating || 0;
+        return (
+          <Space>
+            <Rate disabled value={rating / 2} allowHalf style={{ fontSize: '14px' }} />
+            <Text>{rating.toFixed(1)}/10</Text>
+          </Space>
+        );
+      },
+    },
+    {
+      title: 'Trạng thái',
+      dataIndex: 'status',
+      key: 'status',
+      render: (status) => {
+        // Map status values to display
+        const statusMap = {
+          'NOW_SHOWING': { text: 'Đang chiếu', color: 'green' },
+          'COMING_SOON': { text: 'Sắp chiếu', color: 'orange' },
+          'ENDED': { text: 'Đã kết thúc', color: 'default' }
+        };
+        const statusInfo = statusMap[status] || { text: status || 'N/A', color: 'default' };
+        return (
+          <Tag color={statusInfo.color}>
+            {statusInfo.text}
+          </Tag>
+        );
+      },
+    },
+    {
+      title: 'Kích hoạt',
+      dataIndex: 'isActive',
+      key: 'active',
+      width: 120,
+      align: 'center',
+      render: (isActive, record) => (
+        <Switch
+          checked={isActive}
+          onChange={() => handleToggleActive(record.id, isActive)}
+          checkedChildren="Bật"
+          unCheckedChildren="Tắt"
+        />
       ),
     },
     {
@@ -274,11 +393,14 @@ const Movies = () => {
           rowKey="id"
           loading={loading}
           pagination={{
-            pageSize: 10,
+            current: pagination.current,
+            pageSize: pagination.pageSize,
+            total: pagination.total,
             showSizeChanger: true,
             showQuickJumper: true,
             showTotal: (total, range) => `${range[0]}-${range[1]} của ${total} phim`,
           }}
+          onChange={handleTableChange}
           scroll={{ x: 1000 }}
         />
       </Card>
@@ -300,8 +422,7 @@ const Movies = () => {
           layout="vertical"
           onFinish={handleSubmit}
           initialValues={{
-            format: '2D',
-            ageLabel: 'P'
+            isActive: true
           }}
         >
           <Form.Item
@@ -317,7 +438,7 @@ const Movies = () => {
             name="genre"
             rules={[{ required: true, message: 'Vui lòng nhập thể loại' }]}
           >
-            <Input placeholder="Ví dụ: Hành động, Phiêu lưu, Khoa học viễn tưởng" />
+            <Input placeholder="Ví dụ: Hành động, Phiêu lưu, Khoa học viễn tưởng (phân cách bằng dấu phẩy)" />
           </Form.Item>
 
           <Space.Compact style={{ display: 'flex', width: '100%' }}>
@@ -327,12 +448,12 @@ const Movies = () => {
               rules={[{ required: true, message: 'Vui lòng nhập ngày phát hành' }]}
               style={{ flex: 1, marginRight: '8px' }}
             >
-              <Input placeholder="dd.mm.yyyy" />
+              <DatePicker style={{ width: '100%' }} format="YYYY-MM-DD" />
             </Form.Item>
 
             <Form.Item
               label="Thời Lượng (phút)"
-              name="duration"
+              name="runtime"
               rules={[{ required: true, message: 'Vui lòng nhập thời lượng' }]}
               style={{ flex: 1, marginLeft: '8px' }}
             >
@@ -343,7 +464,7 @@ const Movies = () => {
           <Space.Compact style={{ display: 'flex', width: '100%' }}>
             <Form.Item
               label="Đánh Giá"
-              name="rating"
+              name="voteAverage"
               rules={[{ required: true, message: 'Vui lòng nhập đánh giá' }]}
               style={{ flex: 1, marginRight: '8px' }}
             >
@@ -351,50 +472,34 @@ const Movies = () => {
             </Form.Item>
 
             <Form.Item
-              label="Độ Tuổi"
-              name="ageLabel"
+              label="Trạng thái"
+              name="isActive"
               style={{ flex: 1, marginLeft: '8px' }}
             >
               <Select>
-                <Option value="P">P - Phim dành cho mọi lứa tuổi</Option>
-                <Option value="K">K - Phim dành cho trẻ em dưới 13 tuổi</Option>
-                <Option value="T13">T13 - Phim cấm trẻ em dưới 13 tuổi</Option>
-                <Option value="T16">T16 - Phim cấm trẻ em dưới 16 tuổi</Option>
-                <Option value="T18">T18 - Phim cấm trẻ em dưới 18 tuổi</Option>
-                <Option value="C">C - Phim cấm chiếu</Option>
+                <Option value={true}>Đang chiếu</Option>
+                <Option value={false}>Sắp chiếu</Option>
               </Select>
             </Form.Item>
           </Space.Compact>
 
           <Form.Item
-            label="Định Dạng"
-            name="format"
-          >
-            <Select>
-              <Option value="2D">2D</Option>
-              <Option value="3D">3D</Option>
-              <Option value="IMAX">IMAX</Option>
-              <Option value="4DX">4DX</Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item
             label="Poster URL"
-            name="poster"
+            name="posterPath"
           >
             <Input placeholder="Nhập URL hình ảnh poster" />
           </Form.Item>
 
           <Form.Item
             label="Background Image URL"
-            name="backgroundImage"
+            name="backdropPath"
           >
             <Input placeholder="Nhập URL hình nền" />
           </Form.Item>
 
           <Form.Item
             label="Trailer URL"
-            name="trailer"
+            name="trailerUrl"
           >
             <Input placeholder="Nhập URL trailer" />
           </Form.Item>
@@ -408,14 +513,14 @@ const Movies = () => {
 
           <Form.Item
             label="Hãng Sản Xuất"
-            name="productionStudio"
+            name="productionCompany"
           >
             <Input />
           </Form.Item>
 
           <Form.Item
             label="Mô Tả"
-            name="description"
+            name="overview"
           >
             <TextArea rows={4} placeholder="Nhập mô tả phim" />
           </Form.Item>
@@ -477,12 +582,12 @@ const Movies = () => {
               rules={[{ required: true, message: 'Vui lòng nhập ngày phát hành' }]}
               style={{ flex: 1, marginRight: '8px' }}
             >
-              <Input placeholder="dd.mm.yyyy" />
+              <DatePicker style={{ width: '100%' }} format="YYYY-MM-DD" />
             </Form.Item>
 
             <Form.Item
               label="Thời Lượng (phút)"
-              name="duration"
+              name="runtime"
               rules={[{ required: true, message: 'Vui lòng nhập thời lượng' }]}
               style={{ flex: 1, marginLeft: '8px' }}
             >
@@ -493,7 +598,7 @@ const Movies = () => {
           <Space.Compact style={{ display: 'flex', width: '100%' }}>
             <Form.Item
               label="Đánh Giá"
-              name="rating"
+              name="voteAverage"
               rules={[{ required: true, message: 'Vui lòng nhập đánh giá' }]}
               style={{ flex: 1, marginRight: '8px' }}
             >
@@ -501,50 +606,34 @@ const Movies = () => {
             </Form.Item>
 
             <Form.Item
-              label="Độ Tuổi"
-              name="ageLabel"
+              label="Trạng thái"
+              name="isActive"
               style={{ flex: 1, marginLeft: '8px' }}
             >
               <Select>
-                <Option value="P">P - Phim dành cho mọi lứa tuổi</Option>
-                <Option value="K">K - Phim dành cho trẻ em dưới 13 tuổi</Option>
-                <Option value="T13">T13 - Phim cấm trẻ em dưới 13 tuổi</Option>
-                <Option value="T16">T16 - Phim cấm trẻ em dưới 16 tuổi</Option>
-                <Option value="T18">T18 - Phim cấm trẻ em dưới 18 tuổi</Option>
-                <Option value="C">C - Phim cấm chiếu</Option>
+                <Option value={true}>Đang chiếu</Option>
+                <Option value={false}>Sắp chiếu</Option>
               </Select>
             </Form.Item>
           </Space.Compact>
 
           <Form.Item
-            label="Định Dạng"
-            name="format"
-          >
-            <Select>
-              <Option value="2D">2D</Option>
-              <Option value="3D">3D</Option>
-              <Option value="IMAX">IMAX</Option>
-              <Option value="4DX">4DX</Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item
             label="Poster URL"
-            name="poster"
+            name="posterPath"
           >
             <Input placeholder="Nhập URL hình ảnh poster" />
           </Form.Item>
 
           <Form.Item
             label="Background Image URL"
-            name="backgroundImage"
+            name="backdropPath"
           >
             <Input placeholder="Nhập URL hình nền" />
           </Form.Item>
 
           <Form.Item
             label="Trailer URL"
-            name="trailer"
+            name="trailerUrl"
           >
             <Input placeholder="Nhập URL trailer" />
           </Form.Item>
@@ -558,14 +647,14 @@ const Movies = () => {
 
           <Form.Item
             label="Hãng Sản Xuất"
-            name="productionStudio"
+            name="productionCompany"
           >
             <Input />
           </Form.Item>
 
           <Form.Item
             label="Mô Tả"
-            name="description"
+            name="overview"
           >
             <TextArea rows={4} placeholder="Nhập mô tả phim" />
           </Form.Item>

@@ -3,10 +3,19 @@ export const API_BASE_URL = 'https://api.hotcinemas.vn';
 export const ENDPOINTS = {
   MOVIES: '/movies',
   CINEMAS: '/cinemas',
-  SCHEDULES: '/schedules',
+  SHOWTIME: '/showtime',
   BOOKINGS: '/bookings',
   USERS: '/users',
-  AUTH: '/auth'
+  AUTH: '/auth',
+  NOTIFICATIONS: '/notifications',
+  CITIES: '/cities',
+  CINEMA_CLUSTERS: '/cinema-clusters',
+  SEATS: '/seats',
+  ROOMS: '/rooms',
+  SHOWTIMESEATS: '/showtime-seats',
+  PROMOTIONS: '/promotions',
+  PAYMENTS: '/payments',
+  REPORTS: '/reports'
 };
 
 export const API_ENDPOINTS = ENDPOINTS; // Backward compatibility
@@ -55,6 +64,22 @@ export const SEAT_TYPES = {
   WHEELCHAIR: 'wheelchair'
 };
 
+// Room Types (Backend format)
+export const ROOM_TYPES = {
+  STANDARD_2D: 'STANDARD_2D',
+  STANDARD_3D: 'STANDARD_3D',
+  IMAX: 'IMAX',
+  VIP: 'VIP'
+};
+
+// Room Types Display (Frontend format)
+export const ROOM_TYPES_DISPLAY = {
+  '2D': '2D',
+  '3D': '3D',
+  'IMAX': 'IMAX',
+  'VIP': 'VIP'
+};
+
 // Payment Methods
 export const PAYMENT_METHODS = {
   CASH: 'cash',
@@ -81,8 +106,11 @@ export const USER_ROLES = {
 
 // Local Storage Keys
 export const STORAGE_KEYS = {
-  USER_TOKEN: 'user_token',
+  ACCESS_TOKEN: 'access_token',
+  REFRESH_TOKEN: 'refresh_token',
+  USER_TOKEN: 'user_token', // Legacy key for backward compatibility
   USER_INFO: 'user_info',
+  USER_ID: 'user_id',
   CART_ITEMS: 'cart_items',
   THEME: 'theme',
   LANGUAGE: 'language',

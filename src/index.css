@@ -10,7 +10,12 @@
   --text-primary: #1f2937;
   --text-secondary: #6b7280;
   --text-muted: #9ca3af;
-  --accent-orange: #ff6b35;
+  /* Accent / brand colors */
+  --accent-red: #e50914;
+  /* Primary brand accent */
+  --accent-primary: var(--accent-red);
+  --accent-orange: var(--accent-red);
+  /* Deprecated legacy alias */
   --accent-blue: #3b82f6;
   --border-color: #e5e7eb;
   --hover-bg: #f9fafb;
@@ -37,7 +42,10 @@
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.7);
   --text-muted: rgba(255, 255, 255, 0.5);
-  --accent-orange: #ff6b35;
+  --accent-red: #e50914;
+  --accent-primary: var(--accent-red);
+  --accent-orange: var(--accent-red);
+  /* Deprecated legacy alias */
   --accent-blue: #1890ff;
   --border-color: rgba(255, 255, 255, 0.1);
   --hover-bg: rgba(255, 255, 255, 0.1);
@@ -76,6 +84,7 @@ body {
   min-height: 100vh;
   display: block;
   background-color: var(--primary-bg);
+  overflow-x: hidden;
 }
 
 h1 {
@@ -98,26 +107,76 @@ button {
 }
 
 button:hover {
-  border-color: var(--accent-orange);
+  border-color: var(--accent-primary);
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
-}
-
-button:focus,
-button:focus-visible {
-  outline: 2px solid var(--accent-orange);
-  outline-offset: 2px;
 }
 
 /* Smooth scrolling for better UX */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
-/* Enhanced focus styles for accessibility */
-*:focus {
-  outline: 2px solid var(--accent-orange);
-  outline-offset: 2px;
+body {
+  overflow-x: hidden;
+}
+
+/* Remove all outlines globally */
+*:focus,
+*:focus-visible,
+*:active,
+button:focus,
+button:focus-visible,
+button:active,
+a:focus,
+a:focus-visible,
+a:active,
+input:focus,
+input:focus-visible,
+textarea:focus,
+textarea:focus-visible,
+select:focus,
+select:focus-visible {
+  outline: none !important;
+}
+
+/* Remove Ant Design default focus outlines */
+.ant-btn:focus,
+.ant-btn:focus-visible,
+.ant-btn:active,
+.ant-input:focus,
+.ant-input:focus-visible,
+.ant-input-affix-wrapper:focus,
+.ant-input-affix-wrapper:focus-visible,
+.ant-picker:focus,
+.ant-picker:focus-visible,
+.ant-picker-focused,
+.ant-checkbox:focus,
+.ant-checkbox:focus-visible,
+.ant-radio:focus,
+.ant-radio:focus-visible,
+.ant-switch:focus,
+.ant-switch:focus-visible,
+.ant-tabs-tab:focus,
+.ant-tabs-tab:focus-visible,
+.ant-tabs-tab-active,
+.ant-menu-item:focus,
+.ant-menu-item:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Allow Select to work properly - DO NOT remove these */
+.ant-select:focus,
+.ant-select:focus-visible,
+.ant-select-focused,
+.ant-select-open,
+.ant-select-dropdown,
+.ant-select-item,
+.ant-dropdown-menu-item:focus,
+.ant-dropdown-menu-item:focus-visible {
+  outline: none !important;
 }
 
 /* Modern scrollbar */

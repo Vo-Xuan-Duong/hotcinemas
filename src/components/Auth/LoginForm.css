@@ -1,441 +1,264 @@
-.login-form-container {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 1rem;
-}
-
-.login-form-container.standalone {
-    min-height: 60vh;
-    background: transparent;
-}
-
-.login-form {
-    background: white;
-    padding: 2.5rem;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+.login-form-antd {
     width: 100%;
-    max-width: 450px;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.login-form::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
 }
 
 .form-header {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 28px;
 }
 
 .form-header h2 {
-    color: #2d3748;
-    font-size: 2rem;
+    color: #000000;
+    font-size: 28px;
     font-weight: 700;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    margin: 0 0 8px 0;
+    background: linear-gradient(45deg, #e50914, #ff6b35);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 .form-header p {
-    color: #718096;
-    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 14px;
     margin: 0;
 }
 
-.error-message {
-    background: #fed7d7;
-    color: #c53030;
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    border-left: 4px solid #e53e3e;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
+/* Form Item Labels */
+.login-form-antd .ant-form-item-label>label {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
 }
 
-.error-icon {
-    font-size: 1.1rem;
+/* Custom Input Styling */
+.custom-input {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 8px !important;
+    color: #000000 !important;
+    height: 48px !important;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+.custom-input:hover {
+    border-color: rgba(229, 9, 20, 0.6) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
 }
 
-.form-group label {
-    font-weight: 600;
-    color: #2d3748;
-    font-size: 0.9rem;
+.custom-input:focus,
+.custom-input.ant-input-focused {
+    border-color: #e50914 !important;
+    box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.2) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
 }
 
-.input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
+.custom-input .ant-input {
+    background: transparent !important;
+    border: none !important;
+    /* Inherit color so it matches the wrapper or any scoped overrides (e.g., Auth modal) */
+    color: inherit !important;
 }
 
-.input-wrapper input {
-    width: 100%;
-    padding: 0.875rem 1rem 0.875rem 3rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 10px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    background: #f7fafc;
+.custom-input .ant-input::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
 }
 
-.input-wrapper input:focus {
-    border-color: #667eea;
-    background: white;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+.custom-input .anticon {
+    color: rgba(255, 255, 255, 0.6);
 }
 
-.input-wrapper input.error {
-    border-color: #e53e3e;
-    background: #fef5e7;
+/* Password Input */
+.custom-input.ant-input-password .ant-input {
+    background: transparent !important;
 }
 
-.input-icon {
-    position: absolute;
-    left: 1rem;
-    font-size: 1.1rem;
-    color: #a0aec0;
-    z-index: 1;
+.custom-input .ant-input-password-icon {
+    color: rgba(0, 0, 0, 0.6) !important;
 }
 
-.password-toggle {
-    position: absolute;
-    right: 1rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.1rem;
-    color: #a0aec0;
-    transition: color 0.2s;
-    padding: 0.25rem;
-    border-radius: 4px;
+.custom-input .ant-input-password-icon:hover {
+    color: #e50914 !important;
 }
 
-.password-toggle:hover {
-    color: #667eea;
-    background: rgba(102, 126, 234, 0.1);
-}
-
-.field-error {
-    color: #e53e3e;
-    font-size: 0.8rem;
-    margin-top: 0.25rem;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
+/* Form Options */
 .form-options {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0.5rem 0;
+    margin-bottom: 8px;
 }
 
-.checkbox-label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-size: 0.9rem;
-    color: #4a5568;
-    gap: 0.5rem;
+.custom-checkbox {
+    color: rgba(255, 255, 255, 0.8) !important;
 }
 
-.checkbox-label input[type="checkbox"] {
-    display: none;
+.custom-checkbox .ant-checkbox-inner {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
-.checkmark {
-    width: 18px;
-    height: 18px;
-    border: 2px solid #cbd5e0;
-    border-radius: 4px;
-    position: relative;
-    transition: all 0.2s;
+.custom-checkbox.ant-checkbox-wrapper:hover .ant-checkbox-inner {
+    border-color: #e50914;
 }
 
-.checkbox-label input[type="checkbox"]:checked+.checkmark {
-    background: #667eea;
-    border-color: #667eea;
+.custom-checkbox.ant-checkbox-wrapper-checked .ant-checkbox-inner {
+    background: #e50914;
+    border-color: #e50914;
 }
 
-.checkbox-label input[type="checkbox"]:checked+.checkmark::after {
-    content: '✓';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
+.forgot-password {
+    color: rgba(255, 255, 255, 0.7) !important;
+    padding: 0 !important;
+    height: auto !important;
+    font-size: 14px;
 }
 
-.forgot-link {
-    color: #667eea;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.2s;
+.forgot-password:hover {
+    color: #e50914 !important;
 }
 
-.forgot-link:hover {
-    color: #764ba2;
-    text-decoration: underline;
-}
-
-.submit-button {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
+/* Login Button */
+.login-button {
+    background: linear-gradient(45deg, #e50914, #ff4757) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    height: 48px !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
     transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    position: relative;
-    overflow: hidden;
 }
 
-.submit-button:hover:not(:disabled) {
+.login-button:hover {
+    background: linear-gradient(45deg, #ff4757, #e50914) !important;
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 6px 16px rgba(229, 9, 20, 0.4);
 }
 
-.submit-button:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-    transform: none;
+.login-button:active {
+    transform: translateY(0);
 }
 
-.loading-spinner {
-    width: 18px;
-    height: 18px;
-    border: 2px solid transparent;
-    border-top: 2px solid white;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+/* Cancel Button */
+.cancel-button {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 8px !important;
+    height: 48px !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    transition: all 0.3s ease;
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
+.cancel-button:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(229, 9, 20, 0.6) !important;
+    color: #e50914 !important;
 }
 
+/* Cancel button override for light modal */
+.auth-modal-antd .cancel-button {
+    background: #ffffff !important;
+    border: 1px solid #d9d9d9 !important;
+    color: #000000 !important;
+}
+
+.auth-modal-antd .cancel-button:hover {
+    background: #f5f5f5 !important;
+    border-color: #e50914 !important;
+    color: #e50914 !important;
+}
+
+/* Divider */
+.custom-divider {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    margin: 24px 0 !important;
+    text-align: center;
+}
+
+.custom-divider .ant-divider-inner-text {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+    background: transparent;
+}
+
+/* Social Buttons */
+.social-button {
+    height: 44px !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease;
+    margin-bottom: 8px;
+}
+
+.google-button {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #fff !important;
+    margin-top: 20px !important;
+}
+
+.google-button:hover {
+    background: rgba(219, 68, 55, 0.2) !important;
+    border-color: #db4437 !important;
+    color: #db4437 !important;
+}
+
+/* Form Footer */
 .form-footer {
     text-align: center;
-    margin-top: 1rem;
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
 }
 
-.form-footer p {
-    color: #718096;
-    font-size: 0.9rem;
-    margin: 0;
+.switch-button {
+    color: #e50914 !important;
+    font-weight: 600 !important;
+    padding: 0 !important;
+    height: auto !important;
 }
 
-.switch-link {
-    color: #667eea;
-    text-decoration: none;
-    font-weight: 600;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: color 0.2s;
-    padding: 0;
-    font-size: inherit;
+.switch-button:hover {
+    color: #ff4757 !important;
 }
 
-.switch-link:hover {
-    color: #764ba2;
-    text-decoration: underline;
+/* Error Messages */
+.login-form-antd .ant-form-item-explain-error {
+    color: #ff7875;
+    font-size: 12px;
 }
 
-.divider {
-    text-align: center;
-    position: relative;
-    margin: 1rem 0;
+/* Loading State */
+.login-button.ant-btn-loading {
+    opacity: 0.8;
 }
 
-.divider::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: #e2e8f0;
+/* Form Item Spacing */
+.login-form-antd .ant-form-item {
+    margin-bottom: 16px;
 }
 
-.divider span {
-    background: white;
-    color: #a0aec0;
-    padding: 0 1rem;
-    font-size: 0.9rem;
-    position: relative;
-    z-index: 1;
+.login-form-antd .ant-form-item:last-child {
+    margin-bottom: 0;
 }
 
-.social-login {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.social-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 10px;
-    background: white;
-    color: #4a5568;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-decoration: none;
-}
-
-.social-button:hover {
-    border-color: #cbd5e0;
-    background: #f7fafc;
-    transform: translateY(-1px);
-}
-
-.social-button.google:hover {
-    border-color: #db4437;
-    color: #db4437;
-}
-
-.social-icon {
-    font-size: 1.2rem;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .login-form-container {
-        padding: 0.5rem;
-    }
-
-    .login-form {
-        padding: 2rem 1.5rem;
-        max-width: 100%;
-    }
-
+/* Responsive */
+@media (max-width: 480px) {
     .form-header h2 {
-        font-size: 1.75rem;
+        font-size: 24px;
     }
 
-    .form-options {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: flex-start;
+    .custom-input {
+        height: 44px !important;
     }
 
-    .social-login {
-        gap: 0.5rem;
+    .login-button {
+        height: 44px !important;
+        font-size: 15px !important;
     }
 
     .social-button {
-        padding: 0.625rem 0.75rem;
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .login-form {
-        padding: 1.5rem 1rem;
-    }
-
-    .form-header h2 {
-        font-size: 1.5rem;
-    }
-
-    .input-wrapper input {
-        padding: 0.75rem 0.875rem 0.75rem 2.75rem;
-    }
-
-    .submit-button {
-        padding: 0.875rem 1.5rem;
-        font-size: 1rem;
-    }
-}
-
-/* Animation for form appearance */
-.login-form {
-    animation: slideInUp 0.6s ease-out;
-}
-
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Focus states for accessibility */
-.submit-button:focus,
-.social-button:focus,
-.switch-link:focus,
-.forgot-link:focus {
-    outline: 2px solid #667eea;
-    outline-offset: 2px;
-}
-
-.input-wrapper input:focus {
-    outline: none;
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    .login-form {
-        border: 2px solid #000;
-    }
-
-    .submit-button {
-        background: #000;
-        border: 2px solid #000;
-    }
-
-    .input-wrapper input {
-        border-color: #000;
+        height: 40px !important;
     }
 }

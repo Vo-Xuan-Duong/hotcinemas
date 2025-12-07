@@ -3,26 +3,22 @@ import { Modal, Input, Button, Typography } from 'antd';
 
 const { Text } = Typography;
 
-// Basic provinces list (có thể mở rộng hoặc fetch sau)
-const PROVINCES = [
-    'Hồ Chí Minh', 'Hà Nội', 'Đà Nẵng', 'Đồng Nai', 'Lạng Sơn', 'Bình Dương', 'An Giang', 'Bà Rịa Vũng Tàu',
-    'Bắc Giang', 'Bạc Liêu', 'Bắc Ninh', 'Bến Tre', 'Bình Định', 'Bình Thuận', 'Cà Mau', 'Cần Thơ', 'Đắk Lắk', 'Đồng Tháp',
-    'Gia Lai', 'Hà Nam', 'Hà Tĩnh', 'Hải Dương', 'Hải Phòng', 'Hậu Giang', 'Hưng Yên', 'Khánh Hòa', 'Kiên Giang', 'Kon Tum',
-    'Lâm Đồng', 'Lào Cai', 'Long An', 'Nam Định', 'Nghệ An', 'Ninh Bình', 'Ninh Thuận', 'Phú Thọ', 'Phú Yên', 'Quảng Bình',
-    'Quảng Nam', 'Quảng Ngãi', 'Quảng Ninh', 'Quảng Trị', 'Sóc Trăng', 'Sơn La', 'Tây Ninh', 'Thái Bình', 'Thái Nguyên',
-    'Thanh Hóa', 'Thừa Thiên Huế', 'Tiền Giang', 'Trà Vinh', 'Tuyên Quang', 'Vĩnh Long', 'Vĩnh Phúc', 'Yên Bái'
-];
-
-export default function LocationSelectModal({ open, onClose, onSelect, value }) {
+export default function LocationSelectModal({ open, onClose, onSelect, value, cities = [] }) {
     const [search, setSearch] = useState('');
 
-    const filtered = useMemo(() => {
-        if (!search.trim()) return PROVINCES;
-        return PROVINCES.filter(p => p.toLowerCase().includes(search.toLowerCase()));
-    }, [search]);
+    console.log('LocationSelectModal received cities:', cities);
 
-    const handleSelect = (province) => {
-        onSelect(province);
+    const filtered = useMemo(() => {
+        if (!search.trim()) return cities;
+        return cities.filter(city =>
+            city.name && city.name.toLowerCase().includes(search.toLowerCase())
+        );
+    }, [search, cities]);
+
+    console.log('Filtered cities:', filtered);
+
+    const handleSelect = (city) => {
+        onSelect(city);
         onClose();
     };
 
@@ -35,11 +31,11 @@ export default function LocationSelectModal({ open, onClose, onSelect, value }) 
             width={780}
             destroyOnClose
             className="location-select-modal"
-            title={<div className="location-modal-header"><Text strong style={{ fontSize: 18 }}>Chọn địa điểm</Text></div>}
+            title={<div className="location-modal-header"><Text strong style={{ fontSize: 18 }}>Chọn thành phố</Text></div>}
         >
             <div className="location-modal-toolbar">
                 <Input
-                    placeholder="Tìm địa điểm ..."
+                    placeholder="Tìm thành phố ..."
                     value={search}
                     allowClear
                     onChange={e => setSearch(e.target.value)}
@@ -47,22 +43,22 @@ export default function LocationSelectModal({ open, onClose, onSelect, value }) 
                 />
             </div>
             <div className="location-grid">
-                {filtered.map(province => {
-                    const active = province === value;
+                {filtered.map(city => {
+                    const active = city.name === value;
                     return (
                         <Button
-                            key={province}
+                            key={city.id}
                             type={active ? 'primary' : 'text'}
                             className={`province-item ${active ? 'active' : ''}`}
-                            onClick={() => handleSelect(province)}
+                            onClick={() => handleSelect(city)}
                         >
-                            {province}
+                            {city.name}
                         </Button>
                     );
                 })}
                 {!filtered.length && (
                     <div className="no-results">
-                        <Text type="secondary">Không tìm thấy địa điểm phù hợp.</Text>
+                        <Text type="secondary">Không tìm thấy thành phố phù hợp.</Text>
                     </div>
                 )}
             </div>

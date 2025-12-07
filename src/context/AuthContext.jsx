@@ -1,7 +1,8 @@
 import React, { createContext, useReducer, useEffect } from 'react';
-import { apiClient as apiService } from '../utils/apiClient.js';
+import api from '../utils/apiClient.js';
+import { authService } from '../services/authService.js';
 import { initialState, AUTH_ACTIONS, authReducer } from './AuthContextUtils.js';
-import { STORAGE_KEYS } from '../utils/constants.js';
+import { getUserInfo, getAccessToken, saveAuthData } from '../utils/authStorage.js';
 
 // Create context
 const AuthContext = createContext();
@@ -10,29 +11,23 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  // Check if user is already logged in on app start
+  // Initialize authentication on mount
   useEffect(() => {
     const initializeAuth = async () => {
-      const token = localStorage.getItem(STORAGE_KEYS.USER_TOKEN);
-      const userInfo = localStorage.getItem(STORAGE_KEYS.USER_INFO);
+      const token = getAccessToken();
+      const userInfo = getUserInfo();
 
       if (token && userInfo) {
         try {
-          // Verify token with backend
-          await apiService.get('/auth/verify');
-
+          // verify token with backend
+          await authService.verify();
           dispatch({
             type: AUTH_ACTIONS.LOGIN_SUCCESS,
-            payload: {
-              user: JSON.parse(userInfo),
-              token: token
-            }
+            payload: { user: userInfo, token }
           });
-        } catch {
-          // Token is invalid, clear storage
-          localStorage.removeItem(STORAGE_KEYS.USER_TOKEN);
-          localStorage.removeItem(STORAGE_KEYS.USER_INFO);
-          apiService.removeAuthToken(); // Add this to clean up the token in apiService
+        } catch (err) {
+          // invalid token, clear
+          api.removeAuthToken();
           dispatch({ type: AUTH_ACTIONS.LOGOUT });
         }
       } else {
@@ -43,106 +38,102 @@ export const AuthProvider = ({ children }) => {
     initializeAuth();
   }, []);
 
-  // Login function
-  const login = async (email, password) => {
+  // Clear error helper
+  const clearError = () => dispatch({ type: AUTH_ACTIONS.CLEAR_ERROR });
+
+  // Login function (supports legacy and new signatures)
+  const login = async (...args) => {
     dispatch({ type: AUTH_ACTIONS.LOGIN_START });
 
     try {
-      const response = await apiService.post('/auth/login', { email, password });
+      let payload;
+      if (args.length === 1 && typeof args[0] === 'object') {
+        const { usernameOrEmail, password, rememberMe } = args[0] || {};
+        payload = { usernameOrEmail, password, rememberMe };
+      } else if (args.length === 2 && typeof args[0] === 'string') {
+        payload = { usernameOrEmail: args[0], password: args[1] };
+      } else {
+        throw new Error('Invalid login parameters');
+      }
 
-      // Store token and user info
-      apiService.setAuthToken(response.token);
-      localStorage.setItem(STORAGE_KEYS.USER_INFO, JSON.stringify(response.user));
+      const response = await authService.login(payload);
+
+      // authService.login should call api.setAuthToken but keep remember email handling here
+      if (payload?.rememberMe && payload?.usernameOrEmail) {
+        saveAuthData({ rememberEmail: payload.usernameOrEmail });
+      } else {
+        saveAuthData({ rememberEmail: false });
+      }
 
       dispatch({
         type: AUTH_ACTIONS.LOGIN_SUCCESS,
-        payload: {
-          user: response.user,
-          token: response.token
-        }
+        payload: { user: response.user, token: response.token }
       });
 
       return response;
     } catch (error) {
-      dispatch({
-        type: AUTH_ACTIONS.LOGIN_FAILURE,
-        payload: error.message
-      });
-      throw error;
+      const message = error?.message || 'Đăng nhập thất bại. Vui lòng thử lại.';
+      dispatch({ type: AUTH_ACTIONS.LOGIN_FAILURE, payload: message });
+      const forwarded = new Error(message);
+      forwarded.status = error?.status;
+      throw forwarded;
     }
   };
 
   // Register function
   const register = async (userData) => {
     dispatch({ type: AUTH_ACTIONS.REGISTER_START });
-
     try {
-      const response = await apiService.post('/auth/register', userData);
+      const response = await authService.register(userData);
 
-      // Store token and user info
-      apiService.setAuthToken(response.token);
-      localStorage.setItem(STORAGE_KEYS.USER_INFO, JSON.stringify(response.user));
+      if (response?.token) {
+        api.setAuthToken(response.token, null, response.user);
+      }
 
       dispatch({
         type: AUTH_ACTIONS.REGISTER_SUCCESS,
-        payload: {
-          user: response.user,
-          token: response.token
-        }
+        payload: { user: response.user, token: response.token }
       });
 
       return response;
     } catch (error) {
-      dispatch({
-        type: AUTH_ACTIONS.REGISTER_FAILURE,
-        payload: error.message
-      });
+      dispatch({ type: AUTH_ACTIONS.REGISTER_FAILURE, payload: error?.message || error });
       throw error;
     }
   };
 
   // Logout function
-  const logout = () => {
-    // Clear storage
-    apiService.removeAuthToken();
-    localStorage.removeItem(STORAGE_KEYS.USER_INFO);
-
+  const logout = async () => {
+    try {
+      await authService.logout();
+    } catch (_) {
+      // ignore
+    }
+    api.removeAuthToken();
     dispatch({ type: AUTH_ACTIONS.LOGOUT });
   };
 
-  // Update user profile
+  // Update profile
   const updateProfile = async (userData) => {
-    const response = await apiService.put('/users/profile', userData);
-    localStorage.setItem(STORAGE_KEYS.USER_INFO, JSON.stringify(response.user));
+    const response = await authService.updateProfile(userData);
+
+    // Update stored user info (keep token)
+    if (response?.user && state.token) {
+      api.setAuthToken(state.token, null, response.user);
+    }
+
     dispatch({
       type: AUTH_ACTIONS.LOGIN_SUCCESS,
-      payload: {
-        user: response.user,
-        token: state.token
-      }
+      payload: { user: response.user, token: state.token }
     });
+
     return response;
   };
 
-  // Clear error
-  const clearError = () => {
-    dispatch({ type: AUTH_ACTIONS.CLEAR_ERROR });
-  };
-
-  // Set mock user for demo purposes
+  // Set mock user (for demo/testing)
   const setMockUser = (mockUser, token = 'mock-jwt-token-' + Date.now()) => {
-    // Store in localStorage
-    localStorage.setItem(STORAGE_KEYS.USER_TOKEN, token);
-    localStorage.setItem(STORAGE_KEYS.USER_INFO, JSON.stringify(mockUser));
-
-    // Update context state
-    dispatch({
-      type: AUTH_ACTIONS.LOGIN_SUCCESS,
-      payload: {
-        user: mockUser,
-        token: token
-      }
-    });
+    api.setAuthToken(token, null, mockUser);
+    dispatch({ type: AUTH_ACTIONS.LOGIN_SUCCESS, payload: { user: mockUser, token } });
   };
 
   const value = {
@@ -155,13 +146,8 @@ export const AuthProvider = ({ children }) => {
     setMockUser
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export { AuthContext };
-
 export default AuthProvider; 

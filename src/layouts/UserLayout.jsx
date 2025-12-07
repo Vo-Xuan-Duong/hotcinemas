@@ -1,22 +1,55 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Layout, BackTop } from 'antd';
 import { ArrowUpOutlined } from '@ant-design/icons';
-import HeaderAntd from '../components/Header/HeaderAntd';
-import FooterAntd from '../components/Footer/FooterAntd';
+import { useLocation } from 'react-router-dom';
+import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
+import AuthModal from '../components/Auth/AuthModal';
 import { Outlet } from 'react-router-dom';
 import { TrailerModalProvider } from '../context/TrailerModalContext';
+import { AuthModalProvider, useAuthModal } from '../context/AuthModalContext';
+import { setAuthErrorCallback } from '../utils/apiClient';
+import ScrollToTop from '../components/ScrollToTop';
 
 const { Content } = Layout;
 
-const UserLayout = () => {
+const UserLayoutContent = () => {
+  const { isAuthModalOpen, authModalMode, closeAuthModal, openAuthModal } = useAuthModal();
+  const location = useLocation();
+
+  // Setup 401 auto-open modal handler
+  useEffect(() => {
+    const handleAuthError = (error) => {
+      console.log('Auth error detected, opening login modal...', error);
+      // Lưu đường dẫn hiện tại để redirect sau khi đăng nhập
+      openAuthModal('login', location.pathname);
+    };
+
+    // Register callback
+    setAuthErrorCallback(handleAuthError);
+
+    // Cleanup
+    return () => {
+      setAuthErrorCallback(null);
+    };
+  }, [openAuthModal, location.pathname]);
+
   return (
     <TrailerModalProvider>
+      <ScrollToTop />
       <Layout className="user-layout">
-        <HeaderAntd />
+        <Header />
         <Content className="main-content">
           <Outlet />
         </Content>
-        <FooterAntd />
+        <Footer />
+
+        {/* Global Auth Modal */}
+        <AuthModal
+          isOpen={isAuthModalOpen}
+          onClose={closeAuthModal}
+          initialMode={authModalMode}
+        />
 
         {/* Global Back to Top - Only shows when scrolled down */}
         <BackTop
@@ -63,6 +96,14 @@ const UserLayout = () => {
         </BackTop>
       </Layout>
     </TrailerModalProvider>
+  );
+};
+
+const UserLayout = () => {
+  return (
+    <AuthModalProvider>
+      <UserLayoutContent />
+    </AuthModalProvider>
   );
 };
 

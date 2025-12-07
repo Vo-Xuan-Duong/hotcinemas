@@ -36,8 +36,9 @@ import {
     ToolOutlined
 } from '@ant-design/icons';
 import './CinemaDetailAntd.css';
-import SeatManagerAntd from "../../../components/SeatManager/SeatManagerAntd";
-import cinemasData from '../../../data/cinemas.json';
+import SeatManager from "../../../components/SeatManager/SeatManager";
+import cinemaService from '../../../services/cinemaService';
+import roomService from '../../../services/roomService';
 
 const { Title, Text, Paragraph } = Typography;
 const { TextArea } = Input;
@@ -48,26 +49,21 @@ const CinemaDetail = () => {
     const navigate = useNavigate();
     const [form] = Form.useForm();
     const [cinema, setCinema] = useState(null);
-    const [rooms, setRooms] = useState([]); // Changed from screens to rooms for clarity
+    const [rooms, setRooms] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [showAddRoom, setShowAddRoom] = useState(false); // Changed from showAddScreen
-    const [showEditRoom, setShowEditRoom] = useState(false); // Changed from showEditScreen
+    const [showAddRoom, setShowAddRoom] = useState(false);
+    const [showEditRoom, setShowEditRoom] = useState(false);
     const [showSeatManager, setShowSeatManager] = useState(false);
-    const [selectedRoom, setSelectedRoom] = useState(null); // Changed from selectedScreen
+    const [selectedRoom, setSelectedRoom] = useState(null);
     const [showEditCinema, setShowEditCinema] = useState(false);
     const [cinemaForm] = Form.useForm();
-    const [roomForm, setRoomForm] = useState({ // Changed from screenForm
-        name: '',
-        capacity: '',
-        type: '2D',
-        description: '',
-        facilities: [],
-        seatLayout: {
-            rows: 10,
-            seatsPerRow: 12,
-            vipRows: []
-        }
-    });
+    const [debugInfo, setDebugInfo] = useState(null);
+
+    // Debug helper
+    const logDebug = (label, data) => {
+        console.log(`[CinemaDetail] ${label}:`, data);
+        setDebugInfo({ label, data, timestamp: new Date().toLocaleTimeString() });
+    };
 
     useEffect(() => {
         loadCinemaDetail();
@@ -76,83 +72,103 @@ const CinemaDetail = () => {
     const loadCinemaDetail = async () => {
         setLoading(true);
         try {
-            // Sử dụng dữ liệu mẫu từ cinemas.json
-            const foundCinema = cinemasData.find(cinema => cinema.id === parseInt(id));
-            if (foundCinema) {
-                const cinema = {
-                    ...foundCinema,
-                    phone: foundCinema.phone || '',
-                    email: foundCinema.email || '',
-                    description: foundCinema.description || 'Rạp chiếu phim hiện đại với công nghệ âm thanh, hình ảnh tốt nhất',
-                    image: foundCinema.image || `https://via.placeholder.com/150x100/667eea/ffffff?text=${encodeURIComponent(foundCinema.name)}`,
-                    facilities: foundCinema.facilities || ['Parking', 'Food Court', 'AC']
-                };
-                setCinema(cinema);
-                setRooms(foundCinema.rooms || []);
+            logDebug('Starting loadCinemaDetail', { cinemaId: id });
+
+            // Gọi API để lấy thông tin cinema
+            const cinemaResponse = await cinemaService.getCinemaById(id);
+            // logDebug('Cinema API Response', cinemaResponse);
+
+            // Extract data - handle both response.data.data and response.data patterns
+            const cinemaData = cinemaResponse?.data?.data || cinemaResponse?.data || cinemaResponse;
+            // logDebug('Extracted Cinema Data', cinemaData);
+
+            // Gọi API để lấy danh sách phòng - handle 404 with empty array
+            let roomsData = [];
+            try {
+                const roomsResponse = await cinemaService.getRoomsByCinemaId(id);
+                // logDebug('Rooms API Response', roomsResponse);
+                roomsData = roomsResponse?.data?.data || roomsResponse?.data || roomsResponse || [];
+                // logDebug('Extracted Rooms Data', roomsData);
+            } catch (roomError) {
+                // Nếu API rooms trả về 404 hoặc lỗi khác, sử dụng danh sách rỗng
+                if (roomError.response?.status === 404) {
+                    logDebug('Rooms Not Found (404)', 'Using empty rooms array');
+                    roomsData = [];
+                } else {
+                    // Log lỗi nhưng vẫn tiếp tục với danh sách rỗng
+                    logDebug('Rooms API Error', { status: roomError.response?.status, message: roomError.message });
+                    console.warn('Error fetching rooms, using empty array:', roomError);
+                    roomsData = [];
+                }
+            }
+
+            if (cinemaData) {
+                setCinema(cinemaData);
+                setRooms(Array.isArray(roomsData) ? roomsData : []);
+                logDebug('State Updated', { cinema: cinemaData, roomsCount: Array.isArray(roomsData) ? roomsData.length : 0 });
             } else {
-                console.error('Cinema not found');
+                logDebug('No Cinema Data', 'Cinema data is null or undefined');
+                message.error('Không tìm thấy rạp phim');
+                navigate('/admin/cinemas');
             }
         } catch (error) {
+            logDebug('Error', { message: error.message, response: error.response });
             console.error('Error loading cinema detail:', error);
-            // Optionally, show an error message to the user
+            message.error(error.response?.data?.message || 'Lỗi khi tải thông tin rạp phim');
+            // Không navigate về nếu lỗi, để user có thể retry
         } finally {
             setLoading(false);
         }
-    };
-
-    const handleAddRoom = () => {
-        setRoomForm({
-            name: '',
-            capacity: '',
-            type: '2D',
-            description: '',
-            facilities: [],
-            seatLayout: {
-                rows: 10,
-                seatsPerRow: 12,
-                vipRows: []
-            }
-        });
+    }; const handleAddRoom = () => {
         form.resetFields();
         setShowAddRoom(true);
     };
 
     const handleEditRoom = (room) => {
         setSelectedRoom(room);
-        setRoomForm({
-            name: room.name || '',
-            capacity: room.capacity || '',
-            type: room.type || '2D',
-            description: room.description || '',
-            facilities: room.facilities || [],
-            seatLayout: room.seatLayout || {
-                rows: 10,
-                seatsPerRow: 12,
-                vipRows: []
-            }
-        });
         form.setFieldsValue({
             name: room.name || '',
-            capacity: room.capacity || '',
-            type: room.type || '2D',
-            description: room.description || '',
-            facilities: room.facilities || [],
-            rows: room.seatLayout?.rows || 10,
-            seatsPerRow: room.seatLayout?.seatsPerRow || 12,
-            vipRows: room.seatLayout?.vipRows || []
+            roomType: room.roomType || 'STANDARD_2D', // Dùng trực tiếp giá trị backend
+            rowsCount: room.rowsCount || room.seatLayout?.rows || 10,
+            seatsPerRow: room.seatsPerRow || room.seatLayout?.seatsPerRow || 12,
+            rowVip: room.rowVip || [],
+            price: room.price || 0,
+            isActive: room.isActive !== undefined ? room.isActive : true
         });
         setShowEditRoom(true);
     };
 
     const handleSubmitRoom = async (values) => {
         try {
-            if (showEditRoom) {
-                // await cinemaService.updateRoom(id, selectedRoom.id, values);
+            console.log('Submitting room data:', values);
+
+            // Map theo RoomRequest từ backend
+            const roomData = {
+                name: values.name,
+                roomType: values.roomType, // Dùng trực tiếp giá trị backend (STANDARD_2D, STANDARD_3D, ...)
+                rowsCount: values.rowsCount || 10,
+                seatsPerRow: values.seatsPerRow || 12,
+                rowVip: values.rowVip || [], // List<Long> - danh sách index hàng VIP
+                price: values.price || 0,
+                isActive: values.isActive !== undefined ? values.isActive : true
+            };
+
+            console.log('Processed room data:', roomData);
+
+            if (showEditRoom && selectedRoom) {
+                // Update existing room
+                console.log('Updating room:', selectedRoom.id);
+                const response = await cinemaService.updateRoom(id, selectedRoom.id, roomData);
+                console.log('Update room response:', response);
                 message.success('Cập nhật phòng chiếu thành công');
             } else {
-                // await cinemaService.addRoom(id, values);
+                // Create new room
+                console.log('Creating new room for cinema:', id);
+                const response = await cinemaService.addRoom(id, roomData);
+                console.log('Create room response:', response);
                 message.success('Thêm phòng chiếu thành công');
             }
+
             setShowAddRoom(false);
             setShowEditRoom(false);
             setSelectedRoom(null);
@@ -160,7 +176,8 @@ const CinemaDetail = () => {
             await loadCinemaDetail();
         } catch (error) {
             console.error('Error saving room:', error);
-            message.error('Lưu thông tin phòng thất bại. Vui lòng thử lại.');
+            console.error('Error response:', error.response);
+            message.error(error.response?.data?.message || error.message || 'Lưu thông tin phòng thất bại');
         }
     };
 
@@ -172,28 +189,31 @@ const CinemaDetail = () => {
     const saveSeatLayout = async (seatLayoutData) => {
         if (!selectedRoom) return;
 
-        const updatedRoom = { ...selectedRoom, seatLayout: seatLayoutData };
+        const updatedRoom = {
+            ...selectedRoom,
+            seatLayout: seatLayoutData
+        };
 
         try {
-            // await cinemaService.updateRoom(id, selectedRoom.id, updatedRoom);
+            await cinemaService.updateRoom(id, selectedRoom.id, updatedRoom);
             message.success('Lưu sơ đồ ghế thành công');
             setShowSeatManager(false);
             setSelectedRoom(null);
             await loadCinemaDetail();
         } catch (error) {
             console.error('Error saving seat layout:', error);
-            message.error('Lưu sơ đồ ghế thất bại. Vui lòng thử lại.');
+            message.error(error.response?.data?.message || 'Lưu sơ đồ ghế thất bại');
         }
     };
 
     const handleDeleteRoom = async (roomId) => {
         try {
-            // await cinemaService.deleteRoom(id, roomId);
+            await cinemaService.deleteRoom(id, roomId);
             message.success('Xóa phòng chiếu thành công');
             await loadCinemaDetail();
         } catch (error) {
             console.error('Error deleting room:', error);
-            message.error('Xóa phòng thất bại. Vui lòng thử lại.');
+            message.error(error.response?.data?.message || 'Xóa phòng thất bại');
         }
     };
 
@@ -212,15 +232,17 @@ const CinemaDetail = () => {
 
     const handleSubmitCinema = async (values) => {
         try {
-            // await cinemaService.updateCinema(id, values);
-            const updatedCinema = { ...cinema, ...values };
-            setCinema(updatedCinema);
+            console.log('Updating cinema with values:', values);
+            const response = await cinemaService.updateCinema(id, values);
+            console.log('Update cinema response:', response);
             message.success('Cập nhật thông tin rạp thành công!');
             setShowEditCinema(false);
             cinemaForm.resetFields();
+            await loadCinemaDetail();
         } catch (error) {
             console.error('Error updating cinema:', error);
-            message.error('Cập nhật thông tin rạp thất bại. Vui lòng thử lại.');
+            console.error('Error response:', error.response);
+            message.error(error.response?.data?.message || error.message || 'Cập nhật thông tin rạp thất bại');
         }
     };
 
@@ -252,21 +274,43 @@ const CinemaDetail = () => {
             title: 'Loại',
             dataIndex: 'type',
             key: 'type',
-            render: (type) => {
+            render: (type, record) => {
+                // Map backend roomType to frontend display if needed
+                const displayType = record.roomType ? roomService.mapRoomTypeToFrontend(record.roomType) : type;
                 const colorMap = {
                     '2D': 'blue',
                     '3D': 'green',
                     'IMAX': 'orange',
-                    '4DX': 'purple'
+                    'VIP': 'gold'
                 };
-                return <Tag color={colorMap[type] || 'default'}>{type}</Tag>;
+                return <Tag color={colorMap[displayType] || 'default'}>{displayType}</Tag>;
             }
         },
         {
             title: 'Sức chứa',
-            dataIndex: 'capacity',
             key: 'capacity',
-            render: (capacity) => capacity ? `${capacity} chỗ` : 'Chưa cập nhật'
+            render: (_, record) => {
+                const seats = (record.rowsCount || 0) * (record.seatsPerRow || 0);
+                return seats > 0 ? `${seats} chỗ` : 'Chưa cập nhật';
+            }
+        },
+        {
+            title: 'Giá phòng',
+            dataIndex: 'price',
+            key: 'price',
+            render: (price) => {
+                return price ? `${price.toLocaleString('vi-VN')} VNĐ` : '0 VNĐ';
+            }
+        },
+        {
+            title: 'Trạng thái',
+            dataIndex: 'isActive',
+            key: 'isActive',
+            render: (isActive) => (
+                <Tag color={isActive ? 'green' : 'red'}>
+                    {isActive ? 'Hoạt động' : 'Không hoạt động'}
+                </Tag>
+            )
         },
         {
             title: 'Hành động',
@@ -325,18 +369,27 @@ const CinemaDetail = () => {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
                     <div>
                         <Title level={2} style={{ margin: 0 }}>
-                            Chi tiết rạp: {cinema.name}
+                            Chi tiết rạp: {cinema?.name || 'Loading...'}
                         </Title>
-                        <Text type="secondary" style={{ fontSize: '16px' }}>{cinema.address}</Text>
+                        <Text type="secondary" style={{ fontSize: '16px' }}>{cinema?.address || ''}</Text>
                     </div>
-                    <Button
-                        icon={<EditOutlined />}
-                        size="large"
-                        onClick={handleEditCinema}
-                        className="action-button"
-                    >
-                        Chỉnh sửa rạp
-                    </Button>
+                    <Space>
+                        <Button
+                            onClick={loadCinemaDetail}
+                            loading={loading}
+                        >
+                            🔄 Reload Data
+                        </Button>
+                        <Button
+                            icon={<EditOutlined />}
+                            size="large"
+                            onClick={handleEditCinema}
+                            className="action-button"
+                            disabled={!cinema}
+                        >
+                            Chỉnh sửa rạp
+                        </Button>
+                    </Space>
                 </div>
             </Card>
 
@@ -404,47 +457,6 @@ const CinemaDetail = () => {
                 </Row>
             </Card>
 
-            {/* Statistics */}
-            <Row gutter={16} style={{ marginBottom: '24px' }} className="stat-cards-row">
-                <Col xs={24} sm={8}>
-                    <div className="stat-card">
-                        <Card>
-                            <Statistic
-                                title="Tổng phòng chiếu"
-                                value={rooms.length}
-                                prefix={<HomeOutlined style={{ color: '#1890ff' }} />}
-                                valueStyle={{ color: '#1890ff', fontWeight: 'bold' }}
-                            />
-                        </Card>
-                    </div>
-                </Col>
-                <Col xs={24} sm={8}>
-                    <div className="stat-card">
-                        <Card>
-                            <Statistic
-                                title="Tổng sức chứa"
-                                value={rooms.reduce((total, room) => total + (parseInt(room.capacity) || 0), 0)}
-                                prefix={<UserOutlined style={{ color: '#52c41a' }} />}
-                                suffix="chỗ"
-                                valueStyle={{ color: '#52c41a', fontWeight: 'bold' }}
-                            />
-                        </Card>
-                    </div>
-                </Col>
-                <Col xs={24} sm={8}>
-                    <div className="stat-card">
-                        <Card>
-                            <Statistic
-                                title="Phòng đặc biệt"
-                                value={rooms.filter(room => room.type === 'IMAX' || room.type === '4DX').length}
-                                prefix={<StarOutlined style={{ color: '#faad14' }} />}
-                                valueStyle={{ color: '#faad14', fontWeight: 'bold' }}
-                            />
-                        </Card>
-                    </div>
-                </Col>
-            </Row>
-
             {/* Rooms Table */}
             <Card
                 title={
@@ -501,8 +513,14 @@ const CinemaDetail = () => {
             <Modal
                 title={
                     <Space>
-                        {showEditRoom ? <EditOutlined /> : <PlusOutlined />}
-                        {showEditRoom ? 'Sửa phòng chiếu' : 'Thêm phòng chiếu'}
+                        {showEditRoom ? (
+                            <EditOutlined style={{ color: '#faad14' }} />
+                        ) : (
+                            <PlusOutlined style={{ color: '#52c41a' }} />
+                        )}
+                        <span style={{ fontSize: '16px', fontWeight: 600 }}>
+                            {showEditRoom ? 'Chỉnh sửa phòng chiếu' : 'Tạo phòng chiếu mới'}
+                        </span>
                     </Space>
                 }
                 open={showAddRoom || showEditRoom}
@@ -512,202 +530,299 @@ const CinemaDetail = () => {
                     form.resetFields();
                 }}
                 footer={null}
-                width={700}
+                width={800}
                 destroyOnClose
+                centered
             >
                 <Form
                     form={form}
                     layout="vertical"
                     onFinish={handleSubmitRoom}
                     initialValues={{
-                        type: '2D',
-                        rows: 10,
+                        roomType: 'STANDARD_2D',
+                        rowsCount: 10,
                         seatsPerRow: 12,
-                        facilities: [],
-                        vipRows: []
+                        rowVip: [],
+                        price: 50000,
+                        isActive: true
                     }}
                 >
-                    <Divider orientation="left">📋 Thông tin cơ bản</Divider>
+                    <Divider orientation="left" style={{ fontSize: '14px', fontWeight: 500 }}>
+                        <Space>
+                            <HomeOutlined style={{ color: '#1890ff' }} />
+                            Thông tin cơ bản
+                        </Space>
+                    </Divider>
 
                     <Row gutter={16}>
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <Form.Item
-                                label="Tên phòng"
+                                label={<span><strong>Tên phòng</strong></span>}
                                 name="name"
-                                rules={[{ required: true, message: 'Vui lòng nhập tên phòng!' }]}
+                                rules={[
+                                    { required: true, message: 'Vui lòng nhập tên phòng!' },
+                                    { min: 3, message: 'Tên phòng phải có ít nhất 3 ký tự!' },
+                                    { max: 50, message: 'Tên phòng không được quá 50 ký tự!' }
+                                ]}
+                                tooltip="Tên phòng chiếu duy nhất trong rạp"
                             >
-                                <Input placeholder="Ví dụ: Phòng chiếu 1" />
+                                <Input
+                                    prefix={<HomeOutlined style={{ color: '#bfbfbf' }} />}
+                                    placeholder="VD: Phòng chiếu 1, Room A, ..."
+                                    size="large"
+                                />
                             </Form.Item>
                         </Col>
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <Form.Item
-                                label="Sức chứa"
-                                name="capacity"
-                                rules={[{ required: true, message: 'Vui lòng nhập sức chứa!' }]}
+                                label={<span><strong>Giá cơ bản</strong></span>}
+                                name="price"
+                                rules={[
+                                    { required: true, message: 'Vui lòng nhập giá phòng!' },
+                                    { type: 'number', min: 0, message: 'Giá phải lớn hơn hoặc bằng 0!' }
+                                ]}
+                                tooltip="Giá cơ bản cho một ghế (giá thực tế sẽ tính theo loại ghế)"
                             >
                                 <InputNumber
                                     style={{ width: '100%' }}
-                                    placeholder="Số ghế"
-                                    min={1}
-                                    addonAfter="chỗ"
+                                    placeholder="Nhập giá"
+                                    min={0}
+                                    step={10000}
+                                    size="large"
+                                    formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                    parser={value => value.replace(/\$\s?|(,*)/g, '')}
+                                    addonAfter="VNĐ"
                                 />
                             </Form.Item>
                         </Col>
                     </Row>
 
                     <Form.Item
-                        label="Loại phòng"
-                        name="type"
+                        label={<span><strong>Loại phòng chiếu</strong></span>}
+                        name="roomType"
                         rules={[{ required: true, message: 'Vui lòng chọn loại phòng!' }]}
+                        tooltip="Chọn công nghệ chiếu phim"
                     >
-                        <Radio.Group>
-                            <Radio.Button value="2D">2D</Radio.Button>
-                            <Radio.Button value="3D">3D</Radio.Button>
-                            <Radio.Button value="IMAX">IMAX</Radio.Button>
-                            <Radio.Button value="4DX">4DX</Radio.Button>
+                        <Radio.Group
+                            buttonStyle="solid"
+                            size="large"
+                            style={{ width: '100%' }}
+                        >
+                            <Row gutter={[8, 8]}>
+                                <Col span={12}>
+                                    <Radio.Button value="STANDARD_2D" style={{ width: '100%', textAlign: 'center' }}>
+                                        🎬 2D Thường
+                                    </Radio.Button>
+                                </Col>
+                                <Col span={12}>
+                                    <Radio.Button value="STANDARD_3D" style={{ width: '100%', textAlign: 'center' }}>
+                                        🕶️ 3D
+                                    </Radio.Button>
+                                </Col>
+                                <Col span={12}>
+                                    <Radio.Button value="IMAX" style={{ width: '100%', textAlign: 'center' }}>
+                                        🎥 IMAX
+                                    </Radio.Button>
+                                </Col>
+                                <Col span={12}>
+                                    <Radio.Button value="VIP" style={{ width: '100%', textAlign: 'center' }}>
+                                        ⭐ VIP
+                                    </Radio.Button>
+                                </Col>
+                            </Row>
                         </Radio.Group>
                     </Form.Item>
 
-                    <Form.Item
-                        label="Mô tả"
-                        name="description"
-                    >
-                        <TextArea
-                            rows={3}
-                            placeholder="Mô tả về phòng chiếu..."
-                        />
-                    </Form.Item>
-
-                    <Divider orientation="left">🎯 Tiện ích phòng</Divider>
-
-                    <Form.List name="facilities">
-                        {(fields, { add, remove }) => (
-                            <>
-                                {fields.map(({ key, name, ...restField }) => (
-                                    <Space key={key} style={{ display: 'flex', marginBottom: 8 }} align="baseline">
-                                        <Form.Item
-                                            {...restField}
-                                            name={[name]}
-                                            style={{ margin: 0, flex: 1 }}
-                                        >
-                                            <Input placeholder="Tên tiện ích" />
-                                        </Form.Item>
-                                        <Button
-                                            type="text"
-                                            danger
-                                            icon={<DeleteOutlined />}
-                                            onClick={() => remove(name)}
-                                        />
-                                    </Space>
-                                ))}
-                                <Form.Item>
-                                    <Button
-                                        type="dashed"
-                                        onClick={() => add()}
-                                        block
-                                        icon={<PlusOutlined />}
-                                    >
-                                        Thêm tiện ích
-                                    </Button>
-                                </Form.Item>
-                            </>
-                        )}
-                    </Form.List>
-
-                    <Divider orientation="left">🪑 Sơ đồ ghế</Divider>
+                    <Divider orientation="left" style={{ fontSize: '14px', fontWeight: 500 }}>
+                        <Space>
+                            <SettingOutlined style={{ color: '#52c41a' }} />
+                            Cấu hình sơ đồ ghế
+                        </Space>
+                    </Divider>
 
                     <Row gutter={16}>
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <Form.Item
-                                label="Số hàng"
-                                name="rows"
-                                rules={[{ required: true, message: 'Vui lòng nhập số hàng!' }]}
+                                label={<span><strong>Số hàng ghế</strong></span>}
+                                name="rowsCount"
+                                rules={[
+                                    { required: true, message: 'Vui lòng nhập số hàng!' },
+                                    { type: 'number', min: 1, max: 26, message: 'Số hàng từ 1-26 (A-Z)!' }
+                                ]}
+                                tooltip="Số hàng ghế từ A-Z (tối đa 26 hàng)"
                             >
                                 <InputNumber
                                     style={{ width: '100%' }}
                                     min={1}
-                                    max={20}
+                                    max={26}
+                                    size="large"
+                                    placeholder="VD: 10 hàng"
                                 />
                             </Form.Item>
                         </Col>
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <Form.Item
-                                label="Ghế mỗi hàng"
+                                label={<span><strong>Số ghế mỗi hàng</strong></span>}
                                 name="seatsPerRow"
-                                rules={[{ required: true, message: 'Vui lòng nhập số ghế mỗi hàng!' }]}
+                                rules={[
+                                    { required: true, message: 'Vui lòng nhập số ghế mỗi hàng!' },
+                                    { type: 'number', min: 1, max: 30, message: 'Số ghế từ 1-30!' }
+                                ]}
+                                tooltip="Số ghế trên mỗi hàng (tối đa 30 ghế)"
                             >
                                 <InputNumber
                                     style={{ width: '100%' }}
                                     min={1}
                                     max={30}
+                                    size="large"
+                                    placeholder="VD: 12 ghế"
                                 />
                             </Form.Item>
                         </Col>
                     </Row>
 
-                    <Form.Item dependencies={['rows', 'seatsPerRow']}>
+                    <Form.Item dependencies={['rowsCount']}>
                         {({ getFieldValue }) => {
-                            const rows = getFieldValue('rows') || 0;
-                            const seatsPerRow = getFieldValue('seatsPerRow') || 0;
-                            const totalSeats = rows * seatsPerRow;
+                            const rowsCount = getFieldValue('rowsCount') || 0;
                             return (
-                                <Card size="small" style={{ background: '#f0f2ff' }}>
-                                    <Text strong>Tổng số ghế: {totalSeats} ghế</Text>
+                                <Form.Item
+                                    label={
+                                        <span>
+                                            <strong>Hàng VIP</strong>
+                                            <span style={{ color: '#8c8c8c', fontSize: '12px', marginLeft: '8px' }}>
+                                                (Không bắt buộc)
+                                            </span>
+                                        </span>
+                                    }
+                                    name="rowVip"
+                                    tooltip="Chọn các hàng ghế VIP có giá cao hơn (thường là hàng giữa)"
+                                >
+                                    <Select
+                                        mode="multiple"
+                                        placeholder="Chọn hàng VIP (VD: E, F, G cho hàng giữa)"
+                                        allowClear
+                                        size="large"
+                                        style={{ width: '100%' }}
+                                        maxTagCount="responsive"
+                                        getPopupContainer={trigger => trigger.parentElement}
+                                        dropdownStyle={{ maxHeight: 240, overflowY: 'auto' }}
+                                    >
+                                        {Array.from({ length: rowsCount }, (_, i) => {
+                                            const rowIndex = i;
+                                            const rowLabel = String.fromCharCode(65 + i); // A, B, C...
+                                            return (
+                                                <Option key={rowIndex} value={rowIndex}>
+                                                    <Space>
+                                                        <StarOutlined style={{ color: '#faad14' }} />
+                                                        Hàng {rowLabel} (vị trí {rowIndex + 1})
+                                                    </Space>
+                                                </Option>
+                                            );
+                                        })}
+                                    </Select>
+                                </Form.Item>
+                            );
+                        }}
+                    </Form.Item>
+
+                    <Form.Item dependencies={['rowsCount', 'seatsPerRow', 'rowVip', 'price']}>
+                        {({ getFieldValue }) => {
+                            const rowsCount = getFieldValue('rowsCount') || 0;
+                            const seatsPerRow = getFieldValue('seatsPerRow') || 0;
+                            const rowVip = getFieldValue('rowVip') || [];
+                            const price = getFieldValue('price') || 0;
+                            const totalSeats = rowsCount * seatsPerRow;
+                            const vipSeats = rowVip.length * seatsPerRow;
+                            const normalSeats = totalSeats - vipSeats;
+
+                            return (
+                                <Card
+                                    size="small"
+                                    style={{
+                                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                        border: 'none',
+                                        color: 'white'
+                                    }}
+                                >
+                                    <Row gutter={16}>
+                                        <Col span={8}>
+                                            <Statistic
+                                                title={<span style={{ color: 'rgba(255,255,255,0.85)' }}>Tổng số ghế</span>}
+                                                value={totalSeats}
+                                                valueStyle={{ color: 'white', fontSize: '24px', fontWeight: 'bold' }}
+                                                suffix="ghế"
+                                            />
+                                        </Col>
+                                        <Col span={8}>
+                                            <Statistic
+                                                title={<span style={{ color: 'rgba(255,255,255,0.85)' }}>Ghế VIP</span>}
+                                                value={vipSeats}
+                                                valueStyle={{ color: '#ffd700', fontSize: '24px', fontWeight: 'bold' }}
+                                                suffix="ghế"
+                                            />
+                                        </Col>
+                                        <Col span={8}>
+                                            <Statistic
+                                                title={<span style={{ color: 'rgba(255,255,255,0.85)' }}>Ghế thường</span>}
+                                                value={normalSeats}
+                                                valueStyle={{ color: 'white', fontSize: '24px', fontWeight: 'bold' }}
+                                                suffix="ghế"
+                                            />
+                                        </Col>
+                                    </Row>
+                                    <Divider style={{ borderColor: 'rgba(255,255,255,0.2)', margin: '12px 0' }} />
+                                    <Text style={{ color: 'rgba(255,255,255,0.85)' }}>
+                                        💰 Giá cơ bản: <strong style={{ color: 'white' }}>{price.toLocaleString('vi-VN')} VNĐ</strong>/ghế
+                                    </Text>
                                 </Card>
                             );
                         }}
                     </Form.Item>
 
-                    <Form.List name="vipRows">
-                        {(fields, { add, remove }) => (
-                            <>
-                                <Text strong>⭐ Hàng ghế VIP</Text>
-                                {fields.map(({ key, name, ...restField }) => (
-                                    <Space key={key} style={{ display: 'flex', marginBottom: 8, marginTop: 8 }} align="baseline">
-                                        <Form.Item
-                                            {...restField}
-                                            name={[name]}
-                                            style={{ margin: 0, flex: 1 }}
-                                        >
-                                            <Input
-                                                placeholder="Ví dụ: A, B, C..."
-                                                maxLength={1}
-                                                style={{ textTransform: 'uppercase' }}
-                                            />
-                                        </Form.Item>
-                                        <Button
-                                            type="text"
-                                            danger
-                                            icon={<DeleteOutlined />}
-                                            onClick={() => remove(name)}
-                                        />
-                                    </Space>
-                                ))}
-                                <Form.Item style={{ marginTop: 8 }}>
-                                    <Button
-                                        type="dashed"
-                                        onClick={() => add()}
-                                        block
-                                        icon={<StarOutlined />}
-                                    >
-                                        Thêm hàng VIP
-                                    </Button>
-                                </Form.Item>
-                            </>
-                        )}
-                    </Form.List>
+                    <Divider orientation="left" style={{ fontSize: '14px', fontWeight: 500 }}>
+                        <Space>
+                            <ToolOutlined style={{ color: '#722ed1' }} />
+                            Trạng thái
+                        </Space>
+                    </Divider>
 
-                    <Form.Item style={{ marginTop: 24, marginBottom: 0 }}>
-                        <Space style={{ width: '100%', justifyContent: 'flex-end' }}>
-                            <Button onClick={() => {
-                                setShowAddRoom(false);
-                                setShowEditRoom(false);
-                                form.resetFields();
-                            }}>
-                                Hủy
+                    <Form.Item
+                        label={<span><strong>Trạng thái hoạt động</strong></span>}
+                        name="isActive"
+                        tooltip="Chỉ phòng đang hoạt động mới có thể đặt vé"
+                    >
+                        <Radio.Group size="large">
+                            <Radio.Button value={true} style={{ minWidth: '120px' }}>
+                                ✅ Hoạt động
+                            </Radio.Button>
+                            <Radio.Button value={false} style={{ minWidth: '120px' }}>
+                                ⛔ Tạm ngưng
+                            </Radio.Button>
+                        </Radio.Group>
+                    </Form.Item>
+
+                    <Divider style={{ margin: '24px 0' }} />
+
+                    <Form.Item style={{ marginBottom: 0 }}>
+                        <Space style={{ width: '100%', justifyContent: 'flex-end' }} size="middle">
+                            <Button
+                                size="large"
+                                onClick={() => {
+                                    setShowAddRoom(false);
+                                    setShowEditRoom(false);
+                                    form.resetFields();
+                                }}
+                            >
+                                Hủy bỏ
                             </Button>
-                            <Button type="primary" htmlType="submit" icon={showEditRoom ? <EditOutlined /> : <PlusOutlined />}>
-                                {showEditRoom ? 'Cập nhật' : 'Thêm mới'}
+                            <Button
+                                type="primary"
+                                htmlType="submit"
+                                size="large"
+                                icon={showEditRoom ? <EditOutlined /> : <PlusOutlined />}
+                                style={{ minWidth: '120px' }}
+                            >
+                                {showEditRoom ? 'Cập nhật' : 'Tạo phòng'}
                             </Button>
                         </Space>
                     </Form.Item>
@@ -721,39 +836,24 @@ const CinemaDetail = () => {
                         <Space size="middle">
                             <SettingOutlined style={{ color: '#1890ff' }} />
                             <span>Quản lý sơ đồ ghế - {selectedRoom.name}</span>
-                            <Tag color="blue">{selectedRoom.type}</Tag>
+                            <Tag color="blue">{roomService.mapRoomTypeToFrontend(selectedRoom.roomType) || selectedRoom.type}</Tag>
                         </Space>
                     }
                     open={showSeatManager}
                     onCancel={() => setShowSeatManager(false)}
-                    footer={[
-                        <Button key="cancel" onClick={() => setShowSeatManager(false)}>
-                            Đóng
-                        </Button>,
-                        <Button
-                            key="save"
-                            type="primary"
-                            onClick={() => {
-                                // Save sẽ được handle bởi SeatManager component
-                                message.success('Lưu sơ đồ ghế thành công');
-                                setShowSeatManager(false);
-                            }}
-                        >
-                            Lưu thay đổi
-                        </Button>
-                    ]}
-                    width="95%"
+                    footer={null}
+                    width="60%"
                     style={{ top: 20 }}
                     bodyStyle={{ height: '75vh', overflow: 'auto', padding: '16px' }}
                     className="seat-manager-modal"
                 >
-                    <div style={{ marginBottom: '16px' }}>
+                    {/* <div style={{ marginBottom: '16px' }}>
                         <Row gutter={16}>
                             <Col span={8}>
                                 <Card size="small">
                                     <Statistic
                                         title="Tổng số ghế"
-                                        value={(selectedRoom.seatLayout?.rows || 10) * (selectedRoom.seatLayout?.seatsPerRow || 12)}
+                                        value={(selectedRoom.rowsCount || 0) * (selectedRoom.seatsPerRow || 0)}
                                         prefix={<UserOutlined />}
                                         valueStyle={{ color: '#1890ff' }}
                                     />
@@ -763,7 +863,7 @@ const CinemaDetail = () => {
                                 <Card size="small">
                                     <Statistic
                                         title="Hàng ghế"
-                                        value={selectedRoom.seatLayout?.rows || 10}
+                                        value={selectedRoom.rowsCount || 0}
                                         prefix={<HomeOutlined />}
                                         valueStyle={{ color: '#52c41a' }}
                                     />
@@ -773,16 +873,16 @@ const CinemaDetail = () => {
                                 <Card size="small">
                                     <Statistic
                                         title="Ghế mỗi hàng"
-                                        value={selectedRoom.seatLayout?.seatsPerRow || 12}
+                                        value={selectedRoom.seatsPerRow || 0}
                                         prefix={<ToolOutlined />}
                                         valueStyle={{ color: '#faad14' }}
                                     />
                                 </Card>
                             </Col>
                         </Row>
-                    </div>
+                    </div> */}
 
-                    <SeatManagerAntd
+                    <SeatManager
                         selectedScreen={selectedRoom}
                         onSave={saveSeatLayout}
                         onClose={() => setShowSeatManager(false)}
@@ -877,26 +977,6 @@ const CinemaDetail = () => {
                         />
                     </Form.Item>
 
-                    <Form.Item
-                        label="Tiện ích"
-                        name="facilities"
-                    >
-                        <Select
-                            mode="multiple"
-                            placeholder="Chọn tiện ích"
-                            allowClear
-                            options={[
-                                { label: 'Bãi đỗ xe', value: 'Parking' },
-                                { label: 'Khu ẩm thực', value: 'Food Court' },
-                                { label: 'Điều hòa', value: 'AC' },
-                                { label: 'WiFi miễn phí', value: 'Free WiFi' },
-                                { label: 'Thang máy', value: 'Elevator' },
-                                { label: 'Ghế massage', value: 'Massage Chair' },
-                                { label: 'Phòng game', value: 'Game Room' },
-                                { label: 'Cửa hàng', value: 'Shop' }
-                            ]}
-                        />
-                    </Form.Item>
 
                     <Form.Item style={{ marginBottom: 0, textAlign: 'right' }}>
                         <Space>

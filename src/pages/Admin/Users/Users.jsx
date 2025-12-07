@@ -315,50 +315,6 @@ const Users = () => {
         </Button>
       </div>
 
-      {/* Thống kê tổng quan */}
-      <Row gutter={[16, 16]} className="stats-row">
-        <Col xs={24} sm={12} md={6}>
-          <Card>
-            <Statistic
-              title="Tổng người dùng"
-              value={userStats.total}
-              prefix={<TeamOutlined />}
-              valueStyle={{ color: '#1890ff' }}
-            />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={6}>
-          <Card>
-            <Statistic
-              title="Đang hoạt động"
-              value={userStats.active}
-              prefix={<CheckCircleOutlined />}
-              valueStyle={{ color: '#52c41a' }}
-            />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={6}>
-          <Card>
-            <Statistic
-              title="VIP"
-              value={userStats.vips}
-              prefix={<CrownOutlined />}
-              valueStyle={{ color: '#faad14' }}
-            />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={6}>
-          <Card>
-            <Statistic
-              title="Quản trị viên"
-              value={userStats.admins}
-              prefix={<CrownOutlined />}
-              valueStyle={{ color: '#f5222d' }}
-            />
-          </Card>
-        </Col>
-      </Row>
-
       {/* Bộ lọc */}
       <Card className="filter-card">
         <Row gutter={[16, 16]}>

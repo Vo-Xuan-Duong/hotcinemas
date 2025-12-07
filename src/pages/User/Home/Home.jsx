@@ -1,119 +1,181 @@
 import React, { useState, useEffect } from 'react';
-import { Spin, BackTop } from 'antd';
-import { ArrowUpOutlined } from '@ant-design/icons';
-import HeroAntd from '../../../components/HeroSection/HeroAntd';
-import MovieShowcaseAntd from '../../../components/MovieShowcase/MovieShowcaseAntd';
-import FeaturedContentAntd from '../../../components/FeaturedContent/FeaturedContentAntd';
+import {
+  Spin,
+  BackTop,
+  FloatButton,
+  Tour
+} from 'antd';
+import {
+  ArrowUpOutlined
+} from '@ant-design/icons';
+import HeroModern from '../../../components/HeroSection/HeroModern';
+import MovieShowcase from '../../../components/MovieShowcase/MovieShowcase';
+import FeaturedContent from '../../../components/FeaturedContent/FeaturedContent';
 import FeaturesSection from '../../../components/FeaturesSection/FeaturesSection';
 import './Home.css';
-import moviesData from '../../../data/movies.json';
+import movieService from '../../../services/movieService';
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
+  const [upcomingMovies, setUpcomingMovies] = useState([]);
+  const [nowShowingMovies, setNowShowingMovies] = useState([]);
+  const [topRatedMovies, setTopRatedMovies] = useState([]);
+  const [tourOpen, setTourOpen] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
-  // Simulate loading data
+  // Load data from API
   useEffect(() => {
     const loadData = async () => {
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Process movies data
-      const processedMovies = moviesData.map((movie, index) => ({
-        ...movie,
-        id: movie.id || index + 1,
-        poster: movie.poster || `https://picsum.photos/300/450?random=${index}`,
-        backdrop: movie.backdrop || movie.poster || `https://picsum.photos/1200/800?random=${index}`,
-        rating: movie.rating || (Math.random() * 3 + 7).toFixed(1),
-        overview: movie.overview || `Một bộ phim tuyệt vời với cốt truyện hấp dẫn và diễn xuất xuất sắc từ dàn diễn viên tài năng.`,
-      }));
-      
-      setMovies(processedMovies);
-      setLoading(false);
-    };
+      try {
+        // Load all movie categories in parallel
+        const [allMoviesData, upcomingData, nowShowingData, topRatedData] = await Promise.all([
+          movieService.getAllMovies({ size: 20 }), // Returns Page object
+          movieService.getComingSoon({ size: 12 }), // Returns array only
+          movieService.getNowShowing({ size: 12 }), // Returns array only
+          movieService.getTopRated({ size: 10 })    // Returns array only
+        ]);
 
+        // Process all movies - handle both Page object and array
+        const processMovies = (data) => {
+          const items = Array.isArray(data) ? data : (data?.content || []);
+          return items.map((m, index) => ({
+            ...m,
+            id: m.id ?? m._id ?? index + 1,
+            poster: m.posterPath || m.posterUrl || '/vite.svg',
+            backdrop: m.backdropPath || m.backdropUrl || m.poster || m.posterUrl || '/vite.svg',
+            rating: m.rating ?? m.voteAverage ?? 0,
+          }));
+        };
+
+        console.log('Fetched movie data:', { allMoviesData, upcomingData, nowShowingData, topRatedData });
+
+        setMovies(processMovies(allMoviesData));
+        setUpcomingMovies(processMovies(upcomingData));
+        setNowShowingMovies(processMovies(nowShowingData));
+        setTopRatedMovies(processMovies(topRatedData));
+      } catch (err) {
+        console.error('Failed to load movies from API', err);
+      } finally {
+        setLoading(false);
+      }
+    };
     loadData();
   }, []);
 
-  // Lọc phim sắp chiếu
-  const currentYear = new Date().getFullYear();
-  const upcomingMovies = movies.filter(m => {
-    if (m.releaseDate) {
-      const year = m.releaseDate.includes('.') 
-        ? Number(m.releaseDate.split('.')[2])
-        : new Date(m.releaseDate).getFullYear();
-      return year >= currentYear;
-    }
-    return false;
-  });
-  
+  // Handle scroll for back to top button
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Use upcoming movies for hero, fallback to all movies if empty
   const heroMovies = upcomingMovies.length > 0 ? upcomingMovies : movies;
-  const nowShowingMovies = movies.filter(m => {
-    if (m.releaseDate) {
-      const year = m.releaseDate.includes('.') 
-        ? Number(m.releaseDate.split('.')[2])
-        : new Date(m.releaseDate).getFullYear();
-      return year <= currentYear;
-    }
-    return true;
-  });
 
   if (loading) {
     return (
-      <div className="home-loading">
-        <Spin size="large" tip="Đang tải nội dung...">
-          <div style={{ 
-            minHeight: '100vh', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center' 
-          }} />
+      <div className="home-loading-modern">
+        <Spin
+          size="large"
+          tip="Đang tải nội dung..."
+          className="loading-spinner-modern"
+        >
+          <div className="loading-placeholder" />
         </Spin>
       </div>
     );
   }
 
   return (
-    <div className="home-antd">
+    <div className="home-modern">
       {/* Hero Section */}
-      <HeroAntd movies={heroMovies} />
-
-      {/* Now Showing Movies */}
-      <MovieShowcaseAntd 
-        movies={nowShowingMovies} 
-        title="Phim đang chiếu" 
-        loading={loading}
-      />
-
-      {/* Featured Content */}
-      <FeaturedContentAntd movies={movies} />
+      <section className="hero-section-modern">
+        <HeroModern movies={heroMovies} />
+      </section>
 
       {/* Upcoming Movies */}
-      <MovieShowcaseAntd 
-        movies={upcomingMovies} 
-        title="Phim sắp chiếu" 
-        loading={loading}
-      />
+      <section className="showcase-section-modern">
+        <MovieShowcase
+          movies={upcomingMovies}
+          title="🔥 Phim sắp chiếu"
+          loading={loading}
+          showFilters={true}
+          category="upcoming"
+        />
+      </section>
+
+      {/* Now Showing Section */}
+      <section className="showcase-section-modern">
+        <MovieShowcase
+          movies={nowShowingMovies}
+          title="🎬 Phim đang chiếu hot"
+          loading={loading}
+          showFilters={true}
+          category="now-showing"
+        />
+      </section>
+
+      {/* Top Rated Movies */}
+      <section className="showcase-section-moder">
+        <MovieShowcase
+          movies={topRatedMovies}
+          title="⭐ Phim được đánh giá cao"
+          loading={loading}
+          // maxItems={4}
+          showFilters={false}
+          category="top-rated"
+        />
+      </section>
+
+      {/* Featured Content Section */}
+      <section className="featured-section-modern">
+        <FeaturedContent movies={movies} />
+      </section>
 
       {/* Features Section */}
-      <FeaturesSection />
+      <section className="features-section-modern">
+        <FeaturesSection />
+      </section>
 
-      {/* Back to Top Button */}
-      <BackTop 
-        style={{
-          height: 50,
-          width: 50,
-          backgroundColor: '#ff6b35',
-          borderRadius: '50%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      >
-        <ArrowUpOutlined style={{ color: 'white', fontSize: '20px' }} />
-      </BackTop>
+      {/* Custom Back to Top Button */}
+      {showBackToTop && (
+        <div
+          className="custom-back-to-top"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          <ArrowUpOutlined />
+          <span className="tooltip-text">Lên đầu trang</span>
+        </div>
+      )}
+
+      {/* Tour for new users */}
+      <Tour
+        open={tourOpen}
+        onClose={() => setTourOpen(false)}
+        steps={[
+          {
+            title: 'Chào mừng đến với HotCinemas!',
+            description: 'Khám phá những bộ phim hot nhất đang chiếu.',
+            target: null,
+          },
+          {
+            title: 'Phim đang chiếu',
+            description: 'Xem các phim đang chiếu tại rạp.',
+            target: () => document.querySelector('.showcase-section-modern'),
+          },
+          {
+            title: 'Đặt vé nhanh',
+            description: 'Click vào phim để xem chi tiết và đặt vé.',
+            target: () => document.querySelector('.movie-showcase-card'),
+          },
+        ]}
+      />
     </div>
   );
 };
 
-export default Home; 
+export default Home;

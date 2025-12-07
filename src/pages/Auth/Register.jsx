@@ -1,79 +1,40 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import useAuth from '../../context/useAuth';
+import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import RegisterForm from '../../components/Auth/RegisterForm';
 import './Auth.css';
 
-const Register = ({ onSwitchToLogin }) => {
-  const { register, isLoading, error, clearError } = useAuth();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [formError, setFormError] = useState('');
+const Register = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    clearError();
-    setFormError('');
-    if (password !== confirmPassword) {
-      setFormError('Mật khẩu xác nhận không khớp!');
-      return;
-    }
-    try {
-      await register({ name, email, password });
-      navigate('/');
-    } catch {
-      // Không làm gì
-    }
+  const handleSwitchToLogin = () => {
+    // Chuyển đến trang đăng nhập, giữ redirect path nếu có
+    navigate('/login', { state: { from: location.state?.from } });
+  };
+
+  const handleClose = () => {
+    // Sau khi đăng ký thành công, chuyển về trang chủ hoặc trang đích
+    const from = location.state?.from?.pathname || '/';
+    navigate(from);
+  };
+
+  const handleSwitchToOTP = (email) => {
+    // Chuyển sang màn hình xác thực OTP
+    navigate('/verify-otp', { state: { email } });
   };
 
   return (
-    <div className="auth-container">
-      <form className="auth-form" onSubmit={handleSubmit}>
-        <h2>Đăng ký</h2>
-        {formError && <div className="error-message">{formError}</div>}
-        {error && <div className="error-message">{error}</div>}
-        <input
-          type="text"
-          placeholder="Họ và tên"
-          value={name}
-          onChange={e => setName(e.target.value)}
-          required
+    <div className="auth-page-container">
+      <div className="auth-page-card">
+        <div className="auth-page-brand">
+          <h1>🎬 HotCinemas</h1>
+        </div>
+        <RegisterForm
+          onSwitchToLogin={handleSwitchToLogin}
+          onSwitchToOTP={handleSwitchToOTP}
+          onClose={handleClose}
         />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Mật khẩu"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Xác nhận mật khẩu"
-          value={confirmPassword}
-          onChange={e => setConfirmPassword(e.target.value)}
-          required
-        />
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Đang đăng ký...' : 'Đăng ký'}
-        </button>
-        <p className="auth-link">
-          Đã có tài khoản?{' '}
-          {onSwitchToLogin ? (
-            <span className="switch-link" onClick={onSwitchToLogin} style={{ color: '#007bff', cursor: 'pointer' }}>Đăng nhập</span>
-          ) : (
-            <Link to="/login">Đăng nhập</Link>
-          )}
-        </p>
-      </form>
+      </div>
     </div>
   );
 };

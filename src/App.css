@@ -1,16 +1,8 @@
+/* Only minimal reset - no global styles that conflict */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  color: #1f2937;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
@@ -21,85 +13,15 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
 }
 
 .main-content {
   flex: 1;
   min-height: calc(100vh - 200px);
-  /* Adjust based on header/footer height */
 }
 
-/* Global button styles */
-button {
-  cursor: pointer;
-  border: none;
-  outline: none;
-  font-family: inherit;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 8px;
-  font-weight: 500;
-}
-
-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-  transform: none;
-}
-
-/* Global link styles */
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* Global input styles */
-input,
-textarea,
-select {
-  font-family: inherit;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 0.75rem;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  background: #ffffff;
-  color: #1f2937;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-  border-color: #ff6b35;
-  box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
-  transform: translateY(-1px);
-}
-
-/* Loading spinner */
-.loading-spinner {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top-color: #fff;
-  animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Modern message styles */
-.error-message {
+/* App-specific messages only - prefixed to avoid conflicts */
+.app-error-message {
   background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
   color: #dc2626;
   padding: 1rem 1.5rem;
@@ -110,7 +32,7 @@ select:focus {
   box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
 }
 
-.success-message {
+.app-success-message {
   background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
   color: #16a34a;
   padding: 1rem 1.5rem;
@@ -121,7 +43,7 @@ select:focus {
   box-shadow: 0 4px 12px rgba(22, 163, 74, 0.15);
 }
 
-.warning-message {
+.app-warning-message {
   background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
   color: #d97706;
   padding: 1rem 1.5rem;
@@ -132,47 +54,61 @@ select:focus {
   box-shadow: 0 4px 12px rgba(217, 119, 6, 0.15);
 }
 
-/* Container utility */
-.container {
+.app-loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: app-spin 1s ease-in-out infinite;
+}
+
+@keyframes app-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* App-specific utility classes only - prefixed to avoid conflicts */
+.app-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
-/* Grid utilities */
-.grid {
+.app-grid {
   display: grid;
   gap: 2rem;
 }
 
-.grid-2 {
+.app-grid-2 {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.grid-3 {
+.app-grid-3 {
   grid-template-columns: repeat(3, 1fr);
 }
 
-.grid-4 {
+.app-grid-4 {
   grid-template-columns: repeat(4, 1fr);
 }
 
-/* Flex utilities */
-.flex {
+.app-flex {
   display: flex;
 }
 
-.flex-center {
+.app-flex-center {
   justify-content: center;
   align-items: center;
 }
 
-.flex-between {
+.app-flex-between {
   justify-content: space-between;
   align-items: center;
 }
 
-.flex-column {
+.app-flex-column {
   flex-direction: column;
 }
 
@@ -239,24 +175,24 @@ select:focus {
   padding: 2rem;
 }
 
-/* Responsive utilities */
+/* Responsive utilities - prefixed */
 @media (max-width: 768px) {
 
-  .grid-2,
-  .grid-3,
-  .grid-4 {
+  .app-grid-2,
+  .app-grid-3,
+  .app-grid-4 {
     grid-template-columns: 1fr;
   }
 
-  .container {
+  .app-container {
     padding: 0 1rem;
   }
 
-  .flex {
+  .app-flex {
     flex-direction: column;
   }
 
-  .flex-between {
+  .app-flex-between {
     justify-content: center;
   }
 }

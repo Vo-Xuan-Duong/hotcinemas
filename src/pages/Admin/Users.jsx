@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   Table,
   Button,
@@ -17,7 +17,8 @@ import {
   Avatar,
   DatePicker,
   InputNumber,
-  Descriptions
+  Descriptions,
+  Spin
 } from 'antd';
 import {
   UserOutlined,
@@ -30,13 +31,14 @@ import {
   StopOutlined,
   CheckCircleOutlined
 } from '@ant-design/icons';
-import usersData from '../../data/users.json';
+import userService from '../../services/userService';
 import './UsersAntd.css';
 
 const { Option } = Select;
 
 const Users = () => {
-  const [users, setUsers] = useState(usersData);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [isDetailModalVisible, setIsDetailModalVisible] = useState(false);
@@ -45,83 +47,167 @@ const Users = () => {
   const [searchText, setSearchText] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [roleFilter, setRoleFilter] = useState('all');
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 10,
+    total: 0
+  });
+
+  // Fetch users từ API
+  useEffect(() => {
+    fetchUsers();
+  }, [pagination.current, pagination.pageSize, roleFilter]);
+
+  const fetchUsers = async () => {
+    setLoading(true);
+    try {
+      let response;
+
+      // Nếu có filter theo role
+      if (roleFilter !== 'all') {
+        response = await userService.getUsersByRole(roleFilter.toUpperCase(), {
+          page: pagination.current - 1,
+          size: pagination.pageSize
+        });
+      } else {
+        // Lấy tất cả users
+        response = await userService.getAllUsers({
+          page: pagination.current - 1,
+          size: pagination.pageSize,
+          sortBy: 'createdAt',
+          sortDir: 'desc'
+        });
+      }
+
+      // Xử lý response - có thể là response.data.data hoặc response.data
+      const data = response.data?.data || response.data || response;
+      console.log('Fetched users:', data);
+
+      if (data.content) {
+        // Response có pagination
+        setUsers(data.content);
+        setPagination(prev => ({
+          ...prev,
+          total: data.totalElements || 0
+        }));
+      } else if (Array.isArray(data)) {
+        // Response là array
+        setUsers(data);
+        setPagination(prev => ({
+          ...prev,
+          total: data.length
+        }));
+      } else {
+        setUsers([]);
+      }
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      message.error('Không thể tải danh sách người dùng!');
+      setUsers([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Thống kê người dùng
   const userStats = useMemo(() => {
     const stats = {
-      total: users.length,
-      active: users.filter(user => user.status === 'active').length,
-      inactive: users.filter(user => user.status === 'inactive').length,
-      suspended: users.filter(user => user.status === 'suspended').length,
-      admins: users.filter(user => user.role === 'admin').length,
-      vips: users.filter(user => user.role === 'vip').length,
-      moderators: users.filter(user => user.role === 'moderator').length
+      total: pagination.total || users.length,
+      active: users.filter(user => user.isActive === true).length,
+      inactive: users.filter(user => user.isActive === false).length,
+      suspended: users.filter(user => user.isActive === false).length,
+      admins: users.filter(user => user.roles?.includes('ADMIN')).length,
+      vips: users.filter(user => user.roles?.includes('VIP')).length,
+      moderators: users.filter(user => user.roles?.includes('MODERATOR')).length
     };
     return stats;
-  }, [users]);
+  }, [users, pagination.total]);
 
-  // Lọc người dùng
+  // Lọc người dùng (client-side filter cho search và status)
   const filteredUsers = useMemo(() => {
     return users.filter(user => {
-      const matchesSearch = user.fullName?.toLowerCase().includes(searchText.toLowerCase()) ||
+      const matchesSearch = !searchText ||
+        user.fullName?.toLowerCase().includes(searchText.toLowerCase()) ||
         user.email?.toLowerCase().includes(searchText.toLowerCase()) ||
         user.username?.toLowerCase().includes(searchText.toLowerCase());
-      const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
-      const matchesRole = roleFilter === 'all' || user.role === roleFilter;
-      return matchesSearch && matchesStatus && matchesRole;
+
+      // Status filter
+      const matchesStatus = statusFilter === 'all' ||
+        (statusFilter === 'active' && user.isActive === true) ||
+        (statusFilter === 'inactive' && user.isActive === false);
+
+      return matchesSearch && matchesStatus;
     });
-  }, [users, searchText, statusFilter, roleFilter]);
+  }, [users, searchText, statusFilter]);
 
   // Xử lý thêm người dùng
-  const handleAddUser = (values) => {
-    const newUser = {
-      id: Date.now(),
-      ...values,
-      createdAt: new Date().toISOString(),
-      lastLogin: null,
-      totalBookings: 0,
-      totalSpent: 0,
-      avatar: "https://image.tmdb.org/t/p/w500/kbNyaREVYRZPfGHdQHBxaxU0DVv.jpg"
-    };
-
-    setUsers([...users, newUser]);
-    setIsAddModalVisible(false);
-    form.resetFields();
-    message.success('Thêm người dùng thành công!');
+  const handleAddUser = async (values) => {
+    setLoading(true);
+    try {
+      const response = await userService.createUser(values);
+      message.success('Thêm người dùng thành công!');
+      setIsAddModalVisible(false);
+      form.resetFields();
+      fetchUsers(); // Reload danh sách
+    } catch (error) {
+      console.error('Error adding user:', error);
+      message.error(error.response?.data?.message || 'Không thể thêm người dùng!');
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Xử lý chỉnh sửa người dùng
-  const handleEditUser = (values) => {
-    const updatedUsers = users.map(user =>
-      user.id === selectedUser.id
-        ? { ...user, ...values }
-        : user
-    );
-
-    setUsers(updatedUsers);
-    setIsEditModalVisible(false);
-    setSelectedUser(null);
-    form.resetFields();
-    message.success('Cập nhật người dùng thành công!');
+  const handleEditUser = async (values) => {
+    setLoading(true);
+    try {
+      await userService.updateUser(selectedUser.userId || selectedUser.id, values);
+      message.success('Cập nhật người dùng thành công!');
+      setIsEditModalVisible(false);
+      setSelectedUser(null);
+      form.resetFields();
+      fetchUsers(); // Reload danh sách
+    } catch (error) {
+      console.error('Error updating user:', error);
+      message.error(error.response?.data?.message || 'Không thể cập nhật người dùng!');
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Xử lý xóa người dùng
-  const handleDeleteUser = (userId) => {
-    const updatedUsers = users.filter(user => user.id !== userId);
-    setUsers(updatedUsers);
-    message.success('Xóa người dùng thành công!');
+  const handleDeleteUser = async (userId) => {
+    setLoading(true);
+    try {
+      await userService.deleteUser(userId);
+      message.success('Xóa người dùng thành công!');
+      fetchUsers(); // Reload danh sách
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      message.error(error.response?.data?.message || 'Không thể xóa người dùng!');
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Xử lý thay đổi trạng thái
-  const handleStatusChange = (userId, newStatus) => {
-    const updatedUsers = users.map(user =>
-      user.id === userId
-        ? { ...user, status: newStatus }
-        : user
-    );
-
-    setUsers(updatedUsers);
-    message.success(`Đã ${newStatus === 'active' ? 'kích hoạt' : newStatus === 'suspended' ? 'tạm khóa' : 'vô hiệu hóa'} người dùng!`);
+  const handleStatusChange = async (userId, newStatus) => {
+    setLoading(true);
+    try {
+      // Sử dụng API activate/deactivate riêng
+      if (newStatus === 'active') {
+        await userService.activateUser(userId);
+      } else {
+        await userService.deactivateUser(userId);
+      }
+      message.success(`Đã ${newStatus === 'active' ? 'kích hoạt' : 'vô hiệu hóa'} người dùng!`);
+      fetchUsers(); // Reload danh sách
+    } catch (error) {
+      console.error('Error updating user status:', error);
+      message.error(error.response?.data?.message || 'Không thể cập nhật trạng thái!');
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Hiển thị modal thêm/sửa
@@ -142,26 +228,49 @@ const Users = () => {
   };
 
   // Render trạng thái
-  const renderStatus = (status) => {
-    const statusConfig = {
-      active: { color: 'success', text: 'Hoạt động', icon: <CheckCircleOutlined /> },
-      inactive: { color: 'default', text: 'Không hoạt động', icon: <StopOutlined /> },
-      suspended: { color: 'error', text: 'Tạm khóa', icon: <StopOutlined /> }
-    };
-
-    const config = statusConfig[status] || statusConfig.inactive;
-    return <Tag color={config.color} icon={config.icon}>{config.text}</Tag>;
+  const renderStatus = (isActive) => {
+    if (isActive) {
+      return <Tag color="success" icon={<CheckCircleOutlined />}>Hoạt động</Tag>;
+    } else {
+      return <Tag color="default" icon={<StopOutlined />}>Không hoạt động</Tag>;
+    }
   };
 
   // Render vai trò
   const renderRole = (role) => {
+    // Xử lý cả trường hợp role là string hoặc array
+    if (!role) {
+      return <Tag color="green" icon={<UserOutlined />}>Người dùng</Tag>;
+    }
+
     const roleConfig = {
       admin: { color: 'red', text: 'Quản trị viên', icon: <CrownOutlined /> },
+      ADMIN: { color: 'red', text: 'Quản trị viên', icon: <CrownOutlined /> },
       moderator: { color: 'blue', text: 'Kiểm duyệt viên', icon: <UserOutlined /> },
+      MODERATOR: { color: 'blue', text: 'Kiểm duyệt viên', icon: <UserOutlined /> },
       vip: { color: 'gold', text: 'VIP', icon: <CrownOutlined /> },
-      user: { color: 'green', text: 'Người dùng', icon: <UserOutlined /> }
+      VIP: { color: 'gold', text: 'VIP', icon: <CrownOutlined /> },
+      user: { color: 'green', text: 'Người dùng', icon: <UserOutlined /> },
+      USER: { color: 'green', text: 'Người dùng', icon: <UserOutlined /> }
     };
 
+    // Nếu role là array
+    if (Array.isArray(role)) {
+      return (
+        <Space size={[0, 4]} wrap>
+          {role.map((r, index) => {
+            const config = roleConfig[r] || roleConfig.user;
+            return (
+              <Tag key={index} color={config.color} icon={config.icon}>
+                {config.text}
+              </Tag>
+            );
+          })}
+        </Space>
+      );
+    }
+
+    // Nếu role là string
     const config = roleConfig[role] || roleConfig.user;
     return <Tag color={config.color} icon={config.icon}>{config.text}</Tag>;
   };
@@ -195,46 +304,32 @@ const Users = () => {
     },
     {
       title: 'Số điện thoại',
-      dataIndex: 'phone',
-      key: 'phone',
+      dataIndex: 'phoneNumber',
+      key: 'phoneNumber',
     },
     {
       title: 'Vai trò',
-      dataIndex: 'role',
-      key: 'role',
+      dataIndex: 'roles',
+      key: 'roles',
       render: renderRole,
       filters: [
-        { text: 'Quản trị viên', value: 'admin' },
-        { text: 'Kiểm duyệt viên', value: 'moderator' },
-        { text: 'VIP', value: 'vip' },
-        { text: 'Người dùng', value: 'user' }
+        { text: 'Quản trị viên', value: 'ADMIN' },
+        { text: 'Kiểm duyệt viên', value: 'MODERATOR' },
+        { text: 'VIP', value: 'VIP' },
+        { text: 'Người dùng', value: 'USER' }
       ],
-      onFilter: (value, record) => record.role === value,
+      onFilter: (value, record) => record.roles?.includes(value),
     },
     {
       title: 'Trạng thái',
-      dataIndex: 'status',
-      key: 'status',
+      dataIndex: 'isActive',
+      key: 'isActive',
       render: renderStatus,
       filters: [
-        { text: 'Hoạt động', value: 'active' },
-        { text: 'Không hoạt động', value: 'inactive' },
-        { text: 'Tạm khóa', value: 'suspended' }
+        { text: 'Hoạt động', value: true },
+        { text: 'Không hoạt động', value: false }
       ],
-      onFilter: (value, record) => record.status === value,
-    },
-    {
-      title: 'Tổng đặt vé',
-      dataIndex: 'totalBookings',
-      key: 'totalBookings',
-      sorter: (a, b) => a.totalBookings - b.totalBookings,
-    },
-    {
-      title: 'Tổng chi tiêu',
-      dataIndex: 'totalSpent',
-      key: 'totalSpent',
-      render: (amount) => `${amount?.toLocaleString('vi-VN')} ₫`,
-      sorter: (a, b) => a.totalSpent - b.totalSpent,
+      onFilter: (value, record) => record.isActive === value,
     },
     {
       title: 'Thao tác',
@@ -258,10 +353,10 @@ const Users = () => {
           >
             Sửa
           </Button>
-          {record.status === 'active' ? (
+          {record.isActive ? (
             <Popconfirm
-              title="Tạm khóa người dùng này?"
-              onConfirm={() => handleStatusChange(record.id, 'suspended')}
+              title="Vô hiệu hóa người dùng này?"
+              onConfirm={() => handleStatusChange(record.userId || record.id, 'inactive')}
               okText="Có"
               cancelText="Không"
             >
@@ -272,7 +367,7 @@ const Users = () => {
           ) : (
             <Popconfirm
               title="Kích hoạt người dùng này?"
-              onConfirm={() => handleStatusChange(record.id, 'active')}
+              onConfirm={() => handleStatusChange(record.userId || record.id, 'active')}
               okText="Có"
               cancelText="Không"
             >
@@ -283,7 +378,7 @@ const Users = () => {
           )}
           <Popconfirm
             title="Bạn có chắc chắn muốn xóa người dùng này?"
-            onConfirm={() => handleDeleteUser(record.id)}
+            onConfirm={() => handleDeleteUser(record.userId || record.id)}
             okText="Có"
             cancelText="Không"
           >
@@ -315,50 +410,6 @@ const Users = () => {
         </Button>
       </div>
 
-      {/* Thống kê tổng quan */}
-      <Row gutter={[16, 16]} className="stats-row">
-        <Col xs={24} sm={12} md={6}>
-          <Card>
-            <Statistic
-              title="Tổng người dùng"
-              value={userStats.total}
-              prefix={<TeamOutlined />}
-              valueStyle={{ color: '#1890ff' }}
-            />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={6}>
-          <Card>
-            <Statistic
-              title="Đang hoạt động"
-              value={userStats.active}
-              prefix={<CheckCircleOutlined />}
-              valueStyle={{ color: '#52c41a' }}
-            />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={6}>
-          <Card>
-            <Statistic
-              title="VIP"
-              value={userStats.vips}
-              prefix={<CrownOutlined />}
-              valueStyle={{ color: '#faad14' }}
-            />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={6}>
-          <Card>
-            <Statistic
-              title="Quản trị viên"
-              value={userStats.admins}
-              prefix={<CrownOutlined />}
-              valueStyle={{ color: '#f5222d' }}
-            />
-          </Card>
-        </Col>
-      </Row>
-
       {/* Bộ lọc */}
       <Card className="filter-card">
         <Row gutter={[16, 16]}>
@@ -380,7 +431,6 @@ const Users = () => {
               <Option value="all">Tất cả trạng thái</Option>
               <Option value="active">Hoạt động</Option>
               <Option value="inactive">Không hoạt động</Option>
-              <Option value="suspended">Tạm khóa</Option>
             </Select>
           </Col>
           <Col xs={24} md={8}>
@@ -391,10 +441,10 @@ const Users = () => {
               style={{ width: '100%' }}
             >
               <Option value="all">Tất cả vai trò</Option>
-              <Option value="admin">Quản trị viên</Option>
-              <Option value="moderator">Kiểm duyệt viên</Option>
-              <Option value="vip">VIP</Option>
-              <Option value="user">Người dùng</Option>
+              <Option value="ADMIN">Quản trị viên</Option>
+              <Option value="MODERATOR">Kiểm duyệt viên</Option>
+              <Option value="VIP">VIP</Option>
+              <Option value="USER">Người dùng</Option>
             </Select>
           </Col>
         </Row>
@@ -402,20 +452,30 @@ const Users = () => {
 
       {/* Bảng người dùng */}
       <Card>
-        <Table
-          columns={columns}
-          dataSource={filteredUsers}
-          rowKey="id"
-          pagination={{
-            total: filteredUsers.length,
-            pageSize: 10,
-            showSizeChanger: true,
-            showQuickJumper: true,
-            showTotal: (total, range) =>
-              `${range[0]}-${range[1]} của ${total} người dùng`,
-          }}
-          scroll={{ x: 1200 }}
-        />
+        <Spin spinning={loading}>
+          <Table
+            columns={columns}
+            dataSource={filteredUsers}
+            rowKey={(record) => record.userId || record.id}
+            pagination={{
+              current: pagination.current,
+              pageSize: pagination.pageSize,
+              total: pagination.total,
+              showSizeChanger: true,
+              showQuickJumper: true,
+              showTotal: (total, range) =>
+                `${range[0]}-${range[1]} của ${total} người dùng`,
+              onChange: (page, pageSize) => {
+                setPagination(prev => ({
+                  ...prev,
+                  current: page,
+                  pageSize: pageSize
+                }));
+              }
+            }}
+            scroll={{ x: 1200 }}
+          />
+        </Spin>
       </Card>
 
       {/* Modal thêm người dùng */}
@@ -475,7 +535,7 @@ const Users = () => {
             </Col>
             <Col span={12}>
               <Form.Item
-                name="phone"
+                name="phoneNumber"
                 label="Số điện thoại"
                 rules={[
                   { required: true, message: 'Vui lòng nhập số điện thoại!' },
@@ -490,29 +550,28 @@ const Users = () => {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="role"
-                label="Vai trò"
-                rules={[{ required: true, message: 'Vui lòng chọn vai trò!' }]}
+                name="password"
+                label="Mật khẩu"
+                rules={[
+                  { required: true, message: 'Vui lòng nhập mật khẩu!' },
+                  { min: 6, message: 'Mật khẩu phải có ít nhất 6 ký tự!' }
+                ]}
               >
-                <Select placeholder="Chọn vai trò">
-                  <Option value="user">Người dùng</Option>
-                  <Option value="vip">VIP</Option>
-                  <Option value="moderator">Kiểm duyệt viên</Option>
-                  <Option value="admin">Quản trị viên</Option>
-                </Select>
+                <Input.Password placeholder="Nhập mật khẩu" />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
-                name="status"
-                label="Trạng thái"
-                rules={[{ required: true, message: 'Vui lòng chọn trạng thái!' }]}
-                initialValue="active"
+                name="role"
+                label="Vai trò"
+                rules={[{ required: true, message: 'Vui lòng chọn vai trò!' }]}
+                initialValue="USER"
               >
-                <Select placeholder="Chọn trạng thái">
-                  <Option value="active">Hoạt động</Option>
-                  <Option value="inactive">Không hoạt động</Option>
-                  <Option value="suspended">Tạm khóa</Option>
+                <Select placeholder="Chọn vai trò">
+                  <Option value="USER">Người dùng</Option>
+                  <Option value="VIP">VIP</Option>
+                  <Option value="MODERATOR">Kiểm duyệt viên</Option>
+                  <Option value="ADMIN">Quản trị viên</Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -587,12 +646,12 @@ const Users = () => {
                   { type: 'email', message: 'Email không hợp lệ!' }
                 ]}
               >
-                <Input placeholder="Nhập email" />
+                <Input placeholder="Nhập email" disabled />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
-                name="phone"
+                name="phoneNumber"
                 label="Số điện thoại"
                 rules={[
                   { required: true, message: 'Vui lòng nhập số điện thoại!' },
@@ -600,55 +659,6 @@ const Users = () => {
                 ]}
               >
                 <Input placeholder="Nhập số điện thoại" />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="role"
-                label="Vai trò"
-                rules={[{ required: true, message: 'Vui lòng chọn vai trò!' }]}
-              >
-                <Select placeholder="Chọn vai trò">
-                  <Option value="user">Người dùng</Option>
-                  <Option value="vip">VIP</Option>
-                  <Option value="moderator">Kiểm duyệt viên</Option>
-                  <Option value="admin">Quản trị viên</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="status"
-                label="Trạng thái"
-                rules={[{ required: true, message: 'Vui lòng chọn trạng thái!' }]}
-              >
-                <Select placeholder="Chọn trạng thái">
-                  <Option value="active">Hoạt động</Option>
-                  <Option value="inactive">Không hoạt động</Option>
-                  <Option value="suspended">Tạm khóa</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="totalBookings"
-                label="Tổng số vé đã đặt"
-              >
-                <InputNumber min={0} style={{ width: '100%' }} />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="totalSpent"
-                label="Tổng chi tiêu (VNĐ)"
-              >
-                <InputNumber min={0} formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} style={{ width: '100%' }} />
               </Form.Item>
             </Col>
           </Row>
@@ -706,26 +716,10 @@ const Users = () => {
             <Descriptions bordered column={2}>
               <Descriptions.Item label="Tên đăng nhập">{selectedUser.username}</Descriptions.Item>
               <Descriptions.Item label="Email">{selectedUser.email}</Descriptions.Item>
-              <Descriptions.Item label="Số điện thoại">{selectedUser.phone}</Descriptions.Item>
-              <Descriptions.Item label="Vai trò">{renderRole(selectedUser.role)}</Descriptions.Item>
-              <Descriptions.Item label="Trạng thái">{renderStatus(selectedUser.status)}</Descriptions.Item>
-              <Descriptions.Item label="Ngày tạo">
-                {new Date(selectedUser.createdAt).toLocaleDateString('vi-VN')}
-              </Descriptions.Item>
-              <Descriptions.Item label="Lần đăng nhập cuối">
-                {selectedUser.lastLogin
-                  ? new Date(selectedUser.lastLogin).toLocaleDateString('vi-VN') + ' ' +
-                  new Date(selectedUser.lastLogin).toLocaleTimeString('vi-VN')
-                  : 'Chưa đăng nhập'
-                }
-              </Descriptions.Item>
-              <Descriptions.Item label="Tổng số vé đã đặt">
-                <strong>{selectedUser.totalBookings} vé</strong>
-              </Descriptions.Item>
-              <Descriptions.Item label="Tổng chi tiêu" span={2}>
-                <strong style={{ color: '#1890ff', fontSize: '16px' }}>
-                  {selectedUser.totalSpent?.toLocaleString('vi-VN')} ₫
-                </strong>
+              <Descriptions.Item label="Số điện thoại">{selectedUser.phoneNumber}</Descriptions.Item>
+              <Descriptions.Item label="Vai trò">{renderRole(selectedUser.roles)}</Descriptions.Item>
+              <Descriptions.Item label="Trạng thái" span={2}>
+                {renderStatus(selectedUser.isActive)}
               </Descriptions.Item>
             </Descriptions>
           </div>

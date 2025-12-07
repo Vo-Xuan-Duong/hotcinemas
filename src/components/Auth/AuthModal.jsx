@@ -1,89 +1,81 @@
 import React, { useState, useEffect } from 'react';
+import { Modal, Button } from 'antd';
+import { UserOutlined, LoginOutlined } from '@ant-design/icons';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
+import OTPVerificationForm from './OTPVerificationForm';
 import './AuthModal.css';
 
 const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
-    const [mode, setMode] = useState(initialMode);
+    const [currentMode, setCurrentMode] = useState(initialMode);
+    const [registerEmail, setRegisterEmail] = useState('');
 
-    // Update mode when initialMode changes
+    // Sync currentMode with initialMode whenever modal is (re)opened
     useEffect(() => {
-        setMode(initialMode);
-    }, [initialMode]);
-
-    // Handle ESC key
-    useEffect(() => {
-        const handleEsc = (e) => {
-            if (e.key === 'Escape') {
-                onClose();
-            }
-        };
-
         if (isOpen) {
-            document.addEventListener('keydown', handleEsc);
-            document.body.style.overflow = 'hidden'; // Prevent body scroll
+            setCurrentMode(initialMode);
+            setRegisterEmail('');
         }
-
-        return () => {
-            document.removeEventListener('keydown', handleEsc);
-            document.body.style.overflow = 'unset'; // Restore body scroll
-        };
-    }, [isOpen, onClose]);
-
-    if (!isOpen) return null;
+    }, [isOpen, initialMode]);
 
     const handleSwitchToRegister = () => {
-        setMode('register');
+        setCurrentMode('register');
     };
 
     const handleSwitchToLogin = () => {
-        setMode('login');
+        setCurrentMode('login');
     };
 
-    const handleOverlayClick = (e) => {
-        if (e.target === e.currentTarget) {
-            onClose();
-        }
+    const handleSwitchToOTP = (email) => {
+        setRegisterEmail(email);
+        setCurrentMode('otp');
+    };
+
+    const handleOTPSuccess = () => {
+        setCurrentMode('login');
+        setRegisterEmail('');
+    };
+
+    const handleBackToRegister = () => {
+        setCurrentMode('register');
     };
 
     return (
-        <div className="auth-modal-overlay" onClick={handleOverlayClick}>
-            <div className="auth-modal-content">
-                <button className="auth-modal-close" onClick={onClose}>
-                    ✕
-                </button>
-
-                {/* Tab navigation */}
-                {/* <div className="auth-modal-tabs">
-                    <button
-                        className={`auth-tab ${mode === 'login' ? 'active' : ''}`}
-                        onClick={handleSwitchToLogin}
-                    >
-                        Đăng nhập
-                    </button>
-                    <button
-                        className={`auth-tab ${mode === 'register' ? 'active' : ''}`}
-                        onClick={handleSwitchToRegister}
-                    >
-                        Đăng ký
-                    </button>
-                </div> */}
-
-                <div className="auth-modal-body">
-                    {mode === 'login' ? (
-                        <LoginForm
-                            onSwitchToRegister={handleSwitchToRegister}
-                            standalone={false}
-                        />
-                    ) : (
-                        <RegisterForm
-                            onSwitchToLogin={handleSwitchToLogin}
-                            standalone={false}
-                        />
-                    )}
+        <Modal
+            title={
+                <div className="auth-modal-title">
+                    🎬 HotCinemas
                 </div>
+            }
+            open={isOpen}
+            onCancel={onClose}
+            footer={null}
+            centered
+            width={420}
+            className="auth-modal-antd"
+            destroyOnClose
+        >
+            <div className="auth-content">
+                {currentMode === 'login' ? (
+                    <LoginForm
+                        onSwitchToRegister={handleSwitchToRegister}
+                        onClose={onClose}
+                    />
+                ) : currentMode === 'otp' ? (
+                    <OTPVerificationForm
+                        email={registerEmail}
+                        onSuccess={handleOTPSuccess}
+                        onBack={handleBackToRegister}
+                    />
+                ) : (
+                    <RegisterForm
+                        onSwitchToLogin={handleSwitchToLogin}
+                        onSwitchToOTP={handleSwitchToOTP}
+                        onClose={onClose}
+                    />
+                )}
             </div>
-        </div>
+        </Modal>
     );
 };
 

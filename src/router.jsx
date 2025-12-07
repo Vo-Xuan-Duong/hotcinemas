@@ -1,29 +1,36 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import UserLayout from './layouts/UserLayout';
-import AdminLayoutAntd from './layouts/AdminLayoutAntd';
-import HomeModern from './pages/User/Home/HomeModern';
+import AuthLayout from './layouts/AuthLayout';
+import AdminLayout from './layouts/AdminLayout';
+import Home from './pages/User/Home/Home';
 import NotFound from './pages/Common/ErrorPages/NotFound';
 import PageTransition from './components/Loading/PageTransition';
 
 // Auth pages
 const Login = React.lazy(() => import('./pages/Auth/Login'));
 const Register = React.lazy(() => import('./pages/Auth/Register'));
+const VerifyOTP = React.lazy(() => import('./pages/Auth/VerifyOTP'));
+const ForgotPassword = React.lazy(() => import('./pages/Auth/ForgotPassword'));
+const ResetPassword = React.lazy(() => import('./pages/Auth/ResetPassword'));
 
-// User pages - Ant Design versions
-const ProfileModern = React.lazy(() => import('./pages/User/Profile/ProfileModern'));
-const BookingHistoryAntd = React.lazy(() => import('./pages/User/BookingHistory/BookingHistoryAntd'));
-const MoviesModern = React.lazy(() => import('./pages/User/Movies/MoviesModern'));
-const MovieDetailModern = React.lazy(() => import('./pages/User/Movies/MovieDetailModern'));
-const MovieDetailImage = React.lazy(() => import('./pages/User/Movies/MovieDetailImage'));
-const CinemasModern = React.lazy(() => import('./pages/User/Cinemas/CinemasModern'));
-const CinemasNew = React.lazy(() => import('./pages/User/Cinemas/CinemasNew'));
+// User pages
+const Profile = React.lazy(() => import('./pages/User/Profile/Profile'));
+const AccountSettings = React.lazy(() => import('./pages/User/Profile/AccountSettings'));
+const BookingDetail = React.lazy(() => import('./pages/User/BookingDetail/BookingDetail'));
+const BookingHistory = React.lazy(() => import('./pages/User/BookingHistory/BookingHistory'));
+const Movies = React.lazy(() => import('./pages/User/Movies/Movies'));
+const MovieDetail = React.lazy(() => import('./pages/User/Movies/MovieDetail'));
+const Cinemas = React.lazy(() => import('./pages/User/Cinemas/Cinemas'));
 const CinemaDetail = React.lazy(() => import('./pages/User/Cinemas/CinemaDetail'));
 const CinemaSchedule = React.lazy(() => import('./pages/User/Cinemas/CinemaSchedule'));
-const ScheduleModern = React.lazy(() => import('./pages/User/Schedule/ScheduleModern'));
-const ScheduleModernNew = React.lazy(() => import('./pages/User/Schedule/ScheduleModernNew'));
+const Schedule = React.lazy(() => import('./pages/User/Schedule/Schedule'));
 const Booking = React.lazy(() => import('./pages/User/Booking'));
-const BookingConfirm = React.lazy(() => import('./pages/User/Booking/BookingConfirm'));
+const BookingSeatSelection = React.lazy(() => import('./pages/User/Booking/BookingSeatSelection'));
+const BookingPayment = React.lazy(() => import('./pages/User/Booking/BookingPayment'));
+const BookingSuccess = React.lazy(() => import('./pages/User/Booking/BookingSuccess'));
+const BookingFailed = React.lazy(() => import('./pages/User/Booking/BookingFailed'));
+const PaymentCallback = React.lazy(() => import('./pages/User/Booking/PaymentCallback'));
 const SearchResults = React.lazy(() => import('./pages/User/Search/SearchResults'));
 const Notifications = React.lazy(() => import('./pages/User/Notifications/Notifications'));
 const Cart = React.lazy(() => import('./pages/User/Cart/Cart'));
@@ -47,45 +54,62 @@ const AdminSettings = React.lazy(() => import('./pages/Admin/Settings'));
 const AdminNotifications = React.lazy(() => import('./pages/Admin/Notifications'));
 const AdminStaff = React.lazy(() => import('./pages/Admin/Staff'));
 const AdminFoodBeverage = React.lazy(() => import('./pages/Admin/FoodBeverage'));
-const AdminPayment = React.lazy(() => import('./pages/Admin/Payment'));
 const AdminTesting = React.lazy(() => import('./pages/Admin/Testing'));
 
 // Demo pages - Cleaned up unused imports
 // const SwiperDemo = React.lazy(() => import('./pages/SwiperDemo'));
 // const AuthTest = React.lazy(() => import('./components/AuthTest')); 
-const MovieLinkTest = React.lazy(() => import('./pages/User/Movies/MovieLinkTest'));
+// const MovieLinkTest = React.lazy(() => import('./pages/User/Movies/MovieLinkTest'));
 // const TestUsers = React.lazy(() => import('./TestUsers'));
 // const LoginDemo = React.lazy(() => import('./pages/LoginDemo'));
 
 const router = createBrowserRouter([
+  // Auth routes - No header/footer
+  {
+    path: '/auth',
+    element: <AuthLayout />,
+    children: [
+      { path: 'login', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải..." />}><Login /></React.Suspense> },
+      { path: 'register', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải..." />}><Register /></React.Suspense> },
+      { path: 'verify-otp', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải..." />}><VerifyOTP /></React.Suspense> },
+      { path: 'forgot-password', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải..." />}><ForgotPassword /></React.Suspense> },
+      { path: 'reset-password', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải..." />}><ResetPassword /></React.Suspense> },
+    ],
+  },
+  // Redirect old auth routes to new structure
+  { path: '/login', element: <Navigate to="/auth/login" replace /> },
+  { path: '/register', element: <Navigate to="/auth/register" replace /> },
+  { path: '/verify-otp', element: <Navigate to="/auth/verify-otp" replace /> },
+  { path: '/forgot-password', element: <Navigate to="/auth/forgot-password" replace /> },
+  { path: '/reset-password', element: <Navigate to="/auth/reset-password" replace /> },
+  // Main app routes - With header/footer
   {
     path: '/',
     element: <UserLayout />,
     children: [
-      { index: true, element: <HomeModern /> },
-      { path: 'login', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải trang đăng nhập..." />}><Login /></React.Suspense> },
-      { path: 'register', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải trang đăng ký..." />}><Register /></React.Suspense> },
-      { path: 'profile', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải hồ sơ cá nhân..." />}><ProfileModern /></React.Suspense> },
-      { path: 'history', element: <React.Suspense fallback={<PageTransition type="ticket" message="Đang tải lịch sử đặt vé..." />}><BookingHistoryAntd /></React.Suspense> },
-      { path: 'movies', element: <React.Suspense fallback={<PageTransition type="movie" message="Đang tải danh sách phim..." />}><MoviesModern /></React.Suspense> },
-      { path: 'movies/:id', element: <React.Suspense fallback={<PageTransition type="movie" message="Đang tải thông tin phim..." />}><MovieDetailImage /></React.Suspense> },
-      // Alias for singular form (in case user navigates to /movie/:id leading to 404)
-      { path: 'movie/:id', element: <React.Suspense fallback={<PageTransition type="movie" message="Đang tải thông tin phim..." />}><MovieDetailImage /></React.Suspense> },
-      { path: 'cinemas', element: <React.Suspense fallback={<PageTransition type="cinema" message="Đang tải danh sách rạp..." />}><CinemasNew /></React.Suspense> },
+      { index: true, element: <Home /> },
+      { path: 'profile', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải hồ sơ cá nhân..." />}><AccountSettings /></React.Suspense> },
+      { path: 'account-settings', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải cài đặt tài khoản..." />}><AccountSettings /></React.Suspense> },
+      { path: 'booking-detail/:bookingCode', element: <React.Suspense fallback={<PageTransition type="ticket" message="Đang tải chi tiết đặt vé..." />}><BookingDetail /></React.Suspense> },
+      { path: 'history', element: <React.Suspense fallback={<PageTransition type="ticket" message="Đang tải lịch sử đặt vé..." />}><BookingHistory /></React.Suspense> },
+      { path: 'movies', element: <React.Suspense fallback={<PageTransition type="movie" message="Đang tải danh sách phim..." />}><Movies /></React.Suspense> },
+      { path: 'movies/:id', element: <React.Suspense fallback={<PageTransition type="movie" message="Đang tải thông tin phim..." />}><MovieDetail /></React.Suspense> },
+      { path: 'cinemas', element: <React.Suspense fallback={<PageTransition type="cinema" message="Đang tải danh sách rạp..." />}><Cinemas /></React.Suspense> },
       { path: 'cinemas/:id', element: <React.Suspense fallback={<PageTransition type="cinema" message="Đang tải thông tin rạp..." />}><CinemaDetail /></React.Suspense> },
       { path: 'cinemas/:cinemaId/schedule', element: <React.Suspense fallback={<PageTransition type="cinema" message="Đang tải lịch chiếu rạp..." />}><CinemaSchedule /></React.Suspense> },
-      { path: 'schedule', element: <React.Suspense fallback={<PageTransition type="cinema" message="Đang tải lịch chiếu..." />}><ScheduleModernNew /></React.Suspense> },
+      { path: 'schedule', element: <React.Suspense fallback={<PageTransition type="cinema" message="Đang tải lịch chiếu..." />}><Schedule /></React.Suspense> },
       { path: 'search', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tìm kiếm..." />}><SearchResults /></React.Suspense> },
       { path: 'notifications', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải thông báo..." />}><Notifications /></React.Suspense> },
       { path: 'cart', element: <React.Suspense fallback={<PageTransition type="ticket" message="Đang tải giỏ hàng..." />}><Cart /></React.Suspense> },
       { path: 'booking', element: <React.Suspense fallback={<PageTransition type="ticket" message="Đang tải trang đặt vé..." />}><Booking /></React.Suspense> },
-      { path: 'booking/confirm', element: <React.Suspense fallback={<PageTransition type="ticket" message="Đang xác nhận đặt vé..." />}><BookingConfirm /></React.Suspense> },
-      // Removed unused demo/test routes
-      // { path: 'swiper-demo', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải demo..." />}><SwiperDemo /></React.Suspense> },
-      // { path: 'auth-test', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải test..." />}><AuthTest /></React.Suspense> },
-      { path: 'movie-link-test', element: <React.Suspense fallback={<PageTransition type="movie" message="Đang tải test..." />}><MovieLinkTest /></React.Suspense> },
-      // { path: 'test-users', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải test..." />}><TestUsers /></React.Suspense> },
-      // { path: 'login-demo', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải demo..." />}><LoginDemo /></React.Suspense> },
+      { path: 'booking/seats/:showtimeId', element: <React.Suspense fallback={<PageTransition type="ticket" message="Đang tải sơ đồ ghế..." />}><BookingSeatSelection /></React.Suspense> },
+      { path: 'booking/payment', element: <React.Suspense fallback={<PageTransition type="ticket" message="Đang tải trang thanh toán..." />}><BookingPayment /></React.Suspense> },
+      { path: 'booking/callback', element: <React.Suspense fallback={<PageTransition type="ticket" message="Đang xử lý thanh toán..." />}><PaymentCallback /></React.Suspense> },
+      { path: 'booking/success', element: <React.Suspense fallback={<PageTransition type="ticket" message="Đang xác nhận..." />}><BookingSuccess /></React.Suspense> },
+      { path: 'booking/failed', element: <React.Suspense fallback={<PageTransition type="ticket" message="Đang tải..." />}><BookingFailed /></React.Suspense> },
+
+
+
     ],
     errorElement: <NotFound />,
   },
@@ -95,12 +119,11 @@ const router = createBrowserRouter([
     element: <Navigate to="/admin/dashboard" replace />,
   },
   // Commented out to avoid conflict with user movies routes
-  /*
+
   {
     path: '/movies',
     element: <Navigate to="/admin/movies" replace />,
   },
-  */
   {
     path: '/users',
     element: <Navigate to="/admin/users" replace />,
@@ -131,7 +154,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/admin',
-    element: <AdminLayoutAntd />,
+    element: <AdminLayout />,
     children: [
       { index: true, element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải dashboard..." />}><Dashboard /></React.Suspense> },
       { path: 'dashboard', element: <React.Suspense fallback={<PageTransition type="modern" message="Đang tải dashboard..." />}><Dashboard /></React.Suspense> },
@@ -148,11 +171,9 @@ const router = createBrowserRouter([
       { path: 'reports', element: <React.Suspense fallback={<div>Loading...</div>}><AdminReports /></React.Suspense> },
       { path: 'promotions', element: <React.Suspense fallback={<div>Loading...</div>}><AdminPromotions /></React.Suspense> },
       { path: 'settings', element: <React.Suspense fallback={<div>Loading...</div>}><AdminSettings /></React.Suspense> },
-      // New Admin routes
       { path: 'notifications', element: <React.Suspense fallback={<div>Loading...</div>}><AdminNotifications /></React.Suspense> },
       { path: 'staff', element: <React.Suspense fallback={<div>Loading...</div>}><AdminStaff /></React.Suspense> },
       { path: 'food-beverage', element: <React.Suspense fallback={<div>Loading...</div>}><AdminFoodBeverage /></React.Suspense> },
-      { path: 'payment', element: <React.Suspense fallback={<div>Loading...</div>}><AdminPayment /></React.Suspense> },
       { path: 'testing', element: <React.Suspense fallback={<div>Loading...</div>}><AdminTesting /></React.Suspense> },
     ],
     errorElement: <NotFound />,

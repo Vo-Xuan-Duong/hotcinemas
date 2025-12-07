@@ -1,9 +1,10 @@
 import React from 'react';
 import { ConfigProvider, theme } from 'antd';
-import { AuthProvider } from './context/AuthContext';
+// Removed AuthProvider usage; auth is handled via hooks
 import { TrailerModalProvider } from './context/TrailerModalContext';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import AppRouter from './router';
+import FloatingSupport from './components/FloatingSupport/FloatingSupport';
 import './App.css';
 import 'antd/dist/reset.css';
 import './styles/antd-overrides.css';
@@ -15,7 +16,7 @@ const AppContent = () => {
   const antdTheme = {
     algorithm: currentTheme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
     token: {
-      colorPrimary: '#ff6b35',
+      colorPrimary: '#e50914', // migrated from #ff6b35
       colorSuccess: '#52c41a',
       colorWarning: '#faad14',
       colorError: '#ff4d4f',
@@ -58,13 +59,12 @@ const AppContent = () => {
 
   return (
     <ConfigProvider theme={antdTheme}>
-      <AuthProvider>
-        <TrailerModalProvider>
-          <div className="App">
-            <AppRouter />
-          </div>
-        </TrailerModalProvider>
-      </AuthProvider>
+      <TrailerModalProvider>
+        <div className="App">
+          <AppRouter />
+          <FloatingSupport />
+        </div>
+      </TrailerModalProvider>
     </ConfigProvider>
   );
 };

@@ -1,218 +1,218 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import useAuth from '../../context/useAuth';
-import { STORAGE_KEYS } from '../../utils/constants';
+import React, { useState } from 'react';
+import { Form, Input, Button, Checkbox, Divider, message } from 'antd';
+import { UserOutlined, LockOutlined, GoogleOutlined } from '@ant-design/icons';
+import { useNavigate, useLocation } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 import './LoginForm.css';
 
-const LoginForm = ({ onSwitchToRegister, standalone = true }) => {
-    const { login, isLoading, error, clearError } = useAuth();
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    });
-    const [formErrors, setFormErrors] = useState({});
-    const [showPassword, setShowPassword] = useState(false);
-    const [rememberMe, setRememberMe] = useState(false);
+const LoginForm = ({ onSwitchToRegister, onClose }) => {
+    const [form] = Form.useForm();
+    const [loading, setLoading] = useState(false);
+    const { login } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
 
-    // Load remembered email on component mount
-    useEffect(() => {
-        const rememberedEmail = localStorage.getItem(STORAGE_KEYS.REMEMBER_EMAIL);
-        if (rememberedEmail) {
-            setFormData(prev => ({ ...prev, email: rememberedEmail }));
-            setRememberMe(true);
-        }
-    }, []);
-
-    // Clear errors when user starts typing
-    useEffect(() => {
-        if (Object.keys(formErrors).length > 0) {
-            setFormErrors({});
-        }
-        if (error) {
-            clearError();
-        }
-    }, [formData, error, clearError]);
-
-    const validateForm = () => {
-        const errors = {};
-
-        // Email validation
-        if (!formData.email) {
-            errors.email = 'Email là bắt buộc';
-        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-            errors.email = 'Email không hợp lệ';
-        }
-
-        // Password validation
-        if (!formData.password) {
-            errors.password = 'Mật khẩu là bắt buộc';
-        } else if (formData.password.length < 6) {
-            errors.password = 'Mật khẩu phải có ít nhất 6 ký tự';
-        }
-
-        return errors;
-    };
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        clearError();
-
-        // Validate form
-        const errors = validateForm();
-        if (Object.keys(errors).length > 0) {
-            setFormErrors(errors);
-            return;
-        }
-
+    const onFinish = async (values) => {
+        setLoading(true);
         try {
-            await login(formData.email, formData.password);
+            const payload = {
+                usernameOrEmail: values.usernameOrEmail,
+                password: values.password,
+                rememberMe: !!values.rememberMe,
+            };
 
-            // Handle remember me
-            if (rememberMe) {
-                localStorage.setItem(STORAGE_KEYS.REMEMBER_EMAIL, formData.email);
+            await login(payload);
+
+            message.success('Đăng nhập thành công!');
+            form.resetFields();
+
+            // If used in modal (onClose exists), just close modal and stay on current page
+            if (onClose) {
+                onClose();
             } else {
-                localStorage.removeItem(STORAGE_KEYS.REMEMBER_EMAIL);
+                // If used in page, redirect to intended page or home
+                const from = location.state?.from?.pathname || '/';
+                navigate(from);
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            console.error('Error status:', error?.status);
+            console.error('Error data:', error?.data);
+
+            const status = error?.status;
+            const errorData = error?.data;
+            let msg = error?.message || 'Đăng nhập thất bại. Vui lòng thử lại!';
+
+            // Xử lý thông báo lỗi từ backend
+            if (errorData?.message) {
+                msg = errorData.message;
+            } else if (errorData?.error) {
+                msg = typeof errorData.error === 'string' ? errorData.error : msg;
             }
 
-            if (standalone) {
-                navigate('/');
+            // Gắn lỗi vào các field để người dùng thấy trực tiếp
+            if (status === 401) {
+                const fieldMsg = msg || 'Email/Tên đăng nhập hoặc mật khẩu không đúng.';
+                form.setFields([
+                    { name: 'password', errors: [fieldMsg] },
+                ]);
+                message.error(fieldMsg);
+            } else if (status === 422) {
+                // Xử lý validation errors từ backend
+                if (errorData?.errors && Array.isArray(errorData.errors)) {
+                    errorData.errors.forEach(err => {
+                        const field = err.field || err.path;
+                        const message = err.message || err.defaultMessage;
+                        if (field) {
+                            form.setFields([{ name: field, errors: [message] }]);
+                        }
+                    });
+                } else {
+                    form.setFields([
+                        { name: 'usernameOrEmail', errors: ['Dữ liệu không hợp lệ.'] },
+                    ]);
+                }
+            } else if (status === 403) {
+                message.error('Tài khoản của bạn đã bị khóa. Vui lòng liên hệ hỗ trợ.');
+                return;
+            } else if (status === 404) {
+                form.setFields([
+                    { name: 'usernameOrEmail', errors: ['Tài khoản không tồn tại.'] },
+                ]);
+            } else if (status >= 500) {
+                message.error('Lỗi server. Vui lòng thử lại sau!');
+                return;
+            } else if (!status) {
+                message.error('Không thể kết nối đến server. Vui lòng kiểm tra kết nối mạng!');
+                return;
             }
-        } catch (err) {
-            // Error is handled by context
-            console.error('Login failed:', err);
+
+            message.error(msg);
+        } finally {
+            setLoading(false);
         }
     };
 
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
+
+    const handleSocialLogin = (provider) => {
+        message.info(`Đăng nhập bằng ${provider} sẽ được phát triển trong tương lai!`);
     };
 
     return (
-        <div className={`login-form-container ${standalone ? 'standalone' : ''}`}>
-            <form className="login-form" onSubmit={handleSubmit}>
-                <div className="form-header">
-                    <h2>Đăng nhập</h2>
-                    <p>Chào mừng bạn quay trở lại!</p>
-                </div>
+        <div className="login-form-antd">
+            <div className="form-header">
+                <h2>Chào mừng trở lại!</h2>
+                <p>Đăng nhập để trải nghiệm đầy đủ tính năng</p>
+            </div>
 
-                {error && (
-                    <div className="error-message">
-                        <i className="error-icon">⚠️</i>
-                        {error}
-                    </div>
-                )}
-
-                <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <div className="input-wrapper">
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Nhập email của bạn"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            className={formErrors.email ? 'error' : ''}
-                            autoComplete="email"
-                        />
-                        <i className="input-icon">📧</i>
-                    </div>
-                    {formErrors.email && <span className="field-error">{formErrors.email}</span>}
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="password">Mật khẩu</label>
-                    <div className="input-wrapper">
-                        <input
-                            type={showPassword ? 'text' : 'password'}
-                            id="password"
-                            name="password"
-                            placeholder="Nhập mật khẩu của bạn"
-                            value={formData.password}
-                            onChange={handleInputChange}
-                            className={formErrors.password ? 'error' : ''}
-                            autoComplete="current-password"
-                        />
-                        <i className="input-icon">🔒</i>
-                        <button
-                            type="button"
-                            className="password-toggle"
-                            onClick={togglePasswordVisibility}
-                            tabIndex={-1}
-                        >
-                            {showPassword ? '👁️' : '👁️‍🗨️'}
-                        </button>
-                    </div>
-                    {formErrors.password && <span className="field-error">{formErrors.password}</span>}
-                </div>
-
-                <div className="form-options">
-                    <label className="checkbox-label">
-                        <input
-                            type="checkbox"
-                            checked={rememberMe}
-                            onChange={(e) => setRememberMe(e.target.checked)}
-                        />
-                        <span className="checkmark"></span>
-                        Ghi nhớ đăng nhập
-                    </label>
-                    <Link to="/forgot-password" className="forgot-link">
-                        Quên mật khẩu?
-                    </Link>
-                </div>
-
-                <button
-                    type="submit"
-                    className="submit-button"
-                    disabled={isLoading}
+            <Form
+                form={form}
+                name="login"
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+                layout="vertical"
+                size="large"
+            >
+                <Form.Item
+                    name="usernameOrEmail"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Vui lòng nhập email hoặc tên đăng nhập!',
+                        },
+                    ]}
                 >
-                    {isLoading ? (
-                        <>
-                            <span className="loading-spinner"></span>
-                            Đang đăng nhập...
-                        </>
-                    ) : (
-                        'Đăng nhập'
-                    )}
-                </button>
+                    <Input
+                        prefix={<UserOutlined />}
+                        placeholder="Email hoặc tên đăng nhập"
+                        className="custom-input"
+                    />
+                </Form.Item>
 
-                <div className="form-footer">
-                    <p>
-                        Chưa có tài khoản?{' '}
-                        {onSwitchToRegister ? (
-                            <button
-                                type="button"
-                                className="switch-link"
-                                onClick={onSwitchToRegister}
-                            >
-                                Đăng ký ngay
-                            </button>
-                        ) : (
-                            <Link to="/register" className="switch-link">Đăng ký ngay</Link>
-                        )}
-                    </p>
-                </div>
+                <Form.Item
+                    name="password"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Vui lòng nhập mật khẩu!',
+                        },
+                        {
+                            min: 6,
+                            message: 'Mật khẩu phải có ít nhất 6 ký tự!',
+                        },
+                    ]}
+                >
+                    <Input.Password
+                        prefix={<LockOutlined />}
+                        placeholder="Mật khẩu"
+                        className="custom-input"
+                    />
+                </Form.Item>
 
-                <div className="divider">
-                    <span>hoặc</span>
-                </div>
+                <Form.Item>
+                    <div className="form-options">
+                        <Form.Item name="rememberMe" valuePropName="checked" noStyle>
+                            <Checkbox className="custom-checkbox">
+                                Ghi nhớ đăng nhập
+                            </Checkbox>
+                        </Form.Item>
+                        <Button
+                            type="link"
+                            className="forgot-password"
+                            onClick={() => navigate('/forgot-password')}
+                        >
+                            Quên mật khẩu?
+                        </Button>
+                    </div>
+                </Form.Item>
 
-                <div className="social-login">
-                    <button type="button" className="social-button google">
-                        <i className="social-icon">🔍</i>
-                        Đăng nhập với Google
-                    </button>
-                </div>
-            </form>
+                <Form.Item>
+                    <div style={{ display: 'flex', gap: '12px' }}>
+                        <Button
+                            size="large"
+                            block
+                            onClick={() => navigate('/')}
+                            className="cancel-button"
+                        >
+                            Hủy
+                        </Button>
+                        <Button
+                            size="large"
+                            type="primary"
+                            htmlType="submit"
+                            loading={loading}
+                            block
+                            className="login-button"
+                        >
+                            Đăng nhập
+                        </Button>
+                    </div>
+                </Form.Item>
+            </Form>
+
+            <Button
+                block
+                icon={<GoogleOutlined />}
+                className="social-button google-button"
+                onClick={() => message.info('Đăng nhập bằng Google sẽ được phát triển trong tương lai!')}
+            >
+                Đăng nhập bằng Google
+            </Button>
+
+            <div className="form-footer">
+                <span>Chưa có tài khoản? </span>
+                <Button
+                    type="link"
+                    onClick={onSwitchToRegister || (() => navigate('/auth/register'))}
+                    className="switch-button"
+                >
+                    Đăng ký ngay
+                </Button>
+            </div>
         </div>
     );
 };

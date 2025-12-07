@@ -1,54 +1,74 @@
-import { apiClient, setTokens, clearTokens } from '../utils/apiClient';
+import api from '../utils/apiClient';
 
 export const authService = {
+    // Verify token validity (used on app start)
+    verify: async () => {
+        return api.get('/auth/verify');
+    },
 
     login: async (data) => {
-        const response = await apiClient.post('/auth/login', data);
-        const { accessToken, refreshToken } = response.data;
-        setTokens(accessToken, refreshToken);
+        const response = await api.post('/auth/login', data);
+
+        console.log('Login response:', response);
+
+        // Let apiClient handle token storage via setAuthToken
+        if (response?.data?.accessToken) {
+            api.setAuthToken(response.data.accessToken, response.data.refreshToken, response.data.userAuth);
+        }
         return response;
     },
 
     register: async (data) => {
-        return apiClient.post('/auth/register', data);
+        const response = await api.post('/auth/register', data);
+        // Token storage is handled by the component/hook after successful registration
+        return response;
     },
 
     refreshToken: async (refreshToken) => {
-        return apiClient.post('/auth/refresh-token', { refreshToken });
+        return api.get('/auth/refresh-token', { refreshToken });
     },
 
     logout: () => {
-        clearTokens();
-        return apiClient.post('/auth/logout');
+        api.removeAuthToken();
+        return api.post('/auth/logout');
     },
 
     forgotPassword: async (email) => {
-        return apiClient.post(`/auth/forgot-password?email=${email}`);
+        return api.post(`/auth/forgot-password?email=${email}`);
     },
 
     verifyPasswordOtp: async (email, otp) => {
-        return apiClient.post('/auth/verify-password-otp', { email, otp });
+        return api.post('/auth/verify-password-otp', { email, otp });
     },
 
     resetPassword: async (email, newPassword) => {
-        return apiClient.patch('/auth/set-password', { email, newPassword });
+        return api.patch('/auth/set-password', { email, newPassword });
     },
 
     verifyEmail: async (token) => {
-        return apiClient.post('/auth/verify-email', { token });
+        return api.post('/auth/verify-email', { token });
     },
 
-    verifyOTP: async (otpData) => {
-        return apiClient.post('/auth/verify-active-otp', otpData);
+    verifyOTP: async (email, otpCode) => {
+        return api.get(`/auth/verify-otp?email=${encodeURIComponent(email)}&otpCode=${encodeURIComponent(otpCode)}`);
+    },
+
+    resendOTP: async (email) => {
+        return api.get(`/auth/resend-otp?email=${encodeURIComponent(email)}`);
     },
 
     getCurrentUser: async () => {
-        return apiClient.get('/users/me');
+        return api.get('/users/me');
+    },
+
+    // Update user profile
+    updateProfile: async (userData) => {
+        return api.put('/users/profile', userData);
     },
 
     validateToken: async () => {
-        return apiClient.get('/auth/validate_token');
+        return api.get('/auth/validate_token');
     },
-    
-    
+
+
 };
