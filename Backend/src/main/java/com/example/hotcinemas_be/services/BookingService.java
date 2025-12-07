@@ -2,6 +2,7 @@ package com.example.hotcinemas_be.services;
 
 import com.example.hotcinemas_be.dtos.booking.requests.BookingRequest;
 import com.example.hotcinemas_be.dtos.booking.responses.BookingDetailResponse;
+import com.example.hotcinemas_be.dtos.booking.responses.BookingItemResponse;
 import com.example.hotcinemas_be.dtos.seat.SeatSnapshot;
 import com.example.hotcinemas_be.enums.BookingStatus;
 import com.example.hotcinemas_be.enums.SeatType;
@@ -217,5 +218,18 @@ public class BookingService {
     public void deleteBooking(Long id) {
         Booking booking = bookingRepository.findById(id).orElseThrow(() -> new ErrorException("Booking not found", ErrorCode.ERROR_BOOKING_NOT_FOUND));
         bookingRepository.delete(booking);
+    }
+
+    public Page<BookingDetailResponse> getBookingHistoryByUserId(Long userId, Pageable pageable) {
+        Page<Booking> bookings = bookingRepository.findBookingsByUserIdOrderByBookingDateDesc(userId, pageable);
+        return bookings.map(
+                booking -> {
+                    try {
+                        return bookingMapper.mapToResponse(booking);
+                    } catch (Exception e) {
+                        throw new ErrorException("Error mapping booking to response", ErrorCode.ERROR_BOOKING_NOT_FOUND);
+                    }
+                }
+        );
     }
 }
